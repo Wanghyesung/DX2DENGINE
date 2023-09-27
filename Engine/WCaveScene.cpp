@@ -1,0 +1,171 @@
+#include "WCaveScene.h"
+#include "WShader.h"
+#include "WMeshRenderer.h"
+#include "WMesh.h"
+#include "WResources.h"
+#include "WGameObject.h"
+#include "WTransform.h"
+#include "WCamera.h"
+#include "WCameraScript.h"
+#include "WGround.h"
+#include "WInput.h"
+#include "WSceneManger.h"
+#include "WGround.h"
+#include "WCollisionManager.h"
+#include "WRenderer.h"
+#include "WStone.h"
+#include "WHorntail.h"
+#include "WStoneScript.h"
+#include "WLadder.h"
+
+namespace W
+{
+	CaveScene::CaveScene()
+	{
+		SetMapSize(0.f, 1.f, 0.f, -1.f);
+		SetMapPossibleSize(-7.f, 7.f);
+
+		std::shared_ptr<Texture> pLadder9 =
+			Resources::Load<Texture>(L"Ladder9BaseTex", L"..\\Resources\\Texture\\Object\\ladder\\9_base.png");
+
+		std::shared_ptr<Material> pLadderMater9 = std::make_shared<Material>();
+		pLadderMater9->SetShader(Resources::Find<Shader>(L"ObjectShader"));
+		pLadderMater9->SetTexture(pLadder9);
+		Resources::Insert(L"LadderBaseMater9", pLadderMater9);
+
+
+		std::shared_ptr<Texture> pLadder9_ =
+			Resources::Load<Texture>(L"Ladder9Base_Tex", L"..\\Resources\\Texture\\Object\\ladder\\9base.png");
+
+		std::shared_ptr<Material> pLadderMater9_ = std::make_shared<Material>();
+		pLadderMater9_->SetShader(Resources::Find<Shader>(L"ObjectShader"));
+		pLadderMater9_->SetTexture(pLadder9_);
+		Resources::Insert(L"LadderBaseMater9_", pLadderMater9_);
+	}
+	CaveScene::~CaveScene()
+	{
+
+	}
+	void CaveScene::Initialize()
+	{
+		CreateBackground();
+		create_object();
+		create_monster();
+
+		{
+			GameObject* pCamera = new GameObject();
+			pCamera->SetName(L"ObjCam");
+			AddGameObject(eLayerType::Camera, pCamera);
+			pCamera->GetComponent<Transform>()->SetPosition(Vector3(0.f, 0.f, -10.f));
+			Camera* pCameraComp = pCamera->AddComponent<Camera>();
+			pCameraComp->TurnLayerMask(eLayerType::UI, false);
+			CameraScript* pCameraScript = pCamera->AddComponent<CameraScript>();
+		}
+
+		//ui camera
+		{
+			GameObject* pUICamera = new GameObject();
+			pUICamera->SetName(L"UICam");
+			AddGameObject(eLayerType::Camera, pUICamera);
+			pUICamera->GetComponent<Transform>()->SetPosition(Vector3(0.f, 0.f, -10.f));
+			Camera* pCameraComp = pUICamera->AddComponent<Camera>();
+			pCameraComp->TurnUILayerMask();//UI만 그리게
+		}
+
+	}
+	void CaveScene::Update()
+	{
+		Scene::Update();
+	}
+	void CaveScene::LateUpdate()
+	{
+		Scene::LateUpdate();
+
+		
+	}
+	void CaveScene::Render()
+	{
+		Scene::Render();
+	}
+	void CaveScene::OnEnter()
+	{
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Box, true);
+		CollisionManager::SetLayer(eLayerType::AttackObject, eLayerType::Box, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ladder, true);
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::AttackObject, true);
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Player, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterAttack, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Portal, true);
+	}
+	void CaveScene::OnExit()
+	{
+		CollisionManager::Clear();
+	}
+	void CaveScene::CreateBackground()
+	{
+		GameObject* pBackGround = new GameObject();
+		AddGameObject(eLayerType::Background, pBackGround);
+		MeshRenderer* pMeshRender = pBackGround->AddComponent<MeshRenderer>();
+		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		pMeshRender->SetMaterial(Resources::Find<Material>(L"WoodCaveMater"));
+		pBackGround->GetComponent<Transform>()->SetPosition(0.f, 0.f, 1.f);
+		//14::10
+		pBackGround->GetComponent<Transform>()->SetScale(14.f * 1.f, 10.f * 1.f, 1.f);
+		
+	}
+	void CaveScene::create_object()
+	{
+		Ground* pGround = new Ground(true);
+		AddGameObject(eLayerType::Ground, pGround);
+		pGround->GetComponent<Transform>()->SetPosition(0.f, -3.8f, -0.1f);
+		pGround->GetComponent<Transform>()->SetScale(2.7f * 5.f, 1.f * 0.3f, 0.f);
+
+		pGround = new Ground();
+		AddGameObject(eLayerType::Ground, pGround);
+		pGround->GetComponent<Transform>()->SetPosition(2.71f, -1.7f, -0.1f);
+		pGround->GetComponent<Transform>()->SetScale(1.f * 0.6f, 1.f * 0.2f, 0.f);
+
+		pGround = new Ground();
+		AddGameObject(eLayerType::Ground, pGround);
+		pGround->GetComponent<Transform>()->SetPosition(2.8f, -0.7f, -0.1f);
+		pGround->GetComponent<Transform>()->SetScale(1.f * 0.6f, 1.f * 0.2f, 0.f);
+		//
+		pGround = new Ground();
+		AddGameObject(eLayerType::Ground, pGround);
+		pGround->GetComponent<Transform>()->SetPosition(4.3f, -1.18f, -0.1f);
+		pGround->GetComponent<Transform>()->SetScale(1.f * 2.f, 1.f * 0.2f, 0.f);
+
+		Ladder* pLadder2 = new Ladder();
+		AddGameObject(eLayerType::Ladder, pLadder2);
+		MeshRenderer* pLadderMeshRender2 = pLadder2->AddComponent<MeshRenderer>();
+		pLadderMeshRender2->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		pLadderMeshRender2->SetMaterial(Resources::Find<Material>(L"LadderBaseMater9"));
+		pLadder2->GetComponent<Transform>()->SetPosition(3.5f, -2.4f, -0.1f);
+		pLadder2->GetComponent<Transform>()->SetScale(1.f * 0.6f, 4.5f * 0.6f, 0.f);
+		pLadder2->Initialize();
+		pLadder2->GetComponent<Collider2D>()->SetSize(Vector2(0.3f, 0.9f));
+		pLadder2->GetComponent<Collider2D>()->SetCenter(Vector2(0.f, 0.11f));
+		//
+		//pGround = new Ground();
+		//AddGameObject(eLayerType::Ground, pGround);
+		//pGround->GetComponent<Transform>()->SetPosition(0.f, -3.8f, -0.1f);
+		//pGround->GetComponent<Transform>()->SetScale(2.7f * 5.f, 1.f * 0.3f, 0.f);
+
+
+	}
+	void CaveScene::create_monster()
+	{
+		Stone* pStone = new Stone();
+		AddGameObject(eLayerType::Box, pStone);
+		pStone->GetComponent<Transform>()->SetPosition(4.45f, 0.f, -0.1f);
+
+		Horntail* pHorntail = new Horntail();
+		pHorntail->Initialize();
+		AddGameObject(eLayerType::Monster, pHorntail);
+		pHorntail->GetComponent<Transform>()->SetPosition(-1.2f, 0.73f, -1.5f);
+
+		std::function<void()> start = std::bind(&Horntail::Start, pHorntail);
+		pStone->GetScript<StoneScript>()->SetFunction(start);
+	}
+}

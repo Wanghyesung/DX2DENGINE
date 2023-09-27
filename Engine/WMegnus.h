@@ -1,0 +1,32 @@
+#pragma once
+#include "WMonster.h"
+namespace W
+{
+	class Megnus : public Monster
+	{
+	public:
+		Megnus();
+		virtual ~Megnus();
+
+		virtual void Initialize()override;
+		virtual void Update()override;
+		virtual void LateUpdate()override;
+		virtual void Render()override;
+
+		void add_skill();
+		void setattack();
+
+		void attack0();
+		void attack1();
+		void attack2();
+		void attack3();
+		void attack4();
+		void attack5();
+		void attack6();
+		void attack7();
+	private:
+		class MobZone* m_pZone;
+	};
+}
+
+
