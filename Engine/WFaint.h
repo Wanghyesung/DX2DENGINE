@@ -15,6 +15,8 @@ namespace W
 		virtual void Render()override;
 
 
+		virtual void Restore()override;
+		
 	private:
 	};
 }

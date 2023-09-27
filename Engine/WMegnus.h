@@ -23,9 +23,17 @@ namespace W
 		void attack4();
 		void attack5();
 		void attack6();
-		void attack7();
+		void create_stone();
+		void create_gas();
 	private:
 		class MobZone* m_pZone;
+
+		class SleepGas* m_pGas;
+		float m_fGasTime;
+		float m_fCurGasTime;
+
+		float m_fCreateTime;
+		float m_fCurCreateTime;
 	};
 }
 

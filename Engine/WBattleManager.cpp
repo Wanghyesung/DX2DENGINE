@@ -19,6 +19,7 @@
 #include "WConfusion.h"
 #include "WVariation.h"
 #include "WSlow.h"
+#include "WUndead.h"
 #define DamageMap std::map<std::wstring, BattleManager::tDamageCount>
 #define EffectMap std::map<std::wstring, std::queue<Effect*>> 
 namespace W
@@ -29,6 +30,7 @@ namespace W
 	DamageMap BattleManager::m_mapDamage = {};
 	UINT BattleManager::m_iMaxDamage = 9999999;
 	bool BattleManager::m_bOnAbnormal = false;
+	bool BattleManager::m_bOnUndead = false;
 	float BattleManager::m_fPotionTime = 0.1f;
 	float BattleManager::m_fCurPotionTime = 0.f;
 
@@ -312,6 +314,18 @@ namespace W
 			pPlayer->SetDir(-1);
 	}
 
+	void BattleManager::undead(GameObject* _pGameObject)
+	{
+		Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
+		if (!pPlayer)
+			return;
+
+		Undead* pUndead = new Undead();
+		pUndead->SetTarget(pPlayer);
+		pUndead->SetTime(8.f);
+		EventManager::CreateObject(pUndead, eLayerType::Object);
+	}
+
 	void BattleManager::PushEffect(Effect* _pEffect)
 	{
 		EffectMap::iterator iter = m_mapEffects.find(_pEffect->GetName());
@@ -341,6 +355,30 @@ namespace W
 		
 
 		return pEffect;
+	}
+
+	void BattleManager::Restore_move(GameObject* _pTarget, eAbnormalType _eType)
+	{
+		PlayerScript* pScript = _pTarget->GetScript<PlayerScript>();
+		switch (_eType)
+		{
+		case W::BattleManager::eAbnormalType::SealPotion:
+			break;
+		case W::BattleManager::eAbnormalType::SealSkill:
+			pScript->m_bSealSkill = false;
+			break;
+		case W::BattleManager::eAbnormalType::temptation:
+			pScript->m_bAbnormal = false;
+			break;
+		case W::BattleManager::eAbnormalType::Faint:
+			pScript->m_bAbnormal = false;
+			break;
+		case W::BattleManager::eAbnormalType::Undead:
+			m_bOnUndead = false;
+			break;
+		}
+
+		m_bOnAbnormal = false;
 	}
 
 	bool BattleManager::IsAblePotion()

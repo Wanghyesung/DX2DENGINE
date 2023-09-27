@@ -91,6 +91,9 @@ namespace W
 			case W::BattleManager::eAbnormalType::temptation:
 				BattleManager::temptation(pObj);
 				break;
+			case W::BattleManager::eAbnormalType::Undead:
+				BattleManager::undead(pObj);
+				break;
 			case W::BattleManager::eAbnormalType::Faint:
 				BattleManager::faint(pObj);
 				break;

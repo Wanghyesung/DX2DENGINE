@@ -60,6 +60,9 @@ namespace W
 		static void CheckDamage(tObjectInfo& _tObjectInfo, const tAttackInfo& _tAttackInfo, const std::wstring _strName, Vector3 _vPosition);
 		static void PushFont(DamageFont* _pDamageFont);
 		
+		static UINT GetMaxDamage() { return m_iMaxDamage; }
+
+		static void Restore_move(GameObject* _pTarget, eAbnormalType _eType);
 		static bool IsAblePotion();
 
 		static void PushEffect(Effect* _pEffect);
@@ -105,7 +108,7 @@ namespace W
 
 		//상태이상 
 		static bool m_bOnAbnormal;
-
+		static bool m_bOnUndead;
 		//체력 회복 시간
 		static float m_fPotionTime;
 		static float m_fCurPotionTime;

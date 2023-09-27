@@ -16,7 +16,7 @@ namespace W
 		std::shared_ptr<Material> pMater = std::make_shared<Material>();
 		pMater->SetRenderinMode(eRenderingMode::Transparent);
 		pMater->SetShader(Resources::Find<Shader>(L"ObjectShader"));
-		Resources::Insert(L"pMater", pMater);
+		Resources::Insert(L"pMonsterAttackMater", pMater);
 
 		MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
 		pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -29,7 +29,7 @@ namespace W
 
 	MonsterAttackObject::~MonsterAttackObject()
 	{
-		
+
 	}
 
 	void MonsterAttackObject::Initialize()
@@ -39,8 +39,12 @@ namespace W
 
 	void MonsterAttackObject::Update()
 	{
+
 		Vector3 vPosition = m_pOwner->GetComponent<Transform>()->GetPosition();
 		GetComponent<Transform>()->SetPosition(vPosition);
+
+		if (m_pOwner->GetState() == GameObject::Paused)
+			object::Destroy(this);
 
 		GameObject::Update();
 	}
@@ -54,22 +58,28 @@ namespace W
 	{
 		GameObject::Render();
 	}
-	
+
 	void MonsterAttackObject::SetMonsterAttack(const tMonsterAttack& _tAttackInfo)
 	{
 		//데미지
 		GetScript<MonsterAttackScript>()->SetAttackInfo(_tAttackInfo.tAttackInfo);
+		Transform* pTransform = GetComponent<Transform>();
+		Transform* pOwnerTr = GetComponent<Transform>();
 
-		GetComponent<Transform>()->SetPosition(_tAttackInfo.vPosition);
-		GetComponent<Transform>()->SetRotation(_tAttackInfo.vRoatate);
+		if (_tAttackInfo.bSkill)
+			pTransform->SetPosition(_tAttackInfo.vPosition);
+		else
+			pTransform->SetPosition(pOwnerTr->GetPosition());
+
+		pTransform->SetRotation(_tAttackInfo.vRoatate);
 
 		//오프셋
 		int iDir = m_pOwner->GetDir();
 		Collider2D* pCollider = GetComponent< Collider2D>();
-		pCollider->SetCenter(Vector2(_tAttackInfo.vOffset.x * iDir , _tAttackInfo.vOffset.y));
+		pCollider->SetCenter(Vector2(_tAttackInfo.vOffset.x * iDir, _tAttackInfo.vOffset.y));
 		pCollider->SetSize(_tAttackInfo.vScale);
 
 		GetComponent<Collider2D>()->SetActive(true);
 	}
-	
+
 }

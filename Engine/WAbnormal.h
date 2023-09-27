@@ -15,6 +15,7 @@ namespace W
 		virtual void LateUpdate()override;
 		virtual void Render()override;
 
+		virtual void Restore();
 
 		void SetTime(float _fTime) { m_fDeleteTime = _fTime; }
 		void SetTarget(Player* _pTarget) { m_pTarget = _pTarget; }

@@ -1,18 +1,17 @@
-#include "WFaint.h"
+#include "WUndead.h"
 #include "WResources.h"
 #include "WAnimator.h"
 #include "WRenderer.h"
-#include "WRigidbody.h"
-#include "WPlayer.h"
 #include "WBattleManager.h"
+#include "WPlayer.h"
 namespace W
 {
-	Faint::Faint()
+	Undead::Undead()
 	{
 		std::shared_ptr<Material> pMater = std::make_shared<Material>();
 		pMater->SetShader(Resources::Find<Shader>(L"ObjectAnimShader"));
 		//pMater->SetTexture(pTex);
-		Resources::Insert(L"faintSkillMater", pMater);
+		Resources::Insert(L"UndeadMater", pMater);
 		pMater->SetRenderinMode(eRenderingMode::Transparent);
 
 		MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
@@ -20,31 +19,31 @@ namespace W
 		pRenderer->SetMaterial(pMater);
 
 		std::shared_ptr<Texture> pAtlas =
-			Resources::Load<Texture>(L"faintTex", L"..\\Resources\\Texture\\Abnormal\\faint.png");
+			Resources::Load<Texture>(L"UndeadTex", L"..\\Resources\\Texture\\Abnormal\\undead.png");
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"faintSkill", pAtlas, Vector2(0.0f, 0.0f), Vector2(66.0f, 18.0f), 3, Vector2(70.f, 70.f), Vector2::Zero, 0.3f);
+		pAnim->Create(L"undead", pAtlas, Vector2(0.0f, 0.0f), Vector2(43.0f, 46.0f), 10, Vector2(70.f, 70.f), Vector2::Zero, 0.15f);
 
-		pAnim->Play(L"faintSkill", true);
+		pAnim->Play(L"undead", true);
 
-		//GetComponent<Transform>()->SetScale(Vector3(1.2f, 1.2f, 0.f));
+		//m_eType = BattleManager::eAbnormalType::Undead;
+
 	}
-	Faint::~Faint()
+	Undead::~Undead()
 	{
-
 	}
-	void Faint::Initialize()
+	void Undead::Initialize()
 	{
-
 	}
-	void Faint::Update()
+	void Undead::Update()
 	{
 		Abnormal::Update();
 	}
-	void Faint::LateUpdate()
+	void Undead::LateUpdate()
 	{
 		Abnormal::LateUpdate();
+
 	}
-	void Faint::Render()
+	void Undead::Render()
 	{
 		renderer::ObjectCB ObjectCB;
 		ObjectCB.vObjectDir.x = -1;
@@ -57,11 +56,8 @@ namespace W
 
 		Abnormal::Render();
 	}
-
-	void Faint::Restore()
+	void Undead::Restore()
 	{
-		BattleManager::Restore_move(m_pTarget, BattleManager::eAbnormalType::Faint);
+		BattleManager::Restore_move(m_pTarget, BattleManager::eAbnormalType::Undead);
 	}
-
-
 }

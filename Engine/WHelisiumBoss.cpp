@@ -71,10 +71,12 @@ namespace W
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ladder, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::AttackObject, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterAttack, true);
+		CollisionManager::SetLayer(eLayerType::Ground, eLayerType::AttackObject, true);
+
 	}
 	void HelisiumBoss::OnExit()
 	{
-
+		CollisionManager::Clear();
 	}
 	void HelisiumBoss::CreateBackground()
 	{
@@ -97,6 +99,6 @@ namespace W
 	{
 		Megnus* pMegnus = new Megnus();
 		pMegnus->Initialize();
-		AddGameObject(eLayerType::Ground, pMegnus);
+		AddGameObject(eLayerType::Monster, pMegnus);
 	}
 }

@@ -15,10 +15,17 @@
 #include "WSceneManger.h"
 #include "WEventManager.h"
 #include "WMegnusAttack.h"
+#include "WTime.h"
+//#include "WSleepGas.h"
 namespace W
 {
-	Megnus::Megnus():
-		m_pZone(nullptr)
+	Megnus::Megnus() :
+		m_pZone(nullptr),
+		m_pGas(nullptr),
+		m_fCreateTime(1.25f),
+		m_fCurCreateTime(0.f),
+		m_fGasTime(5.f),
+		m_fCurGasTime(0.f)
 	{
 		SetName(L"Megnus");
 
@@ -57,7 +64,7 @@ namespace W
 		pAnim->FindAnimation(L"Megnus_attack3_left")->Create(L"Megnus_attack3_left", pAtlas1, Vector2(0.f, 6600.f), Vector2(1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Megnus_attack3_left")->Create(L"Megnus_attack3_left", pAtlas1, Vector2(0.f, 7150.f), Vector2(1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Megnus_attack3_left")->Create(L"Megnus_attack3_left", pAtlas1, Vector2(0.f, 7700), Vector2(1100.f, 550.f), 6, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
-		
+
 		pAnim->Create(L"Megnus_stand_right", pAtlas1, Vector2(8800.f, 0.f), Vector2(-1100.f, 550.f), 8, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"Megnus_move_right", pAtlas1, Vector2(8800.f, 550.f), Vector2(-1100.f, 550.f), 8, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"Megnus_attack0_right", pAtlas1, Vector2(8800.f, 1100.f), Vector2(-1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
@@ -123,6 +130,10 @@ namespace W
 		pEffect = new Effect();
 		pEffect->SetName(L"Megnus_attack4");
 		pEffect->CreateAnimation(Resources::Find<Texture>(L"Megnus_attack4_hit"), Vector2(0.f, 0.f), Vector2(165.f, 168.f), 7, 1, Vector2(170.f, 170.f), Vector2(0.f, 0.f), 0.2f);
+
+		//stone
+		Resources::Load<Texture>(L"magnus_stone", L"..\\Resources\\Texture\\Monster\\megnus\\magnusstone.png");
+
 	}
 	Megnus::~Megnus()
 	{
@@ -160,6 +171,24 @@ namespace W
 	}
 	void Megnus::Update()
 	{
+		//if (!m_pGas->m_bStart)
+		//{
+		//	m_fCurGasTime += Time::DeltaTime();
+		//	if (m_fCurGasTime >= m_fGasTime)
+		//	{
+		//		m_fCurGasTime = 0.f;
+		//		create_gas();
+		//	}
+		//}
+
+
+		m_fCurCreateTime += Time::DeltaTime();
+		if (m_fCurCreateTime >= m_fCreateTime)
+		{
+			m_fCurCreateTime = 0.f;
+			create_stone();
+		}
+
 		Monster::Update();
 	}
 	void Megnus::LateUpdate()
@@ -198,12 +227,11 @@ namespace W
 	}
 	void Megnus::add_skill()
 	{
-		MonsterScript* pScript = GetScript<MonsterScript>();
 		//운석
 		for (int i = 0; i < 30; ++i)
 		{
 			MegnusStone* pStone = new MegnusStone();
-			pStone->SetName(L"Megnus_StoneAttack");
+			pStone->SetName(L"Megnus_Stone");
 			AddMonsterSkill(pStone);
 		}
 
@@ -233,7 +261,7 @@ namespace W
 		AddMonsterSkill(attack2);
 
 		//attack3
-		for (int i = -1; i <= 1; i+=2)
+		for (int i = -1; i <= 1; i += 2)
 		{
 			MegnusAttack* attack3 = new MegnusAttack();
 			attack3->SetDir(i);
@@ -246,6 +274,12 @@ namespace W
 		attack4->SetName(L"Megnus_attack4");
 		AddMonsterSkill(attack4);
 
+		//가스
+		//m_pGas = new SleepGas();
+		//m_pGas->SetOnwer(this);
+		//m_pGas->Initialize();
+
+		//SceneManger::AddGameObject(eLayerType::MonsterAttack, m_pGas);
 	}
 	void Megnus::setattack()
 	{
@@ -272,7 +306,7 @@ namespace W
 
 		attack2.tTime.fCoolTime = 20.f;
 		attack2.vScale = Vector2(3.f, 3.f);
-		
+
 		attack2.pFunction = std::bind(&Megnus::attack1, this);
 
 		attack2.iStartFrame = 12;
@@ -318,13 +352,13 @@ namespace W
 		attack5.pFunction = std::bind(&Megnus::attack4, this);
 
 		attack5.iStartFrame = 28;
-		attack5.iEndFrame =30;
+		attack5.iEndFrame = 30;
 		Pscript->AddAttack(attack5);
 
 		tMonsterAttack attack6 = {};
 		attack6.bSkill = true;
 		attack6.tTime.fCoolTime = 40.f;
-		attack6.tTime.fCurTime = 40.f;
+		//attack6.tTime.fCurTime = 40.f;
 
 		attack6.pFunction = std::bind(&Megnus::attack5, this);
 
@@ -335,7 +369,7 @@ namespace W
 		tMonsterAttack attack7 = {};
 		attack7.bSkill = true;
 		attack7.tTime.fCoolTime = 30.f;
-
+		attack7.tTime.fCurTime = 30.f;
 		attack7.pFunction = std::bind(&Megnus::attack6, this);
 
 		attack7.iStartFrame = 10;
@@ -418,17 +452,51 @@ namespace W
 	void Megnus::attack5()
 	{
 		//슬로우
-		BattleManager::HitchAbnormal(BattleManager::eAbnormalType::Slow,-1.2f);
+		BattleManager::HitchAbnormal(BattleManager::eAbnormalType::Slow, -1.2f);
 	}
 	void Megnus::attack6()
 	{
 		//언데드화
 		BattleManager::HitchAbnormal(BattleManager::eAbnormalType::Undead);
 	}
-	void Megnus::attack7()
+	void Megnus::create_stone()
 	{
-		//운석
+		MonsterAttackObject* pObj = GetMonsterSkill(L"Megnus_Stone");
+		if (pObj == nullptr)
+			return;
+
+		std::random_device rDiv;
+		std::mt19937 en(rDiv());
+		std::uniform_int_distribution<int> disX(-13, 13);
+		std::uniform_int_distribution<int> disY(2, 4);
+		float fPosX = (float)disX(en);
+		float fPosY = (float)disY(en);
+		Vector3 vPosition = Vector3(fPosX, fPosY, -1.5f);
+
+		pObj->GetComponent<Transform>()->SetPosition(vPosition);
+		pObj->SetOnwer(this);
+		pObj->Initialize();
+
+		EventManager::CreateObject(pObj, eLayerType::MonsterAttack);
 
 	}
-	
+
+	void Megnus::create_gas()
+	{
+		//m_pGas->SetState(GameObject::eState::Active);
+		//m_pGas->m_bStart = true;
+		//
+		//std::random_device rDiv;
+		//std::mt19937 en(rDiv());
+		//std::uniform_int_distribution<int> disX(-13, 13);
+		//std::uniform_int_distribution<int> disY(2, 4);
+		//float fPosX = (float)disX(en);
+		//float fPosY = (float)disY(en);
+		//Vector3 vPosition = Vector3(fPosX, fPosY, -1.5f);
+		//
+		//m_pGas->GetComponent<Transform>()->SetPosition(vPosition);
+		//
+		//m_pGas->Initialize();
+	}
+
 }

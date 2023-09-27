@@ -46,6 +46,10 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
+	void Abnormal::Restore()
+	{
+
+	}
 	void Abnormal::Render()
 	{	
 		GameObject::Render();

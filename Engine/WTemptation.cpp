@@ -4,7 +4,7 @@
 #include "WRenderer.h"
 #include "WRigidbody.h"
 #include "WPlayer.h"
-
+#include "WBattleManager.h"
 namespace W
 {
 	Temptation::Temptation()
@@ -68,6 +68,11 @@ namespace W
 		pConstBuffer->Bind(eShaderStage::PS);
 
 		Abnormal::Render();
+	}
+
+	void Temptation::Restore()
+	{
+		BattleManager::Restore_move(m_pTarget, BattleManager::eAbnormalType::temptation);
 	}
 
 	

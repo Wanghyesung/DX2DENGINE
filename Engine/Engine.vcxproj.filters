@@ -644,6 +644,9 @@
     <ClInclude Include="WSlow.h">
       <Filter>Contents\Object\Abnormal</Filter>
     </ClInclude>
+    <ClInclude Include="WUndead.h">
+      <Filter>Contents\Object\Abnormal\undead</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
@@ -1286,6 +1289,9 @@
     <ClCompile Include="WSlow.cpp">
       <Filter>Contents\Object\Abnormal</Filter>
     </ClCompile>
+    <ClCompile Include="WUndead.cpp">
+      <Filter>Contents\Object\Abnormal\undead</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -1743,6 +1749,9 @@
     </Filter>
     <Filter Include="Contents\Object\Abnormal\Slow">
       <UniqueIdentifier>{86f4969b-1146-46de-97fc-52d2286a9b4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Abnormal\undead">
+      <UniqueIdentifier>{04691a25-fa52-40c1-ae65-27492786f165}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

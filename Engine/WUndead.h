@@ -3,11 +3,11 @@
 
 namespace W
 {
-	class SealSkill : public Abnormal
+	class Undead :public Abnormal
 	{
 	public:
-		SealSkill();
-		virtual ~SealSkill();
+		Undead();
+		virtual ~Undead();
 
 		virtual void Initialize() override;
 		virtual void Update()override;
@@ -15,7 +15,9 @@ namespace W
 		virtual void Render()override;
 
 		virtual void Restore()override;
+
 	private:
 	};
 }
+
 

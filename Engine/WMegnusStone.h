@@ -15,8 +15,15 @@ namespace W
 		virtual void Render()override;
 
 	private:
-		UINT m_iCallCount;
+		void move();
+		void start();
+		void off();
+	private:
 		tMonsterAttack m_tMonsterAttack;
+		std::wstring m_strCurAnim;
+
+		bool m_bMove;
+		bool m_bEnd;
 	};
 }
 

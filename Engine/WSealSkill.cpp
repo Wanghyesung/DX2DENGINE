@@ -4,7 +4,8 @@
 #include "WRenderer.h"
 #include "WRigidbody.h"
 #include "WPlayer.h"
-
+#include "WBattleManager.h"
+#include "WPlayer.h"
 namespace W
 {
 	SealSkill::SealSkill()
@@ -56,6 +57,11 @@ namespace W
 		pConstBuffer->Bind(eShaderStage::PS);
 
 		Abnormal::Render();
+	}
+
+	void SealSkill::Restore()
+	{
+		BattleManager::Restore_move(m_pTarget, BattleManager::eAbnormalType::SealSkill);
 	}
 
 

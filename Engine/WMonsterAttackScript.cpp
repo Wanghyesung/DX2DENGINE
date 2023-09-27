@@ -9,8 +9,11 @@
 #include "WPlayerScript.h"
 namespace W
 {
-	MonsterAttackScript::MonsterAttackScript():
-		m_eAbnorType(BattleManager::eAbnormalType::None)
+	MonsterAttackScript::MonsterAttackScript() :
+		m_eAbnorType(BattleManager::eAbnormalType::None),
+		m_fAccValue(0.f),
+		m_iAbnormalStack(1),
+		m_bEnter(false)
 	{
 	}
 	MonsterAttackScript::~MonsterAttackScript()
@@ -23,7 +26,7 @@ namespace W
 	}
 	void MonsterAttackScript::Update()
 	{
-		
+
 	}
 	void MonsterAttackScript::LateUpdate()
 	{
@@ -33,9 +36,13 @@ namespace W
 	{
 
 	}
+
 	void MonsterAttackScript::OnCollisionEnter(Collider2D* other)
 	{
-		
+		GameObject* pOther = other->GetOwner();
+		if (pOther->GetLayerType() == eLayerType::Player ||
+			pOther->GetLayerType() == eLayerType::Ground)
+			m_bEnter = true;
 	}
 
 	void MonsterAttackScript::OnCollisionStay(Collider2D* other)
@@ -51,8 +58,11 @@ namespace W
 				return;
 
 			//ex : ½ºÅÏ, ¾ÏÈæ
-			BattleManager::HitchAbnormal(m_eAbnorType);
-
+			if (m_iAbnormalStack == 1)
+			{
+				BattleManager::HitchAbnormal(m_eAbnorType, m_fAccValue);
+				m_iAbnormalStack = 0;
+			}
 			Effect* pEffect = BattleManager::GetEffect(pMonsterAttack->GetName());
 			if (pEffect)
 			{
@@ -67,6 +77,6 @@ namespace W
 
 	void MonsterAttackScript::OnCollisionExit(Collider2D* other)
 	{
-		
+
 	}
 }

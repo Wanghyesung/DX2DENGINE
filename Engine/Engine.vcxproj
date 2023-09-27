@@ -399,6 +399,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WTemptation.h" />
     <ClInclude Include="WThunder.h" />
     <ClInclude Include="WTop_10.h" />
+    <ClInclude Include="WUndead.h" />
     <ClInclude Include="WUpBtn.h" />
     <ClInclude Include="WUpStat.h" />
     <ClInclude Include="WValleyScene.h" />
@@ -615,6 +616,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WTemptation.cpp" />
     <ClCompile Include="WThunder.cpp" />
     <ClCompile Include="WTop_10.cpp" />
+    <ClCompile Include="WUndead.cpp" />
     <ClCompile Include="WUpBtn.cpp" />
     <ClCompile Include="WUpStat.cpp" />
     <ClCompile Include="WValleyScene.cpp" />
