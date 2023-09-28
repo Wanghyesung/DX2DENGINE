@@ -16,7 +16,7 @@
 #include "WEventManager.h"
 #include "WMegnusAttack.h"
 #include "WTime.h"
-//#include "WSleepGas.h"
+#include "WSleepGas.h"
 namespace W
 {
 	Megnus::Megnus() :
@@ -24,8 +24,9 @@ namespace W
 		m_pGas(nullptr),
 		m_fCreateTime(1.25f),
 		m_fCurCreateTime(0.f),
-		m_fGasTime(5.f),
-		m_fCurGasTime(0.f)
+		m_fGasTime(15.f),
+		m_fCurGasTime(0.f),
+		m_iCurLevel(0)
 	{
 		SetName(L"Megnus");
 
@@ -59,7 +60,7 @@ namespace W
 		pAnim->Create(L"Megnus_attack2_left", pAtlas1, Vector2(0.f, 3850), Vector2(1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Megnus_attack2_left")->Create(L"Megnus_attack2_left", pAtlas1, Vector2(0.f, 4400.f), Vector2(1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Megnus_attack2_left")->Create(L"Megnus_attack2_left", pAtlas1, Vector2(0.f, 4950.f), Vector2(1100.f, 550.f), 6, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Megnus_attack3_left", pAtlas1, Vector2(0.f, 5500), Vector2(1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"Megnus_attack3_left", pAtlas1, Vector2(0.f, 5500.f), Vector2(1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Megnus_attack3_left")->Create(L"Megnus_attack3_left", pAtlas1, Vector2(0.f, 6050), Vector2(1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Megnus_attack3_left")->Create(L"Megnus_attack3_left", pAtlas1, Vector2(0.f, 6600.f), Vector2(1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Megnus_attack3_left")->Create(L"Megnus_attack3_left", pAtlas1, Vector2(0.f, 7150.f), Vector2(1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
@@ -69,17 +70,17 @@ namespace W
 		pAnim->Create(L"Megnus_move_right", pAtlas1, Vector2(8800.f, 550.f), Vector2(-1100.f, 550.f), 8, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"Megnus_attack0_right", pAtlas1, Vector2(8800.f, 1100.f), Vector2(-1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Megnus_attack0_right")->Create(L"Megnus_attack0_right", pAtlas1, Vector2(8800.f, 1650.f), Vector2(-1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"Megnus_attack0_right")->Create(L"Megnus_attack0_right", pAtlas1, Vector2(8800.f, 2200.f), Vector2(-1100.f, 550.f), 8, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
+		pAnim->FindAnimation(L"Megnus_attack0_right")->Create(L"Megnus_attack0_right", pAtlas1, Vector2(8800.f, 2200.f), Vector2(-1100.f, 550.f), 7, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"Megnus_attack1_right", pAtlas1, Vector2(8800.f, 2750.f), Vector2(-1100, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Megnus_attack1_right")->Create(L"Megnus_attack1_right", pAtlas1, Vector2(8800.f, 3300), Vector2(-1100.f, 550.f), 8, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"Megnus_attack2_right", pAtlas1, Vector2(8800.f, 3850), Vector2(-1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Megnus_attack2_right")->Create(L"Megnus_attack2_right", pAtlas1, Vector2(8800.f, 4400.f), Vector2(-1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Megnus_attack2_right")->Create(L"Megnus_attack2_right", pAtlas1, Vector2(8800.f, 4950.f), Vector2(-1100.f, 550.f), 6, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"Megnus_attack3_right", pAtlas1, Vector2(8800.f, 5500), Vector2(-1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"Megnus_attack3_right")->Create(L"Megnus_attack3_right", pAtlas1, Vector2(8800.f, 6050), Vector2(-1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
+		pAnim->FindAnimation(L"Megnus_attack3_right")->Create(L"Megnus_attack3_right", pAtlas1, Vector2(8800.f, 6050.f), Vector2(-1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Megnus_attack3_right")->Create(L"Megnus_attack3_right", pAtlas1, Vector2(8800.f, 6600.f), Vector2(-1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Megnus_attack3_right")->Create(L"Megnus_attack3_right", pAtlas1, Vector2(8800.f, 7150.f), Vector2(-1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"Megnus_attack3_right")->Create(L"Megnus_attack3_right", pAtlas1, Vector2(8800.f, 7700), Vector2(-1100.f, 550.f), 6, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
+		pAnim->FindAnimation(L"Megnus_attack3_right")->Create(L"Megnus_attack3_right", pAtlas1, Vector2(8800.f, 7700.f), Vector2(-1100.f, 550.f), 6, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 
 		pAnim->Create(L"Megnus_attack4_left", pAtlas2, Vector2(0.f, 0.f), Vector2(1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Megnus_attack4_left")->Create(L"Megnus_attack4_left", pAtlas2, Vector2(0.f, 550.f), Vector2(1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
@@ -171,23 +172,9 @@ namespace W
 	}
 	void Megnus::Update()
 	{
-		//if (!m_pGas->m_bStart)
-		//{
-		//	m_fCurGasTime += Time::DeltaTime();
-		//	if (m_fCurGasTime >= m_fGasTime)
-		//	{
-		//		m_fCurGasTime = 0.f;
-		//		create_gas();
-		//	}
-		//}
+		check_time();
+		check_HP();
 
-
-		m_fCurCreateTime += Time::DeltaTime();
-		if (m_fCurCreateTime >= m_fCreateTime)
-		{
-			m_fCurCreateTime = 0.f;
-			create_stone();
-		}
 
 		Monster::Update();
 	}
@@ -236,10 +223,10 @@ namespace W
 		}
 
 		//mobzone
-		//m_pZone = new MobZone();
-		//m_pZone->SetOwner(this);
-		//m_pZone->Initialize();
-		//SceneManger::AddGameObject(eLayerType::Object, m_pZone);
+		m_pZone = new MobZone();
+		m_pZone->SetOwner(this);
+		m_pZone->Initialize();
+		SceneManger::AddGameObject(eLayerType::Object, m_pZone);
 
 
 		//attack0
@@ -275,11 +262,10 @@ namespace W
 		AddMonsterSkill(attack4);
 
 		//가스
-		//m_pGas = new SleepGas();
-		//m_pGas->SetOnwer(this);
-		//m_pGas->Initialize();
+		m_pGas = new SleepGas();
+		m_pGas->SetOnwer(this);
 
-		//SceneManger::AddGameObject(eLayerType::MonsterAttack, m_pGas);
+		SceneManger::AddGameObject(eLayerType::MonsterAttack, m_pGas);
 	}
 	void Megnus::setattack()
 	{
@@ -358,7 +344,7 @@ namespace W
 		tMonsterAttack attack6 = {};
 		attack6.bSkill = true;
 		attack6.tTime.fCoolTime = 40.f;
-		//attack6.tTime.fCurTime = 40.f;
+		attack6.tTime.fCurTime = 40.f;
 
 		attack6.pFunction = std::bind(&Megnus::attack5, this);
 
@@ -369,7 +355,7 @@ namespace W
 		tMonsterAttack attack7 = {};
 		attack7.bSkill = true;
 		attack7.tTime.fCoolTime = 30.f;
-		attack7.tTime.fCurTime = 30.f;
+		//attack7.tTime.fCurTime = 30.f;
 		attack7.pFunction = std::bind(&Megnus::attack6, this);
 
 		attack7.iStartFrame = 10;
@@ -393,7 +379,7 @@ namespace W
 		vStartPos.z -= 0.1f;
 		vStartPos.y -= 0.5f;
 		srand(time(NULL));
-		for (int i = 0; i < 7; ++i)
+		for (int i = -3; i < 4; ++i)
 		{
 			int iIndx = (rand() % 4);
 
@@ -483,20 +469,70 @@ namespace W
 
 	void Megnus::create_gas()
 	{
-		//m_pGas->SetState(GameObject::eState::Active);
-		//m_pGas->m_bStart = true;
-		//
-		//std::random_device rDiv;
-		//std::mt19937 en(rDiv());
-		//std::uniform_int_distribution<int> disX(-13, 13);
-		//std::uniform_int_distribution<int> disY(2, 4);
-		//float fPosX = (float)disX(en);
-		//float fPosY = (float)disY(en);
-		//Vector3 vPosition = Vector3(fPosX, fPosY, -1.5f);
-		//
-		//m_pGas->GetComponent<Transform>()->SetPosition(vPosition);
-		//
-		//m_pGas->Initialize();
+		
+		std::random_device rDiv;
+		std::mt19937 en(rDiv());
+		std::uniform_int_distribution<int> disX(-13, 12);
+		float fPosX = (float)disX(en);
+
+		if((fPosX >= 0))
+			fPosX = 10.f;
+		else
+			fPosX = -10.f;
+
+		Vector3 vPosition = Vector3(fPosX, -1.95f, -1.5f);
+		
+		m_pGas->GetComponent<Transform>()->SetPosition(vPosition);
+
+		m_pGas->start();
+	}
+
+	void Megnus::check_time()
+	{
+		if (!m_pGas->m_bStart)
+		{
+			m_fCurGasTime += Time::DeltaTime();
+			if (m_fCurGasTime >= m_fGasTime)
+			{
+				m_fCurGasTime = 0.f;
+				create_gas();
+			}
+		}
+
+
+		m_fCurCreateTime += Time::DeltaTime();
+		if (m_fCurCreateTime >= m_fCreateTime)
+		{
+			m_fCurCreateTime = 0.f;
+			create_stone();
+		}
+
+	}
+
+	void Megnus::check_HP()
+	{
+		const tObjectInfo& tInfo = GetScript<MonsterScript>()->GetObjectInfo();
+		float fRatio = tInfo.fHP/ tInfo.fMaxHP;
+		
+		UINT iLevel = 0;
+		if (fRatio < 0.75f && fRatio>0.5f)
+			iLevel = 1;
+
+		else if (fRatio < 0.5f && fRatio>.25f)
+			iLevel = 2;
+
+		else if (fRatio < 0.25f)
+			iLevel = 3;
+
+		if (m_iCurLevel != iLevel)
+		{
+			m_iCurLevel = iLevel;
+			m_pZone->SetLevel(m_iCurLevel);
+
+			//더 빨리 생성하게
+			m_fCreateTime -= 0.1f;
+			m_fGasTime -= 0.15f;
+		}
 	}
 
 }

@@ -14,7 +14,7 @@
 #include "WArielStone.h"
 #include "WBattleManager.h"
 #include "WPullObject.h"
-
+#include "WPinkBean.h"
 namespace W
 {
 	Ariel::Ariel()
@@ -256,6 +256,9 @@ namespace W
 		float fAccValue = 10.f;
 		for (GameObject* pMon : vecMonster)
 		{
+			if (dynamic_cast<PinkBean*>(pMon))
+				continue;
+
 			if(pMon->GetState() == GameObject::eState::Active)
 				BattleManager::Buff_Stat(pMon, BattleManager::eUpStatType::Heal, fAccValue);
 		}

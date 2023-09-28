@@ -647,6 +647,12 @@
     <ClInclude Include="WUndead.h">
       <Filter>Contents\Object\Abnormal\undead</Filter>
     </ClInclude>
+    <ClInclude Include="WSleepGas.h">
+      <Filter>Contents\Object\BossMonster\magnus\sleepgas</Filter>
+    </ClInclude>
+    <ClInclude Include="WStop.h">
+      <Filter>Contents\Object\Abnormal\Stop</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
@@ -1292,6 +1298,12 @@
     <ClCompile Include="WUndead.cpp">
       <Filter>Contents\Object\Abnormal\undead</Filter>
     </ClCompile>
+    <ClCompile Include="WSleepGas.cpp">
+      <Filter>Contents\Object\BossMonster\magnus\sleepgas</Filter>
+    </ClCompile>
+    <ClCompile Include="WStop.cpp">
+      <Filter>Contents\Object\Abnormal\Stop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -1752,6 +1764,12 @@
     </Filter>
     <Filter Include="Contents\Object\Abnormal\undead">
       <UniqueIdentifier>{04691a25-fa52-40c1-ae65-27492786f165}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\BossMonster\magnus\sleepgas">
+      <UniqueIdentifier>{f9d61ce3-e33a-4678-964c-485d47f8fac9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\Abnormal\Stop">
+      <UniqueIdentifier>{924e8adf-1b15-4ea0-8443-bd38769250f3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

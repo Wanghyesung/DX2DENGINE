@@ -97,6 +97,9 @@ namespace W
 			case W::BattleManager::eAbnormalType::Faint:
 				BattleManager::faint(pObj);
 				break;
+			case W::BattleManager::eAbnormalType::Stop:
+				BattleManager::stop(pObj);
+				break;
 			case W::BattleManager::eAbnormalType::Dark:
 				BattleManager::dark(pObj);
 				break;
@@ -104,7 +107,7 @@ namespace W
 				BattleManager::confusion(pObj);
 				break;
 			case W::BattleManager::eAbnormalType::Slow:
-				BattleManager::slow(pObj, _tEve.accParm);//능력치 깍는 효과는 accparm추가
+				BattleManager::debuff_slow(pObj, _tEve.accParm);//능력치 깍는 효과는 accparm추가
 				break;
 			case W::BattleManager::eAbnormalType::Variation:
 				BattleManager::variation(pObj);

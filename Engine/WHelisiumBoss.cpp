@@ -71,7 +71,7 @@ namespace W
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ladder, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::AttackObject, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterAttack, true);
-		CollisionManager::SetLayer(eLayerType::Ground, eLayerType::AttackObject, true);
+		CollisionManager::SetLayer(eLayerType::Ground, eLayerType::MonsterAttack, true);
 
 	}
 	void HelisiumBoss::OnExit()

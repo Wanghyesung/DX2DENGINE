@@ -1,10 +1,13 @@
 #include "WSlow.h"
 #include "WAnimator.h"
 #include "WResources.h"
+#include "WRenderer.h"
+#include "WBattleManager.h"
+#include "WPlayer.h"
 namespace W
 {
 	Slow::Slow(float _fAccStat):
-		UpStat(_fAccStat)
+		m_fAccValue(_fAccStat)
 	{
 		std::shared_ptr<Material> pMater = std::make_shared<Material>();
 		pMater->SetShader(Resources::Find<Shader>(L"ObjectAnimShader"));
@@ -29,18 +32,32 @@ namespace W
 	}
 	void Slow::Initialize()
 	{
-
+		
 	}
 	void Slow::Update()
 	{
-		UpStat::Update();
+		Abnormal::Update();
 	}
 	void Slow::LateUpdate()
 	{
-		UpStat::LateUpdate();
+		Abnormal::LateUpdate();
+
 	}
 	void Slow::Render()
 	{
-		UpStat::Render();
+		renderer::ObjectCB ObjectCB;
+		ObjectCB.vObjectDir.x = -1;
+		ObjectCB.vObjectColor = Vector4::One;
+
+		ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Object];
+		//Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
+		pConstBuffer->SetData(&ObjectCB);
+		pConstBuffer->Bind(eShaderStage::PS);
+
+		Abnormal::Render();
+	}
+	void Slow::Restore()
+	{
+		BattleManager::Restore_move(m_pTarget, BattleManager::eAbnormalType::Slow, -m_fAccValue);
 	}
 }

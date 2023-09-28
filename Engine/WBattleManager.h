@@ -21,6 +21,7 @@ namespace W
 			Dark,
 			Confusion,
 			Slow,
+			Stop,
 			Undead,
 			Variation,
 			End
@@ -62,7 +63,7 @@ namespace W
 		
 		static UINT GetMaxDamage() { return m_iMaxDamage; }
 
-		static void Restore_move(GameObject* _pTarget, eAbnormalType _eType);
+		static void Restore_move(GameObject* _pTarget, eAbnormalType _eType, float _fAccValue = 0.f);
 		static bool IsAblePotion();
 
 		static void PushEffect(Effect* _pEffect);
@@ -78,6 +79,7 @@ namespace W
 
 
 		static void dark(GameObject* _pGameObject);
+		static void stop(GameObject* _pGameObject);
 		static void faint(GameObject* _pGameObject);
 		static void seal_potion(GameObject* _pGameObject);
 		static void seal_skill(GameObject* _pGameObject);
@@ -86,7 +88,7 @@ namespace W
 		static void undead(GameObject* _pGameObject);
 		static void variation(GameObject* _pGameObject);
 
-		static void restore_move(Player* _pTarget);
+		//static void restore_move(Player* _pTarget);
 
 		//monster
 		static void buff_attack(GameObject* _pTarget, float _fAccDamage);
@@ -94,9 +96,10 @@ namespace W
 		static void buff_ignore(GameObject* _pTarget, float _fsign);
 		static void buff_heal(GameObject* _pTarget, float _fAccHeal);
 		static void buff_reflex(GameObject* _pTarget, float _fsign);
+
 		//player
 		static void buff_speed(GameObject* _pTarget, float _fAccSpeed);
-		static void slow(GameObject* _pGameObject,float _fAccSpeed);
+		static void debuff_slow(GameObject* _pGameObject,float _fAccSpeed);
 		static void buff_HP(GameObject* _pTarget, float _fAccValue);
 		static void buff_MP(GameObject* _pTarget, float _fAccValue);
 	private:

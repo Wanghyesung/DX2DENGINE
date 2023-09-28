@@ -363,18 +363,22 @@ namespace W
 		Vector3 vPosition = m_pPlayer->GetComponent<Transform>()->GetPosition();
 		BattleManager::CheckDamage(m_tObjectInfo, _tAttackInfo, _strAttackName, vPosition);
 
+		m_pPlayer->SetAlert(true);
+
 		m_tHitInfo.eAttType = _tAttackInfo.eAttType;
 		m_tHitInfo.fHitRcnt = _tAttackInfo.fAttRcnt;
 		m_tHitInfo.fHitRigidityTime = _tAttackInfo.fAttRigidityTime;
 		m_tHitInfo.fHitUpperRcnt = _tAttackInfo.fAttUpperRcnt;
 
-		m_fHitTime = 0.f;
-		m_pPlayer->SetAlert(true);
-
 		Player::ePlayerState eState = m_pPlayer->GetCurPlayerState();
 		if (eState == Player::ePlayerState::ladder)
 			return;
-		
+
+		m_fHitTime = 0.f;
+		if (m_tHitInfo.fHitRcnt <= 0.f &&
+			m_tHitInfo.fHitUpperRcnt <= 0.f)
+			return;
+
 		knockback();
 	}
 	

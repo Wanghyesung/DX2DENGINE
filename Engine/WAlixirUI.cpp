@@ -1,5 +1,5 @@
 #include "WAlixirUI.h"
-
+#include "WBattleManager.h"
 namespace W
 {
 	AlixirUI::AlixirUI()
@@ -25,8 +25,8 @@ namespace W
 	}
 	void AlixirUI::Initialize()
 	{
-		m_fAccHP = 1000000.f;
-		m_fAccMP = 1000000.f;
+		m_fAccHP = BattleManager::GetMaxDamage();
+		m_fAccMP = BattleManager::GetMaxDamage();
 	}
 	void AlixirUI::Update()
 	{

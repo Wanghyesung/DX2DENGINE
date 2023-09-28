@@ -25,15 +25,22 @@ namespace W
 		void attack6();
 		void create_stone();
 		void create_gas();
-	private:
-		class MobZone* m_pZone;
 
+		void check_time();
+		void check_HP();
+	private:
+
+
+		class MobZone* m_pZone;
 		class SleepGas* m_pGas;
+
 		float m_fGasTime;
 		float m_fCurGasTime;
 
 		float m_fCreateTime;
 		float m_fCurCreateTime;
+
+		UINT m_iCurLevel;
 	};
 }
 

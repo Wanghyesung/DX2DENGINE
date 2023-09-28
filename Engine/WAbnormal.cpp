@@ -34,7 +34,7 @@ namespace W
 			m_pTarget->GetState() == GameObject::Dead)
 		{
 			object::Destroy(this);
-			BattleManager::restore_move(m_pTarget);
+			Restore();
 			return;
 		}
 

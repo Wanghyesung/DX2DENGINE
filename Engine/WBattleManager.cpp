@@ -117,6 +117,9 @@ namespace W
 			iFinalDamage = m_iMaxDamage;
 
 		_tObjectInfo.fHP -= iFinalDamage;
+		if (_tObjectInfo.fHP <= 0.f)
+			_tObjectInfo.fHP = 0.f;
+
 		UINT iMinus = m_iMaxDamage + 1;
 		
 		while (iMinus > 0)
@@ -225,6 +228,23 @@ namespace W
 	{
 
 	}
+	void BattleManager::stop(GameObject* _pGameObject)
+	{
+		Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
+		if (!pPlayer)
+			return;
+
+		//Faint* pFaint = new Faint();
+		//pFaint->SetTarget(pPlayer);
+		//pFaint->SetTime(5.f);
+		//EventManager::CreateObject(pFaint, eLayerType::Object);
+
+		PlayerScript* pScript = pPlayer->GetScript<PlayerScript>();
+		pScript->m_bAbnormal = true;
+
+		EventManager::ChangePlayerSkillState(Player::ePlayerSkill::end);
+		EventManager::ChangePlayerFSMState(pScript->m_pFSM, Player::ePlayerState::alert);
+	}
 	void BattleManager::faint(GameObject* _pGameObject)
 	{
 		Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
@@ -238,8 +258,9 @@ namespace W
 
 		PlayerScript* pScript = pPlayer->GetScript<PlayerScript>();
 		pScript->m_bAbnormal = true;
-
+		
 		EventManager::ChangePlayerSkillState(Player::ePlayerSkill::end);
+		EventManager::ChangePlayerFSMState(pScript->m_pFSM, Player::ePlayerState::alert);
 		//SkillManager::SetActiveSkill(Player::ePlayerSkill::end);
 	}
 	void BattleManager::seal_potion(GameObject* _pGameObject)
@@ -248,21 +269,22 @@ namespace W
 	}
 
 	//음수로 넣어야함
-	void BattleManager::slow(GameObject* _pGameObject, float _fAccSpeed)
+	void BattleManager::debuff_slow(GameObject* _pGameObject, float _fAccSpeed)
 	{
 		Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
+		tObjectInfo& tInfo = pPlayer->GetScript<PlayerScript>()->m_tObjectInfo;
 		if (!pPlayer)
 			return;
 
-		Slow* pSlow = new Slow(_fAccSpeed);
-		pSlow->SetTarget(pPlayer);
-		pSlow->SetDeleteTime(6.f);
-		pSlow->SetType(eUpStatType::Speed);
+		if (_fAccSpeed < 0)
+		{
+			Slow* pSlow = new Slow(_fAccSpeed);
+			pSlow->SetTarget(pPlayer);
+			pSlow->SetTime(6.f);
+			EventManager::CreateObject(pSlow, eLayerType::Object);
+		}
 
-		EventManager::CreateObject(pSlow, eLayerType::Object);
-	
-		PlayerScript* pScript = pPlayer->GetScript<PlayerScript>();
-		pScript->m_tObjectInfo.fSpeed += _fAccSpeed;
+		tInfo.fSpeed += _fAccSpeed;
 	}
 
 	void BattleManager::seal_skill(GameObject* _pGameObject)
@@ -324,6 +346,8 @@ namespace W
 		pUndead->SetTarget(pPlayer);
 		pUndead->SetTime(8.f);
 		EventManager::CreateObject(pUndead, eLayerType::Object);
+
+		m_bOnUndead = true;
 	}
 
 	void BattleManager::PushEffect(Effect* _pEffect)
@@ -357,7 +381,7 @@ namespace W
 		return pEffect;
 	}
 
-	void BattleManager::Restore_move(GameObject* _pTarget, eAbnormalType _eType)
+	void BattleManager::Restore_move(GameObject* _pTarget, eAbnormalType _eType, float _fAccValue)
 	{
 		PlayerScript* pScript = _pTarget->GetScript<PlayerScript>();
 		switch (_eType)
@@ -372,6 +396,12 @@ namespace W
 			break;
 		case W::BattleManager::eAbnormalType::Faint:
 			pScript->m_bAbnormal = false;
+			break;
+		case W::BattleManager::eAbnormalType::Stop:
+			pScript->m_bAbnormal = false;
+			break;
+		case W::BattleManager::eAbnormalType::Slow:
+			debuff_slow(_pTarget, _fAccValue);
 			break;
 		case W::BattleManager::eAbnormalType::Undead:
 			m_bOnUndead = false;
@@ -506,6 +536,12 @@ namespace W
 	{
 		tObjectInfo& tInfo = _pTarget->GetScript<PlayerScript>()->m_tObjectInfo;
 
+		if (_fAccValue >= m_iMaxDamage)
+			_fAccValue = tInfo.fMaxHP;
+
+		if (m_bOnUndead)
+			_fAccValue /= 2.f;
+
 		tInfo.fHP += _fAccValue;
 		if (tInfo.fHP >= tInfo.fMaxHP)
 			tInfo.fHP = tInfo.fMaxHP;
@@ -540,14 +576,7 @@ namespace W
 		EventManager::UpStat(_pTarget, _eType, _fAccStat);
 	}
 
-	void BattleManager::restore_move(Player* _pTarget)
-	{
-		PlayerScript* pScript = _pTarget->GetScript<PlayerScript>();
-		pScript->m_bAbnormal = false;
-		pScript->m_bSealSkill = false;
-
-		m_bOnAbnormal = false;
-	}
+	
 
 	void BattleManager::variation(GameObject* _pGameObject)
 	{

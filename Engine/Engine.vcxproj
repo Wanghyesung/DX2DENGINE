@@ -380,6 +380,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WSKillUI.h" />
     <ClInclude Include="WSkillWind.h" />
     <ClInclude Include="WSkillWindUI.h" />
+    <ClInclude Include="WSleepGas.h" />
     <ClInclude Include="WSlow.h" />
     <ClInclude Include="WSolomon.h" />
     <ClInclude Include="WSolThunder.h" />
@@ -391,6 +392,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WStatUI.h" />
     <ClInclude Include="WStone.h" />
     <ClInclude Include="WStoneScript.h" />
+    <ClInclude Include="WStop.h" />
     <ClInclude Include="WSystemUI.h" />
     <ClInclude Include="WTempleBossScene.h" />
     <ClInclude Include="WTempleScene.h" />
@@ -597,6 +599,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WSKillUI.cpp" />
     <ClCompile Include="WSkillWind.cpp" />
     <ClCompile Include="WSkillWindUI.cpp" />
+    <ClCompile Include="WSleepGas.cpp" />
     <ClCompile Include="WSlow.cpp" />
     <ClCompile Include="WSolomon.cpp" />
     <ClCompile Include="WSolThunder.cpp" />
@@ -608,6 +611,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WStatUI.cpp" />
     <ClCompile Include="WStone.cpp" />
     <ClCompile Include="WStoneScript.cpp" />
+    <ClCompile Include="WStop.cpp" />
     <ClCompile Include="WSystemUI.cpp" />
     <ClCompile Include="WTempleBossScene.cpp" />
     <ClCompile Include="WTempleScene.cpp" />
