@@ -57,7 +57,7 @@ namespace W
 			if (bHit)
 				return;
 
-			//ex : ╫╨ео, ╬охФ
+			//ex : ╫╨ео, ╬охФ, Ё╚юн
 			if (m_iAbnormalStack == 1)
 			{
 				BattleManager::HitchAbnormal(m_eAbnorType, m_fAccValue);

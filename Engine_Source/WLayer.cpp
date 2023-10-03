@@ -24,6 +24,9 @@ namespace W
 	{
 		for (GameObject* gameObj : m_vecGameObject)
 		{
+			if (gameObj->GetState() != GameObject::eState::Active)
+				continue;
+
 			gameObj->Update();
 		}
 	}
@@ -31,6 +34,8 @@ namespace W
 	{
 		for (GameObject* gameObj : m_vecGameObject)
 		{
+			if (gameObj->GetState() != GameObject::eState::Active)
+				continue;
 			gameObj->LateUpdate();
 		}
 	}
@@ -38,6 +43,8 @@ namespace W
 	{
 		for (GameObject* gameObj : m_vecGameObject)
 		{
+			if (gameObj->GetState() != GameObject::eState::Active)
+				continue;
 			gameObj->Render();
 		}
 	}

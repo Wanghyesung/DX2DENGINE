@@ -205,6 +205,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WBattleManager.h" />
     <ClInclude Include="WBlast.h" />
     <ClInclude Include="WBossStart.h" />
+    <ClInclude Include="WBossUI.h" />
     <ClInclude Include="WCage.h" />
     <ClInclude Include="WChannel.h" />
     <ClInclude Include="WChannelNumber.h" />
@@ -213,6 +214,8 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WConfusion.h" />
     <ClInclude Include="WDamageFont.h" />
     <ClInclude Include="WDefenseUp.h" />
+    <ClInclude Include="WDemian.h" />
+    <ClInclude Include="WDemianScene.h" />
     <ClInclude Include="WEffect.h" />
     <ClInclude Include="WEventManager.h" />
     <ClInclude Include="WEyes.h" />
@@ -260,6 +263,8 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WMonsterScript.h" />
     <ClInclude Include="WMonsterStand.h" />
     <ClInclude Include="WMonsterState.h" />
+    <ClInclude Include="WBossTex.h" />
+    <ClInclude Include="WMonsterUI.h" />
     <ClInclude Include="WMunin.h" />
     <ClInclude Include="WMuninStone.h" />
     <ClInclude Include="WPinkBean.h" />
@@ -297,6 +302,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WRex.h" />
     <ClInclude Include="WRexThunder.h" />
     <ClInclude Include="WRoccatBean.h" />
+    <ClInclude Include="WBossEnterUI.h" />
     <ClInclude Include="WScroll.h" />
     <ClInclude Include="WSealSkill.h" />
     <ClInclude Include="WSeleteScene.h" />
@@ -424,6 +430,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WBattleManager.cpp" />
     <ClCompile Include="WBlast.cpp" />
     <ClCompile Include="WBossStart.cpp" />
+    <ClCompile Include="WBossUI.cpp" />
     <ClCompile Include="WCage.cpp" />
     <ClCompile Include="WChannel.cpp" />
     <ClCompile Include="WChannelNumber.cpp" />
@@ -432,6 +439,8 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WConfusion.cpp" />
     <ClCompile Include="WDamageFont.cpp" />
     <ClCompile Include="WDefenseUp.cpp" />
+    <ClCompile Include="WDemian.cpp" />
+    <ClCompile Include="WDemianScene.cpp" />
     <ClCompile Include="WEffect.cpp" />
     <ClCompile Include="WEventManager.cpp" />
     <ClCompile Include="WEyes.cpp" />
@@ -479,6 +488,8 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WMonsterScript.cpp" />
     <ClCompile Include="WMonsterStand.cpp" />
     <ClCompile Include="WMonsterState.cpp" />
+    <ClCompile Include="WBossTex.cpp" />
+    <ClCompile Include="WMonsterUI.cpp" />
     <ClCompile Include="WMunin.cpp" />
     <ClCompile Include="WMuninStone.cpp" />
     <ClCompile Include="WPinkBean.cpp" />
@@ -516,6 +527,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WRex.cpp" />
     <ClCompile Include="WRexThunder.cpp" />
     <ClCompile Include="WRoccatBean.cpp" />
+    <ClCompile Include="WBossEnterUI.cpp" />
     <ClCompile Include="WScroll.cpp" />
     <ClCompile Include="WSealSkill.cpp" />
     <ClCompile Include="WSeleteScene.cpp" />

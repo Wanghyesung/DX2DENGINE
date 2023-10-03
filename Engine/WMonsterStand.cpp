@@ -54,7 +54,9 @@ namespace W
 	}
 	void MonsterStand::Enter()
 	{
-		
+		Collider2D* pCollider = GetMonster()->GetComponent<Collider2D>();
+		if (!pCollider->IsActive())
+			pCollider->SetActive(true);
 	}
 	void MonsterStand::Exit()
 	{

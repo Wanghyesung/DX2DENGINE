@@ -6,6 +6,7 @@
 #include "WPlayer.h"
 #include "WBattleManager.h"
 #include "WPlayer.h"
+#include "WEventManager.h"
 namespace W
 {
 	SealSkill::SealSkill()
@@ -61,7 +62,8 @@ namespace W
 
 	void SealSkill::Restore()
 	{
-		BattleManager::Restore_move(m_pTarget, BattleManager::eAbnormalType::SealSkill);
+		EventManager::Restore(m_pTarget, BattleManager::eAbnormalType::SealSkill);
+		//BattleManager::Restore_move(m_pTarget, BattleManager::eAbnormalType::SealSkill);
 	}
 
 

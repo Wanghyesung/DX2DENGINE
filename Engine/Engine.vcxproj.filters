@@ -653,6 +653,24 @@
     <ClInclude Include="WStop.h">
       <Filter>Contents\Object\Abnormal\Stop</Filter>
     </ClInclude>
+    <ClInclude Include="WBossUI.h">
+      <Filter>Contents\UI\Interface\Extra\bossUI</Filter>
+    </ClInclude>
+    <ClInclude Include="WBossTex.h">
+      <Filter>Contents\UI\Interface\Extra\bossUI\monsterTex</Filter>
+    </ClInclude>
+    <ClInclude Include="WBossEnterUI.h">
+      <Filter>Contents\UI\Interface\Extra\bossUI\SceneEnter</Filter>
+    </ClInclude>
+    <ClInclude Include="WMonsterUI.h">
+      <Filter>Contents\UI\Interface\Extra\bossUI\monsterUI</Filter>
+    </ClInclude>
+    <ClInclude Include="WDemianScene.h">
+      <Filter>Contents\Scene\Demian</Filter>
+    </ClInclude>
+    <ClInclude Include="WDemian.h">
+      <Filter>Contents\Object\BossMonster\Demian</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
@@ -1304,6 +1322,24 @@
     <ClCompile Include="WStop.cpp">
       <Filter>Contents\Object\Abnormal\Stop</Filter>
     </ClCompile>
+    <ClCompile Include="WBossUI.cpp">
+      <Filter>Contents\UI\Interface\Extra\bossUI</Filter>
+    </ClCompile>
+    <ClCompile Include="WBossTex.cpp">
+      <Filter>Contents\UI\Interface\Extra\bossUI\monsterTex</Filter>
+    </ClCompile>
+    <ClCompile Include="WBossEnterUI.cpp">
+      <Filter>Contents\UI\Interface\Extra\bossUI\SceneEnter</Filter>
+    </ClCompile>
+    <ClCompile Include="WMonsterUI.cpp">
+      <Filter>Contents\UI\Interface\Extra\bossUI\monsterUI</Filter>
+    </ClCompile>
+    <ClCompile Include="WDemianScene.cpp">
+      <Filter>Contents\Scene\Demian</Filter>
+    </ClCompile>
+    <ClCompile Include="WDemian.cpp">
+      <Filter>Contents\Object\BossMonster\Demian</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -1770,6 +1806,27 @@
     </Filter>
     <Filter Include="Contents\Object\Abnormal\Stop">
       <UniqueIdentifier>{924e8adf-1b15-4ea0-8443-bd38769250f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Extra\bossUI">
+      <UniqueIdentifier>{5a4c252c-7f32-452a-9436-a83090912b91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Extra\bossUI\extra">
+      <UniqueIdentifier>{a52fd706-24ef-4a5a-b30f-786001d549ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Extra\bossUI\monsterUI">
+      <UniqueIdentifier>{41706f2b-5947-4235-a7cb-ce2a20616c28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Extra\bossUI\monsterTex">
+      <UniqueIdentifier>{243c7dac-ae15-41d6-9781-14b9c86fefd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Extra\bossUI\SceneEnter">
+      <UniqueIdentifier>{bb4261a6-ef5b-49a7-a12f-490161d11a47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Demian">
+      <UniqueIdentifier>{9fc9b9e3-8682-4cf6-9838-b604ef7592a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\BossMonster\Demian">
+      <UniqueIdentifier>{c5207de9-0181-4036-aae5-97ec6115021a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

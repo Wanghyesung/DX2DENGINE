@@ -186,6 +186,8 @@ namespace W
 			m_tObjectInfo.fHP = 0.f;
 
 			EventManager::ChangeMonsterFSMState(m_pFSM, Monster::eMonsterState::dead);
+
+			//캐릭터 공격 오브젝트에서 내 객체 삭제
 			_pAttackObj->GetScript<AttackScript>()->Erase(pCollider->GetColliderID());
 		}
 		else if (!m_bBoss)

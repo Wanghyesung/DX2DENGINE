@@ -17,6 +17,7 @@
 #include "WCharScene.h"
 #include "WSeleteScene.h"
 #include "WHelisiumBoss.h"
+#include "WDemianScene.h"
 #ifdef _DEBUG
 #pragma comment (lib,"..\\x64\\Debug\\Engine.lib")
 
@@ -39,6 +40,7 @@ namespace W
 		SceneManger::CreateScene<TempleStartScene>(L"Start2");
 		SceneManger::CreateScene<TempleBossScene>(L"TempleBoss");
 		SceneManger::CreateScene<HelisiumBoss>(L"Helisium");
+		SceneManger::CreateScene<DemianScene>(L"DemianScene");
 		SceneManger::CreateScene<MoveScene>(L"Move1");
 		SceneManger::CreateScene<MoveScene_2>(L"Move2");
 		SceneManger::CreateScene<CharScene>(L"CharScene");

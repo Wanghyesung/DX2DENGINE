@@ -63,7 +63,6 @@ namespace W
 		
 		static UINT GetMaxDamage() { return m_iMaxDamage; }
 
-		static void Restore_move(GameObject* _pTarget, eAbnormalType _eType, float _fAccValue = 0.f);
 		static bool IsAblePotion();
 
 		static void PushEffect(Effect* _pEffect);
@@ -88,6 +87,8 @@ namespace W
 		static void undead(GameObject* _pGameObject);
 		static void variation(GameObject* _pGameObject);
 
+		//상태이상 해제
+		static void restore(GameObject* _pTarget, eAbnormalType _eType, float _fAccValue = 0.f);
 		//static void restore_move(Player* _pTarget);
 
 		//monster

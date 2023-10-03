@@ -174,7 +174,7 @@ namespace W
 		//3
 		tMonsterAttack skill = {};
 		skill.bSkill = true;
-		skill.tTime.fCoolTime = 13.f;
+		skill.tTime.fCoolTime = 20.f;
 
 		skill.vScale = Vector2(0.f, 0.f);
 		skill.pFunction = std::bind(&Ariel::pull, this);
@@ -273,7 +273,7 @@ namespace W
 		PullObject* pPullObj = new PullObject();
 		pPullObj->SetTarget(pPlayer);
 		pPullObj->SetPosition(Vector2(vTargetPosition.x, 0.f));
-		pPullObj->SetDeleteTime(2.f);
+		pPullObj->SetDeleteTime(1.5f);
 		pPullObj->Initialize();
 
 		EventManager::CreateObject(pPullObj, eLayerType::Object);

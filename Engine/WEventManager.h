@@ -16,6 +16,7 @@ namespace W
 		ADD_OBJECTPOLL,
 		HITCH_ABNORMAL,
 		UP_STAT,
+		RESTORE,
 		END,
 	};
 
@@ -39,6 +40,7 @@ namespace W
 		static void ChangeMonsterFSMState(MonsterFSM* _pFSM, Monster::eMonsterState _eMonsterState);
 		static void CreateObject(GameObject* _pObj, eLayerType _eLayer);
 		static void HitchAbnormal(GameObject* _pObj, BattleManager::eAbnormalType _eType, float _fAccStat = 0.f);
+		static void Restore(GameObject* _pObj, BattleManager::eAbnormalType _eType, float _fAccStat = 0.f);
 		static void UpStat(GameObject* _pObj, BattleManager::eUpStatType _eType, float _fAccStat);
 	private:
 		static void excute(const tEvent& _tEve);

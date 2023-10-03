@@ -25,6 +25,7 @@
 #include "WSkelegon.h"
 #include "WPortal.h"
 #include "WPortalScript.h"
+#include "WBossUI.h"
 namespace W
 {
 	ValleyScene::ValleyScene()
@@ -83,6 +84,9 @@ namespace W
 		AddGameObject(eLayerType::UI, pInterUI);
 		pInterUI->Initialize();
 
+		BossUI* pBossUI = new BossUI();
+		AddGameObject(eLayerType::UI, pBossUI);
+		pBossUI->Initialize();
 
 		//AlixirUI* pTest = new AlixirUI();
 		//AddGameObject(eLayerType::UI, pTest);
@@ -149,7 +153,6 @@ namespace W
 	}
 	void ValleyScene::CreateBackground()
 	{
-
 		GameObject* pBackGround = new GameObject();
 		AddGameObject(eLayerType::Background, pBackGround);
 		MeshRenderer* pMeshRender = pBackGround->AddComponent<MeshRenderer>();
@@ -216,7 +219,7 @@ namespace W
 
 		Portal* pPortal = new Portal();
 		AddGameObject(eLayerType::Portal, pPortal);
-		pPortal->GetScript<PortalScript>()->SetNextScene(L"Helisium");
+		pPortal->GetScript<PortalScript>()->SetNextScene(L"DemianScene");
 		pPortal->GetComponent<Transform>()->SetPosition(3.6f, -6.8f, -0.1f);
 
 		Portal* pPortal2 = new Portal();

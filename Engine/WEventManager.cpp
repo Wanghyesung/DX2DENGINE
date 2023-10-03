@@ -151,6 +151,14 @@ namespace W
 			}
 		}
 		break;
+		case EVENT_TYPE::RESTORE:
+		{
+			GameObject* pObj = (GameObject*)_tEve.lParm;
+			BattleManager::eAbnormalType eType = (BattleManager::eAbnormalType)_tEve.wParm;
+			float fAccStat = (float)_tEve.accParm;
+			BattleManager::restore(pObj,eType,fAccStat);
+		}
+		break;
 		}
 	}
 
@@ -220,6 +228,17 @@ namespace W
 		eve.lParm = (DWORD_PTR)_pObj;
 		eve.wParm = (DWORD_PTR)_eType;
 		eve.accParm = _fAccStat;
+
+		AddEvent(eve);
+	}
+
+	void EventManager::Restore(GameObject* _pObj, BattleManager::eAbnormalType _eType, float _fAccStat)
+	{
+		tEvent eve = {};
+		eve.eEventType = EVENT_TYPE::RESTORE;
+		eve.lParm = (DWORD_PTR)_pObj;
+		eve.wParm = (DWORD_PTR)_eType;
+		eve.accParm = (LONG_PTR)_fAccStat;
 
 		AddEvent(eve);
 	}

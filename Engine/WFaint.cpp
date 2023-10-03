@@ -5,6 +5,7 @@
 #include "WRigidbody.h"
 #include "WPlayer.h"
 #include "WBattleManager.h"
+#include "WEventManager.h"
 namespace W
 {
 	Faint::Faint()
@@ -60,7 +61,8 @@ namespace W
 
 	void Faint::Restore()
 	{
-		BattleManager::Restore_move(m_pTarget, BattleManager::eAbnormalType::Faint);
+		EventManager::Restore(m_pTarget, BattleManager::eAbnormalType::Faint);
+
 	}
 
 

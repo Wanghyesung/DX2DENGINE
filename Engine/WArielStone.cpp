@@ -43,7 +43,7 @@ namespace W
 		float faccAttack = GetOwner()->GetScript<MonsterScript>()->GetAttackInfo().fAttack;
 		m_tMonsterAttack.tAttackInfo.fAttackDamage = 10.f + faccAttack;
 		m_tMonsterAttack.tAttackInfo.fAttUpperRcnt = 0.f;
-		m_tMonsterAttack.tAttackInfo.fAttRigidityTime = 1.f;
+		m_tMonsterAttack.tAttackInfo.fAttRigidityTime = 0.5f;
 		m_tMonsterAttack.tAttackInfo.fAttRcnt = 5.f;
 		m_tMonsterAttack.tAttackInfo.eAttType = eAttackType::SuperKnockback;
 

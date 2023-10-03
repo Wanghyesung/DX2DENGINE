@@ -4,6 +4,7 @@
 #include "WRenderer.h"
 #include "WBattleManager.h"
 #include "WPlayer.h"
+#include "WEventManager.h"
 namespace W
 {
 	Undead::Undead()
@@ -58,6 +59,8 @@ namespace W
 	}
 	void Undead::Restore()
 	{
-		BattleManager::Restore_move(m_pTarget, BattleManager::eAbnormalType::Undead);
+		EventManager::Restore(m_pTarget, BattleManager::eAbnormalType::Undead);
+
+		//BattleManager::Restore_move(m_pTarget, BattleManager::eAbnormalType::Undead);
 	}
 }

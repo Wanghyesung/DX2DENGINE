@@ -18,7 +18,6 @@ namespace W
 
 		void SetOwner(Monster* _pMon) { m_pMonster = _pMon; }
 		void SetLevel(UINT _iNum);
-
 	private:
 		void attack();
 	private:
@@ -31,6 +30,7 @@ namespace W
 		float m_fAttackTime;
 		float m_fCurTime;
 
+		
 		std::vector<float> m_vecLength;
 	};
 }

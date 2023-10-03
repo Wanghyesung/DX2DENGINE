@@ -413,7 +413,7 @@ namespace W
 
 		tMonsterAttack attack7 = {};
 		attack7.bSkill = true;
-		attack7.tTime.fCoolTime = 10000.f;
+		attack7.tTime.fCoolTime = 40.f;
 
 		attack7.pFunction = std::bind(&PinkBean::attack7, this);
 

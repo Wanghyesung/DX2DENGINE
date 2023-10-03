@@ -521,8 +521,11 @@ namespace W
 		else if (fRatio < 0.5f && fRatio>.25f)
 			iLevel = 2;
 
-		else if (fRatio < 0.25f)
+		else if (fRatio < 0.25f && fRatio > 0.f)
 			iLevel = 3;
+
+		else if (fRatio <= 0.f)
+			iLevel = 4;
 
 		if (m_iCurLevel != iLevel)
 		{

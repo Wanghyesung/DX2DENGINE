@@ -4,6 +4,7 @@
 #include "WRenderer.h"
 #include "WBattleManager.h"
 #include "WPlayer.h"
+#include "WEventManager.h"
 namespace W
 {
 	Slow::Slow(float _fAccStat):
@@ -58,6 +59,6 @@ namespace W
 	}
 	void Slow::Restore()
 	{
-		BattleManager::Restore_move(m_pTarget, BattleManager::eAbnormalType::Slow, -m_fAccValue);
+		EventManager::Restore(m_pTarget, BattleManager::eAbnormalType::Slow, -m_fAccValue);
 	}
 }

@@ -54,8 +54,6 @@ namespace W
 	void GameObject::Update()
 	{
 		//생성위치 기록
-		if (m_eState == eState::Paused)
-			return;
 
 		for (Component* comp : m_vecComponent)
 		{
@@ -70,8 +68,6 @@ namespace W
 
 	void GameObject::LateUpdate()
 	{
-		if (m_eState == eState::Paused)
-			return;
 
 		for (Component* comp : m_vecComponent)
 		{
@@ -85,8 +81,6 @@ namespace W
 	}
 	void GameObject::Render()
 	{
-		if (m_eState == eState::Paused)
-			return;
 
 		for (Component* comp : m_vecComponent)
 		{

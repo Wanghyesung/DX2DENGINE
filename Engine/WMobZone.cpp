@@ -59,6 +59,8 @@ namespace W
 	}
 	void MobZone::Update()
 	{
+		
+
 		Vector3 vPosition = m_pMonster->GetComponent<Transform>()->GetPosition();
 		GetComponent<Transform>()->SetPosition(vPosition);
 
@@ -91,6 +93,13 @@ namespace W
 	void MobZone::SetLevel(UINT _iNum)
 	{
 		m_iCurLevel = _iNum;
+
+		if (m_iCurLevel >= 4)
+		{
+			SetState(GameObject::eState::Paused);
+			return;
+		}
+
 		std::wstring strLevel =  std::to_wstring(m_iCurLevel);
 		std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"Megnus_Zone" + strLevel);
 

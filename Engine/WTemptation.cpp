@@ -5,6 +5,7 @@
 #include "WRigidbody.h"
 #include "WPlayer.h"
 #include "WBattleManager.h"
+#include "WEventManager.h"
 namespace W
 {
 	Temptation::Temptation()
@@ -72,7 +73,9 @@ namespace W
 
 	void Temptation::Restore()
 	{
-		BattleManager::Restore_move(m_pTarget, BattleManager::eAbnormalType::temptation);
+		EventManager::Restore(m_pTarget, BattleManager::eAbnormalType::temptation);
+
+		//BattleManager::Restore_move(m_pTarget, BattleManager::eAbnormalType::temptation);
 	}
 
 	

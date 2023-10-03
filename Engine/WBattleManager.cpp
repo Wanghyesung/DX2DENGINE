@@ -381,7 +381,7 @@ namespace W
 		return pEffect;
 	}
 
-	void BattleManager::Restore_move(GameObject* _pTarget, eAbnormalType _eType, float _fAccValue)
+	void BattleManager::restore(GameObject* _pTarget, eAbnormalType _eType, float _fAccValue)
 	{
 		PlayerScript* pScript = _pTarget->GetScript<PlayerScript>();
 		switch (_eType)
