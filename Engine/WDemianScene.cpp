@@ -9,11 +9,11 @@ namespace W
 {
 	DemianScene::DemianScene()
 	{
-		SetMapSize(-7.5f, -1.f, 7.5f, -1.f);
-		SetMapPossibleSize(-14.f, 14.f);
+		SetMapSize(-1.9f, -1.f, 1.9f, -1.f);
+		SetMapPossibleSize(-8.9f, 8.9f);
 
 		std::shared_ptr<Texture> pTempleBossTex =
-			Resources::Load<Texture>(L"HelisiumBoss", L"..\\Resources\\Texture\\background\\demain_back.png");
+			Resources::Load<Texture>(L"DemianBossScene", L"..\\Resources\\Texture\\background\\demain_back.png");
 		std::shared_ptr<Material> pMater = std::make_shared<Material>();
 		pMater->SetShader(Resources::Find<Shader>(L"BackgroundShader"));
 		pMater->SetTexture(pTempleBossTex);
@@ -71,6 +71,8 @@ namespace W
 		CollisionManager::SetLayer(eLayerType::ItemObject, eLayerType::Player, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::AttackObject, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterAttack, true);
+		CollisionManager::SetLayer(eLayerType::Ground, eLayerType::MonsterAttack, true);
+
 	}
 	void DemianScene::OnExit()
 	{

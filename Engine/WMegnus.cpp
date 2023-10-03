@@ -533,7 +533,7 @@ namespace W
 			m_pZone->SetLevel(m_iCurLevel);
 
 			//더 빨리 생성하게
-			m_fCreateTime -= 0.1f;
+			m_fCreateTime -= 0.15f;
 			m_fGasTime -= 0.15f;
 		}
 	}

@@ -39,12 +39,8 @@ namespace W
 
 	void MonsterAttackObject::Update()
 	{
-
 		Vector3 vPosition = m_pOwner->GetComponent<Transform>()->GetPosition();
 		GetComponent<Transform>()->SetPosition(vPosition);
-
-		if (m_pOwner->GetState() == GameObject::Paused)
-			object::Destroy(this);
 
 		GameObject::Update();
 	}
@@ -64,12 +60,12 @@ namespace W
 		//µ¥¹ÌÁö
 		GetScript<MonsterAttackScript>()->SetAttackInfo(_tAttackInfo.tAttackInfo);
 		Transform* pTransform = GetComponent<Transform>();
-		Transform* pOwnerTr = GetComponent<Transform>();
+		//Transform* pOwnerTr = GetComponent<Transform>();
 
 		if (_tAttackInfo.bSkill)
-			pTransform->SetPosition(_tAttackInfo.vPosition);
-		else
-			pTransform->SetPosition(pOwnerTr->GetPosition());
+		pTransform->SetPosition(_tAttackInfo.vPosition);
+		//else
+		//	pTransform->SetPosition(pOwnerTr->GetPosition());
 
 		pTransform->SetRotation(_tAttackInfo.vRoatate);
 
