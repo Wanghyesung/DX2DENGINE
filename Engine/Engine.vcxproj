@@ -217,7 +217,13 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WDemianFire0.h" />
     <ClInclude Include="WDemian.h" />
     <ClInclude Include="WDemianExplode.h" />
+    <ClInclude Include="WDemianFire1.h" />
+    <ClInclude Include="WDemianFire2.h" />
+    <ClInclude Include="WDemianObject.h" />
+    <ClInclude Include="WDemianPhase2.h" />
     <ClInclude Include="WDemianScene.h" />
+    <ClInclude Include="WDemianSpear0.h" />
+    <ClInclude Include="WDemianSpear1.h" />
     <ClInclude Include="WEffect.h" />
     <ClInclude Include="WEventManager.h" />
     <ClInclude Include="WEyes.h" />
@@ -445,7 +451,13 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WDemianFire0.cpp" />
     <ClCompile Include="WDemian.cpp" />
     <ClCompile Include="WDemianExplode.cpp" />
+    <ClCompile Include="WDemianFire1.cpp" />
+    <ClCompile Include="WDemianFire2.cpp" />
+    <ClCompile Include="WDemianObject.cpp" />
+    <ClCompile Include="WDemianPhase2.cpp" />
     <ClCompile Include="WDemianScene.cpp" />
+    <ClCompile Include="WDemianSpear0.cpp" />
+    <ClCompile Include="WDemianSpear1.cpp" />
     <ClCompile Include="WEffect.cpp" />
     <ClCompile Include="WEventManager.cpp" />
     <ClCompile Include="WEyes.cpp" />

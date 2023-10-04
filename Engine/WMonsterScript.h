@@ -30,6 +30,8 @@ namespace W
 		void SetAttackInfo(const tAttackInfo& _tAttackInfo) { m_tMonsterInfo.tAttackInfo = _tAttackInfo; }
 		const tAttackInfo& GetAttackInfo() { return  m_tMonsterInfo.tAttackInfo; }
 
+		//스킬 바로 활성화
+		void AciveAttack(UINT _iINdex);
 		void AddAttack(const tMonsterAttack& _tMonsterAttack);
 		const tMonsterAttack& GetCurMonsterAttack() { return m_vecAttacks[m_iCurAttackCount]; }
 

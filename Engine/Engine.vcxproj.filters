@@ -677,8 +677,26 @@
     <ClInclude Include="WSpawnMonsterAttack.h">
       <Filter>Contents\Object\BossMonster\Demian\spawnattack</Filter>
     </ClInclude>
-    <ClInclude Include="WDemianFire0.h">
+    <ClInclude Include="WDemianObject.h">
+      <Filter>Contents\Object\BossMonster\Demian\object</Filter>
+    </ClInclude>
+    <ClInclude Include="WDemianPhase2.h">
       <Filter>Contents\Object\BossMonster\Demian</Filter>
+    </ClInclude>
+    <ClInclude Include="WDemianFire0.h">
+      <Filter>Contents\Object\BossMonster\Demian\DemianFire</Filter>
+    </ClInclude>
+    <ClInclude Include="WDemianFire1.h">
+      <Filter>Contents\Object\BossMonster\Demian\DemianFire</Filter>
+    </ClInclude>
+    <ClInclude Include="WDemianFire2.h">
+      <Filter>Contents\Object\BossMonster\Demian\DemianFire</Filter>
+    </ClInclude>
+    <ClInclude Include="WDemianSpear0.h">
+      <Filter>Contents\Object\BossMonster\Demian\spear</Filter>
+    </ClInclude>
+    <ClInclude Include="WDemianSpear1.h">
+      <Filter>Contents\Object\BossMonster\Demian\spear</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1355,8 +1373,26 @@
     <ClCompile Include="WSpawnMonsterAttack.cpp">
       <Filter>Contents\Object\BossMonster\Demian\spawnattack</Filter>
     </ClCompile>
-    <ClCompile Include="WDemianFire0.cpp">
+    <ClCompile Include="WDemianObject.cpp">
+      <Filter>Contents\Object\BossMonster\Demian\object</Filter>
+    </ClCompile>
+    <ClCompile Include="WDemianPhase2.cpp">
       <Filter>Contents\Object\BossMonster\Demian</Filter>
+    </ClCompile>
+    <ClCompile Include="WDemianFire0.cpp">
+      <Filter>Contents\Object\BossMonster\Demian\DemianFire</Filter>
+    </ClCompile>
+    <ClCompile Include="WDemianFire1.cpp">
+      <Filter>Contents\Object\BossMonster\Demian\DemianFire</Filter>
+    </ClCompile>
+    <ClCompile Include="WDemianFire2.cpp">
+      <Filter>Contents\Object\BossMonster\Demian\DemianFire</Filter>
+    </ClCompile>
+    <ClCompile Include="WDemianSpear0.cpp">
+      <Filter>Contents\Object\BossMonster\Demian\spear</Filter>
+    </ClCompile>
+    <ClCompile Include="WDemianSpear1.cpp">
+      <Filter>Contents\Object\BossMonster\Demian\spear</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1851,6 +1887,18 @@
     </Filter>
     <Filter Include="Contents\Object\BossMonster\Demian\spawnattack">
       <UniqueIdentifier>{d1afa790-59f6-42e7-8f87-fa04eea792dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\BossMonster\Demian\object">
+      <UniqueIdentifier>{3dc9c768-2934-44d8-8a12-25b0a8520ffb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\BossMonster\Demian\DemianFire">
+      <UniqueIdentifier>{eb487f29-3d14-4f5b-9d1c-b753187680a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\BossMonster\Demian\demainspear">
+      <UniqueIdentifier>{7274e2c9-be3a-42dd-95ea-681f5a3e5366}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\BossMonster\Demian\spear">
+      <UniqueIdentifier>{462c9dfb-3af6-45a3-adfc-0f31b3cf1a1d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

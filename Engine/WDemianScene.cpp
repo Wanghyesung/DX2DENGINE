@@ -5,6 +5,7 @@
 #include "WGround.h"
 #include "WDemian.h"
 #include "WCollisionManager.h"
+#include "WDemianPhase2.h"
 namespace W
 {
 	DemianScene::DemianScene()
@@ -97,7 +98,11 @@ namespace W
 	}
 	void DemianScene::create_monster()
 	{
-		Demian* pDemian = new Demian();
+		//Demian* pDemian = new Demian();
+		//pDemian->Initialize();
+		//AddGameObject(eLayerType::Monster, pDemian);
+
+		DemianPhase2* pDemian = new DemianPhase2();
 		pDemian->Initialize();
 		AddGameObject(eLayerType::Monster, pDemian);
 	}

@@ -16,7 +16,7 @@ namespace W
 		virtual void LateUpdate()override;
 		virtual void Render()override;
 		
-		void SetVelocity(const Vector2& _vVelocity);
+		void SetVelocity(const Vector2& _vVelocity, const Vector3& _vOffset = Vector3::Zero);
 		void SetTime(float _fTime) { m_fCreateTime = _fTime; }
 		void SetAttackName(const std::wstring _strName) { m_strAttackName = _strName; }
 		void SetCreateCount(int _iCount) { m_iCreateCount = _iCount; }
@@ -27,6 +27,7 @@ namespace W
 
 	private:
 		std::vector<Vector2> m_vecVelocity;
+		std::vector<Vector3> m_vecOffset;
 		//몬스터 오브젝트에서 가져올 몬스터 이름
 		std::wstring m_strAttackName;
 

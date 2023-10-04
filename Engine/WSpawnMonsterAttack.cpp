@@ -11,7 +11,8 @@ namespace W
 		m_fCreateTime(0.f),
 		m_fCurCreateTime(0.f),
 		m_iCurIndex(0),
-		m_iEndFrame(0)
+		m_iEndFrame(0),
+		m_vecOffset{}
 	{
 
 	}
@@ -26,6 +27,7 @@ namespace W
 		m_fCurCreateTime = 0.f;
 		m_fCreateTime = 0.f;
 		m_vecVelocity.clear();
+		m_vecOffset.clear();
 	}
 	void SpawnMonsterAttack::Update()
 	{
@@ -57,7 +59,11 @@ namespace W
 				if (++m_iCurIndex >= m_vecVelocity.size())
 					m_iCurIndex = 0;
 
-				pObj->GetComponent<Transform>()->SetPosition(vPosition);
+				Vector3 vCreatePos = vPosition;
+				vCreatePos.x += m_vecOffset[i].x;
+				vCreatePos.y += m_vecOffset[i].y;
+
+				pObj->GetComponent<Transform>()->SetPosition(vCreatePos);
 				//속도 전달
 				pObj->Initialize();
 
@@ -71,14 +77,10 @@ namespace W
 	{
 		GameObject::Render();
 	}
-	void SpawnMonsterAttack::SetVelocity(const Vector2& _vVelocity)
+	void SpawnMonsterAttack::SetVelocity(const Vector2& _vVelocity, const Vector3& _vOffset)
 	{
-		/*std::random_device rDiv;
-		std::mt19937 en(rDiv());
-		std::uniform_int_distribution<int> time(_vVelocity.y - 0.2f, _vVelocity.y);
-		float m_fCreateTime = (float)time(en);*/
-
 		m_vecVelocity.push_back(_vVelocity);
+		m_vecOffset.push_back(_vOffset);
 	}
 	void SpawnMonsterAttack::off()
 	{

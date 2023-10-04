@@ -149,6 +149,11 @@ namespace W
 		}
 	}
 
+	void MonsterScript::AciveAttack(UINT _iINdex)
+	{
+		m_vecAttacks[_iINdex].tTime.fCurTime = m_vecAttacks[_iINdex].tTime.fCoolTime;
+	}
+
 	void MonsterScript::AddAttack(const tMonsterAttack& _tMonsterAttack)
 	{
 		m_vecAttacks.push_back(_tMonsterAttack);
