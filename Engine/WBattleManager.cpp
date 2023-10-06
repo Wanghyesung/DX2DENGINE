@@ -20,6 +20,7 @@
 #include "WVariation.h"
 #include "WSlow.h"
 #include "WUndead.h"
+#include "WDemianEntireAttack.h"
 #define DamageMap std::map<std::wstring, BattleManager::tDamageCount>
 #define EffectMap std::map<std::wstring, std::queue<Effect*>> 
 namespace W
@@ -406,6 +407,9 @@ namespace W
 		case W::BattleManager::eAbnormalType::Undead:
 			m_bOnUndead = false;
 			break;
+		case W::BattleManager::eAbnormalType::DemianStop:
+			pScript->m_bAbnormal = false;
+			break;
 		}
 
 		m_bOnAbnormal = false;
@@ -496,7 +500,23 @@ namespace W
 		pConfusion->SetTime(7.f);
 
 		EventManager::CreateObject(pConfusion, eLayerType::Object);
+	}
+	void BattleManager::demianstop(GameObject* _pGameObject)
+	{
+		Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
+		if (!pPlayer)
+			return;
 
+		DemianEntireAttack* DemianEnire = new DemianEntireAttack();
+		DemianEnire->SetTarget(pPlayer);
+		 
+		PlayerScript* pScript = pPlayer->GetScript<PlayerScript>();
+		pScript->m_bAbnormal = true;
+
+		EventManager::ChangePlayerSkillState(Player::ePlayerSkill::end);
+		EventManager::ChangePlayerFSMState(pScript->m_pFSM, Player::ePlayerState::alert);
+
+		EventManager::CreateObject(DemianEnire, eLayerType::Object);
 	}
 
 	void BattleManager::buff_heal(GameObject* _pTarget, float _fAccHeal)
@@ -594,5 +614,7 @@ namespace W
 		
 		EventManager::ChangePlayerSkillState(Player::ePlayerSkill::end);*/
 	}
+
+	
 	
 }

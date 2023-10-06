@@ -66,7 +66,13 @@ namespace W
 			m_bEnd = GetScript<MonsterAttackScript>()->IsEnter();
 
 			if (m_bEnd)
+			{
 				m_bMove = false;
+				Vector3 vPosition = GetComponent<Transform>()->GetPosition();
+				vPosition.y += 0.8f;
+				GetComponent<Transform>()->SetPosition(vPosition);
+			}
+				
 		}
 
 		GameObject::Update();
@@ -118,7 +124,7 @@ namespace W
 	void DemianFire2::start()
 	{
 		m_bMove = true;
-		SetMonsterAttack(m_tMonsterAttack);
+		//SetMonsterAttack(m_tMonsterAttack);
 	}
 
 	void DemianFire2::move()

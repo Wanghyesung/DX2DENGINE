@@ -3,6 +3,7 @@
 
 namespace W
 {
+	class DemianSword;
 	class Demian : public Monster
 	{
 	public:
@@ -22,7 +23,8 @@ namespace W
 		void attack1();
 		void attack2();
 		void attack3();
-		
+	
+		void move();
 	};
 }
 

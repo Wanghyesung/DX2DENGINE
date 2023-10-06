@@ -6,9 +6,16 @@
 #include "WDemian.h"
 #include "WCollisionManager.h"
 #include "WDemianPhase2.h"
+#include "WSharHP.h"
+#include "WMonsterScript.h"
+#include "WWhite.h"
+#include "WEventManager.h"
 namespace W
 {
-	DemianScene::DemianScene()
+	DemianScene::DemianScene():
+		m_pWhite(nullptr),
+		m_bEnd(false),
+		m_iFadeCallStack(1)
 	{
 		SetMapSize(-1.9f, -1.f, 1.9f, -1.f);
 		SetMapPossibleSize(-8.9f, 8.9f);
@@ -19,17 +26,24 @@ namespace W
 		pMater->SetShader(Resources::Find<Shader>(L"BackgroundShader"));
 		pMater->SetTexture(pTempleBossTex);
 		Resources::Insert(L"DemianBackMater", pMater);
+
+		m_pWhite = new White();
+		m_pWhite->SetEndTime(2.f);
+		m_pWhite->SetFunction(std::bind(&DemianScene::phase2, this));
 	}
 	DemianScene::~DemianScene()
 	{
-
+		if (!m_bEnd)
+		{
+			delete m_pWhite;
+			m_pWhite = nullptr;
+		}
 	}
 	void DemianScene::Initialize()
 	{
 		CreateBackground();
 
 		create_monster();
-
 		{
 			GameObject* pCamera = new GameObject();
 			pCamera->SetName(L"ObjCam");
@@ -50,9 +64,40 @@ namespace W
 			pCameraComp->TurnUILayerMask();//UI만 그리게
 			//pCamera->AddComponent<CameraScript>();
 		}
+
+		m_pSharHP = new SharHP();
+		AddGameObject(eLayerType::UI, m_pSharHP);
+		m_pSharHP->Initialize();
 	}
 	void DemianScene::Update()
 	{
+		float fRatio = 0.f;
+		float fMaxHP = 0.f;
+		float fHP = 0.f;
+
+		const std::vector<GameObject*>& vecMonster =
+			GetLayer(eLayerType::Monster).GetGameObjects();
+		
+		for (UINT i = 0; i < vecMonster.size(); ++i)
+		{
+			if (vecMonster[0]->GetState() == GameObject::eState::Paused)
+			{
+				if (m_iFadeCallStack == 1 &&
+					dynamic_cast<Demian*>(vecMonster[0]))
+				{
+					fadein();
+				}
+			}
+				
+			const tObjectInfo& tInfo = vecMonster[i]->GetScript<MonsterScript>()->GetObjectInfo();
+
+			fMaxHP += tInfo.fMaxHP;
+			fHP += tInfo.fHP;
+		}
+
+		fRatio = (fHP / fMaxHP) * 100.f;
+		m_pSharHP->SetHPValue(fRatio);
+
 		Scene::Update();
 	}
 	void DemianScene::LateUpdate()
@@ -74,6 +119,8 @@ namespace W
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterAttack, true);
 		CollisionManager::SetLayer(eLayerType::Ground, eLayerType::MonsterAttack, true);
 
+		m_bEnd = false;
+		m_iFadeCallStack = 1;
 	}
 	void DemianScene::OnExit()
 	{
@@ -96,14 +143,35 @@ namespace W
 		pGround->GetComponent<Transform>()->SetPosition(0.f, -2.95f, -0.1f);
 		pGround->GetComponent<Transform>()->SetScale(4.3f * 7.f, 1.f * 0.3f, 0.f);
 	}
+
+	void DemianScene::fadein()
+	{
+		m_bEnd = true;
+		m_iFadeCallStack = 0;
+		m_pWhite->Initialize();
+		EventManager::CreateObject(m_pWhite, eLayerType::Object);
+	}
+	void DemianScene::phase2()
+	{
+		m_bEnd = false;
+		const std::vector<GameObject*>& vecGameObj =
+			GetLayer(eLayerType::Monster).GetGameObjects();
+
+		//phase2 데미안
+		vecGameObj[1]->GetComponent<Collider2D>()->SetActive(true);
+		vecGameObj[1]->SetState(GameObject::eState::Active);
+	}
+
 	void DemianScene::create_monster()
 	{
-		//Demian* pDemian = new Demian();
-		//pDemian->Initialize();
-		//AddGameObject(eLayerType::Monster, pDemian);
-
-		DemianPhase2* pDemian = new DemianPhase2();
+		Demian* pDemian = new Demian();
 		pDemian->Initialize();
 		AddGameObject(eLayerType::Monster, pDemian);
+
+		DemianPhase2* pDemian2 = new DemianPhase2();
+		pDemian2->Initialize();
+		AddGameObject(eLayerType::Monster, pDemian2);
+		pDemian2->GetComponent<Collider2D>()->SetActive(false);
+		pDemian2->SetState(GameObject::eState::Paused);
 	}
 }

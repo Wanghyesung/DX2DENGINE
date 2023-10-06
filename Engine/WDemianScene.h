@@ -19,8 +19,16 @@ namespace W
 		virtual void CreateBackground() override;
 
 	private:
-		void create_monster();
+		void fadein();
+		void phase2();
 
+	private:
+		void create_monster();
+		class SharHP* m_pSharHP;
+
+		class White* m_pWhite;
+		bool m_bEnd;
+		UINT m_iFadeCallStack;
 	};
 }
 

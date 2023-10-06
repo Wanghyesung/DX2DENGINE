@@ -677,7 +677,7 @@
     <ClInclude Include="WSpawnMonsterAttack.h">
       <Filter>Contents\Object\BossMonster\Demian\spawnattack</Filter>
     </ClInclude>
-    <ClInclude Include="WDemianObject.h">
+    <ClInclude Include="WDemianSword.h">
       <Filter>Contents\Object\BossMonster\Demian\object</Filter>
     </ClInclude>
     <ClInclude Include="WDemianPhase2.h">
@@ -697,6 +697,18 @@
     </ClInclude>
     <ClInclude Include="WDemianSpear1.h">
       <Filter>Contents\Object\BossMonster\Demian\spear</Filter>
+    </ClInclude>
+    <ClInclude Include="WDemianEntireAttack.h">
+      <Filter>Contents\Object\BossMonster\Demian</Filter>
+    </ClInclude>
+    <ClInclude Include="WDemianVine.h">
+      <Filter>Contents\Object\BossMonster\Demian\object</Filter>
+    </ClInclude>
+    <ClInclude Include="WWhite.h">
+      <Filter>Contents\Script\fadein</Filter>
+    </ClInclude>
+    <ClInclude Include="WSowrdExplode.h">
+      <Filter>Contents\Object\BossMonster\Demian\object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1373,7 +1385,7 @@
     <ClCompile Include="WSpawnMonsterAttack.cpp">
       <Filter>Contents\Object\BossMonster\Demian\spawnattack</Filter>
     </ClCompile>
-    <ClCompile Include="WDemianObject.cpp">
+    <ClCompile Include="WDemianSword.cpp">
       <Filter>Contents\Object\BossMonster\Demian\object</Filter>
     </ClCompile>
     <ClCompile Include="WDemianPhase2.cpp">
@@ -1393,6 +1405,18 @@
     </ClCompile>
     <ClCompile Include="WDemianSpear1.cpp">
       <Filter>Contents\Object\BossMonster\Demian\spear</Filter>
+    </ClCompile>
+    <ClCompile Include="WDemianEntireAttack.cpp">
+      <Filter>Contents\Object\BossMonster\Demian</Filter>
+    </ClCompile>
+    <ClCompile Include="WDemianVine.cpp">
+      <Filter>Contents\Object\BossMonster\Demian\object</Filter>
+    </ClCompile>
+    <ClCompile Include="WWhite.cpp">
+      <Filter>Contents\Script\fadein</Filter>
+    </ClCompile>
+    <ClCompile Include="WSowrdExplode.cpp">
+      <Filter>Contents\Object\BossMonster\Demian\object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1899,6 +1923,9 @@
     </Filter>
     <Filter Include="Contents\Object\BossMonster\Demian\spear">
       <UniqueIdentifier>{462c9dfb-3af6-45a3-adfc-0f31b3cf1a1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\fadein">
+      <UniqueIdentifier>{a887672d-5342-4f0f-957d-54cdce0227cf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

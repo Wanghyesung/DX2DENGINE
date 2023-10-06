@@ -62,7 +62,7 @@ namespace W
 		Transform* pTransform = GetComponent<Transform>();
 		//Transform* pOwnerTr = GetComponent<Transform>();
 
-		if (_tAttackInfo.bSkill)
+		//if (_tAttackInfo.bSkill)
 		pTransform->SetPosition(_tAttackInfo.vPosition);
 		//else
 		//	pTransform->SetPosition(pOwnerTr->GetPosition());

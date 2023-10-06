@@ -71,7 +71,6 @@ namespace W
 		{
 			float fDir = other->GetPosition().x - GetOwner()->GetComponent<Collider2D>()->GetPosition().x;
 			int iDir = fDir > 0 ? 1 : -1;
-			m_pMonster->SetDir(iDir);
 			m_tHitInfo.fHitDir = -iDir;
 
 			AttackScript* pAttackScript = pOther->GetScript<AttackScript>();
@@ -196,7 +195,10 @@ namespace W
 			_pAttackObj->GetScript<AttackScript>()->Erase(pCollider->GetColliderID());
 		}
 		else if (!m_bBoss)
+		{
 			EventManager::ChangeMonsterFSMState(m_pFSM, Monster::eMonsterState::hit);
+			m_pMonster->SetDir(m_tHitInfo.fHitDir);
+		}
 
 		//°ø¹Ý
 		if (m_bReflex)

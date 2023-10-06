@@ -16,7 +16,7 @@ namespace W
 		m_fEventEndTime(3.f),
 		m_eCurEventType(eCameraEventType::None)
 	{
-
+		
 	}
 	CameraScript::~CameraScript()
 	{
@@ -70,6 +70,7 @@ namespace W
 		}
 	}
 
+	
 	Vector3 CameraScript::check_map(Vector3 _vPosition)
 	{
 		Scene* pActiveScene = SceneManger::GetActiveScene();

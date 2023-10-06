@@ -23,7 +23,6 @@ namespace W
 	}
 	void Abnormal::Update()
 	{	
-
 		GameObject::Update();
 	}
 	void Abnormal::LateUpdate()

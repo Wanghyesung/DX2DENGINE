@@ -13,6 +13,10 @@
 #include "WDemianExplode.h"
 #include "WSpawnMonsterAttack.h"
 #include "WDemianFire0.h"
+#include "WDemianSword.h"
+#include "WSceneManger.h"
+#include "WSceneManger.h"
+#include "WWhite.h"
 namespace W
 {
 	Demian::Demian()
@@ -33,6 +37,8 @@ namespace W
 
 		std::shared_ptr<Texture> pNormal =
 			Resources::Load<Texture>(L"DemianNormal", L"..\\Resources\\Texture\\Monster\\demian\\stand.png");
+		std::shared_ptr<Texture> pDead =
+			Resources::Load<Texture>(L"DemianDead", L"..\\Resources\\Texture\\Monster\\demian\\dead0.png");
 		std::shared_ptr<Texture> pAttack0 =
 			Resources::Load<Texture>(L"Demian_attack0", L"..\\Resources\\Texture\\Monster\\demian\\attack0.png");
 		std::shared_ptr<Texture> pAttack1 =
@@ -44,6 +50,14 @@ namespace W
 		
 		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"Demian1_stand_left", pNormal, Vector2(0.f, 0.f), Vector2(2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
+
+		pAnim->Create(L"Demian1_dead_left", pDead, Vector2(0.f, 0.f), Vector2(2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
+		pAnim->FindAnimation(L"Demian1_dead_left")->Create(L"Demian1_dead_left", pDead, Vector2(0.f, 2000.f), Vector2(2000.f, 2000.f), 6, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
+		for (int i = 0; i < 3; ++i)
+		{
+			pAnim->FindAnimation(L"Demian1_dead_left")->Create(L"Demian1_dead_left", pDead, Vector2(0.f, 4000.f), Vector2(2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
+			pAnim->FindAnimation(L"Demian1_dead_left")->Create(L"Demian1_dead_left", pDead, Vector2(0.f, 6000.f), Vector2(2000.f, 2000.f), 5, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
+		}
 
 		pAnim->Create(L"Demian1_attack0_left", pAttack0, Vector2(0.f, 0.f), Vector2(2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Demian1_attack0_left")->Create(L"Demian1_attack0_left",pAttack0, Vector2(0.f, 2000.f), Vector2(2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
@@ -80,6 +94,14 @@ namespace W
 
 		pAnim->Create(L"Demian1_stand_right", pNormal, Vector2(12000.f, 0.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
 		
+		pAnim->Create(L"Demian1_dead_right", pDead, Vector2(0.f, 0.f), Vector2(12000.f, 2000.f), 7, Vector2(-2000.f, 2000.f), Vector2::Zero, 0.15f);
+		pAnim->FindAnimation(L"Demian1_dead_right")->Create(L"Demian1_dead_right", pDead, Vector2(10000.f, 2000.f), Vector2(-2000.f, 2000.f), 6, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
+		for (int i = 0; i < 3; ++i)
+		{
+			pAnim->FindAnimation(L"Demian1_dead_right")->Create(L"Demian1_dead_right", pDead, Vector2(12000.f, 4000.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
+			pAnim->FindAnimation(L"Demian1_dead_right")->Create(L"Demian1_dead_right", pDead, Vector2(12000.f, 6000.f), Vector2(-2000.f, 2000.f), 5, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
+		}
+
 		pAnim->Create(L"Demian1_attack0_right", pAttack0, Vector2(12000.f, 0.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Demian1_attack0_right")->Create(L"Demian1_attack0_right", pAttack0, Vector2(12000.f, 2000.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Demian1_attack0_right")->Create(L"Demian1_attack0_right", pAttack0, Vector2(12000.f, 2000.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
@@ -91,9 +113,8 @@ namespace W
 		pAnim->FindAnimation(L"Demian1_attack1_right")->Create(L"Demian1_attack1_right", pAttack1, Vector2(12000.f, 4000.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Demian1_attack1_right")->Create(L"Demian1_attack1_right", pAttack1, Vector2(12000.f, 6000.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Demian1_attack1_right")->Create(L"Demian1_attack1_right", pAttack1, Vector2(12000.f, 8000.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"Demian1_attack1_right")->Create(L"Demian1_attack1_right", pAttack1, Vector2(12000.f, 10000.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"Demian1_attack1_right")->Create(L"Demian1_attack1_right", pAttack1, Vector2(12000.f, 12000.f), Vector2(-2000.f, 2000.f), 6, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
-
+		pAnim->FindAnimation(L"Demian1_attack1_right")->Create(L"Demian1_attack1_right", pAttack1, Vector2(12000.f, 10000.f), Vector2(-2000.f, 2000.f), 6, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
+		
 		pAnim->Create(L"Demian1_attack2_right", pAttack2, Vector2(12000.f, 0.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Demian1_attack2_right")->Create(L"Demian1_attack2_right", pAttack2, Vector2(12000.f, 2000.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Demian1_attack2_right")->Create(L"Demian1_attack2_right", pAttack2, Vector2(12000.f, 4000.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
@@ -115,6 +136,11 @@ namespace W
 		pAnim->FindAnimation(L"Demian1_attack3_right")->Create(L"Demian1_attack3_right", pAttack3, Vector2(12000.f, 8000.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
 
 		//pAnim->Play(L"Demian1_stand_right", true);
+		//pAnim->EndEvent(L"Demian1_dead_left") = std::bind(&Demian::phase2, this);
+		//pAnim->EndEvent(L"Demian1_dead_right") = std::bind(&Demian::phase2, this);
+
+		pAnim->EndEvent(L"Demian1_attack2_left") = std::bind(&Demian::move, this);
+		pAnim->EndEvent(L"Demian1_attack2_right") = std::bind(&Demian::move, this);
 
 		//attack skill
 		Resources::Load<Texture>(L"demainfire0", L"..\\Resources\\Texture\\Monster\\demian\\demainfire0.png");
@@ -123,12 +149,12 @@ namespace W
 	}
 	Demian::~Demian()
 	{
-
+		
 	}
 	void Demian::Initialize()
 	{
 		GetComponent<Transform>()->SetScale(18.f, 18.f, 0.f);
-		GetComponent<Transform>()->SetPosition(0.1f, -1.8f, -1.5f);
+		GetComponent<Transform>()->SetPosition(0.1f, -1.85f, -1.5f);
 		Collider2D* pCollider = AddComponent<Collider2D>();
 		pCollider->SetSize(Vector2(0.06f, 0.06f));
 		pCollider->SetCenter(Vector2(0.f, -0.4f));
@@ -136,7 +162,8 @@ namespace W
 		MonsterScript* Pscript = AddComponent<MonsterScript>();
 		Pscript->SetBoss();
 		Pscript->Initialize();
-		Pscript->CreateHP();
+		Pscript->SetHP(700.f);
+		//Pscript->CreateHP();
 
 		setattack();
 		add_skill();
@@ -195,6 +222,14 @@ namespace W
 	}
 	void Demian::add_skill()
 	{
+		//DemianSword* pSword = new DemianSword();
+		//pSword->SetOnwer(this);
+		//pSword->Initialize();
+		//pSword->SetName(L"demianSword");
+		//
+		//AddMonsterSkill(pSword);
+		//SceneManger::AddGameObject(eLayerType::MonsterAttack, GetMonsterSkill(L"demianSword"));
+
 		//데미안 불덩이들 소환 오브젝트
 		SpawnMonsterAttack* pSpawnObj = new SpawnMonsterAttack();
 		pSpawnObj->SetName(L"SpawnObj");
@@ -236,7 +271,7 @@ namespace W
 		tMonsterAttack attack0 = {};
 		attack0.bSkill = true;
 
-		attack0.tTime.fCoolTime = 5.f;
+		attack0.tTime.fCoolTime = 30.f;
 
 		attack0.pFunction = std::bind(&Demian::attack0, this);
 
@@ -248,41 +283,41 @@ namespace W
 		//2
 		tMonsterAttack attack1 = {};
 		
-		attack1.tTime.fCoolTime = 20.f;
+		attack1.tTime.fCoolTime = 18.f;
 		attack1.vPosition = vPosition;
 		attack1.vScale = Vector2(4.f, 2.f);
 		attack1.vOffset = Vector2(3.5f, 0.f);
 		attack1.tAttackInfo.fAttackDamage = BattleManager::GetMaxDamage();
-
+		
 		attack1.pFunction = std::bind(&Demian::attack1, this);
-
+		
 		attack1.iStartFrame = 28;
 		attack1.iEndFrame = 30;
-
+		
 		Pscript->AddAttack(attack1);
-
+		
 		////3
 		tMonsterAttack attack2 = {};
 		attack2.vPosition = vPosition;
 		attack2.vScale = Vector2(3.f, 2.f);
 		attack2.vOffset = Vector2(3.5f, 0.f);
 		attack2.tAttackInfo.fAttackDamage = BattleManager::GetMaxDamage();
-		attack2.tTime.fCoolTime = 10.f;
-
+		attack2.tTime.fCoolTime = 16.f;
+		
 		attack2.pFunction = std::bind(&Demian::attack2, this);
-
+		
 		attack2.iStartFrame = 32;
 		attack2.iEndFrame = 34;
 		Pscript->AddAttack(attack2);
-
+		
 		//
 		//
 		tMonsterAttack attack3 = {};
 		attack3.bSkill = true;
 		attack3.tTime.fCoolTime = 25.f;
-
+		
 		attack3.pFunction = std::bind(&Demian::attack3, this);
-
+		
 		attack3.iStartFrame = 18;
 		attack3.iEndFrame = 113;
 		Pscript->AddAttack(attack3);
@@ -293,24 +328,24 @@ namespace W
 	{
 		Vector3 vStartPos = GetComponent<Transform>()->GetPosition();
 		vStartPos.z -= 0.1f;
-		vStartPos.y -= 0.2f;
+		vStartPos.y += 1.f;
 		srand(time(NULL));
 		for (int i = -2; i < 2; ++i)
 		{
 			int iIndx = (rand() % 4);
 
 			float fOffsetX = i * 3.f + vStartPos.x;
-			fOffsetX += iIndx * 0.5f;
+			fOffsetX += iIndx * 0.7f;
 
 			
 			MonsterAttackObject* attack0 = GetMonsterSkill(L"Demian_attack0");
 			if (attack0 == nullptr)
 				return;
 
-			attack0->Initialize();
 			attack0->GetComponent<Transform>()->SetPosition(fOffsetX, vStartPos.y, vStartPos.z);
 			EventManager::CreateObject(attack0, eLayerType::MonsterAttack);
 			
+			attack0->Initialize();
 		}
 	}
 	void Demian::attack1()
@@ -360,6 +395,13 @@ namespace W
 		pSpawn->SetCreateCount(5);
 		pSpawn->SetEndFrame(113);
 		EventManager::CreateObject(pSpawn, eLayerType::MonsterAttack);
+
 	}
 
+	void Demian::move()
+	{
+		Vector3 vPosition = GetComponent<Transform>()->GetPosition();
+		vPosition.x += (GetDir() * 4.38f);
+		GetComponent<Transform>()->SetPosition(vPosition);
+	}
 }

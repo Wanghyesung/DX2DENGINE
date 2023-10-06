@@ -40,7 +40,7 @@ namespace W
 		MonsterAttackObject* GetMonsterAttack() { return m_pAttackObject; }
 
 		void SetSpeed(float _pSpeed) { m_tObjectInfo.fSpeed = _pSpeed; }
-
+		void SetHP(float _fHP) { m_tObjectInfo.fMaxHP = _fHP; m_tObjectInfo.fHP = _fHP; }
 		UINT GetAttackNumber() { return m_iCurAttackCount; }
 
 		void SetActiveAttack();

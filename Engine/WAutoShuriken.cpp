@@ -200,7 +200,7 @@ namespace W
 		float fDot = m_vVelocity.Dot(vDiff);
 		if (fDot < 0)
 		{
-			m_vForce *= 7.f;
+			m_vForce *= 8.f;
 		}
 		m_vVelocity += Time::DeltaTime() * m_vForce;
 		//m_vVelocity += Time::DeltaTime() * m_vForce;

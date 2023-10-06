@@ -112,6 +112,9 @@ namespace W
 			case W::BattleManager::eAbnormalType::Variation:
 				BattleManager::variation(pObj);
 				break;
+			case W::BattleManager::eAbnormalType::DemianStop:
+				BattleManager::demianstop(pObj);
+				break;
 			}
 		}
 		break;

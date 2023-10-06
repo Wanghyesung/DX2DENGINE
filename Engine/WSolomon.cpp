@@ -155,7 +155,7 @@ namespace W
 		attack1.pFunction = std::bind(&Solomon::attack1, this);
 
 		attack1.tAttackInfo.fAttUpperRcnt = 0.f;
-		attack1.tAttackInfo.fAttRigidityTime = 1.f;
+		attack1.tAttackInfo.fAttRigidityTime = 0.7f;
 		attack1.tAttackInfo.fAttRcnt = 5.f;
 		attack1.tAttackInfo.eAttType = eAttackType::SuperKnockback;
 

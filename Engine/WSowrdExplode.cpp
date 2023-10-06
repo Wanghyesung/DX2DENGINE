@@ -1,21 +1,20 @@
-#include "WDemianExplode.h"
+#include "WSowrdExplode.h"
 #include "WResources.h"
 #include "WAnimator.h"
-#include "WBattleManager.h"
 #include "WRenderer.h"
-#include "WSceneManger.h"
+#include "WObject.h"
+#include "WMonsterAttackScript.h"
 #include "WMonster.h"
 namespace W
 {
-	DemianExplode::DemianExplode():
+	SowrdExplode::SowrdExplode() :
 		m_iCallCount(0),
 		m_tMonsterAttack{}
-
 	{
 		std::shared_ptr<Material> pMater = std::make_shared<Material>();
 		pMater->SetRenderinMode(eRenderingMode::Transparent);
 		pMater->SetShader(Resources::Find<Shader>(L"ObjectAnimShader"));
-		Resources::Insert(L"DemianExpoldeMater", pMater);
+		Resources::Insert(L"FireMater", pMater);
 
 		MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
 		pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -24,36 +23,42 @@ namespace W
 		Collider2D* pCollider = GetComponent<Collider2D>();
 		pCollider->SetActive(false);
 
-		GetComponent<Transform>()->SetScale(4.f, 4.f, 0.f);
+		GetComponent<Transform>()->SetScale(18.f, 18.f, 0.f);
 
-		std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"demianExplode");
+		std::shared_ptr<Texture> pAtlas =
+			Resources::Load<Texture>(L"swordExplodeTex", L"..\\Resources\\Texture\\Monster\\demian\\swordexplode.png");
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"Explode", pAtlas, Vector2(0.0f, 0.0f), Vector2(439.f, 432.0f), 36, Vector2(440.f, 440.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"start", pAtlas, Vector2(0.0f, 0.0f), Vector2(111.f, 110.0f), 30, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"explode", pAtlas, Vector2(0.0f, 0.0f), Vector2(111.f, 110.0f), 30, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
 
-		pAnim->CompleteEvent(L"Explode") = std::bind(&DemianExplode::off, this);
-		pAnim->Play(L"Explode", true);
+		pAnim->CompleteEvent(L"explode") = std::bind(&SowrdExplode::off, this);
+		pAnim->Play(L"start", true);
 
 	}
-	DemianExplode::~DemianExplode()
+
+	SowrdExplode::~SowrdExplode()
 	{
 
 	}
-	void DemianExplode::Initialize()
+
+	void SowrdExplode::Initialize()
 	{
-		m_tMonsterAttack.tAttackInfo.fAttackDamage = BattleManager::GetMaxDamage();
+		m_tMonsterAttack.tAttackInfo.fAttackDamage = 10.f;
 
 		m_tMonsterAttack.vPosition = GetComponent<Transform>()->GetPosition();
-		m_tMonsterAttack.vScale = Vector2(0.6f,0.7f);
-		m_tMonsterAttack.vOffset = Vector2(0.f, 0.f);
+		m_tMonsterAttack.vScale = Vector2(0.6f, 0.6f);
+		m_tMonsterAttack.vOffset = Vector2(0.f, -0.25f);
 
-		m_tMonsterAttack.iStartFrame = 29;
-		m_tMonsterAttack.iEndFrame = 30;
+		m_tMonsterAttack.iStartFrame = 25;
+		m_tMonsterAttack.iEndFrame = 27;
 	}
-	void DemianExplode::Update()
+
+	void SowrdExplode::Update()
 	{
 		GameObject::Update();
 	}
-	void DemianExplode::LateUpdate()
+
+	void SowrdExplode::LateUpdate()
 	{
 		Animation* pAnim = GetComponent<Animator>()->GetActiveAnimation();
 
@@ -74,7 +79,7 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
-	void DemianExplode::Render()
+	void SowrdExplode::Render()
 	{
 		renderer::ObjectCB ObjectCB;
 		ObjectCB.vObjectDir.x = 1;
@@ -87,7 +92,7 @@ namespace W
 
 		GameObject::Render();
 	}
-	void DemianExplode::off()
+	void SowrdExplode::off()
 	{
 		m_iCallCount = 0;
 		SceneManger::Erase(this);

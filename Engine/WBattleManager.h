@@ -24,6 +24,7 @@ namespace W
 			Stop,
 			Undead,
 			Variation,
+			DemianStop,
 			End
 		};
 
@@ -86,6 +87,7 @@ namespace W
 		static void confusion(GameObject* _pGameObject);//변이
 		static void undead(GameObject* _pGameObject);
 		static void variation(GameObject* _pGameObject);
+		static void demianstop(GameObject* _pGameObject);
 
 		//상태이상 해제
 		static void restore(GameObject* _pTarget, eAbnormalType _eType, float _fAccValue = 0.f);

@@ -164,7 +164,6 @@ void CalculateLight2D(in out float4 lightColor, float3 position, int idx)
         
         if (fLen < lightsAttribute[idx].radius)
         {
-            //lightarribute 위치에 가까운 위치일수록 밝게 보이게
             float fRatio = 1.f - (fLen / lightsAttribute[idx].radius);
             lightColor -= lightsAttribute[idx].color * fRatio;
         }

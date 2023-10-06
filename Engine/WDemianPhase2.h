@@ -35,7 +35,10 @@ namespace W
 		void set_effect();
 		void teleport();
 		void move();
+
 	private:
+		//세계수 카운트
+		UINT m_iAttackCallCount;
 		bool m_bGroggy;
 		int m_iSpearCount;
 	};

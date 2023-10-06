@@ -79,7 +79,8 @@ namespace W
 		Light* lightComp = m_pFadeEffect->GetComponent<Light>();
 		lightComp->SetType(eLightType::FadeOut);
 		lightComp->SetColor(Vector4(0.8f, 0.8f, 0.8f, 0.0f));
-		lightComp->SetRadius(9.0f);
+		//lightComp->SetColor(Vector4(1.f, 1.f, 1.f, 1.0f));
+		lightComp->SetRadius(10.0f);
 
 		m_pFadeEffect->SetFunction(std::bind(&SkillRaid::fade_out, this), 28);
 	}
