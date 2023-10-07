@@ -82,5 +82,7 @@ namespace W
 	{
 		tAttackInfo& attack = _pAttackObject->GetScript<AttackScript>()->GetAttackInfo();
 		attack.fAttackDamage *= m_fAddDamage;
+
+		 //attack.fAttackDamage += 
 	}
 }

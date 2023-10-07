@@ -25,6 +25,13 @@ namespace W
 		void attack3();
 	
 		void move();
+
+		void check_time();
+		//키입력 공격
+		void create();
+	private:
+		float m_fCreateTime;
+		float m_fCurCreateTime;
 	};
 }
 

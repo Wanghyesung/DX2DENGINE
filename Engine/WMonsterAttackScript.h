@@ -25,6 +25,8 @@ namespace W
 
 		void SeteAbnormalType(BattleManager::eAbnormalType _eType) { m_eAbnorType = _eType; }
 
+		bool IsPlayerEnter() { return m_bPlayerEnter; }
+
 		bool IsEnter() { return m_bEnter; }
 		void SetEnter(bool _bEnter) { m_bEnter = _bEnter; }
 
@@ -36,6 +38,7 @@ namespace W
 		float m_fAccValue;//맞으면 상태나 , 능력치 깍일때 사용
 
 		bool m_bEnter;
+		bool m_bPlayerEnter;
 
 		UINT m_iAbnormalStack;
 	};

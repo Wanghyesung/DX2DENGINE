@@ -115,6 +115,9 @@ namespace W
 			case W::BattleManager::eAbnormalType::DemianStop:
 				BattleManager::demianstop(pObj);
 				break;
+			case W::BattleManager::eAbnormalType::InputKey:
+				BattleManager::inputkey(pObj);
+				break;
 			}
 		}
 		break;

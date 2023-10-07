@@ -63,8 +63,8 @@ namespace W
 		const tObjectInfo& tInfo = GetOwner()->GetScript<MonsterScript>()->GetObjectInfo();
 		m_fDemianHP = tInfo.fHP;
 
-		Vector3 vPosition = SceneManger::FindPlayer()->GetComponent<Transform>()->GetPosition();
-		vPosition.y -= 0.5f;
+		Vector3 vPosition = renderer::MainCamera->GetOwner()->GetComponent<Transform>()->GetPosition();
+		vPosition.y -= 1.5f;
 		GetComponent<Transform>()->SetPosition(vPosition);
 
 

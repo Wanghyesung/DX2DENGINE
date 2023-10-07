@@ -33,8 +33,6 @@ namespace W
 		pAnim->CompleteEvent(L"sleepGas_end") = std::bind(&SleepGas::off, this);
 
 		mr->SetMaterial(pMater);
-
-		SetState(GameObject::eState::Paused);
 	}
 
 	SleepGas::~SleepGas()

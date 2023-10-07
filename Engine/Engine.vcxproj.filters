@@ -710,6 +710,24 @@
     <ClInclude Include="WSowrdExplode.h">
       <Filter>Contents\Object\BossMonster\Demian\object</Filter>
     </ClInclude>
+    <ClInclude Include="WDemianKeyAttack.h">
+      <Filter>Contents\Object\BossMonster\Demian\object</Filter>
+    </ClInclude>
+    <ClInclude Include="WGroggy.h">
+      <Filter>Contents\Object\Abnormal</Filter>
+    </ClInclude>
+    <ClInclude Include="WInputObject.h">
+      <Filter>Contents\Object\BossMonster\Demian\object</Filter>
+    </ClInclude>
+    <ClInclude Include="WInputBackground.h">
+      <Filter>Contents\Object\BossMonster\Demian\object</Filter>
+    </ClInclude>
+    <ClInclude Include="WDemianCircle.h">
+      <Filter>Contents\Object\BossMonster\Demian\object</Filter>
+    </ClInclude>
+    <ClInclude Include="WDmianStigma.h">
+      <Filter>Contents\Object\BossMonster\Demian</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
@@ -1417,6 +1435,24 @@
     </ClCompile>
     <ClCompile Include="WSowrdExplode.cpp">
       <Filter>Contents\Object\BossMonster\Demian\object</Filter>
+    </ClCompile>
+    <ClCompile Include="WDemianKeyAttack.cpp">
+      <Filter>Contents\Object\BossMonster\Demian\object</Filter>
+    </ClCompile>
+    <ClCompile Include="WGroggy.cpp">
+      <Filter>Contents\Object\Abnormal</Filter>
+    </ClCompile>
+    <ClCompile Include="WInputObject.cpp">
+      <Filter>Contents\Object\BossMonster\Demian\object</Filter>
+    </ClCompile>
+    <ClCompile Include="WInputBackground.cpp">
+      <Filter>Contents\Object\BossMonster\Demian\object</Filter>
+    </ClCompile>
+    <ClCompile Include="WDemianCircle.cpp">
+      <Filter>Contents\Object\BossMonster\Demian\object</Filter>
+    </ClCompile>
+    <ClCompile Include="WDmianStigma.cpp">
+      <Filter>Contents\Object\BossMonster\Demian</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

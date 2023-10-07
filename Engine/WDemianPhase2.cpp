@@ -18,12 +18,15 @@
 #include "WDemianSpear0.h"
 #include "WDemianSpear1.h"
 #include "WDemianVine.h"
+#include "WDemianCircle.h"
+#include "WSceneManger.h"
 namespace W
 {
 	DemianPhase2::DemianPhase2():
 		m_bGroggy(false),
 		m_iSpearCount(0),
-		m_iAttackCallCount(1)
+		m_iAttackCallCount(1),
+		m_iCircleLevel(0)
 	{
 		SetName(L"Demian2");
 
@@ -165,6 +168,10 @@ namespace W
 		pEffect->SetName(L"DemianAttack0Effect");
 		pEffect->CreateAnimation(Resources::Find<Texture>(L"DemianAttack0Effect"), Vector2(0.f, 0.f), Vector2(1122.f, 382.f), 9, 1, Vector2(2000.f, 2000.f), Vector2(0.f, 0.f), 0.1f);
 
+		//구
+		Resources::Load<Texture>(L"DemianCircle", L"..\\Resources\\Texture\\Monster\\demian\\circle.png");
+
+
 		//데미안 창 공격
 		set_effect();
 	
@@ -176,6 +183,15 @@ namespace W
 	}
 	DemianPhase2::~DemianPhase2()
 	{
+		for(int i = 0; i<m_vecCircle.size(); ++i)
+		{
+			if (m_vecCircle[i]->IsActive())
+				continue;
+
+			delete m_vecCircle[i];;
+			m_vecCircle[i] = nullptr;
+		}
+
 	}
 	void DemianPhase2::Initialize()
 	{
@@ -251,6 +267,17 @@ namespace W
 	}
 	void DemianPhase2::add_skill()
 	{
+		for (int i = 0; i < 2; ++i)
+		{
+			DemianCircle* pDemianCircle = new DemianCircle();
+			pDemianCircle->SetName(L"DemianCircle");
+			pDemianCircle->SetOnwer(this);
+			m_vecCircle.push_back(pDemianCircle);
+		}
+		SceneManger::AddGameObject(eLayerType::MonsterAttack, m_vecCircle[0]);
+		m_vecCircle[0]->Initialize();
+
+
 		SpawnMonsterAttack* pSpawnObj = new SpawnMonsterAttack();
 		pSpawnObj->SetName(L"SpawnObj");
 		pSpawnObj->SetOnwer(this);
@@ -508,6 +535,40 @@ namespace W
 		//세계수
 		if (tInfo.fHP / tInfo.fMaxHP <= 0.15f)
 			pScript->AciveAttack(5);
+
+		//구 크기
+		if (tInfo.fHP / tInfo.fMaxHP <= 0.20f)
+		{
+			int iLevel = 0;
+			if (tInfo.fHP / tInfo.fMaxHP <= 0.10f)
+				iLevel = 2;
+			else
+				iLevel = 1;
+
+			if (m_iCircleLevel != iLevel)
+			{
+				m_iCircleLevel = iLevel;
+				if (m_iCircleLevel == 1)
+				{
+					EventManager::CreateObject(m_vecCircle[m_iCircleLevel], eLayerType::MonsterAttack);
+					m_vecCircle[m_iCircleLevel]->Initialize();
+				}
+				for (int i = 0; i < m_vecCircle.size(); ++i)
+				{
+					m_vecCircle[i]->LevelUp(m_iCircleLevel);
+				}
+			}
+		}
+			
+
+		if (tInfo.fHP / tInfo.fMaxHP <= 0.f)
+		{
+			for (int i = 0; i < 2; ++i)
+			{
+				SceneManger::Erase(m_vecCircle[i]);
+				m_vecCircle[i]->SetActive(false);
+			}
+		}
 	}
 	void DemianPhase2::create_spear0()
 	{

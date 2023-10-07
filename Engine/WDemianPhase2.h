@@ -33,7 +33,7 @@ namespace W
 		void create_spear1();
 
 		void set_effect();
-		void teleport();
+		//void teleport();
 		void move();
 
 	private:
@@ -41,6 +41,11 @@ namespace W
 		UINT m_iAttackCallCount;
 		bool m_bGroggy;
 		int m_iSpearCount;
+
+		//±¸ ·¹º§
+		UINT m_iCircleLevel;
+
+		std::vector<class DemianCircle*> m_vecCircle;
 	};
 }
 

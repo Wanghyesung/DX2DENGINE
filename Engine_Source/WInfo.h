@@ -24,6 +24,7 @@ namespace W
 	{
 		tAttackInfo():
 			fAttack(5.f),
+			fMaxAttack(5.f),
 			fDex(10.f),
 			iDamageCount(0),
 			eAttType(eAttackType::Knockback)
@@ -31,6 +32,7 @@ namespace W
 
 		//기본 공격력, dex, 데미지
 		float fAttack;
+		float fMaxAttack;
 		float fDex;
 		float fAttackDamage; //데미지
 

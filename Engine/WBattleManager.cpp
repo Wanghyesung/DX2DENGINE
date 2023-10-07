@@ -20,6 +20,8 @@
 #include "WVariation.h"
 #include "WSlow.h"
 #include "WUndead.h"
+#include "WGroggy.h"
+#include "WInputBackground.h"
 #include "WDemianEntireAttack.h"
 #define DamageMap std::map<std::wstring, BattleManager::tDamageCount>
 #define EffectMap std::map<std::wstring, std::queue<Effect*>> 
@@ -410,6 +412,9 @@ namespace W
 		case W::BattleManager::eAbnormalType::DemianStop:
 			pScript->m_bAbnormal = false;
 			break;
+		case W::BattleManager::eAbnormalType::InputKey:
+			pScript->m_bAbnormal = false;
+			break;
 		}
 
 		m_bOnAbnormal = false;
@@ -519,6 +524,32 @@ namespace W
 		EventManager::CreateObject(DemianEnire, eLayerType::Object);
 	}
 
+	void BattleManager::inputkey(GameObject* _pGameObject)
+	{
+		Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
+		if (!pPlayer)
+			return;
+
+		Groggy* pGroggy = new Groggy();
+		pGroggy->SetTarget(pPlayer);
+		pGroggy->SetTime(999999.f);
+		pGroggy->Initialize();
+
+		PlayerScript* pScript = pPlayer->GetScript<PlayerScript>();
+		pScript->m_bAbnormal = true;
+
+		EventManager::ChangePlayerSkillState(Player::ePlayerSkill::end);
+		EventManager::ChangePlayerFSMState(pScript->m_pFSM, Player::ePlayerState::alert);
+
+		//key입력
+		InputBackground* pInput = new InputBackground();
+		pInput->Initialize();
+		pInput->SetOwner(pGroggy);
+
+		EventManager::CreateObject(pInput, eLayerType::Object);
+		EventManager::CreateObject(pGroggy, eLayerType::Object);
+	}
+
 	void BattleManager::buff_heal(GameObject* _pTarget, float _fAccHeal)
 	{
 		Monster* pTarget = dynamic_cast<Monster*>(_pTarget);
@@ -594,6 +625,15 @@ namespace W
 	void BattleManager::Buff_Stat(GameObject* _pTarget, eUpStatType _eType, float _fAccStat)
 	{
 		EventManager::UpStat(_pTarget, _eType, _fAccStat);
+	}
+
+	void BattleManager::Player_DeBuff_Attack(GameObject* _pTarget, eUpStatType _eType, float _fAccStat)
+	{
+		//_eType 타입에 따라 추가 가능
+		if (_fAccStat >= 0.f)
+			_pTarget->GetScript<PlayerScript>()->m_tObjectInfo.fDefense / fabs(_fAccStat);
+		else
+			_pTarget->GetScript<PlayerScript>()->m_tObjectInfo.fDefense * fabs(_fAccStat);
 	}
 
 	

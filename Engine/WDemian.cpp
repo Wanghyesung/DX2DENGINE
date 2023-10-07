@@ -16,10 +16,13 @@
 #include "WDemianSword.h"
 #include "WSceneManger.h"
 #include "WSceneManger.h"
-#include "WWhite.h"
+#include "WDemianKeyAttack.h"
+#include "WTime.h"
 namespace W
 {
-	Demian::Demian()
+	Demian::Demian():
+		m_fCreateTime(3.f),
+		m_fCurCreateTime(0.f)
 	{
 		SetName(L"Demian1");
 
@@ -145,7 +148,13 @@ namespace W
 		//attack skill
 		Resources::Load<Texture>(L"demainfire0", L"..\\Resources\\Texture\\Monster\\demian\\demainfire0.png");
 		Resources::Load<Texture>(L"demianExplode", L"..\\Resources\\Texture\\Monster\\demian\\demain_explode.png");
-		
+		Resources::Load<Texture>(L"demainkeyAttack", L"..\\Resources\\Texture\\Monster\\demian\\keyAttack.png");
+		Resources::Load<Texture>(L"demainInputBack", L"..\\Resources\\Texture\\Monster\\demian\\inputbackground.png");
+		Resources::Load<Texture>(L"Inputright", L"..\\Resources\\Texture\\Monster\\demian\\right.png");
+		Resources::Load<Texture>(L"Inputleft", L"..\\Resources\\Texture\\Monster\\demian\\left.png");
+		Resources::Load<Texture>(L"Inputup", L"..\\Resources\\Texture\\Monster\\demian\\up.png");
+		Resources::Load<Texture>(L"Inputdown", L"..\\Resources\\Texture\\Monster\\demian\\down.png");
+
 	}
 	Demian::~Demian()
 	{
@@ -184,6 +193,8 @@ namespace W
 	}
 	void Demian::Update()
 	{
+		check_time();
+
 		Monster::Update();
 	}
 	void Demian::LateUpdate()
@@ -230,6 +241,15 @@ namespace W
 		//AddMonsterSkill(pSword);
 		//SceneManger::AddGameObject(eLayerType::MonsterAttack, GetMonsterSkill(L"demianSword"));
 
+		//키입력 오브젝트
+		for (int i = 0; i < 5; ++i)
+		{
+			DemianKeyAttack* pKeyAttack = new DemianKeyAttack();
+			pKeyAttack->SetName(L"KeyAttackObj");
+			pKeyAttack->SetOnwer(this);
+			AddMonsterSkill(pKeyAttack);
+		}
+
 		//데미안 불덩이들 소환 오브젝트
 		SpawnMonsterAttack* pSpawnObj = new SpawnMonsterAttack();
 		pSpawnObj->SetName(L"SpawnObj");
@@ -268,59 +288,59 @@ namespace W
 		MonsterScript* Pscript = GetComponent<MonsterScript>();
 		Vector3 vPosition = GetComponent<Transform>()->GetPosition();
 
-		tMonsterAttack attack0 = {};
-		attack0.bSkill = true;
-
-		attack0.tTime.fCoolTime = 30.f;
-
-		attack0.pFunction = std::bind(&Demian::attack0, this);
-
-		attack0.iStartFrame = 4;
-		attack0.iEndFrame = 5;
-
-		Pscript->AddAttack(attack0);
-
-		//2
-		tMonsterAttack attack1 = {};
-		
-		attack1.tTime.fCoolTime = 18.f;
-		attack1.vPosition = vPosition;
-		attack1.vScale = Vector2(4.f, 2.f);
-		attack1.vOffset = Vector2(3.5f, 0.f);
-		attack1.tAttackInfo.fAttackDamage = BattleManager::GetMaxDamage();
-		
-		attack1.pFunction = std::bind(&Demian::attack1, this);
-		
-		attack1.iStartFrame = 28;
-		attack1.iEndFrame = 30;
-		
-		Pscript->AddAttack(attack1);
-		
-		////3
-		tMonsterAttack attack2 = {};
-		attack2.vPosition = vPosition;
-		attack2.vScale = Vector2(3.f, 2.f);
-		attack2.vOffset = Vector2(3.5f, 0.f);
-		attack2.tAttackInfo.fAttackDamage = BattleManager::GetMaxDamage();
-		attack2.tTime.fCoolTime = 16.f;
-		
-		attack2.pFunction = std::bind(&Demian::attack2, this);
-		
-		attack2.iStartFrame = 32;
-		attack2.iEndFrame = 34;
-		Pscript->AddAttack(attack2);
-		
+		//tMonsterAttack attack0 = {};
+		//attack0.bSkill = true;
 		//
+		//attack0.tTime.fCoolTime = 30.f;
 		//
-		tMonsterAttack attack3 = {};
-		attack3.bSkill = true;
-		attack3.tTime.fCoolTime = 25.f;
-		
-		attack3.pFunction = std::bind(&Demian::attack3, this);
-		
-		attack3.iStartFrame = 18;
-		attack3.iEndFrame = 113;
-		Pscript->AddAttack(attack3);
+		//attack0.pFunction = std::bind(&Demian::attack0, this);
+		//
+		//attack0.iStartFrame = 4;
+		//attack0.iEndFrame = 5;
+		//
+		//Pscript->AddAttack(attack0);
+		//
+		////2
+		//tMonsterAttack attack1 = {};
+		//
+		//attack1.tTime.fCoolTime = 18.f;
+		//attack1.vPosition = vPosition;
+		//attack1.vScale = Vector2(4.f, 2.f);
+		//attack1.vOffset = Vector2(3.5f, 0.f);
+		//attack1.tAttackInfo.fAttackDamage = BattleManager::GetMaxDamage();
+		//
+		//attack1.pFunction = std::bind(&Demian::attack1, this);
+		//
+		//attack1.iStartFrame = 28;
+		//attack1.iEndFrame = 30;
+		//
+		//Pscript->AddAttack(attack1);
+		//
+		//////3
+		//tMonsterAttack attack2 = {};
+		//attack2.vPosition = vPosition;
+		//attack2.vScale = Vector2(3.f, 2.f);
+		//attack2.vOffset = Vector2(3.5f, 0.f);
+		//attack2.tAttackInfo.fAttackDamage = BattleManager::GetMaxDamage();
+		//attack2.tTime.fCoolTime = 16.f;
+		//
+		//attack2.pFunction = std::bind(&Demian::attack2, this);
+		//
+		//attack2.iStartFrame = 32;
+		//attack2.iEndFrame = 34;
+		//Pscript->AddAttack(attack2);
+		//
+		////
+		////
+		//tMonsterAttack attack3 = {};
+		//attack3.bSkill = true;
+		//attack3.tTime.fCoolTime = 25.f;
+		//
+		//attack3.pFunction = std::bind(&Demian::attack3, this);
+		//
+		//attack3.iStartFrame = 18;
+		//attack3.iEndFrame = 113;
+		//Pscript->AddAttack(attack3);
 
 	}
 
@@ -334,7 +354,7 @@ namespace W
 		{
 			int iIndx = (rand() % 4);
 
-			float fOffsetX = i * 3.f + vStartPos.x;
+			float fOffsetX = i * 4.3f + vStartPos.x;
 			fOffsetX += iIndx * 0.7f;
 
 			
@@ -403,5 +423,48 @@ namespace W
 		Vector3 vPosition = GetComponent<Transform>()->GetPosition();
 		vPosition.x += (GetDir() * 4.38f);
 		GetComponent<Transform>()->SetPosition(vPosition);
+	}
+	void Demian::check_time()
+	{
+		m_fCurCreateTime += Time::DeltaTime();
+		if (m_fCurCreateTime >= m_fCreateTime)
+		{
+			m_fCurCreateTime = 0.f;
+			create();
+		}
+	}
+
+	void Demian::create()
+	{
+		Vector3 vStartPos = GetComponent<Transform>()->GetPosition();
+		vStartPos.z -= 0.1f;
+		vStartPos.y += 1.f;
+		srand(time(NULL));
+		for (int i = -2; i < 3; ++i)
+		{
+			int iIndx = (rand() % 4);
+
+			float fOffsetX = i * 3.f + vStartPos.x;
+			fOffsetX += iIndx * 0.7f;
+
+			MonsterAttackObject* attack0 = GetMonsterSkill(L"KeyAttackObj");
+			if (attack0 == nullptr)
+				return;
+
+			DemianKeyAttack* pAttack = dynamic_cast<DemianKeyAttack*>(attack0);
+
+			std::random_device rDiv;
+			std::mt19937 en(rDiv());
+			std::uniform_int_distribution<int> time(4, 8);
+			float fTime = (float)time(en);
+			pAttack->SetTime(fTime);
+
+			attack0->GetComponent<Transform>()->SetPosition(fOffsetX, vStartPos.y, vStartPos.z);
+			EventManager::CreateObject(attack0, eLayerType::MonsterAttack);
+
+			attack0->Initialize();
+		}
+		//
+		m_fCreateTime = 1000000.f;
 	}
 }

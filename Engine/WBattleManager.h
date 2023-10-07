@@ -25,6 +25,7 @@ namespace W
 			Undead,
 			Variation,
 			DemianStop,
+			InputKey,
 			End
 		};
 
@@ -72,6 +73,8 @@ namespace W
 		static void HitchAbnormal(eAbnormalType _eType, float _fAccStat = 0.f);
 		static void Buff_Stat(GameObject* _pTarget, eUpStatType _eType, float _fAccStat);
 
+		static void Player_DeBuff_Attack(GameObject* _pTarget, eUpStatType _eType, float _fAccStat);
+
 	private:
 		static void render_damage(std::queue<DamageFont*> _queueFonts, UINT _iDamageCount, const std::wstring& _strName);
 		static void erase_damage(const std::wstring& _strName);
@@ -88,7 +91,7 @@ namespace W
 		static void undead(GameObject* _pGameObject);
 		static void variation(GameObject* _pGameObject);
 		static void demianstop(GameObject* _pGameObject);
-
+		static void inputkey(GameObject* _pGameObject);
 		//상태이상 해제
 		static void restore(GameObject* _pTarget, eAbnormalType _eType, float _fAccValue = 0.f);
 		//static void restore_move(Player* _pTarget);

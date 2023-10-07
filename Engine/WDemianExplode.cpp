@@ -44,7 +44,7 @@ namespace W
 
 		m_tMonsterAttack.vPosition = GetComponent<Transform>()->GetPosition();
 		m_tMonsterAttack.vScale = Vector2(0.6f,0.7f);
-		m_tMonsterAttack.vOffset = Vector2(0.f, 0.f);
+		m_tMonsterAttack.vOffset = Vector2(0.f, -0.2f);
 
 		m_tMonsterAttack.iStartFrame = 29;
 		m_tMonsterAttack.iEndFrame = 30;

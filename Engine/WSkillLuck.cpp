@@ -129,7 +129,7 @@ namespace W
 			//Shuriken* pShuriken = GetPlayer()->GetScript<PlayerScript>()->CreateShuriken();
 			//pShuriken->SetName(L"luck");
 			//추가 데미지
-			//AddDamage(pShuriken);
+			AddDamage(pShuriken);
 
 			tAttackInfo& tAttack = pShuriken->GetScript<AttackScript>()->GetAttackInfo();
 			tAttack.iDamageCount = m_iMaxCnt;
