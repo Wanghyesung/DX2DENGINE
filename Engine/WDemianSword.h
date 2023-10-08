@@ -17,12 +17,15 @@ namespace W
 		void off();
 		void start();
 		void move();
+		void attack();
 
 		void set_target();
 		bool check_position();
 		void set_dir();
 
 		void restart();
+
+		void check_HP();
 	private:
 		bool m_bEnd;
 		bool m_bMove;
@@ -56,6 +59,7 @@ namespace W
 		tMonsterAttack m_tMonsterAttack;
 		std::wstring m_strCurAnim;
 
+		friend class SwordExplode;
 	};
 }
 

@@ -164,14 +164,14 @@ namespace W
 
 	void DemianScene::create_monster()
 	{
-		//Demian* pDemian = new Demian();
-		//pDemian->Initialize();
-		//AddGameObject(eLayerType::Monster, pDemian);
+		Demian* pDemian = new Demian();
+		pDemian->Initialize();
+		AddGameObject(eLayerType::Monster, pDemian);
 
 		DemianPhase2* pDemian2 = new DemianPhase2();
 		pDemian2->Initialize();
 		AddGameObject(eLayerType::Monster, pDemian2);
-		//pDemian2->GetComponent<Collider2D>()->SetActive(false);
-		//pDemian2->SetState(GameObject::eState::Paused);
+		pDemian2->GetComponent<Collider2D>()->SetActive(false);
+		pDemian2->SetState(GameObject::eState::Paused);
 	}
 }

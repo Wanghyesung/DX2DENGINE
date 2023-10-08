@@ -707,7 +707,7 @@
     <ClInclude Include="WWhite.h">
       <Filter>Contents\Script\fadein</Filter>
     </ClInclude>
-    <ClInclude Include="WSowrdExplode.h">
+    <ClInclude Include="WSwordExplode.h">
       <Filter>Contents\Object\BossMonster\Demian\object</Filter>
     </ClInclude>
     <ClInclude Include="WDemianKeyAttack.h">
@@ -1433,7 +1433,7 @@
     <ClCompile Include="WWhite.cpp">
       <Filter>Contents\Script\fadein</Filter>
     </ClCompile>
-    <ClCompile Include="WSowrdExplode.cpp">
+    <ClCompile Include="WSwordExplode.cpp">
       <Filter>Contents\Object\BossMonster\Demian\object</Filter>
     </ClCompile>
     <ClCompile Include="WDemianKeyAttack.cpp">

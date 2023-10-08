@@ -9,6 +9,7 @@
 #include "WEffect.h"
 #include "WRenderer.h"
 #include "WEventManager.h"
+#include "WMonsterScript.h"
 namespace W
 {
 	DemianSword::DemianSword():
@@ -28,8 +29,7 @@ namespace W
 		m_iDirIndex(0)
 	{
 		AddComponent<Rigidbody>();
-		AddComponent<Collider2D>()->SetActive(false);
-
+		
 		//기본적으로 제공하는 script를 제거하고 전용 script로
 
 		GetComponent<Transform>()->SetScale(20.f, 20.f, 0.f);
@@ -78,14 +78,17 @@ namespace W
 	{
 		m_tMonsterAttack.tAttackInfo.fAttackDamage = 25.f;
 		
-		m_tMonsterAttack.vPosition = GetComponent<Transform>()->GetPosition();
+		m_tMonsterAttack.vPosition = Vector3(0.f, -1.85f, -2.f);
 		m_tMonsterAttack.vScale = Vector2(0.03f, 0.05f);
 		m_tMonsterAttack.vOffset = Vector2(0.f, 0.f);
 	}
 	void DemianSword::Update()
 	{
+
 		if (m_bAttackOn)
 			return;
+
+		check_HP();
 
 		if (m_bWait)
 		{
@@ -101,12 +104,18 @@ namespace W
 		{
 			if (check_position())
 			{
+				if (m_iMoveCount >= 3.f)
+				{
+					m_bAttackOn = true;
+					GetComponent<Collider2D>()->SetActive(false);
+					attack();
+					return;
+				}
+
 				set_target();
 				m_bWait = true;
 			}
 
-			if (m_iMoveCount >= 3.f)
-				m_bAttackOn = true;
 		}
 		
 		else
@@ -181,21 +190,10 @@ namespace W
 		m_fCurAttackTime = 0.f;
 		m_fCurChangeTime = 0.f;
 		m_fCurWaitTime = 0.f;
+		m_iDir = 1;
 
 		SceneManger::Erase(this);
 		GetOwner()->AddMonsterSkill(this);
-	}
-	void DemianSword::start()
-	{
-		GetComponent<Transform>()->SetPosition(0.f, 0.f, 0.f);
-
-		m_bMove = true;
-		m_bTargetOn = false;
-		m_bAttackOn = false;
-		m_bWait = false;
-		SetMonsterAttack(m_tMonsterAttack);
-
-		set_dir();
 	}
 	
 	void DemianSword::move()
@@ -231,6 +229,7 @@ namespace W
 
 		GetComponent<Rigidbody>()->AddForce(m_vActiveDir * 3.f);
 	}
+	
 	void DemianSword::set_target()
 	{
 		GameObject* pObj = SceneManger::FindPlayer();
@@ -248,7 +247,7 @@ namespace W
 
 		m_vArrivePos = vTargetPosition;
 
-		vPos.y -= 0.4f;
+		//vPos.y -= 0.4f;
 		Vector2 vDiff = vTargetPos - vPos;
 		vDiff.Normalize();
 
@@ -284,41 +283,55 @@ namespace W
 			m_iDirIndex = 0;
 	}
 
+	void DemianSword::start()
+	{
+		//GetComponent<Transform>()->SetPosition(0.f, 0.f, 0.f);
+
+		m_bMove = true;
+		m_bTargetOn = false;
+		m_bAttackOn = false;
+		m_bWait = false;
+		SetMonsterAttack(m_tMonsterAttack);
+
+		set_dir();
+	}
+
 	void DemianSword::restart()
 	{
+		GetComponent<Collider2D>()->SetActive(true);
+		//GetComponent<Transform>()->SetPosition() Vector3(0.f, -1.85f, -2.f);
 		m_bTargetOn = false;
 		m_bAttackOn = false;
 		m_bWait = false;
 		m_bEnd = false;
 	
+		m_iDir *= -1;
+		m_iMoveCount = 0;
 		m_fCurAttackTime = 0.f;
 		m_fCurChangeTime = 0.f;
 		m_fCurWaitTime = 0.f;
 	}
-}
 
-//GameObject* pObj = SceneManger::FindPlayer();
-//Vector3 vTargetPosition = pObj->GetComponent<Collider2D>()->GetPosition();
-//Vector2 vTargetPos = Vector2(vTargetPosition.x, vTargetPosition.y);
-//
-//Vector3 vPosition = GetComponent<Collider2D>()->GetPosition();
-//Vector2 vPos = Vector2(vPosition.x, vPosition.y);
-//
-//Effect* pEffect = BattleManager::GetEffect(L"DemianTarget");
-//pEffect->StartEffect(1);
-//pEffect->SetActive(true);
-//pEffect->GetComponent<Collider2D>()->SetPosition(vTargetPosition);
-//EventManager::CreateObject(pEffect, eLayerType::Effect);
-//
-//m_vArrivePos = vTargetPosition;
-//
-////vPos.y -= 1.f;
-//Vector2 vDiff = vTargetPos - vPos;
-//vDiff.Normalize();
-//
-//m_vActiveDir = vDiff;
-////m_vActiveDir = Vector2(m_vArrivePos.x, m_vArrivePos.y);
-//
-//float fRadian = m_iDir > 0 ? -XM_PI / 2.f : XM_PI / 2.f;
-//float fNewRadian = atan2f(m_vActiveDir.y, m_vActiveDir.x);
-//GetComponent<Transform>()->SetRotation(0.f, 0.f, fRadian + fNewRadian);
+	void DemianSword::check_HP()
+	{
+		float fHP = GetOwner()->GetScript<MonsterScript>()->GetObjectInfo().fHP;
+		if (fHP <= 0.f)
+		{
+			m_bMove = false;
+			m_bEnd = true;
+		}
+	}
+
+	void DemianSword::attack()
+	{
+		MonsterAttackObject* pObject = GetOwner()->GetMonsterSkill(L"SwordExplode");
+		EventManager::CreateObject(pObject, eLayerType::MonsterAttack);
+
+		Vector3 vPosition = GetComponent<Transform>()->GetPosition();
+		vPosition.y = -1.4f;//땅 위치
+		pObject->GetComponent<Transform>()->SetPosition(vPosition);
+
+		pObject->Initialize();
+	}
+
+}

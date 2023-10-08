@@ -406,7 +406,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WSlow.h" />
     <ClInclude Include="WSolomon.h" />
     <ClInclude Include="WSolThunder.h" />
-    <ClInclude Include="WSowrdExplode.h" />
+    <ClInclude Include="WSwordExplode.h" />
     <ClInclude Include="WSpawnMonsterAttack.h" />
     <ClInclude Include="WSpear.h" />
     <ClInclude Include="WStartScene.h" />
@@ -650,7 +650,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WSlow.cpp" />
     <ClCompile Include="WSolomon.cpp" />
     <ClCompile Include="WSolThunder.cpp" />
-    <ClCompile Include="WSowrdExplode.cpp" />
+    <ClCompile Include="WSwordExplode.cpp" />
     <ClCompile Include="WSpawnMonsterAttack.cpp" />
     <ClCompile Include="WSpear.cpp" />
     <ClCompile Include="WStartScene.cpp" />

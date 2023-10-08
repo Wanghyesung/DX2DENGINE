@@ -17,11 +17,12 @@
 #include "WSceneManger.h"
 #include "WSceneManger.h"
 #include "WDemianKeyAttack.h"
+#include "WSwordExplode.h"
 #include "WTime.h"
 namespace W
 {
 	Demian::Demian():
-		m_fCreateTime(20.f),
+		m_fCreateTime(2000.f),
 		m_fCurCreateTime(0.f)
 	{
 		SetName(L"Demian1");
@@ -171,7 +172,7 @@ namespace W
 		MonsterScript* Pscript = AddComponent<MonsterScript>();
 		Pscript->SetBoss();
 		Pscript->Initialize();
-		Pscript->SetHP(700.f);
+		Pscript->SetHP(50.f);
 		//Pscript->CreateHP();
 
 		setattack();
@@ -237,9 +238,16 @@ namespace W
 		pSword->SetOnwer(this);
 		pSword->Initialize();
 		pSword->SetName(L"demianSword");
-		
 		AddMonsterSkill(pSword);
 		SceneManger::AddGameObject(eLayerType::MonsterAttack, GetMonsterSkill(L"demianSword"));
+
+		SwordExplode* pExplode = new SwordExplode();
+		pExplode->SetSword(pSword);
+		pExplode->SetOnwer(this);
+		pExplode->Initialize();
+		pExplode->SetName(L"SwordExplode");
+		AddMonsterSkill(pExplode);
+
 
 		//키입력 오브젝트
 		for (int i = 0; i < 5; ++i)
@@ -291,7 +299,7 @@ namespace W
 		tMonsterAttack attack0 = {};
 		attack0.bSkill = true;
 		
-		attack0.tTime.fCoolTime = 30.f;
+		attack0.tTime.fCoolTime = 3000.f;
 		
 		attack0.pFunction = std::bind(&Demian::attack0, this);
 		
@@ -303,7 +311,7 @@ namespace W
 		//2
 		tMonsterAttack attack1 = {};
 		
-		attack1.tTime.fCoolTime = 18.f;
+		attack1.tTime.fCoolTime = 1800.f;
 		attack1.vPosition = vPosition;
 		attack1.vScale = Vector2(4.f, 2.f);
 		attack1.vOffset = Vector2(3.5f, 0.f);
@@ -322,7 +330,7 @@ namespace W
 		attack2.vScale = Vector2(3.f, 2.f);
 		attack2.vOffset = Vector2(3.5f, 0.f);
 		attack2.tAttackInfo.fAttackDamage = BattleManager::GetMaxDamage();
-		attack2.tTime.fCoolTime = 16.f;
+		attack2.tTime.fCoolTime = 1600.f;
 		
 		attack2.pFunction = std::bind(&Demian::attack2, this);
 		
@@ -334,7 +342,7 @@ namespace W
 		//
 		tMonsterAttack attack3 = {};
 		attack3.bSkill = true;
-		attack3.tTime.fCoolTime = 4.f;
+		attack3.tTime.fCoolTime = 3000.f;
 		
 		attack3.pFunction = std::bind(&Demian::attack3, this);
 		
