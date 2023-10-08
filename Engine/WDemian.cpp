@@ -21,7 +21,7 @@
 namespace W
 {
 	Demian::Demian():
-		m_fCreateTime(3.f),
+		m_fCreateTime(20.f),
 		m_fCurCreateTime(0.f)
 	{
 		SetName(L"Demian1");
@@ -233,13 +233,13 @@ namespace W
 	}
 	void Demian::add_skill()
 	{
-		//DemianSword* pSword = new DemianSword();
-		//pSword->SetOnwer(this);
-		//pSword->Initialize();
-		//pSword->SetName(L"demianSword");
-		//
-		//AddMonsterSkill(pSword);
-		//SceneManger::AddGameObject(eLayerType::MonsterAttack, GetMonsterSkill(L"demianSword"));
+		DemianSword* pSword = new DemianSword();
+		pSword->SetOnwer(this);
+		pSword->Initialize();
+		pSword->SetName(L"demianSword");
+		
+		AddMonsterSkill(pSword);
+		SceneManger::AddGameObject(eLayerType::MonsterAttack, GetMonsterSkill(L"demianSword"));
 
 		//키입력 오브젝트
 		for (int i = 0; i < 5; ++i)
@@ -288,59 +288,59 @@ namespace W
 		MonsterScript* Pscript = GetComponent<MonsterScript>();
 		Vector3 vPosition = GetComponent<Transform>()->GetPosition();
 
-		//tMonsterAttack attack0 = {};
-		//attack0.bSkill = true;
+		tMonsterAttack attack0 = {};
+		attack0.bSkill = true;
+		
+		attack0.tTime.fCoolTime = 30.f;
+		
+		attack0.pFunction = std::bind(&Demian::attack0, this);
+		
+		attack0.iStartFrame = 4;
+		attack0.iEndFrame = 5;
+		
+		Pscript->AddAttack(attack0);
+		
+		//2
+		tMonsterAttack attack1 = {};
+		
+		attack1.tTime.fCoolTime = 18.f;
+		attack1.vPosition = vPosition;
+		attack1.vScale = Vector2(4.f, 2.f);
+		attack1.vOffset = Vector2(3.5f, 0.f);
+		attack1.tAttackInfo.fAttackDamage = BattleManager::GetMaxDamage();
+		
+		attack1.pFunction = std::bind(&Demian::attack1, this);
+		
+		attack1.iStartFrame = 28;
+		attack1.iEndFrame = 30;
+		
+		Pscript->AddAttack(attack1);
+		
+		////3
+		tMonsterAttack attack2 = {};
+		attack2.vPosition = vPosition;
+		attack2.vScale = Vector2(3.f, 2.f);
+		attack2.vOffset = Vector2(3.5f, 0.f);
+		attack2.tAttackInfo.fAttackDamage = BattleManager::GetMaxDamage();
+		attack2.tTime.fCoolTime = 16.f;
+		
+		attack2.pFunction = std::bind(&Demian::attack2, this);
+		
+		attack2.iStartFrame = 32;
+		attack2.iEndFrame = 34;
+		Pscript->AddAttack(attack2);
+		
 		//
-		//attack0.tTime.fCoolTime = 30.f;
 		//
-		//attack0.pFunction = std::bind(&Demian::attack0, this);
-		//
-		//attack0.iStartFrame = 4;
-		//attack0.iEndFrame = 5;
-		//
-		//Pscript->AddAttack(attack0);
-		//
-		////2
-		//tMonsterAttack attack1 = {};
-		//
-		//attack1.tTime.fCoolTime = 18.f;
-		//attack1.vPosition = vPosition;
-		//attack1.vScale = Vector2(4.f, 2.f);
-		//attack1.vOffset = Vector2(3.5f, 0.f);
-		//attack1.tAttackInfo.fAttackDamage = BattleManager::GetMaxDamage();
-		//
-		//attack1.pFunction = std::bind(&Demian::attack1, this);
-		//
-		//attack1.iStartFrame = 28;
-		//attack1.iEndFrame = 30;
-		//
-		//Pscript->AddAttack(attack1);
-		//
-		//////3
-		//tMonsterAttack attack2 = {};
-		//attack2.vPosition = vPosition;
-		//attack2.vScale = Vector2(3.f, 2.f);
-		//attack2.vOffset = Vector2(3.5f, 0.f);
-		//attack2.tAttackInfo.fAttackDamage = BattleManager::GetMaxDamage();
-		//attack2.tTime.fCoolTime = 16.f;
-		//
-		//attack2.pFunction = std::bind(&Demian::attack2, this);
-		//
-		//attack2.iStartFrame = 32;
-		//attack2.iEndFrame = 34;
-		//Pscript->AddAttack(attack2);
-		//
-		////
-		////
-		//tMonsterAttack attack3 = {};
-		//attack3.bSkill = true;
-		//attack3.tTime.fCoolTime = 25.f;
-		//
-		//attack3.pFunction = std::bind(&Demian::attack3, this);
-		//
-		//attack3.iStartFrame = 18;
-		//attack3.iEndFrame = 113;
-		//Pscript->AddAttack(attack3);
+		tMonsterAttack attack3 = {};
+		attack3.bSkill = true;
+		attack3.tTime.fCoolTime = 4.f;
+		
+		attack3.pFunction = std::bind(&Demian::attack3, this);
+		
+		attack3.iStartFrame = 18;
+		attack3.iEndFrame = 113;
+		Pscript->AddAttack(attack3);
 
 	}
 
@@ -464,7 +464,6 @@ namespace W
 
 			attack0->Initialize();
 		}
-		//
-		m_fCreateTime = 1000000.f;
+		
 	}
 }

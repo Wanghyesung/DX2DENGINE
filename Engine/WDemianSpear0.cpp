@@ -45,7 +45,7 @@ namespace W
 		m_tMonsterAttack.tAttackInfo.fAttackDamage = BattleManager::GetMaxDamage();
 
 		m_tMonsterAttack.vPosition = GetComponent<Transform>()->GetPosition();
-		m_tMonsterAttack.vScale = Vector2(0.07f, 0.2f);
+		m_tMonsterAttack.vScale = Vector2(0.05f, 0.2f);
 		m_tMonsterAttack.vOffset = Vector2(0.f, 0.f);
 
 		int iDir = GetOwner()->GetDir();

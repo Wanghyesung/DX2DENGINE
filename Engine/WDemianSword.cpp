@@ -187,7 +187,7 @@ namespace W
 	}
 	void DemianSword::start()
 	{
-		GetComponent<Transform>()->SetPosition(0.f, -2.f, 0.f);
+		GetComponent<Transform>()->SetPosition(0.f, 0.f, 0.f);
 
 		m_bMove = true;
 		m_bTargetOn = false;
@@ -207,7 +207,7 @@ namespace W
 
 		if (m_bTargetOn)
 		{
-			GetComponent<Rigidbody>()->AddForce(m_vActiveDir * 3.5f);
+			GetComponent<Rigidbody>()->AddForce(m_vActiveDir * 7.f);
 			return;
 		}
 			
@@ -234,10 +234,10 @@ namespace W
 	void DemianSword::set_target()
 	{
 		GameObject* pObj = SceneManger::FindPlayer();
-		Vector3 vTargetPosition = pObj->GetComponent<Transform>()->GetPosition();
+		Vector3 vTargetPosition = pObj->GetComponent<Collider2D>()->GetPosition();
 		Vector2 vTargetPos = Vector2(vTargetPosition.x, vTargetPosition.y);
 
-		Vector3 vPosition = GetComponent<Transform>()->GetPosition();
+		Vector3 vPosition = GetComponent<Collider2D>()->GetPosition();
 		Vector2 vPos = Vector2(vPosition.x, vPosition.y);
 
 		Effect* pEffect = BattleManager::GetEffect(L"DemianTarget");
@@ -247,17 +247,17 @@ namespace W
 		EventManager::CreateObject(pEffect, eLayerType::Effect);
 
 		m_vArrivePos = vTargetPosition;
-		
+
+		vPos.y -= 0.4f;
 		Vector2 vDiff = vTargetPos - vPos;
 		vDiff.Normalize();
-		
+
 		m_vActiveDir = vDiff;
-		
+		//m_vActiveDir = Vector2(m_vArrivePos.x, m_vArrivePos.y);
 
 		float fRadian = m_iDir > 0 ? -XM_PI / 2.f : XM_PI / 2.f;
 		float fNewRadian = atan2f(m_vActiveDir.y, m_vActiveDir.x);
 		GetComponent<Transform>()->SetRotation(0.f, 0.f, fRadian + fNewRadian);
-
 	}
 	bool DemianSword::check_position()
 	{
@@ -296,3 +296,29 @@ namespace W
 		m_fCurWaitTime = 0.f;
 	}
 }
+
+//GameObject* pObj = SceneManger::FindPlayer();
+//Vector3 vTargetPosition = pObj->GetComponent<Collider2D>()->GetPosition();
+//Vector2 vTargetPos = Vector2(vTargetPosition.x, vTargetPosition.y);
+//
+//Vector3 vPosition = GetComponent<Collider2D>()->GetPosition();
+//Vector2 vPos = Vector2(vPosition.x, vPosition.y);
+//
+//Effect* pEffect = BattleManager::GetEffect(L"DemianTarget");
+//pEffect->StartEffect(1);
+//pEffect->SetActive(true);
+//pEffect->GetComponent<Collider2D>()->SetPosition(vTargetPosition);
+//EventManager::CreateObject(pEffect, eLayerType::Effect);
+//
+//m_vArrivePos = vTargetPosition;
+//
+////vPos.y -= 1.f;
+//Vector2 vDiff = vTargetPos - vPos;
+//vDiff.Normalize();
+//
+//m_vActiveDir = vDiff;
+////m_vActiveDir = Vector2(m_vArrivePos.x, m_vArrivePos.y);
+//
+//float fRadian = m_iDir > 0 ? -XM_PI / 2.f : XM_PI / 2.f;
+//float fNewRadian = atan2f(m_vActiveDir.y, m_vActiveDir.x);
+//GetComponent<Transform>()->SetRotation(0.f, 0.f, fRadian + fNewRadian);

@@ -30,6 +30,7 @@ namespace W
 
 		bool m_bStart;
 		bool m_bActive;
+		bool m_bClear;
 
 		tAttackInfo m_tAttackInfo;
 		White* m_pWhite;

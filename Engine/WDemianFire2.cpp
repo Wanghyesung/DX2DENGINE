@@ -68,11 +68,11 @@ namespace W
 			if (m_bEnd)
 			{
 				m_bMove = false;
-				Vector3 vPosition = GetComponent<Transform>()->GetPosition();
-				vPosition.y += 0.8f;
-				GetComponent<Transform>()->SetPosition(vPosition);
+				//Vector3 vPosition = GetComponent<Transform>()->GetPosition();
+				//vPosition.y += 0.35f;
+				//GetComponent<Transform>()->SetPosition(vPosition);
 			}
-				
+
 		}
 
 		GameObject::Update();

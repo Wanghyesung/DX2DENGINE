@@ -12,7 +12,7 @@
 namespace W
 {
 	DemianEntireAttack::DemianEntireAttack():
-		m_iKeyDonwCount(40),
+		m_iKeyDonwCount(50),
 		m_fDeleteTime(5.f),
 		m_fCurTime(0.f),
 		m_iCallStack(0)

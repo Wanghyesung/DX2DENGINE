@@ -369,14 +369,15 @@ namespace W
 		m_tHitInfo.fHitRcnt = _tAttackInfo.fAttRcnt;
 		m_tHitInfo.fHitRigidityTime = _tAttackInfo.fAttRigidityTime;
 		m_tHitInfo.fHitUpperRcnt = _tAttackInfo.fAttUpperRcnt;
-
-		Player::ePlayerState eState = m_pPlayer->GetCurPlayerState();
-		if (eState == Player::ePlayerState::ladder)
+		
+		if (m_tHitInfo.fHitRcnt <= 0.f &&
+			m_tHitInfo.fHitUpperRcnt <= 0.f)
 			return;
 
 		m_fHitTime = 0.f;
-		if (m_tHitInfo.fHitRcnt <= 0.f &&
-			m_tHitInfo.fHitUpperRcnt <= 0.f)
+
+		Player::ePlayerState eState = m_pPlayer->GetCurPlayerState();
+		if (eState == Player::ePlayerState::ladder)
 			return;
 
 		knockback();

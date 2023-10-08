@@ -43,6 +43,10 @@ namespace W
 
 		m_pWhite = new White();
 		m_pWhite->SetEndTime(2.f);
+		Vector3 vPos = m_pWhite->GetComponent<Transform>()->GetPosition();
+		vPos.z = -3.1f;
+		m_pWhite->GetComponent<Transform>()->SetPosition(vPos);
+
 		m_pWhite->SetFunction(std::bind(&DemianVine::attack, this));
 
 
@@ -65,6 +69,7 @@ namespace W
 
 		Vector3 vPosition = renderer::MainCamera->GetOwner()->GetComponent<Transform>()->GetPosition();
 		vPosition.y -= 1.5f;
+		vPosition.z = -3.f;
 		GetComponent<Transform>()->SetPosition(vPosition);
 
 
@@ -93,7 +98,8 @@ namespace W
 				
 		}
 
-		check_hp();
+		if(m_bActive)
+			check_hp();
 
 		GameObject::Update();
 	}
@@ -134,6 +140,7 @@ namespace W
 		m_fDeleteTime = 6.f;
 		m_bStart = false;
 		m_bActive = false;
+		m_bClear = false;
 
 		GetComponent<Animator>()->Stop(false);
 		GetComponent<Animator>()->FindAnimation(L"vine")->SetIndex(0);
@@ -147,12 +154,16 @@ namespace W
 
 		//일정 데미지를 넣으면 해제
 		if (CLEAR_VALUE <= m_fDemianHP - tInfo.fHP)
-			off();
+		{
+			m_bClear = true;
+		}
 	}
 
 	void DemianVine::attack()
 	{
-		SceneManger::FindPlayer()->GetScript<PlayerScript>()->Hit(m_tAttackInfo,L"DemianVine");
+		if(!m_bClear)
+			SceneManger::FindPlayer()->GetScript<PlayerScript>()->Hit(m_tAttackInfo,L"DemianVine");
+
 		off();
 	}
 }

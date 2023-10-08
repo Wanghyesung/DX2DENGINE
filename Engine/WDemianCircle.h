@@ -1,9 +1,9 @@
 #pragma once
-#include "WMonsterAttackObject.h"
+#include "WGameObject.h"
 
 namespace W
 {
-	class DemianCircle : public MonsterAttackObject
+	class DemianCircle : public GameObject
 	{
 	public:
 		DemianCircle();
@@ -17,6 +17,7 @@ namespace W
 		void LevelUp(UINT _iLevel);
 		void SetActive(bool _bActive) { m_bActive = _bActive; }
 		bool IsActive() { return m_bActive; }
+		void SetSpeed(float _fSpeed) { m_fSpeed = _fSpeed; }
 	private:
 		//void off();
 		void check_enter();
@@ -31,6 +32,11 @@ namespace W
 
 		bool m_bActive;
 		bool m_bEnter;
+
+		float m_fAttackTime;
+		float m_fCurAttackTime;
+
+		float m_fSpeed;
 	};
 }
 

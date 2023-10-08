@@ -138,7 +138,7 @@ namespace W
 	}
 	Megnus::~Megnus()
 	{
-
+		
 	}
 	void Megnus::Initialize()
 	{
@@ -264,7 +264,7 @@ namespace W
 		//°¡½º
 		m_pGas = new SleepGas();
 		m_pGas->SetOnwer(this);
-
+		m_pGas->GetComponent<Transform>()->SetPosition(10.f, -1.95f, -1.5f);
 		SceneManger::AddGameObject(eLayerType::MonsterAttack, m_pGas);
 	}
 	void Megnus::setattack()

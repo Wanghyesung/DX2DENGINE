@@ -219,6 +219,7 @@ namespace W
 
 		Portal* pPortal = new Portal();
 		AddGameObject(eLayerType::Portal, pPortal);
+		//pPortal->GetScript<PortalScript>()->SetNextScene(L"Helisium");
 		pPortal->GetScript<PortalScript>()->SetNextScene(L"DemianScene");
 		//pPortal->GetScript<PortalScript>()->SetNextScene(L"Cave");
 		pPortal->GetComponent<Transform>()->SetPosition(3.6f, -6.8f, -0.1f);

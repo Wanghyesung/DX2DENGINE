@@ -26,7 +26,7 @@ namespace W
 		m_bGroggy(false),
 		m_iSpearCount(0),
 		m_iAttackCallCount(1),
-		m_iCircleLevel(0)
+		m_iCircleLevel(-1)
 	{
 		SetName(L"Demian2");
 
@@ -226,8 +226,7 @@ namespace W
 	}
 	void DemianPhase2::Update()
 	{
-		if (m_iAttackCallCount == 1)
-			check_HP();
+		check_HP();
 
 		Monster::Update();
 	}
@@ -271,12 +270,9 @@ namespace W
 		{
 			DemianCircle* pDemianCircle = new DemianCircle();
 			pDemianCircle->SetName(L"DemianCircle");
-			pDemianCircle->SetOnwer(this);
+			pDemianCircle->Initialize();
 			m_vecCircle.push_back(pDemianCircle);
 		}
-		SceneManger::AddGameObject(eLayerType::MonsterAttack, m_vecCircle[0]);
-		m_vecCircle[0]->Initialize();
-
 
 		SpawnMonsterAttack* pSpawnObj = new SpawnMonsterAttack();
 		pSpawnObj->SetName(L"SpawnObj");
@@ -359,7 +355,7 @@ namespace W
 		tMonsterAttack attack1 = {};
 		attack1.bSkill = true;
 		
-		attack1.tTime.fCoolTime = 10000.f;
+		attack1.tTime.fCoolTime = 2000.f;
 		attack1.tAttackInfo.fAttackDamage = BattleManager::GetMaxDamage();
 		
 		attack1.pFunction = std::bind(&DemianPhase2::attack1, this);
@@ -373,7 +369,7 @@ namespace W
 		tMonsterAttack attack2 = {};
 		attack2.bSkill = true;
 		
-		attack2.tTime.fCoolTime = 1000000.f;
+		attack2.tTime.fCoolTime = 2000.f;
 		
 		attack2.pFunction = std::bind(&DemianPhase2::attack2, this);
 		
@@ -388,7 +384,7 @@ namespace W
 		attack3.vScale = Vector2(3.f, 2.f);
 		attack3.vOffset = Vector2(4.f, 0.f);
 		attack3.tAttackInfo.fAttackDamage = BattleManager::GetMaxDamage();
-		attack3.tTime.fCoolTime = 5000000.f;
+		attack3.tTime.fCoolTime = 3000.f;
 		
 		attack3.pFunction = std::bind(&DemianPhase2::attack3, this);
 		
@@ -398,7 +394,7 @@ namespace W
 
 		tMonsterAttack attack4 = {};
 		attack4.bSkill = true;
-		attack4.tTime.fCoolTime = 5.f;
+		attack4.tTime.fCoolTime = 2500.f;
 		//attack4.tAttackInfo.fAttackDamage = BattleManager::GetMaxDamage();
 		
 		attack4.pFunction = std::bind(&DemianPhase2::attack4, this);
@@ -410,7 +406,7 @@ namespace W
 		//
 		tMonsterAttack attack5 = {};
 		attack5.bSkill = true;
-		attack5.tTime.fCoolTime = 5.f;
+		attack5.tTime.fCoolTime = 999999999.f;
 		
 		attack5.pFunction = std::bind(&DemianPhase2::attack5, this);
 		attack5.iStartFrame = 7;
@@ -448,8 +444,8 @@ namespace W
 		//속도, 생성 위치 설정
 		Vector2 vLook[4] = { Vector2{3.f, 0.f},Vector2{3.f, 0.f},Vector2{-3.f, 0.f},
 		Vector2{-3.f, 0.f} };
-		Vector3 vOffset[4] = { Vector3{0.f, 0.7f,0.f},Vector3{0.f, -0.7f,0.f},Vector3{0.f, 0.7f,0.f},
-		Vector3{0.f, -0.7f,0.f} };
+		Vector3 vOffset[4] = { Vector3{0.f, 0.7f,0.f},Vector3{0.f, -0.3f,0.f},Vector3{0.f, 0.7f,0.f},
+		Vector3{0.f, -0.3f,0.f} };
 
 		for (int i = 0; i < 4; ++i)
 			pSpawn->SetVelocity(vLook[i], vOffset[i]);
@@ -533,26 +529,35 @@ namespace W
 		const tObjectInfo& tInfo = pScript->GetObjectInfo();
 
 		//세계수
-		if (tInfo.fHP / tInfo.fMaxHP <= 0.15f)
+		if (tInfo.fHP / tInfo.fMaxHP <= 0.15f &&
+			m_iAttackCallCount == 1)
+		{
+			m_iAttackCallCount = 0;
 			pScript->AciveAttack(5);
+		}
+			
 
 		//구 크기
-		if (tInfo.fHP / tInfo.fMaxHP <= 0.20f)
+		if (tInfo.fHP / tInfo.fMaxHP <= 1.0f)
 		{
 			int iLevel = 0;
-			if (tInfo.fHP / tInfo.fMaxHP <= 0.10f)
+			if (tInfo.fHP / tInfo.fMaxHP <= 0.20f)
 				iLevel = 2;
-			else
-				iLevel = 1;
 
+			else if(tInfo.fHP / tInfo.fMaxHP <= 0.40f)
+					iLevel = 1;
+			
 			if (m_iCircleLevel != iLevel)
 			{
+
 				m_iCircleLevel = iLevel;
-				if (m_iCircleLevel == 1)
+				if (m_iCircleLevel == 1 || m_iCircleLevel == 0)
 				{
 					EventManager::CreateObject(m_vecCircle[m_iCircleLevel], eLayerType::MonsterAttack);
-					m_vecCircle[m_iCircleLevel]->Initialize();
+					m_vecCircle[m_iCircleLevel]->SetActive(true);
+					m_vecCircle[m_iCircleLevel]->SetSpeed((m_iCircleLevel + 1.f)/2.f);
 				}
+
 				for (int i = 0; i < m_vecCircle.size(); ++i)
 				{
 					m_vecCircle[i]->LevelUp(m_iCircleLevel);

@@ -46,7 +46,7 @@ namespace W
 
 		m_tMonsterAttack.vPosition = GetComponent<Transform>()->GetPosition();
 		
-		m_tMonsterAttack.vScale = Vector2(0.1f, 0.2f);
+		m_tMonsterAttack.vScale = Vector2(0.05f, 0.2f);
 		m_tMonsterAttack.vOffset = Vector2(0.f, 0.f);
 		int iDir = GetOwner()->GetDir();
 		Vector3 vRotate = Vector3(0.f, 0.f, -iDir * XM_PI / 7.f);

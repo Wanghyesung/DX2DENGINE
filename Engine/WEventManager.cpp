@@ -157,6 +157,7 @@ namespace W
 			}
 		}
 		break;
+
 		case EVENT_TYPE::RESTORE:
 		{
 			GameObject* pObj = (GameObject*)_tEve.lParm;

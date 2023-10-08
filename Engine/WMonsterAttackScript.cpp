@@ -43,9 +43,10 @@ namespace W
 		if (pOther->GetLayerType() == eLayerType::Player ||
 			pOther->GetLayerType() == eLayerType::Ground)
 		{
-			m_bEnter = true;
 			if (pOther->GetLayerType() == eLayerType::Player)
 				m_bPlayerEnter = true;
+
+			m_bEnter = true;
 		}
 			
 	}
@@ -83,7 +84,7 @@ namespace W
 	void MonsterAttackScript::OnCollisionExit(Collider2D* other)
 	{
 		GameObject* pOther = other->GetOwner();
-		
+
 		if (pOther->GetLayerType() == eLayerType::Player)
 			m_bPlayerEnter = false;
 	}

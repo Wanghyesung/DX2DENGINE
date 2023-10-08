@@ -43,7 +43,7 @@ namespace W
 		int m_iSpearCount;
 
 		//±¸ ·¹º§
-		UINT m_iCircleLevel;
+		int m_iCircleLevel;
 
 		std::vector<class DemianCircle*> m_vecCircle;
 	};
