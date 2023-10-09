@@ -116,6 +116,7 @@ namespace W
 		m_bStart = false;
 		m_bEnd = false;
 
+		GetComponent<MonsterAttackScript>()->InitStack();
 		SetState(GameObject::eState::Paused);
 	}
 }

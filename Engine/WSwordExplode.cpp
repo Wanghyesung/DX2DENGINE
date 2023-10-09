@@ -14,6 +14,8 @@ namespace W
 		m_pSword(nullptr),
 		m_iExplodeCount(3)
 	{
+		GetScript<MonsterAttackScript>()->SeteAbnormalType(BattleManager::eAbnormalType::Stigma);
+
 		std::shared_ptr<Material> pMater = std::make_shared<Material>();
 		pMater->SetRenderinMode(eRenderingMode::Transparent);
 		pMater->SetShader(Resources::Find<Shader>(L"ObjectAnimShader"));
@@ -101,6 +103,7 @@ namespace W
 		m_iCallCount = 0;
 		SceneManger::Erase(this);
 		GetOwner()->AddMonsterSkill(this);
+		GetScript<MonsterAttackScript>()->InitStack();
 	}
 	void SwordExplode::start()
 	{

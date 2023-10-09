@@ -10,12 +10,17 @@
 #include "WMonsterScript.h"
 #include "WWhite.h"
 #include "WEventManager.h"
+#include "WStigmaBack.h"
+#include "WTime.h"
 namespace W
 {
 	DemianScene::DemianScene():
 		m_pWhite(nullptr),
 		m_bEnd(false),
-		m_iFadeCallStack(1)
+		m_pStigmaBack(nullptr),
+		m_iFadeCallStack(1),
+		m_fStigmaTime(30.f),
+		m_fCurStigmaTime(0.f)
 	{
 		SetMapSize(-1.9f, -1.f, 1.9f, -1.f);
 		SetMapPossibleSize(-8.9f, 8.9f);
@@ -68,6 +73,10 @@ namespace W
 		m_pSharHP = new SharHP();
 		AddGameObject(eLayerType::UI, m_pSharHP);
 		m_pSharHP->Initialize();
+
+		m_pStigmaBack = new StigmaBack();
+		m_pStigmaBack->Initialize();
+		AddGameObject(eLayerType::Object, m_pStigmaBack);
 	}
 	void DemianScene::Update()
 	{
@@ -160,6 +169,16 @@ namespace W
 		//phase2 µ¥¹Ì¾È
 		vecGameObj[1]->GetComponent<Collider2D>()->SetActive(true);
 		vecGameObj[1]->SetState(GameObject::eState::Active);
+	}
+
+	void DemianScene::check_stigma()
+	{
+		m_fCurStigmaTime += Time::DeltaTime();
+		if (m_fCurStigmaTime >= m_fStigmaTime)
+		{
+			m_fCurStigmaTime = 0.f;
+			BattleManager::HitchAbnormal(BattleManager::eAbnormalType::Stigma);
+		}
 	}
 
 	void DemianScene::create_monster()

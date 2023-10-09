@@ -5,6 +5,7 @@
 #include "WRenderer.h"
 #include "WSceneManger.h"
 #include "WMonster.h"
+#include "WMonsterAttackScript.h"
 namespace W
 {
 	DemianExplode::DemianExplode():
@@ -90,6 +91,7 @@ namespace W
 	void DemianExplode::off()
 	{
 		m_iCallCount = 0;
+		GetScript<MonsterAttackScript>()->InitStack();
 		SceneManger::Erase(this);
 		GetOwner()->AddMonsterSkill(this);
 	}

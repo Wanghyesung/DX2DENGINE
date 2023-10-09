@@ -99,6 +99,7 @@ namespace W
 	void DemianSpear1::off()
 	{
 		m_iCallCount = 0;
+		GetScript<MonsterAttackScript>()->InitStack();
 		SceneManger::Erase(this);
 		GetOwner()->AddMonsterSkill(this);
 	}

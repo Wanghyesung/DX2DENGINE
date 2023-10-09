@@ -52,6 +52,7 @@ namespace W
 		Vector3 m_vArrivePos;
 		//내가 랜덤으로 갈 방향들
 		std::vector<Vector2> m_vecDir;
+		Vector2 m_vVelocity;
 		Vector2 m_vActiveDir;
 		int m_iDir;
 		UINT m_iDirIndex;

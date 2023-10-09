@@ -12,7 +12,7 @@
 #include "WMonsterScript.h"
 namespace W
 {
-	DemianSword::DemianSword():
+	DemianSword::DemianSword() :
 		m_bEnd(false),
 		m_bMove(false),
 		m_bTargetOn(false),
@@ -29,7 +29,7 @@ namespace W
 		m_iDirIndex(0)
 	{
 		AddComponent<Rigidbody>();
-		
+
 		//기본적으로 제공하는 script를 제거하고 전용 script로
 
 		GetComponent<Transform>()->SetScale(20.f, 20.f, 0.f);
@@ -77,7 +77,7 @@ namespace W
 	void DemianSword::Initialize()
 	{
 		m_tMonsterAttack.tAttackInfo.fAttackDamage = 25.f;
-		
+
 		m_tMonsterAttack.vPosition = Vector3(0.f, -1.85f, -2.f);
 		m_tMonsterAttack.vScale = Vector2(0.03f, 0.05f);
 		m_tMonsterAttack.vOffset = Vector2(0.f, 0.f);
@@ -117,7 +117,7 @@ namespace W
 			}
 
 		}
-		
+
 		else
 		{
 			m_fCurAttackTime += Time::DeltaTime();
@@ -132,7 +132,7 @@ namespace W
 			}
 		}
 
-		if(m_bMove)
+		if (m_bMove)
 			move();
 
 		GameObject::Update();
@@ -195,7 +195,7 @@ namespace W
 		SceneManger::Erase(this);
 		GetOwner()->AddMonsterSkill(this);
 	}
-	
+
 	void DemianSword::move()
 	{
 		if (m_bAttackOn || m_bWait)
@@ -208,17 +208,18 @@ namespace W
 			GetComponent<Rigidbody>()->AddForce(m_vActiveDir * 7.f);
 			return;
 		}
-			
+
 		int iLen = pTr->GetPosition().x;
 		int iMaxLen = SceneManger::GetActiveScene()->GetMapPossibleSize().RX;
-		if (fabs(iMaxLen) - fabs(iLen) < 0.5f)
-			m_iDir *= -1;
-
-		m_vActiveDir.x *= m_iDir;
+		if (fabs(iMaxLen) - fabs(iLen) <= 0.0f)
+		{
+			//m_iDir *= -1;
+			m_vActiveDir.x *= -m_iDir;
+		}
 
 		float fRadian = m_iDir > 0 ? -XM_PI / 2.f : XM_PI / 2.f;
 		float fNewRadian = atan2f(m_vActiveDir.y, m_vActiveDir.x);
-		GetComponent<Transform>()->SetRotation(0.f, 0.f, fRadian + fNewRadian);
+		GetComponent<Transform>()->SetRotation(0.f, 0.f, fRadian+fNewRadian);
 
 		m_fCurChangeTime += Time::DeltaTime();
 		if (m_fCurChangeTime >= m_fChangeTime)
@@ -227,9 +228,9 @@ namespace W
 			set_dir();
 		}
 
-		GetComponent<Rigidbody>()->AddForce(m_vActiveDir * 3.f);
+		GetComponent<Rigidbody>()->AddForce(m_vActiveDir * 5.f);
 	}
-	
+
 	void DemianSword::set_target()
 	{
 		GameObject* pObj = SceneManger::FindPlayer();
@@ -247,16 +248,20 @@ namespace W
 
 		m_vArrivePos = vTargetPosition;
 
-		//vPos.y -= 0.4f;
+		if (vTargetPos.y < vPos.y)
+			vPos.y -= 0.4f;
+		else
+			vPos.y += 0.4f;
 		Vector2 vDiff = vTargetPos - vPos;
 		vDiff.Normalize();
 
 		m_vActiveDir = vDiff;
+		m_vActiveDir.x *= m_iDir;
 		//m_vActiveDir = Vector2(m_vArrivePos.x, m_vArrivePos.y);
 
 		float fRadian = m_iDir > 0 ? -XM_PI / 2.f : XM_PI / 2.f;
 		float fNewRadian = atan2f(m_vActiveDir.y, m_vActiveDir.x);
-		GetComponent<Transform>()->SetRotation(0.f, 0.f, fRadian + fNewRadian);
+		GetComponent<Transform>()->SetRotation(0.f, 0.f, fRadian+fNewRadian);
 	}
 	bool DemianSword::check_position()
 	{
@@ -265,9 +270,9 @@ namespace W
 		Vector2 vPosition = Vector2(vPos.x, vPos.y);
 		Vector2 vArrivePos = Vector2(m_vArrivePos.x, m_vArrivePos.y);
 
-	    Vector2 vDiff = vArrivePos - vPosition;
-		float fLen = vDiff.Length();
-		if (fLen < 1.f)
+		Vector2 vDiff = vArrivePos - vPosition;
+		//float fLen = vDiff.Length();
+		if (fabs(vDiff.x) < 0.25f)
 		{
 			++m_iMoveCount;
 			return true;
@@ -304,8 +309,8 @@ namespace W
 		m_bAttackOn = false;
 		m_bWait = false;
 		m_bEnd = false;
-	
-		m_iDir *= -1;
+
+		//m_iDir *= -1;
 		m_iMoveCount = 0;
 		m_fCurAttackTime = 0.f;
 		m_fCurChangeTime = 0.f;

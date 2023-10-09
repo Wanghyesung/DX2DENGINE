@@ -725,7 +725,13 @@
     <ClInclude Include="WDemianCircle.h">
       <Filter>Contents\Object\BossMonster\Demian\object</Filter>
     </ClInclude>
-    <ClInclude Include="WDmianStigma.h">
+    <ClInclude Include="WStigma.h">
+      <Filter>Contents\Object\BossMonster\Demian</Filter>
+    </ClInclude>
+    <ClInclude Include="WStigmaBack.h">
+      <Filter>Contents\Object\BossMonster\Demian</Filter>
+    </ClInclude>
+    <ClInclude Include="WStigmaCount.h">
       <Filter>Contents\Object\BossMonster\Demian</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1451,7 +1457,13 @@
     <ClCompile Include="WDemianCircle.cpp">
       <Filter>Contents\Object\BossMonster\Demian\object</Filter>
     </ClCompile>
-    <ClCompile Include="WDmianStigma.cpp">
+    <ClCompile Include="WStigma.cpp">
+      <Filter>Contents\Object\BossMonster\Demian</Filter>
+    </ClCompile>
+    <ClCompile Include="WStigmaBack.cpp">
+      <Filter>Contents\Object\BossMonster\Demian</Filter>
+    </ClCompile>
+    <ClCompile Include="WStigmaCount.cpp">
       <Filter>Contents\Object\BossMonster\Demian</Filter>
     </ClCompile>
   </ItemGroup>

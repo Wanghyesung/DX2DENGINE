@@ -11,7 +11,7 @@
 #include "WMonsterHP.h"
 #include "WPlayerAttackObject.h"
 #include "WPlayerScript.h"
-
+#include "WMonsterAttackScript.h"
 namespace W
 {
 	MonsterScript::MonsterScript() :
@@ -143,6 +143,7 @@ namespace W
 		if (!tAttack.bSkill)
 		{
 			m_pMonster->AddMonsterSkill(m_pAttackObject);
+			m_pAttackObject->GetScript<MonsterAttackScript>()->InitStack();
 			SceneManger::Erase(m_pAttackObject);
 			m_pAttackObject = nullptr;
 		}

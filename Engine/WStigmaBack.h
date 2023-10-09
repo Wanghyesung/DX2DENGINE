@@ -3,11 +3,12 @@
 
 namespace W
 {
-	class DmianStigma : public GameObject
+	class StigmaCount;
+	class StigmaBack : public GameObject
 	{
 	public:
-		DmianStigma();
-		virtual ~DmianStigma();
+		StigmaBack();
+		virtual ~StigmaBack();
 
 		virtual void Initialize()override;
 		virtual void Update()override;
@@ -15,9 +16,13 @@ namespace W
 		virtual void Render()override;
 
 	private:
+		void set_count();
 
-
+	private:
+		GameObject* m_pTarget;
+		StigmaCount* m_pCount;
+		UINT m_iCount;
 	};
-}
 
+}
 

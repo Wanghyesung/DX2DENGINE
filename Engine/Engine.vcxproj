@@ -228,7 +228,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WDemianSpear0.h" />
     <ClInclude Include="WDemianSpear1.h" />
     <ClInclude Include="WDemianVine.h" />
-    <ClInclude Include="WDmianStigma.h" />
+    <ClInclude Include="WStigma.h" />
     <ClInclude Include="WEffect.h" />
     <ClInclude Include="WEventManager.h" />
     <ClInclude Include="WEyes.h" />
@@ -406,6 +406,8 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WSlow.h" />
     <ClInclude Include="WSolomon.h" />
     <ClInclude Include="WSolThunder.h" />
+    <ClInclude Include="WStigmaBack.h" />
+    <ClInclude Include="WStigmaCount.h" />
     <ClInclude Include="WSwordExplode.h" />
     <ClInclude Include="WSpawnMonsterAttack.h" />
     <ClInclude Include="WSpear.h" />
@@ -472,7 +474,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WDemianSpear0.cpp" />
     <ClCompile Include="WDemianSpear1.cpp" />
     <ClCompile Include="WDemianVine.cpp" />
-    <ClCompile Include="WDmianStigma.cpp" />
+    <ClCompile Include="WStigma.cpp" />
     <ClCompile Include="WEffect.cpp" />
     <ClCompile Include="WEventManager.cpp" />
     <ClCompile Include="WEyes.cpp" />
@@ -650,6 +652,8 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WSlow.cpp" />
     <ClCompile Include="WSolomon.cpp" />
     <ClCompile Include="WSolThunder.cpp" />
+    <ClCompile Include="WStigmaBack.cpp" />
+    <ClCompile Include="WStigmaCount.cpp" />
     <ClCompile Include="WSwordExplode.cpp" />
     <ClCompile Include="WSpawnMonsterAttack.cpp" />
     <ClCompile Include="WSpear.cpp" />

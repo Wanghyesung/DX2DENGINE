@@ -21,6 +21,7 @@
 #include "WSlow.h"
 #include "WUndead.h"
 #include "WGroggy.h"
+#include "WStigma.h"
 #include "WInputBackground.h"
 #include "WDemianEntireAttack.h"
 #define DamageMap std::map<std::wstring, BattleManager::tDamageCount>
@@ -36,6 +37,7 @@ namespace W
 	bool BattleManager::m_bOnUndead = false;
 	float BattleManager::m_fPotionTime = 0.1f;
 	float BattleManager::m_fCurPotionTime = 0.f;
+	UINT BattleManager::m_iStigmaCount = 6;
 
 	void BattleManager::Initialize()
 	{
@@ -183,8 +185,13 @@ namespace W
 			return;
 
 		GameObject* pPlayer = SceneManger::FindPlayer();
-		if (pPlayer->GetState() == GameObject::Active &&
-			!m_bOnAbnormal)
+		if (_eType == eAbnormalType::Stigma)
+		{
+			EventManager::HitchAbnormal(pPlayer, _eType, _fAccStat);
+			return;
+		}
+			
+		if (!m_bOnAbnormal)
 			EventManager::HitchAbnormal(pPlayer, _eType, _fAccStat);
 
 		m_bOnAbnormal = true;
@@ -415,6 +422,9 @@ namespace W
 		case W::BattleManager::eAbnormalType::InputKey:
 			pScript->m_bAbnormal = false;
 			break;
+		case W::BattleManager::eAbnormalType::Stigma:
+			m_iStigmaCount = 0;
+			break;
 		}
 
 		m_bOnAbnormal = false;
@@ -548,6 +558,25 @@ namespace W
 
 		EventManager::CreateObject(pInput, eLayerType::Object);
 		EventManager::CreateObject(pGroggy, eLayerType::Object);
+	}
+
+	void BattleManager::stigma(GameObject* _pGameObject)
+	{
+		++m_iStigmaCount;
+		if (m_iStigmaCount >= 7)
+		{
+			tAttackInfo tAttackInfo = {};
+			tAttackInfo.fAttack = m_iMaxDamage;
+			tAttackInfo.fAttRcnt = 0.f;
+			tAttackInfo.fAttUpperRcnt = 0.f;
+			SceneManger::FindPlayer()->GetScript<PlayerScript>()->Hit(tAttackInfo, L"stigma");
+			
+			Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
+			Stigma* pStigma = new Stigma();
+			pStigma->SetTarget(pPlayer);
+			pStigma->SetTime(999.f);
+			EventManager::CreateObject(pStigma, eLayerType::Object);
+		}
 	}
 
 	void BattleManager::buff_heal(GameObject* _pTarget, float _fAccHeal)

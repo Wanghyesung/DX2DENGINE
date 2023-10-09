@@ -118,6 +118,9 @@ namespace W
 			case W::BattleManager::eAbnormalType::InputKey:
 				BattleManager::inputkey(pObj);
 				break;
+			case W::BattleManager::eAbnormalType::Stigma:
+				BattleManager::stigma(pObj);
+				break;
 			}
 		}
 		break;

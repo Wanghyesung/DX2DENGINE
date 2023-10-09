@@ -26,6 +26,7 @@ namespace W
 			Variation,
 			DemianStop,
 			InputKey,
+			Stigma,
 			End
 		};
 
@@ -64,6 +65,8 @@ namespace W
 		static void PushFont(DamageFont* _pDamageFont);
 		
 		static UINT GetMaxDamage() { return m_iMaxDamage; }
+		static UINT GetStigmaCount() { return m_iStigmaCount; }
+		static void SetStigmaCount(UINT _iCount) { m_iStigmaCount = _iCount; }
 
 		static bool IsAblePotion();
 
@@ -92,6 +95,7 @@ namespace W
 		static void variation(GameObject* _pGameObject);
 		static void demianstop(GameObject* _pGameObject);
 		static void inputkey(GameObject* _pGameObject);
+		static void stigma(GameObject* _pGameObject);
 		//상태이상 해제
 		static void restore(GameObject* _pTarget, eAbnormalType _eType, float _fAccValue = 0.f);
 		//static void restore_move(Player* _pTarget);
@@ -108,6 +112,7 @@ namespace W
 		static void debuff_slow(GameObject* _pGameObject,float _fAccSpeed);
 		static void buff_HP(GameObject* _pTarget, float _fAccValue);
 		static void buff_MP(GameObject* _pTarget, float _fAccValue);
+
 	private:
 		static std::queue<DamageFont*> m_queueFonts;
 		static std::map<std::wstring, tDamageCount> m_mapDamage;
@@ -121,6 +126,8 @@ namespace W
 		//체력 회복 시간
 		static float m_fPotionTime;
 		static float m_fCurPotionTime;
+
+		static UINT m_iStigmaCount;
 
 		friend class EventManager;
 		friend class Abnormal;

@@ -2,6 +2,7 @@
 #include "..\Engine_Source\WScene.h"
 namespace W
 {
+	
 	class DemianScene : public Scene
 	{
 	public:
@@ -21,12 +22,17 @@ namespace W
 	private:
 		void fadein();
 		void phase2();
-
+		void check_stigma();
 	private:
 		void create_monster();
 		class SharHP* m_pSharHP;
 
 		class White* m_pWhite;
+		class StigmaBack* m_pStigmaBack;
+
+		float m_fStigmaTime;
+		float m_fCurStigmaTime;
+		
 		bool m_bEnd;
 		UINT m_iFadeCallStack;
 	};

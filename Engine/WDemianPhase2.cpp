@@ -20,6 +20,7 @@
 #include "WDemianVine.h"
 #include "WDemianCircle.h"
 #include "WSceneManger.h"
+#include "WMonsterAttackScript.h"
 namespace W
 {
 	DemianPhase2::DemianPhase2():
@@ -44,6 +45,8 @@ namespace W
 
 		std::shared_ptr<Texture> pNormal2 =
 			Resources::Load<Texture>(L"Demian2Normal", L"..\\Resources\\Texture\\Monster\\demian\\stand1.png");
+		std::shared_ptr<Texture> pDead2 =
+			Resources::Load<Texture>(L"Demian2Dead", L"..\\Resources\\Texture\\Monster\\demian\\dead1.png");
 		std::shared_ptr<Texture> pAttack20 =
 			Resources::Load<Texture>(L"Demian2_attack0", L"..\\Resources\\Texture\\Monster\\demian\\attack10.png");
 		std::shared_ptr<Texture> pAttack21 =
@@ -60,6 +63,12 @@ namespace W
 		Animator* pAnim = AddComponent<Animator>();
 		//////////////////ÆäÀÌÁî 2///////////////////////
 		pAnim->Create(L"Demian2_stand_left", pNormal2, Vector2(0.f, 0.f), Vector2(2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
+
+		pAnim->Create(L"Demian2_dead_left", pDead2, Vector2(0.f, 0.f), Vector2(2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
+		pAnim->FindAnimation(L"Demian2_dead_left")->Create(L"Demian2_dead_left", pDead2, Vector2(0.f, 2000.f), Vector2(2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
+		pAnim->FindAnimation(L"Demian2_dead_left")->Create(L"Demian2_dead_left", pDead2, Vector2(0.f, 4000.f), Vector2(2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
+		pAnim->FindAnimation(L"Demian2_dead_left")->Create(L"Demian2_dead_left", pDead2, Vector2(0.f, 6000.f), Vector2(2000.f, 2000.f), 5, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
+
 
 		pAnim->Create(L"Demian2_attack0_left", pAttack20, Vector2(0.f, 0.f), Vector2(2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Demian2_attack0_left")->Create(L"Demian2_attack0_left", pAttack20, Vector2(0.f, 2000.f), Vector2(2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
@@ -104,6 +113,12 @@ namespace W
 		pAnim->FindAnimation(L"Demian2_attack5_left")->Create(L"Demian2_attack5_left", pAttack25, Vector2(0.f, 12000.f), Vector2(2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
 
 		pAnim->Create(L"Demian2_stand_right", pNormal2, Vector2(12000.f, 0.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
+
+		pAnim->Create(L"Demian2_dead_right", pDead2, Vector2(12000.f, 0.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
+		pAnim->FindAnimation(L"Demian2_dead_right")->Create(L"Demian2_dead_right", pDead2, Vector2(12000.f, 2000.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
+		pAnim->FindAnimation(L"Demian2_dead_right")->Create(L"Demian2_dead_right", pDead2, Vector2(12000.f, 4000.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
+		pAnim->FindAnimation(L"Demian2_dead_right")->Create(L"Demian2_dead_right", pDead2, Vector2(12000.f, 6000.f), Vector2(-2000.f, 2000.f), 5, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
+
 
 		pAnim->Create(L"Demian2_attack0_right", pAttack20, Vector2(12000.f, 0.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Demian2_attack0_right")->Create(L"Demian2_attack0_right", pAttack20, Vector2(12000.f, 2000.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
@@ -158,7 +173,7 @@ namespace W
 
 		Resources::Load<Texture>(L"demianfire1hit", L"..\\Resources\\Texture\\Monster\\demian\\demianfire1hit.png");
 		Effect* pAttack_hit1 = new Effect();
-		pAttack_hit1->SetName(L"Demian_attack1");
+		pAttack_hit1->SetName(L"Demian2_attack1");
 		pAttack_hit1->CreateAnimation(Resources::Find<Texture>(L"demianfire1hit"), Vector2(0.f, 0.f), Vector2(227.f, 228.f), 5, 1, Vector2(250.f, 250.f), Vector2(0.f, 0.f), 0.2f);
 
 
@@ -281,6 +296,7 @@ namespace W
 
 		MonsterMoveAttack* pAttack0 = new MonsterMoveAttack();
 		pAttack0->SetName(L"Demian2_attack0");
+		pAttack0->GetScript<MonsterAttackScript>()->SeteAbnormalType(BattleManager::eAbnormalType::Stigma);
 		pAttack0->SetOnwer(this);
 		AddMonsterSkill(pAttack0);
 
@@ -294,21 +310,25 @@ namespace W
 		
 		DemianSpear0* pAttack2 = new DemianSpear0();
 		pAttack2->SetName(L"Demian2_attack2");
+		pAttack2->GetScript<MonsterAttackScript>()->SeteAbnormalType(BattleManager::eAbnormalType::Stigma);
 		pAttack2->SetOnwer(this);
 		AddMonsterSkill(pAttack2);
 
 		DemianSpear1* pAttack2_1 = new DemianSpear1();
 		pAttack2_1->SetName(L"Demian2_attack2");
+		pAttack2_1->GetScript<MonsterAttackScript>()->SeteAbnormalType(BattleManager::eAbnormalType::Stigma);
 		pAttack2_1->SetOnwer(this);
 		AddMonsterSkill(pAttack2_1);
 
 		pAttack2 = new DemianSpear0();
 		pAttack2->SetName(L"Demian2_attack2");
+		pAttack2->GetScript<MonsterAttackScript>()->SeteAbnormalType(BattleManager::eAbnormalType::Stigma);
 		pAttack2->SetOnwer(this);
 		AddMonsterSkill(pAttack2);
 
 		MonsterAttackObject* pAttack3 = new MonsterAttackObject();
 		pAttack3->SetName(L"Demian2_attack3");
+		pAttack3->GetScript<MonsterAttackScript>()->SeteAbnormalType(BattleManager::eAbnormalType::Stigma);
 		pAttack3->SetOnwer(this);
 		AddMonsterSkill(pAttack3);
 
@@ -342,7 +362,7 @@ namespace W
 		attack0.tAttackInfo.fAttRigidityTime = 0.7f;
 		attack0.tAttackInfo.fAttRcnt = 3.f;
 	
-		attack0.tTime.fCoolTime = 1000.f;
+		attack0.tTime.fCoolTime = 10.f;
 
 		attack0.pFunction = std::bind(&DemianPhase2::attack0, this);
 	
@@ -355,7 +375,7 @@ namespace W
 		tMonsterAttack attack1 = {};
 		attack1.bSkill = true;
 		
-		attack1.tTime.fCoolTime = 2000.f;
+		attack1.tTime.fCoolTime = 20.f;
 		attack1.tAttackInfo.fAttackDamage = BattleManager::GetMaxDamage();
 		
 		attack1.pFunction = std::bind(&DemianPhase2::attack1, this);
@@ -384,7 +404,7 @@ namespace W
 		attack3.vScale = Vector2(3.f, 2.f);
 		attack3.vOffset = Vector2(4.f, 0.f);
 		attack3.tAttackInfo.fAttackDamage = BattleManager::GetMaxDamage();
-		attack3.tTime.fCoolTime = 3000.f;
+		attack3.tTime.fCoolTime = 30.f;
 		
 		attack3.pFunction = std::bind(&DemianPhase2::attack3, this);
 		
@@ -394,7 +414,7 @@ namespace W
 
 		tMonsterAttack attack4 = {};
 		attack4.bSkill = true;
-		attack4.tTime.fCoolTime = 2500.f;
+		attack4.tTime.fCoolTime = 25.f;
 		//attack4.tAttackInfo.fAttackDamage = BattleManager::GetMaxDamage();
 		
 		attack4.pFunction = std::bind(&DemianPhase2::attack4, this);
