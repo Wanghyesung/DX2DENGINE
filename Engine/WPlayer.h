@@ -96,6 +96,12 @@ namespace W
 
 		bool IsAnimStop() { return m_bAnimStop; }
 		void SetAnimStop(bool _bStop);
+		
+		void Reset_Animation();
+	private:
+		void child_update();
+		void child_render();
+		void child_lateupdate();
 
 	private:
 		Shadow* m_pShadow;
@@ -118,10 +124,6 @@ namespace W
 		ePlayerSkill m_ePlayerSkill;
 
 		std::wstring m_strCurStateName;
-
-		void child_update();
-		void child_render();
-		void child_lateupdate();
 
 	};
 }

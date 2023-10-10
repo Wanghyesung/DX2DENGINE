@@ -71,6 +71,36 @@ namespace W
 		IconUI* pWeapon = ItemManager::GetClone(L"10_weapon");
 		AddItem(pWeapon, pWeapon->GetName());
 
+		IconUI* pEquip = ItemManager::GetClone(L"25_weapon");
+		AddItem(pEquip, pEquip->GetName());
+
+		pEquip = ItemManager::GetClone(L"40_hat");
+		AddItem(pEquip, pEquip->GetName());
+
+		pEquip = ItemManager::GetClone(L"40_bottom");
+		AddItem(pEquip, pEquip->GetName());
+
+		pEquip = ItemManager::GetClone(L"40_top");
+		AddItem(pEquip, pEquip->GetName());
+
+		pEquip = ItemManager::GetClone(L"40_shoes");
+		AddItem(pEquip, pEquip->GetName());
+
+		pEquip = ItemManager::GetClone(L"63_weapon");
+		AddItem(pEquip, pEquip->GetName());
+
+		pEquip = ItemManager::GetClone(L"80_hat");
+		AddItem(pEquip, pEquip->GetName());
+
+		pEquip = ItemManager::GetClone(L"80_bottom");
+		AddItem(pEquip, pEquip->GetName());
+
+		pEquip = ItemManager::GetClone(L"80_top");
+		AddItem(pEquip, pEquip->GetName());
+
+		pEquip = ItemManager::GetClone(L"80_shoes");
+		AddItem(pEquip, pEquip->GetName());
+		
 #pragma endregion
 
 		//page √ ±‚»≠

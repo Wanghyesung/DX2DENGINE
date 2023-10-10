@@ -23,9 +23,12 @@ namespace W
 
 		void SetStop(bool _bStop) { GetComponent<Animator>()->Stop(_bStop); }
 		void SetAlert(bool _bAlert) { m_bAlert = _bAlert; }
+
+		
 	private:
 		PlayerHead* m_pPlayerHead;
 
+		UINT m_iEyeNumber;
 		std::wstring m_strCurAnim;
 		bool m_bAlert;
 

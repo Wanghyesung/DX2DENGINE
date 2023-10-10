@@ -1,13 +1,13 @@
 #pragma once
-
 #include "WEquip.h"
+
 namespace W
 {
-	class Bottom_40 : public Equip
+	class Top_40 : public Equip
 	{
 	public:
-		Bottom_40();
-		virtual ~Bottom_40();
+		Top_40();
+		virtual ~Top_40();
 
 		virtual void Initialize() override;
 		virtual void Update()override;
@@ -19,7 +19,8 @@ namespace W
 		virtual void MouseLbtnUp()override;
 		virtual void MouseLbtnClicked()override;
 
-	};
-}
 
+	};
+
+}
 

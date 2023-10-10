@@ -3,11 +3,11 @@
 #include "WEquip.h"
 namespace W
 {
-	class Bottom_40 : public Equip
+	class Bottom_80 : public Equip
 	{
 	public:
-		Bottom_40();
-		virtual ~Bottom_40();
+		Bottom_80();
+		virtual ~Bottom_80();
 
 		virtual void Initialize() override;
 		virtual void Update()override;

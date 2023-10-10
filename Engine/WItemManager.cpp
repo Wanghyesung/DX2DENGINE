@@ -6,7 +6,16 @@
 #include "WTop_10.h"
 #include "WBottom_10.h"
 #include "WShoes_10.h"
-
+#include "WWeapon_25.h"
+#include "WHat_40.h"
+#include "WTop_40.h"
+#include "WBottom_40.h"
+#include "WShoes_40.h"
+#include "WWeapon_63.h"
+#include "WHat_80.h"
+#include "WTop_80.h"
+#include "WBottom_80.h"
+#include "WShoes_80.h"
 namespace W
 {
 #define HashItems std::unordered_map<std::wstring, IconUI*>
@@ -45,6 +54,45 @@ namespace W
 		pShoes10->SetName(L"10_shoes");
 		AddItem(pShoes10);
 
+		Weapon_25* pWeapon25 = new Weapon_25();
+		pWeapon25->SetName(L"25_weapon");
+		AddItem(pWeapon25);
+
+		Hat_40* pHat40 = new Hat_40();
+		pHat40->SetName(L"40_hat");
+		AddItem(pHat40);
+
+		Top_40* pTop40 = new Top_40();
+		pTop40->SetName(L"40_top");
+		AddItem(pTop40);
+
+		Bottom_40* pBottom40 = new Bottom_40();
+		pBottom40->SetName(L"40_bottom");
+		AddItem(pBottom40);
+
+		Shoes_40* pShoes40 = new Shoes_40();
+		pShoes40->SetName(L"40_shoes");
+		AddItem(pShoes40);
+
+		Hat_80* pHat80 = new Hat_80();
+		pHat80->SetName(L"80_hat");
+		AddItem(pHat80);
+
+		Top_80* pTop80 = new Top_80();
+		pTop80->SetName(L"80_top");
+		AddItem(pTop80);
+
+		Bottom_80* pBottom80 = new Bottom_80();
+		pBottom80->SetName(L"80_bottom");
+		AddItem(pBottom80);
+
+		Shoes_80* pShoes80 = new Shoes_80();
+		pShoes80->SetName(L"80_shoes");
+		AddItem(pShoes80);
+
+		Weapon_63* pWeapon63 = new Weapon_63();
+		pWeapon63->SetName(L"63_weapon");
+		AddItem(pWeapon63);
 #pragma endregion
 
 	}

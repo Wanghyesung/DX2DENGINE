@@ -87,6 +87,8 @@ namespace W
 		pWeapon10->Initialize();
 		pWeapon10->GetComponent<Transform>()->SetPosition(Vector3(m_vWeaponPosition.x, m_vWeaponPosition.y, 0.f));
 		SetEquipPosition(pWeapon10);
+
+
 		
 #pragma endregion
 	}

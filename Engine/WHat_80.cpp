@@ -1,62 +1,61 @@
-#include "WBottom_40.h"
+#include "WHat_80.h"
 
 namespace W
 {
-	Bottom_40::Bottom_40()
+	Hat_80::Hat_80()
 	{
 		std::shared_ptr<Texture> pTex =
-			Resources::Load<Texture>(L"40_bottomTex", L"..\\Resources\\Texture\\UI\\ItemUI\\item1_1.png");
+			Resources::Load<Texture>(L"80_hatTex", L"..\\Resources\\Texture\\UI\\ItemUI\\item2_2.png");
 
 		std::shared_ptr<Material> pMater = std::make_shared<Material>();
 		pMater->SetRenderinMode(eRenderingMode::Transparent);
 		pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
 		pMater->SetTexture(pTex);
-		Resources::Insert(L"item1_1Mater", pMater);
+		Resources::Insert(L"item2_2Mater", pMater);
 
 		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
 		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		pMeshRender->SetMaterial(pMater);
 
-		GetComponent<Transform>()->SetScale(0.1f * 2.6f, 0.1f * 3.0f, 0.f);
+		GetComponent<Transform>()->SetScale(0.1f * 3.2f, 0.1f * 3.0f, 0.f);
 
-		SetEquipType(EquipType::Bottom);
+		SetEquipType(EquipType::Hat);
 		SetIconType(eIconType::Equip);
-
-		SetEquipName(L"40_bottom");
+		SetEquipName(L"80_hat");
 	}
-	Bottom_40::~Bottom_40()
+	Hat_80::~Hat_80()
 	{
 
 	}
-	void Bottom_40::Initialize()
+	void Hat_80::Initialize()
 	{
 		Equip::Initialize();
 	}
-	void Bottom_40::Update()
+	void Hat_80::Update()
 	{
 		Equip::Update();
 	}
-	void Bottom_40::LateUpdate()
+	void Hat_80::LateUpdate()
 	{
 		Equip::LateUpdate();
 	}
-	void Bottom_40::Render()
+	void Hat_80::Render()
 	{
 		Equip::Render();
 	}
-	void Bottom_40::MouseOn()
+	void Hat_80::MouseOn()
 	{
 		Equip::MouseOn();
 	}
-	void Bottom_40::MouseLbtnDown()
+	void Hat_80::MouseLbtnDown()
 	{
 		Equip::MouseLbtnDown();
 	}
-	void Bottom_40::MouseLbtnUp()
+	void Hat_80::MouseLbtnUp()
 	{
 		Equip::MouseLbtnUp();
 	}
-	void Bottom_40::MouseLbtnClicked()
+	void Hat_80::MouseLbtnClicked()
 	{
 		Equip::MouseLbtnClicked();
 	}

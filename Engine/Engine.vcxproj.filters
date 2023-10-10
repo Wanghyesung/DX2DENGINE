@@ -734,6 +734,36 @@
     <ClInclude Include="WStigmaCount.h">
       <Filter>Contents\Object\BossMonster\Demian</Filter>
     </ClInclude>
+    <ClInclude Include="WBottom_40.h">
+      <Filter>Contents\UI\Equip\Equip_40</Filter>
+    </ClInclude>
+    <ClInclude Include="WHat_40.h">
+      <Filter>Contents\UI\Equip\Equip_40</Filter>
+    </ClInclude>
+    <ClInclude Include="WWeapon_25.h">
+      <Filter>Contents\UI\Equip\Equip_40</Filter>
+    </ClInclude>
+    <ClInclude Include="WTop_40.h">
+      <Filter>Contents\UI\Equip\Equip_40</Filter>
+    </ClInclude>
+    <ClInclude Include="WBottom_80.h">
+      <Filter>Contents\UI\Equip\Equip_80</Filter>
+    </ClInclude>
+    <ClInclude Include="WTop_80.h">
+      <Filter>Contents\UI\Equip\Equip_80</Filter>
+    </ClInclude>
+    <ClInclude Include="WHat_80.h">
+      <Filter>Contents\UI\Equip\Equip_80</Filter>
+    </ClInclude>
+    <ClInclude Include="WWeapon_63.h">
+      <Filter>Contents\UI\Equip\Equip_80</Filter>
+    </ClInclude>
+    <ClInclude Include="WShoes_40.h">
+      <Filter>Contents\UI\Equip\Equip_40</Filter>
+    </ClInclude>
+    <ClInclude Include="WShoes_80.h">
+      <Filter>Contents\UI\Equip\Equip_80</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
@@ -1465,6 +1495,36 @@
     </ClCompile>
     <ClCompile Include="WStigmaCount.cpp">
       <Filter>Contents\Object\BossMonster\Demian</Filter>
+    </ClCompile>
+    <ClCompile Include="WBottom_40.cpp">
+      <Filter>Contents\UI\Equip\Equip_40</Filter>
+    </ClCompile>
+    <ClCompile Include="WHat_40.cpp">
+      <Filter>Contents\UI\Equip\Equip_40</Filter>
+    </ClCompile>
+    <ClCompile Include="WWeapon_25.cpp">
+      <Filter>Contents\UI\Equip\Equip_40</Filter>
+    </ClCompile>
+    <ClCompile Include="WTop_40.cpp">
+      <Filter>Contents\UI\Equip\Equip_40</Filter>
+    </ClCompile>
+    <ClCompile Include="WBottom_80.cpp">
+      <Filter>Contents\UI\Equip\Equip_80</Filter>
+    </ClCompile>
+    <ClCompile Include="WTop_80.cpp">
+      <Filter>Contents\UI\Equip\Equip_80</Filter>
+    </ClCompile>
+    <ClCompile Include="WHat_80.cpp">
+      <Filter>Contents\UI\Equip\Equip_80</Filter>
+    </ClCompile>
+    <ClCompile Include="WWeapon_63.cpp">
+      <Filter>Contents\UI\Equip\Equip_80</Filter>
+    </ClCompile>
+    <ClCompile Include="WShoes_40.cpp">
+      <Filter>Contents\UI\Equip\Equip_40</Filter>
+    </ClCompile>
+    <ClCompile Include="WShoes_80.cpp">
+      <Filter>Contents\UI\Equip\Equip_80</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

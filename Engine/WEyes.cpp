@@ -7,22 +7,37 @@
 namespace W
 {
 	Eyes::Eyes():
-		m_bAlert(false)
+		m_bAlert(false),
+		m_iEyeNumber(0)
 	{
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimaionMaterial"));
+
+		Animator* pAnimator = AddComponent<Animator>();
+
+		Resources::Load<Texture>(L"PlayerEyes2", L"..\\Resources\\Texture\\Player\\eyes\\PlayerEyes2.png");
+		Resources::Load<Texture>(L"PlayerEyes1", L"..\\Resources\\Texture\\Player\\eyes\\PlayerEyes1.png");
+		Resources::Load<Texture>(L"PlayerEyes0", L"..\\Resources\\Texture\\Player\\eyes\\PlayerEyes.png");
+		
+		Resources::Load<Texture>(L"PlayerEyesHit2", L"..\\Resources\\Texture\\Player\\eyes\\PlayerEyesHit2.png");
+		Resources::Load<Texture>(L"PlayerEyesHit1", L"..\\Resources\\Texture\\Player\\eyes\\PlayerEyesHit1.png");
+		Resources::Load<Texture>(L"PlayerEyesHit0", L"..\\Resources\\Texture\\Player\\eyes\\PlayerEyesHit.png");
+
 	}
+
 	Eyes::~Eyes()
 	{
 
 	}
+	
 	void Eyes::Initialize()
 	{
-		Animator* pAnimator = AddComponent<Animator>();
+		std::wstring strNum = std::to_wstring(m_iEyeNumber);
 
-		std::shared_ptr<Texture> pAtlasBdoy
-			= Resources::Load<Texture>(L"PlayerEyesTex", L"..\\Resources\\Texture\\Player\\eyes\\PlayerEyes.png");
+		Animator* pAnimator = GetComponent<Animator>();
+		std::shared_ptr<Texture> pAtlasBdoy = Resources::Find<Texture>(L"PlayerEyes" + strNum);
+		
 		pAnimator->Create(L"eye_alert_left", pAtlasBdoy, Vector2(0.0f, 0.0f), Vector2(150.0f, 150.0f), 3, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);
 		pAnimator->Create(L"eye_jump_left", pAtlasBdoy, Vector2(0.0f, 150.0f), Vector2(150.0f, 150.0f), 1, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);
 		pAnimator->Create(L"eye_ladder_left", pAtlasBdoy, Vector2(0.0f, 300.0f), Vector2(150.0f, 150.0f), 2, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);
@@ -55,8 +70,7 @@ namespace W
 		pAnimator->FindAnimation(L"eye_swingQS_right")->Create(L"eye_swingQS_right", pAtlasBdoy, Vector2(0, 1200.0f), Vector2(-150.0f, 150.0f), 1, Vector2(120.f, 120.f), Vector2::Zero, 0.14f);
 
 
-		std::shared_ptr<Texture> pAtlas
-			= Resources::Load<Texture>(L"PlayerEyesHitTex", L"..\\Resources\\Texture\\Player\\eyes\\PlayerEyesHit.png");
+		std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"PlayerEyesHit" +strNum);
 		pAnimator->Create(L"eyealert_alert_left", pAtlas, Vector2(0.0f, 0.0f), Vector2(150.0f, 150.0f), 3, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);
 		pAnimator->Create(L"eyealert_jump_left", pAtlas, Vector2(0.0f, 150.0f), Vector2(150.0f, 150.0f), 1, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);
 		pAnimator->Create(L"eyealert_ladder_left", pAtlas, Vector2(0.0f, 300.0f), Vector2(150.0f, 150.0f), 2, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);

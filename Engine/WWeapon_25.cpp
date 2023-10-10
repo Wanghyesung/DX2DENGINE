@@ -1,62 +1,60 @@
-#include "WBottom_40.h"
+#include "WWeapon_25.h"
 
 namespace W
 {
-	Bottom_40::Bottom_40()
+	Weapon_25::Weapon_25()
 	{
 		std::shared_ptr<Texture> pTex =
-			Resources::Load<Texture>(L"40_bottomTex", L"..\\Resources\\Texture\\UI\\ItemUI\\item1_1.png");
+			Resources::Load<Texture>(L"25_weaponTex", L"..\\Resources\\Texture\\UI\\ItemUI\\item1_4.png");
 
 		std::shared_ptr<Material> pMater = std::make_shared<Material>();
 		pMater->SetRenderinMode(eRenderingMode::Transparent);
 		pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
 		pMater->SetTexture(pTex);
-		Resources::Insert(L"item1_1Mater", pMater);
+		Resources::Insert(L"item1_4Mater", pMater);
 
 		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
 		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		pMeshRender->SetMaterial(pMater);
 
-		GetComponent<Transform>()->SetScale(0.1f * 2.6f, 0.1f * 3.0f, 0.f);
+		GetComponent<Transform>()->SetScale(0.1f * 2.9f, 0.1f * 2.9f, 0.f);
 
-		SetEquipType(EquipType::Bottom);
+		SetEquipType(EquipType::Weapon);
 		SetIconType(eIconType::Equip);
-
-		SetEquipName(L"40_bottom");
+		SetEquipName(L"25_weapon");
 	}
-	Bottom_40::~Bottom_40()
+	Weapon_25::~Weapon_25()
 	{
-
 	}
-	void Bottom_40::Initialize()
+	void Weapon_25::Initialize()
 	{
 		Equip::Initialize();
 	}
-	void Bottom_40::Update()
+	void Weapon_25::Update()
 	{
 		Equip::Update();
 	}
-	void Bottom_40::LateUpdate()
+	void Weapon_25::LateUpdate()
 	{
 		Equip::LateUpdate();
 	}
-	void Bottom_40::Render()
+	void Weapon_25::Render()
 	{
 		Equip::Render();
 	}
-	void Bottom_40::MouseOn()
+	void Weapon_25::MouseOn()
 	{
 		Equip::MouseOn();
 	}
-	void Bottom_40::MouseLbtnDown()
+	void Weapon_25::MouseLbtnDown()
 	{
 		Equip::MouseLbtnDown();
 	}
-	void Bottom_40::MouseLbtnUp()
+	void Weapon_25::MouseLbtnUp()
 	{
 		Equip::MouseLbtnUp();
 	}
-	void Bottom_40::MouseLbtnClicked()
+	void Weapon_25::MouseLbtnClicked()
 	{
 		Equip::MouseLbtnClicked();
 	}

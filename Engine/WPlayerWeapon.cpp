@@ -15,6 +15,8 @@ namespace W
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimaionMaterial"));
+
+		Animator* pAnimator = AddComponent<Animator>();
 	}
 	PlayerWeapon::~PlayerWeapon()
 	{
@@ -25,7 +27,7 @@ namespace W
 		if (m_strCurEquip.size() == 0)
 			return;
 
-		Animator* pAnimator = AddComponent<Animator>();
+		Animator* pAnimator = GetComponent<Animator>();
 
 		std::shared_ptr<Texture> pAtlasBdoy
 			= Resources::Load<Texture>(L"Player " + m_strCurEquip + L"Tex", L"..\\Resources\\Texture\\Player\\equip\\" + m_strCurEquip + L".png");

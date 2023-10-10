@@ -206,6 +206,8 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WBlast.h" />
     <ClInclude Include="WBossStart.h" />
     <ClInclude Include="WBossUI.h" />
+    <ClInclude Include="WBottom_40.h" />
+    <ClInclude Include="WBottom_80.h" />
     <ClInclude Include="WCage.h" />
     <ClInclude Include="WChannel.h" />
     <ClInclude Include="WChannelNumber.h" />
@@ -228,6 +230,10 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WDemianSpear0.h" />
     <ClInclude Include="WDemianSpear1.h" />
     <ClInclude Include="WDemianVine.h" />
+    <ClInclude Include="WHat_40.h" />
+    <ClInclude Include="WHat_80.h" />
+    <ClInclude Include="WShoes_40.h" />
+    <ClInclude Include="WShoes_80.h" />
     <ClInclude Include="WStigma.h" />
     <ClInclude Include="WEffect.h" />
     <ClInclude Include="WEventManager.h" />
@@ -427,6 +433,8 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WTemptation.h" />
     <ClInclude Include="WThunder.h" />
     <ClInclude Include="WTop_10.h" />
+    <ClInclude Include="WTop_40.h" />
+    <ClInclude Include="WTop_80.h" />
     <ClInclude Include="WUndead.h" />
     <ClInclude Include="WUpBtn.h" />
     <ClInclude Include="WUpStat.h" />
@@ -434,6 +442,8 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WValleyScene_2.h" />
     <ClInclude Include="WVariation.h" />
     <ClInclude Include="WWeapon_10.h" />
+    <ClInclude Include="WWeapon_25.h" />
+    <ClInclude Include="WWeapon_63.h" />
     <ClInclude Include="WWhiggin.h" />
     <ClInclude Include="WWhite.h" />
     <ClInclude Include="WWind.h" />
@@ -452,6 +462,8 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WBlast.cpp" />
     <ClCompile Include="WBossStart.cpp" />
     <ClCompile Include="WBossUI.cpp" />
+    <ClCompile Include="WBottom_40.cpp" />
+    <ClCompile Include="WBottom_80.cpp" />
     <ClCompile Include="WCage.cpp" />
     <ClCompile Include="WChannel.cpp" />
     <ClCompile Include="WChannelNumber.cpp" />
@@ -474,6 +486,10 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WDemianSpear0.cpp" />
     <ClCompile Include="WDemianSpear1.cpp" />
     <ClCompile Include="WDemianVine.cpp" />
+    <ClCompile Include="WHat_40.cpp" />
+    <ClCompile Include="WHat_80.cpp" />
+    <ClCompile Include="WShoes_40.cpp" />
+    <ClCompile Include="WShoes_80.cpp" />
     <ClCompile Include="WStigma.cpp" />
     <ClCompile Include="WEffect.cpp" />
     <ClCompile Include="WEventManager.cpp" />
@@ -673,6 +689,8 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WTemptation.cpp" />
     <ClCompile Include="WThunder.cpp" />
     <ClCompile Include="WTop_10.cpp" />
+    <ClCompile Include="WTop_40.cpp" />
+    <ClCompile Include="WTop_80.cpp" />
     <ClCompile Include="WUndead.cpp" />
     <ClCompile Include="WUpBtn.cpp" />
     <ClCompile Include="WUpStat.cpp" />
@@ -680,6 +698,8 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WValleyScene_2.cpp" />
     <ClCompile Include="WVariation.cpp" />
     <ClCompile Include="WWeapon_10.cpp" />
+    <ClCompile Include="WWeapon_25.cpp" />
+    <ClCompile Include="WWeapon_63.cpp" />
     <ClCompile Include="WWhiggin.cpp" />
     <ClCompile Include="WWhite.cpp" />
     <ClCompile Include="WWind.cpp" />

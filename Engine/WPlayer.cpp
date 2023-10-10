@@ -185,9 +185,7 @@ namespace W
 			break;
 		}
 
-		dynamic_cast<PlayerBody*>(m_vecChildObj[0])->SetAnimationIndex();
-		dynamic_cast<PlayerHead*>(m_vecChildObj[1])->SetAnimationIndex();
-		dynamic_cast<PlayerArm*>(m_vecChildObj[2])->SetAnimationIndex();
+		Reset_Animation();
 	}
 
 	void Player::DisableEquip(Equip* _pEquip)
@@ -212,9 +210,7 @@ namespace W
 			break;
 		}
 
-		dynamic_cast<PlayerBody*>(m_vecChildObj[0])->SetAnimationIndex();
-		dynamic_cast<PlayerHead*>(m_vecChildObj[1])->SetAnimationIndex();
-		dynamic_cast<PlayerArm*>(m_vecChildObj[2])->SetAnimationIndex();
+		Reset_Animation();
 	}
 
 	void Player::SetAnimStop(bool _bStop)
@@ -246,5 +242,11 @@ namespace W
 		{
 			pObj->LateUpdate();
 		}
+	}
+	void Player::Reset_Animation()
+	{
+		dynamic_cast<PlayerBody*>(m_vecChildObj[0])->SetAnimationIndex();
+		dynamic_cast<PlayerHead*>(m_vecChildObj[1])->SetAnimationIndex();
+		dynamic_cast<PlayerArm*>(m_vecChildObj[2])->SetAnimationIndex();
 	}
 }
