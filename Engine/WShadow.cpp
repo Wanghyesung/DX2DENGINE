@@ -5,6 +5,7 @@
 #include "WPlayer.h"
 #include "WPlayerScript.h"
 #include "WTime.h"
+#include "WSceneManger.h"
 namespace W
 {
 	Shadow::Shadow() :
@@ -75,22 +76,21 @@ namespace W
 	}
 	void Shadow::Initialize()
 	{
-
+		
 	}
 
 	void Shadow::Update()
 	{
 		if (!m_bActive)
 			return;
+
 		m_fCurTime += Time::DeltaTime();
 
 		PlayerScript* pScript = m_pOwner->GetComponent<PlayerScript>();
-		if (pScript->GetObjectInfo().fHP <= 0.f ||m_fCurTime >= m_fActiveTime &&
-			!m_bOff)
+		if (pScript->GetObjectInfo().fHP <= 0.f ||m_fCurTime >= m_fActiveTime)
 		{
 			m_bOff = true;
 			m_pOwner->SetShadow(false);
-			GetComponent<Animator>()->Play(L"_dead", true);
 		}
 		
 		if (m_pFuncAttack)
@@ -101,7 +101,7 @@ namespace W
 
 	void Shadow::LateUpdate()
 	{
-		if (!m_bActive || m_bOff)
+		if (!m_bActive)
 			return;
 
 		if (m_pOwner->IsAnimStop())
@@ -129,6 +129,9 @@ namespace W
 		
 		strState = m_pOwner->GetCurStateName();
 		std::wstring strAnim = strState + strDir;
+		if (m_bOff)
+			strAnim = L"_dead";
+
 		if (m_strCurAnim != strAnim)
 		{
 			m_strCurAnim = strAnim;
@@ -171,6 +174,7 @@ namespace W
 	void Shadow::off()
 	{
 		m_fCurTime = 0.f;
+		//SceneManger::Erase(this);
 		m_bOff = false;
 		m_bActive = false;
 	}

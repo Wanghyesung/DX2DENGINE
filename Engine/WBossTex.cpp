@@ -20,8 +20,8 @@ namespace W
 		Resources::Load<Texture>(L"BossTex2", L"..\\Resources\\Texture\\UI\\MonsterUI\\tex2.png");
 		Resources::Load<Texture>(L"BossTex3", L"..\\Resources\\Texture\\UI\\MonsterUI\\tex3.png");
 
-		GetComponent<Transform>()->SetPosition(0.8f, -0.5f, 0.f);
-		GetComponent<Transform>()->SetScale(0.844f * 5.3f, 1.f * 5.3f, 0.f);
+		GetComponent<Transform>()->SetPosition(0.83f, -0.5f, 0.f);
+		GetComponent<Transform>()->SetScale(0.844f * 5.55f, 1.f * 5.55f, 0.f);
 	}
 	BossTex::~BossTex()
 	{

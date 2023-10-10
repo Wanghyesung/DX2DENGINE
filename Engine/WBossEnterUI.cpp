@@ -4,7 +4,8 @@
 namespace W
 {
 	BossEnterUI::BossEnterUI():
-		m_bDown(false)
+		m_bDown(false),
+		m_strNextScene(L"Cave")
 	{
 		std::shared_ptr<Texture> pTex =
 			Resources::Load<Texture>(L"BossEnterUI0", L"..\\Resources\\Texture\\UI\\MonsterUI\\move0.png");
@@ -19,7 +20,7 @@ namespace W
 		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		pMeshRender->SetMaterial(pMater);
 
-		GetComponent<Transform>()->SetScale(7.f * 0.3f, 3.f * 0.3f, -0.1f);
+		GetComponent<Transform>()->SetScale(7.f * 0.23f, 3.f * 0.23f, -0.1f);
 
 	}
 	BossEnterUI::~BossEnterUI()
@@ -28,7 +29,11 @@ namespace W
 	}
 	void BossEnterUI::Initialize()
 	{
-
+		Vector3 vPosition = GetComponent<Transform>()->GetPosition();
+		vPosition.z -= 0.2f;
+		vPosition.y -= 2.3f;
+		vPosition.x += 1.55f;
+		GetComponent<Transform>()->SetPosition(vPosition);
 	}
 	void BossEnterUI::Update()
 	{
@@ -60,10 +65,12 @@ namespace W
 	{
 
 	}
+
 	void BossEnterUI::MouseLbtnClicked()
 	{
 		m_bDown = false;
-		
+		dynamic_cast<BossUI*>(GetParentUI())->SetRender(false);
+
 		EventManager::ChangeScene(m_strNextScene);
 	}
 	void BossEnterUI::set_nextscene(BossUI::eBossUnber _eNumber)
@@ -80,7 +87,7 @@ namespace W
 			m_strNextScene = L"Helisium";
 			break;
 		case W::BossUI::eBossUnber::Demian:
-			m_strNextScene = L"";
+			m_strNextScene = L"DemianScene";
 			break;
 		}
 	}

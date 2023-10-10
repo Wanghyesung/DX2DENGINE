@@ -25,6 +25,17 @@ namespace W
 
 		GetComponent<Transform>()->SetPosition(0.f,0.f,-3.f);
 		GetComponent<Transform>()->SetScale(7.f * 0.961f, 7.f , 0.f);
+
+		Resources::Load<Texture>(L"BossUI00", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete0_0.png");
+		Resources::Load<Texture>(L"BossUI10", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete1_0.png");
+		Resources::Load<Texture>(L"BossUI20", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete2_0.png");
+		Resources::Load<Texture>(L"BossUI30", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete3_0.png");
+
+		//on
+		Resources::Load<Texture>(L"BossUI01", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete0_1.png");
+		Resources::Load<Texture>(L"BossUI11", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete1_1.png");
+		Resources::Load<Texture>(L"BossUI21", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete2_1.png");
+		Resources::Load<Texture>(L"BossUI31", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete3_1.png");
 	}
 	BossUI::~BossUI()
 	{
@@ -37,21 +48,26 @@ namespace W
 		m_pBossTex->Initialize();
 		AddChildUI(m_pBossTex, false);
 
-		BossEnterUI* pEnter = new BossEnterUI();
-		pEnter->Initialize();
-		AddChildUI(pEnter, false);
-
+		float fOffSetY = 0.26f;
+		float fOffsetX = 0.04f;
 		for (int i = 0; i < 4; ++i)
 		{
 			m_vecMonsterUI.push_back(new MonsterUI());
 			m_vecMonsterUI[i]->set_bossnumber((eBossUnber)i);
 
 		 	Vector3 vPosition = m_vecMonsterUI[i]->GetComponent<Transform>()->GetPosition();
-			vPosition.y -= 0.38f * i ;
+			vPosition.y += fOffSetY;
+			vPosition.y -= 0.33f * i ;
+			vPosition.x += fOffsetX;
 			m_vecMonsterUI[i]->GetComponent<Transform>()->SetPosition(vPosition);
 
 			AddChildUI(m_vecMonsterUI[i], false);
 		}
+
+		m_pBossEnter = new BossEnterUI();
+		AddChildUI(m_pBossEnter, false);
+		m_pBossEnter->Initialize();
+
 	}
 	void BossUI::Update()
 	{

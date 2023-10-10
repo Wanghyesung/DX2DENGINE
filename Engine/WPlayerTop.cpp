@@ -113,6 +113,7 @@ namespace W
 
 	void PlayerTop::SetPlayerEquip(Equip* _pEquip)
 	{
+		//미리 셋팅된 아이템 text로 갈아끼기
 		if (_pEquip != nullptr)
 			m_strCurEquip = _pEquip->GetEquipName();
 		else

@@ -7,11 +7,11 @@ namespace W
 	public:
 		enum class eBossUnber
 		{
-			None,
 			Horntail,
 			PinkBean,
 			Magnus,
-			Demian
+			Demian,
+			End,
 		};
 
 		BossUI();
@@ -28,7 +28,7 @@ namespace W
 		virtual void MouseLbtnClicked()override;//UI안에서 누르고 떘을 떄
 	
 		void SetActiveBoss(eBossUnber _eNumber);
-
+		void SetRender(bool _bRender) { m_bRenderOn = _bRender; }
 	private:
 		void clear_monster();
 

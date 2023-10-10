@@ -1,13 +1,13 @@
 #include "WMonsterUI.h"
 #include "WResources.h"
-
+#include "WBossUI.h"
 namespace W
 {
 	UINT MonsterUI::COUNT = 0;
 
 	MonsterUI::MonsterUI():
 		m_iCount(COUNT),
-		m_eBossNumber(BossUI::eBossUnber::None),
+		m_eBossNumber(BossUI::eBossUnber::End),
 		m_bSelete(false)
 	{
 		++COUNT;
@@ -22,19 +22,9 @@ namespace W
 		pMeshRender->SetMaterial(pMater);
 
 		//off
-		Resources::Load<Texture>(L"BossUI00", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete0_0.png");
-		Resources::Load<Texture>(L"BossUI10", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete1_0.png");
-		Resources::Load<Texture>(L"BossUI20", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete2_0.png");
-		Resources::Load<Texture>(L"BossUI30", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete3_0.png");
-
-		//on
-		Resources::Load<Texture>(L"BossUI01", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete0_1.png");
-		Resources::Load<Texture>(L"BossUI11", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete1_1.png");
-		Resources::Load<Texture>(L"BossUI21", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete2_1.png");
-		Resources::Load<Texture>(L"BossUI31", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete3_1.png");
-
 		GetComponent<Transform>()->SetPosition(-2.4f, 1.82f, 0.f);
-		GetComponent<Transform>()->SetScale(2.f * 0.9f, 2.f * 0.2f, 0.f);
+		GetComponent<Transform>()->SetScale(2.f * 0.755f, 2.f * 0.169f, 0.f);
+
 	}
 	MonsterUI::~MonsterUI()
 	{
@@ -75,12 +65,17 @@ namespace W
 	{
 		m_bSelete = true;
 	}
+
 	void MonsterUI::MouseLbtnUp()
 	{
+
 	}
+
 	void MonsterUI::MouseLbtnClicked()
 	{
 		m_bSelete = false;
+		//야기서 고르면 active보스 변경
+		dynamic_cast<BossUI*>(GetParentUI())->SetActiveBoss(m_eBossNumber);
 	}
 
 	void MonsterUI::set_bossnumber(BossUI::eBossUnber _eNumber)

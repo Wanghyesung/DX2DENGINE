@@ -187,6 +187,7 @@ namespace W
 		GameObject* pPlayer = SceneManger::FindPlayer();
 		if (_eType == eAbnormalType::Stigma)
 		{
+			//씬에서 관리하는 게 더 좋음
 			EventManager::HitchAbnormal(pPlayer, _eType, _fAccStat);
 			return;
 		}

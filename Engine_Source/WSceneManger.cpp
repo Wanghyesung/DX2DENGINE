@@ -11,7 +11,7 @@
 //#include "WTempleScene_2.h"
 //#include "WTempleBossScene.h"
 #include "..\Engine\WCameraScript.h"
-#include "..\Engine\WQuestState.h"
+#include "..\Engine\WBossUI.h"
 #include "..\Engine\WBattleManager.h"
 #include "..\Engine\WItemManager.h"
 #include "..\Engine\WPlayerAttackObject.h"
@@ -125,7 +125,7 @@ namespace W
 		SwapObject(_pPrevScene, _pNextScene, (GameObject*)GetUI<class Stat>());
 		SwapObject(_pPrevScene, _pNextScene, (GameObject*)GetUI<class EquipState>());
 		SwapObject(_pPrevScene, _pNextScene, (GameObject*)GetUI<class SKillStorage>());
-		SwapObject(_pPrevScene, _pNextScene, (GameObject*)GetUI<class QuestState>());
+		SwapObject(_pPrevScene, _pNextScene, (GameObject*)GetUI<class BossUI>());
 	}
 
 	void SceneManger::SwapPlayer(Scene* _pPrevScene, Scene* _pNextScene)
