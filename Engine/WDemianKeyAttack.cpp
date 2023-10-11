@@ -129,6 +129,7 @@ namespace W
 		m_bAttack = false;
 		m_fCurTime = 0.f;
 
+		GetScript<MonsterAttackScript>()->InitStack();
 		SceneManger::Erase(this);
 		GetOwner()->AddMonsterSkill(this);
 	}

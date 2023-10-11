@@ -165,7 +165,7 @@ namespace W
 			Transform* pTr = pDamage->GetComponent<Transform>();
 			Vector3 vPos = pTr->GetPosition();
 			vPos.x += X;
-			vPos.z = -3.f;
+			vPos.z = -6.f;
 			vPos.y += (0.3f * tDamage.iCurCount);
 			pTr->SetPosition(vPos);
 
