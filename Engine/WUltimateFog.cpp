@@ -2,6 +2,7 @@
 #include "WResources.h"
 #include "WRenderer.h"
 #include "WAnimator.h"
+#include "WAttackScript.h"
 namespace W
 {
 	UltimateFog::UltimateFog()
@@ -18,22 +19,33 @@ namespace W
 		std::shared_ptr<Texture> pTex =
 			Resources::Load<Texture>(L"ultimate2", L"..\\Resources\\Texture\\Player\\skill\\ultimate\\ultimate2.png");
 
-		Animator* pAnim = GetComponent<Animator>();
+		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"ultimate2",pTex, Vector2(0.f,0.f), Vector2(1412.f, 812.f),10, Vector2(1500.f, 1500.f), Vector2(0.0f, 0.f), 0.13f);
-		pAnim->FindAnimation(L"ultimate2")->Create(L"ultimate2", pTex, Vector2(0.f, 0.f), Vector2(1412.f, 812.f), 10, Vector2(1500.f, 1500.f), Vector2(0.0f, 0.f), 0.13f);
+		pAnim->FindAnimation(L"ultimate2")->Create(L"ultimate2", pTex, Vector2(0.f, 812.f), Vector2(1412.f, 812.f), 6, Vector2(1500.f, 1500.f), Vector2(0.0f, 0.f), 0.13f);
 
 		mr->SetMaterial(pMater);
+
+		AddComponent<Collider2D>()->SetSize(Vector2(0.f, 0.f));
+		AddComponent<AttackScript>()->SetDeleteTime(20.f);
 	}
 	UltimateFog::~UltimateFog()
 	{
 	}
 	void UltimateFog::Initialize()
 	{
-		GetComponent<Transform>()->SetPosition(Vector3(0.f, 0.f, -3.9f));
+		Vector3 vCamPos = renderer::MainCamera->GetOwner()->GetComponent<Transform>()->GetPosition();
+
+		GetComponent<Transform>()->SetPosition(Vector3(vCamPos.x, vCamPos.y, -4.f));
 		GetComponent<Transform>()->SetScale(Vector3(15.f, 15.f, 0.f));
+
+		GetComponent<Animator>()->Play(L"ultimate2", true);
 	}
 	void UltimateFog::Update()
 	{
+		Vector3 vCamPos = renderer::MainCamera->GetOwner()->GetComponent<Transform>()->GetPosition();
+		
+		GetComponent<Transform>()->SetPosition(Vector3(vCamPos.x, vCamPos.y, -4.f));
+
 		GameObject::Update();
 	}
 	void UltimateFog::LateUpdate()

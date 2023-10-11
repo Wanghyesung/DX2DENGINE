@@ -2,6 +2,7 @@
 #include "WResources.h"
 #include "WRenderer.h"
 #include "WAnimator.h"
+#include "WAttackScript.h"
 namespace W
 {
 	UltimateBackground::UltimateBackground()
@@ -11,29 +12,40 @@ namespace W
 
 		std::shared_ptr<Material> pMater = std::make_shared<Material>();
 		pMater->SetRenderinMode(eRenderingMode::Transparent);
-		pMater->SetShader(Resources::Find<Shader>(L"ObjectAnimShader"));
+		pMater->SetShader(Resources::Find<Shader>(L"SpriteAnimaionMaterial"));
 		Resources::Insert(L"UltiBackMater", pMater);
 
 		//충돌체 없음
 		std::shared_ptr<Texture> pTex =
 			Resources::Load<Texture>(L"ultimate1", L"..\\Resources\\Texture\\Player\\skill\\ultimate\\ultimate1.png");
 
-		Animator* pAnim = GetComponent<Animator>();
+		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"ultimate1", pTex, Vector2(0.f, 0.f), Vector2(1412.f, 812.f), 10, Vector2(1500.f, 1500.f), Vector2(0.0f, 0.f), 0.13f);
-		pAnim->FindAnimation(L"ultimate1")->Create(L"ultimate1", pTex, Vector2(0.f, 0.f), Vector2(1412.f, 812.f), 10, Vector2(1500.f, 1500.f), Vector2(0.0f, 0.f), 0.13f);
+		pAnim->FindAnimation(L"ultimate1")->Create(L"ultimate1", pTex, Vector2(0.f, 812.f), Vector2(1412.f, 812.f), 6, Vector2(1500.f, 1500.f), Vector2(0.0f, 0.f), 0.13f);
 
 		mr->SetMaterial(pMater);
+
+		AddComponent<Collider2D>()->SetSize(Vector2(0.f, 0.f));
+		AddComponent<AttackScript>()->SetDeleteTime(20.f);
 	}
 	UltimateBackground::~UltimateBackground()
 	{
 	}
 	void UltimateBackground::Initialize()
 	{
-		GetComponent<Transform>()->SetPosition(Vector3(0.f, 0.f, -3.9f));
+		Vector3 vCamPos = renderer::MainCamera->GetOwner()->GetComponent<Transform>()->GetPosition();
+
+		GetComponent<Transform>()->SetPosition(Vector3(vCamPos.x, vCamPos.y, -3.9f));
 		GetComponent<Transform>()->SetScale(Vector3(15.f, 15.f, 0.f));
+
+		GetComponent<Animator>()->Play(L"ultimate1", true);
 	}
 	void UltimateBackground::Update()
 	{
+		Vector3 vCamPos = renderer::MainCamera->GetOwner()->GetComponent<Transform>()->GetPosition();
+		
+		GetComponent<Transform>()->SetPosition(Vector3(vCamPos.x, vCamPos.y, -3.9f));
+
 		GameObject::Update();
 	}
 	void UltimateBackground::LateUpdate()
@@ -42,12 +54,12 @@ namespace W
 	}
 	void UltimateBackground::Render()
 	{
-		renderer::ObjectCB ObjcetCB;
-		ObjcetCB.vObjectColor = Vector4::One;
-		ObjcetCB.vObjectDir.x = 1;
-		ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Object];
+		renderer::PlayerCB PlayerCB;
+		PlayerCB.vColor = Vector4(1.f, 1.f, 1.f, 0.45f);
+		PlayerCB.vDir.x = 1;
+		ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Player];
 
-		pConstBuffer->SetData(&ObjcetCB);
+		pConstBuffer->SetData(&PlayerCB);
 		pConstBuffer->Bind(eShaderStage::PS);
 
 		GameObject::Render();

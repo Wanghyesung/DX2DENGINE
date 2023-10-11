@@ -11,6 +11,7 @@
 #include "WSkillBlast.h"
 #include "WSkillLoad.h"
 #include "WPlayerScript.h"
+#include "WUltimateSkill.h"
 #include "WTime.h"
 namespace W
 {
@@ -36,6 +37,7 @@ namespace W
 		AddSkill(new SkillWind());
 		AddSkill(new SkillBlast());
 		AddSkill(new SkillLoad());
+		AddSkill(new SkillUltimate());
 	}
 
 	void SkillManager::AddSkill(SkillState* _pSkill)

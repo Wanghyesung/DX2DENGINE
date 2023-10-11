@@ -61,7 +61,6 @@ namespace W
 	}
 	void SkillRaid::Enter()
 	{
-
 		if (GetPlayer()->GetCurPlayerState() == Player::ePlayerState::ladder)
 		{
 			Exit();

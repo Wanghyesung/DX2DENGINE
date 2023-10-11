@@ -389,7 +389,7 @@ namespace W
 		tMonsterAttack attack2 = {};
 		attack2.bSkill = true;
 		
-		attack2.tTime.fCoolTime = 2000.f;
+		attack2.tTime.fCoolTime = 20.f;
 		
 		attack2.pFunction = std::bind(&DemianPhase2::attack2, this);
 		

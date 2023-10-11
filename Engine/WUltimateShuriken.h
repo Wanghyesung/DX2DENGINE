@@ -6,7 +6,7 @@ namespace W
 	{
 	public:
 		//가져올 수리검 이미지 넘버
-		UltimateShuriken(UINT _iSurikenNum);
+		UltimateShuriken();
 		virtual ~UltimateShuriken();
 
 		virtual void Initialize()override;
@@ -14,11 +14,11 @@ namespace W
 		virtual void LateUpdate()override;
 		virtual void Render()override;
 
-		void SetDir(Vector2 _vVel) { m_vDir = _vVel; }
-		void SetStartPos(Vector3 _vPos);
+		void SetStartPos(Vector2 _vPos);
+		void SetTarget(GameObject* _pTarget) { m_pTarget = _pTarget; }
 	private:
 		Vector2 m_vDir;
-
+		GameObject* m_pTarget;
 
 	};
 }

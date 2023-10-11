@@ -234,6 +234,8 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WHat_80.h" />
     <ClInclude Include="WShoes_40.h" />
     <ClInclude Include="WShoes_80.h" />
+    <ClInclude Include="WSkillUltimateUI.h" />
+    <ClInclude Include="WSpawnUltimate.h" />
     <ClInclude Include="WStigma.h" />
     <ClInclude Include="WEffect.h" />
     <ClInclude Include="WEventManager.h" />
@@ -435,6 +437,11 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WTop_10.h" />
     <ClInclude Include="WTop_40.h" />
     <ClInclude Include="WTop_80.h" />
+    <ClInclude Include="WUltimateBackground.h" />
+    <ClInclude Include="WUltimateFog.h" />
+    <ClInclude Include="WUltimateObject.h" />
+    <ClInclude Include="WUltimateShuriken.h" />
+    <ClInclude Include="WUltimateSkill.h" />
     <ClInclude Include="WUndead.h" />
     <ClInclude Include="WUpBtn.h" />
     <ClInclude Include="WUpStat.h" />
@@ -490,6 +497,8 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WHat_80.cpp" />
     <ClCompile Include="WShoes_40.cpp" />
     <ClCompile Include="WShoes_80.cpp" />
+    <ClCompile Include="WSkillUltimateUI.cpp" />
+    <ClCompile Include="WSpawnUltimate.cpp" />
     <ClCompile Include="WStigma.cpp" />
     <ClCompile Include="WEffect.cpp" />
     <ClCompile Include="WEventManager.cpp" />
@@ -691,6 +700,11 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WTop_10.cpp" />
     <ClCompile Include="WTop_40.cpp" />
     <ClCompile Include="WTop_80.cpp" />
+    <ClCompile Include="WUltimateBackground.cpp" />
+    <ClCompile Include="WUltimateFog.cpp" />
+    <ClCompile Include="WUltimateObject.cpp" />
+    <ClCompile Include="WUltimateShuriken.cpp" />
+    <ClCompile Include="WUltimateSkill.cpp" />
     <ClCompile Include="WUndead.cpp" />
     <ClCompile Include="WUpBtn.cpp" />
     <ClCompile Include="WUpStat.cpp" />

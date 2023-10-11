@@ -764,6 +764,27 @@
     <ClInclude Include="WShoes_80.h">
       <Filter>Contents\UI\Equip\Equip_80</Filter>
     </ClInclude>
+    <ClInclude Include="WUltimateSkill.h">
+      <Filter>Contents\Player\PlayerSkill\SkillState\ultimate</Filter>
+    </ClInclude>
+    <ClInclude Include="WUltimateFog.h">
+      <Filter>Contents\Player\PlayerSkill\SkillState\ultimate</Filter>
+    </ClInclude>
+    <ClInclude Include="WUltimateBackground.h">
+      <Filter>Contents\Player\PlayerSkill\SkillState\ultimate</Filter>
+    </ClInclude>
+    <ClInclude Include="WSpawnUltimate.h">
+      <Filter>Contents\Player\PlayerSkill\SkillState\ultimate</Filter>
+    </ClInclude>
+    <ClInclude Include="WUltimateShuriken.h">
+      <Filter>Contents\Player\PlayerSkill\SkillState\ultimate</Filter>
+    </ClInclude>
+    <ClInclude Include="WSkillUltimateUI.h">
+      <Filter>Contents\UI\Interface\Extra\Skill\5</Filter>
+    </ClInclude>
+    <ClInclude Include="WUltimateObject.h">
+      <Filter>Contents\Player\PlayerSkill\SkillState\ultimate</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
@@ -1526,6 +1547,27 @@
     <ClCompile Include="WShoes_80.cpp">
       <Filter>Contents\UI\Equip\Equip_80</Filter>
     </ClCompile>
+    <ClCompile Include="WUltimateSkill.cpp">
+      <Filter>Contents\Player\PlayerSkill\SkillState\ultimate</Filter>
+    </ClCompile>
+    <ClCompile Include="WUltimateFog.cpp">
+      <Filter>Contents\Player\PlayerSkill\SkillState\ultimate</Filter>
+    </ClCompile>
+    <ClCompile Include="WUltimateBackground.cpp">
+      <Filter>Contents\Player\PlayerSkill\SkillState\ultimate</Filter>
+    </ClCompile>
+    <ClCompile Include="WSpawnUltimate.cpp">
+      <Filter>Contents\Player\PlayerSkill\SkillState\ultimate</Filter>
+    </ClCompile>
+    <ClCompile Include="WUltimateShuriken.cpp">
+      <Filter>Contents\Player\PlayerSkill\SkillState\ultimate</Filter>
+    </ClCompile>
+    <ClCompile Include="WSkillUltimateUI.cpp">
+      <Filter>Contents\UI\Interface\Extra\Skill\5</Filter>
+    </ClCompile>
+    <ClCompile Include="WUltimateObject.cpp">
+      <Filter>Contents\Player\PlayerSkill\SkillState\ultimate</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -2034,6 +2076,9 @@
     </Filter>
     <Filter Include="Contents\Script\fadein">
       <UniqueIdentifier>{a887672d-5342-4f0f-957d-54cdce0227cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Player\PlayerSkill\SkillState\ultimate">
+      <UniqueIdentifier>{6bce2403-cb21-433c-8d66-e1896e616830}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

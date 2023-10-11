@@ -14,16 +14,24 @@ namespace W
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
+		//void SetDir(UINT _iCount, Vector2 _vVelocity);
+		
+	private:
+		void off();
+		void create();
 	private:
 		//³ª
 		float m_fCurActiveTime;
 		float m_fActiveTime;
 
-		//Ç¥Ã¢
+		UINT m_iCurIndex;
 		std::vector<UINT> m_vecCreateCount;
+		std::vector<std::vector<Vector2>> m_vecShurikenDir;
 
 		float m_fCurCreateTime;
 		float m_fCreateTime;
+
+		GameObject* m_pTarget;
 	};
 }
 

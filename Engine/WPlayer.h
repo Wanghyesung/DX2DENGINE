@@ -35,6 +35,7 @@ namespace W
 			wind,
 			blast,
 			load,
+			ultimate,
 			//
 			end
 		};

@@ -20,12 +20,13 @@ namespace W
 		//충돌체 없음
 		std::shared_ptr<Texture> pTex = Resources::Find<Texture>(L"UltiShuriken");
 
-		Animator* pAnim = GetComponent<Animator>();
-		pAnim->Create(L"ultimate1", pTex, Vector2(0.f, 0.f), Vector2(581.f, 251.f), 6, Vector2(600.f, 600.f), Vector2(0.0f, 0.f), 0.13f);
-	
+		Animator* pAnim = AddComponent<Animator>();
+		pAnim->Create(L"shuriken", pTex, Vector2(0.f, 0.f), Vector2(581.f, 252.f), 6, Vector2(600.f, 600.f), Vector2(0.0f, 0.f), 0.1f);
+		pAnim->Play(L"shuriken", true);
+
 		mr->SetMaterial(pMater);
 
-
+		AddComponent<Collider2D>();
 	}
 	UltimateShuriken::~UltimateShuriken()
 	{
@@ -34,24 +35,26 @@ namespace W
 	void UltimateShuriken::Initialize()
 	{
 		GetComponent<Transform>()->SetScale(5.f, 5.f, 0.f);
-		Collider2D* pCOll = AddComponent<Collider2D>();
+		Collider2D* pCOll = GetComponent<Collider2D>();
 		pCOll->SetSize(Vector2(0.7f, 0.4f));
 
 		AttackScript* pScript = AddComponent<AttackScript>();
 		//pScript->SetDir(m_iDir);
 		//최대 15명의 적 공격가능
 		pScript->SetStayObject(3, 0.3f);
-		pScript->SetDeleteTime(3.5f);
+		pScript->SetDeleteTime(7.f);
 		pScript->SetAbleAttackCount(15);
 	}
 	void UltimateShuriken::Update()
 	{
 		Vector3 vPos = GetComponent<Transform>()->GetPosition();
-		Vector2 vVel = m_vDir * 7.f;
+		vPos.x += (Time::DeltaTime() * m_vDir.x * 7.f);
+		vPos.y += (Time::DeltaTime() * m_vDir.y * 7.f);
 
-		vPos.x *= (Time::DeltaTime() * vVel.x);
-		vPos.y *= (Time::DeltaTime() * vVel.y);
 		GetComponent<Transform>()->SetPosition(vPos);
+
+		float fRadian = atan2f(m_vDir.y, m_vDir.x);
+		GetComponent<Transform>()->SetRotation(0.f, 0.f, fRadian);
 
 		GameObject::Update();
 
@@ -73,8 +76,23 @@ namespace W
 
 		GameObject::Render();
 	}
-	void UltimateShuriken::SetStartPos(Vector3 _vPos)
+	void UltimateShuriken::SetStartPos(Vector2 _vPos)
 	{
-		GetComponent<Transform>()->SetPosition(_vPos);
+		Vector3 vTemPos = renderer::MainCamera->GetOwner()->GetComponent<Transform>()->GetPosition();
+		Vector2 vCamPos = Vector2(vTemPos.x, vTemPos.y);
+
+		vCamPos += (_vPos * 7.f);
+
+		Vector3 vPosition = GetComponent<Transform>()->GetPosition();
+		GetComponent<Transform>()->SetPosition(vCamPos.x, vCamPos.y,vPosition.z);
+
+		Vector3 vPos = GetComponent<Transform>()->GetPosition();
+		vPos.z = 0.f;
+		Vector3 vTargetPos = m_pTarget->GetComponent<Transform>()->GetPosition();
+		vTargetPos.z = 0.f;
+
+		Vector3 vDiff = vTargetPos - vPos;
+		vDiff.Normalize();
+		m_vDir = Vector2(vDiff.x,vDiff.y);
 	}
 }

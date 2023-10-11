@@ -2,11 +2,11 @@
 #include "WSkillState.h"
 namespace W
 {
-	class UltimateSkill : public SkillState
+	class SkillUltimate : public SkillState
 	{
 	public:
-		UltimateSkill();
-		virtual ~UltimateSkill();
+		SkillUltimate();
+		virtual ~SkillUltimate();
 
 		virtual void Update()override;
 		virtual void Initialize()override;
@@ -21,8 +21,8 @@ namespace W
 	private:
 		bool m_bCreate;
 
-		class UltimateFog* m_pFog;
-		class UltimateBackground* m_pBackGround;
+
+
 	};
 
 }

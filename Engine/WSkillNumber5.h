@@ -25,5 +25,6 @@ namespace W
 		Vector3 m_vQSSkillPosition;
 		Vector3 m_vRadeSkillPosition;
 		Vector3 m_vWindSkillPosition;
+		Vector3 m_vUltimateSkillPosition;
 	};
 }
