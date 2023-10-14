@@ -71,10 +71,10 @@ namespace W
 		IconUI* pWeapon = ItemManager::GetClone(L"10_weapon");
 		AddItem(pWeapon, pWeapon->GetName());
 
-		IconUI* pEquip = ItemManager::GetClone(L"25_weapon");
-		AddItem(pEquip, pEquip->GetName());
+		//IconUI* pEquip = ItemManager::GetClone(L"25_weapon");
+		//AddItem(pEquip, pEquip->GetName());
 
-		pEquip = ItemManager::GetClone(L"40_hat");
+		IconUI* pEquip = ItemManager::GetClone(L"40_hat");
 		AddItem(pEquip, pEquip->GetName());
 
 		pEquip = ItemManager::GetClone(L"40_bottom");

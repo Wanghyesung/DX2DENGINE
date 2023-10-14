@@ -21,7 +21,7 @@ namespace W
 		GetComponent<Transform>()->SetScale(2.f, 2.f, 0.f);
 
 		std::shared_ptr<Texture> pAtlas =
-			Resources::Load<Texture>(L"temptationTex", L"..\\Resources\\Texture\\Abnormal\\groggy.png");
+			Resources::Load<Texture>(L"groggyTex", L"..\\Resources\\Texture\\Abnormal\\groggy.png");
 		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"groggy", pAtlas, Vector2(0.0f, 0.0f), Vector2(129.0f, 67.0f), 8, Vector2(139.f, 130.f), Vector2::Zero, 0.2f);
 
@@ -44,10 +44,6 @@ namespace W
 	void Groggy::LateUpdate()
 	{
 		Abnormal::LateUpdate();
-
-		Vector3 vPosition = m_pTarget->GetComponent<Transform>()->GetPosition();
-		vPosition.y -= 1.2f;
-		GetComponent<Transform>()->SetPosition(vPosition);
 	}
 
 	void Groggy::Render()

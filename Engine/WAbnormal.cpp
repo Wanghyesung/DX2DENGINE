@@ -9,6 +9,7 @@ namespace W
 	Abnormal::Abnormal() :
 		m_pTarget(nullptr),
 		m_bRender(false),
+		m_bRenderPosUp(true),
 		m_fDeleteTime(0.f),
 		m_fCurTime(0.f)
 	{
@@ -38,8 +39,11 @@ namespace W
 		}
 
 		Vector3 vTargetPos = m_pTarget->GetComponent<Transform>()->GetPosition();
-		vTargetPos.y += 0.5f;
 		vTargetPos.z -= 0.5f;
+		if(m_bRenderPosUp)
+			vTargetPos.y += 0.5f;
+		else
+			vTargetPos.y -= 0.2f;
 
 		GetComponent<Transform>()->SetPosition(vTargetPos);
 

@@ -19,6 +19,7 @@ namespace W
 
 		void SetTime(float _fTime) { m_fDeleteTime = _fTime; }
 		void SetTarget(Player* _pTarget) { m_pTarget = _pTarget; }
+		void SetRenderPos(bool _bUp) { m_bRenderPosUp = _bUp; }
 
 	protected:
 		Player* m_pTarget;
@@ -27,6 +28,8 @@ namespace W
 		float m_fDeleteTime;
 		float m_fCurTime;
 		bool m_bRender;
+		//타겟 위로 그릴지
+		bool m_bRenderPosUp;
 
 		friend class BattleManager;
 	};

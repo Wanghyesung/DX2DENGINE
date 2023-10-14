@@ -544,6 +544,8 @@ namespace W
 		Groggy* pGroggy = new Groggy();
 		pGroggy->SetTarget(pPlayer);
 		pGroggy->SetTime(999999.f);
+		//플레이어 아래에 그리기
+		pGroggy->SetRenderPos(false);
 		pGroggy->Initialize();
 
 		PlayerScript* pScript = pPlayer->GetScript<PlayerScript>();

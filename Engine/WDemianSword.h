@@ -16,14 +16,17 @@ namespace W
 	private:
 		void off();
 		void start();
+		void restart();
+
 		void move();
 		void attack();
 
 		void set_target();
 		bool check_position();
-		void set_dir();
 
-		void restart();
+		void set_dir();
+		void change_dir();
+		void set_rotate();
 
 		void check_HP();
 	private:
@@ -49,12 +52,13 @@ namespace W
 		UINT m_iMoveCount;
 
 		//도착 위치
-		Vector3 m_vArrivePos;
 		//내가 랜덤으로 갈 방향들
 		std::vector<Vector2> m_vecDir;
-		Vector2 m_vVelocity;
 		Vector2 m_vActiveDir;
-		int m_iDir;
+
+		Vector2 m_vTargetPos;
+		Vector2 m_vVelocity;
+
 		UINT m_iDirIndex;
 
 		tMonsterAttack m_tMonsterAttack;
