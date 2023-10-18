@@ -79,7 +79,7 @@ namespace W
 
 	void SkillUltimateUI::Using()
 	{
-		//SkillManager::SetActiveSkill(GetPlayerSkill());
+		
 		EventManager::ChangePlayerSkillState(Player::ePlayerSkill::ultimate);
 	}
 }

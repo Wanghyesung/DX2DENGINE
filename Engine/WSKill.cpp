@@ -11,7 +11,7 @@
 #include "WSceneManger.h"
 #include "WObject.h"
 #include "WPlayer.h"
-
+#include "WSKillNumber6.h"
 namespace W
 {
 	SKill::SKill() :
@@ -110,7 +110,9 @@ namespace W
 		case W::SKillStorage::eSkillNuber::Five:
 			m_pSKillClone = dynamic_cast<SkillNumber5*>(pParentUI)->CreateClone(this);
 			break;
-
+		case W::SKillStorage::eSkillNuber::Six:
+			m_pSKillClone = dynamic_cast<SkillNumber6*>(pParentUI)->CreateClone(this);
+			break;
 		}
 	}
 

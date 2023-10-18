@@ -245,8 +245,14 @@ namespace W
 		EventManager::CreateObject(pEffect, eLayerType::Effect);
 
 
+		if (m_vTargetPos.y > 0)
+			m_vTargetPos.y -= 0.4f;
+		else
+			m_vTargetPos.y += 0.4f;
+
 		Vector2 vDiff = m_vTargetPos - vPos;
 		vDiff.Normalize();
+
 		m_vActiveDir = vDiff;
 		set_rotate();
 	}

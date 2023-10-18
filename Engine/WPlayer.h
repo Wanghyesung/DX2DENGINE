@@ -99,6 +99,8 @@ namespace W
 		void SetAnimStop(bool _bStop);
 		
 		void Reset_Animation();
+
+		void SetHair(UINT _iHairNum);
 	private:
 		void child_update();
 		void child_render();

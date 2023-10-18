@@ -23,10 +23,13 @@ namespace W
 		void SetHairDown(bool _bDown) { m_bHairDown = _bDown; }
 
 		void SetStop(bool _bStop) { GetComponent<Animator>()->Stop(_bStop); }
+		void SetHair(UINT _iNum);
 	private:
 		PlayerHead* m_pPlayerHead;
 
 		std::wstring m_strCurAnim;
+		//헤어 tex 넘버
+		UINT m_iHairNum;
 
 		bool m_bHairDown;
 

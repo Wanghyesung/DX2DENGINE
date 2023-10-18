@@ -128,10 +128,8 @@ namespace W
 		m_vStartPos = pTransform->GetPosition();
 
 		Vector3 vPosition = pTransform->GetPosition();
-		vPosition.z = -9.f;
+		vPosition.z = -6.f;
 		pTransform->SetPosition(vPosition);
-
-		//SetTargetParentUI();
 	}
 	void IconUI::MouseLbtnUp()
 	{

@@ -15,6 +15,7 @@ namespace W
 			Third,
 			Four,
 			Five,
+			Six,
 			None,
 		};
 

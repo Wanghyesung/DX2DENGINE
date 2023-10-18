@@ -170,4 +170,10 @@ namespace W
 		m_pPlayerEyes->GetComponent<Animator>()->Stop(_bStop);
 		m_pPlayerHat->GetComponent<Animator>()->Stop(_bStop);
 	}
+
+	void PlayerHead::SetHair(UINT _iHairNum)
+	{
+		m_pPlayerHair->SetHair(_iHairNum);
+	}
+	
 }

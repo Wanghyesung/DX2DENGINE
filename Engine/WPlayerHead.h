@@ -28,6 +28,8 @@ namespace W
 		void SetAnimationIndex();
 
 		void SetStop(bool _bStop);
+
+		void SetHair(UINT _iHairNum);
 	private:
 		Player* m_pPlayer;
 

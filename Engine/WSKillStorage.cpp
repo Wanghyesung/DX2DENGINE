@@ -7,7 +7,7 @@
 #include "WSkillNumber4.h"
 #include "WSkillNumber5.h"
 #include "WSkillNumber.h"
-
+#include "WSKillNumber6.h"
 namespace W
 {
 	SKillStorage::SKillStorage():
@@ -79,6 +79,13 @@ namespace W
 		pSkillNumberTr5->SetScale(0.5f * 0.51f, 0.4f * 0.51f, 0.f); //5 : 4
 		AddChildUI(m_vecSkillNumber[(UINT)eSkillNuber::Five]);
 		m_vecSkillNumber[(UINT)eSkillNuber::Five]->Initialize();
+
+		m_vecSkillNumber[(UINT)eSkillNuber::Six] = new SkillNumber6();
+		Transform* pSkillNumberTr6 = m_vecSkillNumber[(UINT)eSkillNuber::Six]->GetComponent<Transform>();
+		pSkillNumberTr6->SetPosition(0.15f, 1.54f, -0.01f);
+		pSkillNumberTr6->SetScale(0.5f * 0.51f, 0.4f * 0.51f, 0.f); //5 : 4
+		AddChildUI(m_vecSkillNumber[(UINT)eSkillNuber::Six]);
+		m_vecSkillNumber[(UINT)eSkillNuber::Six]->Initialize();
 		
 #pragma endregion
 

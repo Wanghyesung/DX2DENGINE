@@ -76,14 +76,7 @@ namespace W
 		pBoxTransform4->SetScale(0.4f * 3.5f, 0.1f * 3.5f, 0.f); //4 : 1
 		AddChildUI(pSKillBox4);
 
-		m_vUltimateSkillPosition = Vector3(0.33f, -1.3f, -0.03f);
-		SkillUltimateUI* pSkill4 = new SkillUltimateUI();
-		pSkill4->SetName(L"UltimateSkill");
-		pSkill4->SetSkillNuber(SKillStorage::eSkillNuber::Five);
-		Transform* pTransform4 = pSkill4->GetComponent<Transform>();
-		pTransform4->SetPosition(m_vUltimateSkillPosition);
-		pTransform4->SetScale(0.1f * 3.3f, 0.1f * 3.3f, 0.f); //1 : 1
-		AddChildUI(pSkill4);
+		
 	}
 
 	void SkillNumber5::Update()
@@ -158,19 +151,6 @@ namespace W
 			return pSkill3;
 		}
 
-		else if (dynamic_cast<SkillUltimateUI*>(_pSkill))
-		{
-			SkillUltimateUI* pSkill4 = new SkillUltimateUI();
-			pSkill4->SetName(L"DarkSkill");
-			pSkill4->SetSkillNuber(SKillStorage::eSkillNuber::Five);
-			pSkill4->SetClone(true);
-			pSkill4->SetOwner(_pSkill);
-			Transform* pLuckTr = pSkill4->GetComponent<Transform>();
-			pLuckTr->SetPosition(m_vUltimateSkillPosition);
-			pLuckTr->SetScale(0.1f * 3.3f, 0.1f * 3.3f, 0.f); //1 : 1
-			AddChildUI(pSkill4);
-			return pSkill4;
-		}
 
 		return nullptr;
 	}

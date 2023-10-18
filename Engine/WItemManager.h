@@ -14,6 +14,8 @@ namespace W
 	private:
 		static IconUI* find_item(const std::wstring& _strName);
 
+		static void chanage_hair();
+
 	private:
 		static std::unordered_map<std::wstring, IconUI*> m_hashItems;
 	};

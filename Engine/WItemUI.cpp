@@ -26,14 +26,17 @@ namespace W
 		m_iItemCount(0),
 		m_fAccHP(_pItem.m_fAccHP),
 		m_fAccMP(_pItem.m_fAccMP),
-		m_iAccCount(_pItem.m_iAccCount)
+		m_iAccCount(_pItem.m_iAccCount),
+		m_pFunction(_pItem.m_pFunction)
 	{
-		SetIconType(eIconType::Item);
+		//SetIconType(eIconType::Item);
 	}
+
 	ItemUI::~ItemUI()
 	{
-
+		int a = 10;
 	}
+
 	void ItemUI::Initialize()
 	{
 		//처음 들어왔을 떄
@@ -41,7 +44,8 @@ namespace W
 		m_pNumber = new Number();
 		MeshRenderer* pMeshRenderer = m_pNumber->AddComponent<MeshRenderer>();
 
-		m_pNumber->GetComponent<Transform>()->SetPosition(-0.08f, -0.07f, -1.f);
+		float z = GetComponent<Transform>()->GetPosition().z;
+		m_pNumber->GetComponent<Transform>()->SetPosition(-0.08f, -0.07f, z + -1.1f);
 		m_pNumber->GetComponent<Transform>()->SetScale(1.f * 0.08f, 1.f * 0.08f, 0.f);
 
 		SetItemNumber();
@@ -72,7 +76,6 @@ namespace W
 	}
 	void ItemUI::MouseLbtnUp()
 	{
-
 		Transform* pTransform = GetComponent<Transform>();
 		Vector3 vStartPos = GetStartPosition();
 
@@ -120,30 +123,25 @@ namespace W
 
 	void ItemUI::Using()
 	{
-		GameObject* pTarget = SceneManger::FindPlayer();
+		IconUI::eIconType eType = GetIconType();
 
-		if (pTarget == nullptr ||
-			pTarget->GetState() != GameObject::eState::Active)
-			return;
-		
-		const tObjectInfo& tInfo = SceneManger::FindPlayer()->GetScript<PlayerScript>()->GetObjectInfo();
-
-		if (m_fAccHP > 0.f && tInfo.fHP < tInfo.fMaxHP)
+		bool bActive = false;
+		switch (eType)
 		{
-			BattleManager::Buff_Stat(SceneManger::FindPlayer(), BattleManager::eUpStatType::AccHP, m_fAccHP);
-			--m_iAccCount;
-		}
-		if (m_fAccMP > 0.f && tInfo.fMP < tInfo.fMaxMP)
-		{
-			BattleManager::Buff_Stat(SceneManger::FindPlayer(), BattleManager::eUpStatType::AccMP, m_fAccMP);
-			--m_iAccCount;
+		case W::IconUI::eIconType::Item:
+			bActive = active_item();
+			break;
+		case W::IconUI::eIconType::Cash:
+			bActive = active_cash();
+			break;
 		}
 
-		if (m_iAccCount < 1)
+		if (bActive)
 		{
 			--m_iItemCount;
 			SetItemNumber();
 		}
+
 	}
 
 	
@@ -226,12 +224,52 @@ namespace W
 		return true;
 	}
 
+	bool ItemUI::active_item()
+	{
+		GameObject* pTarget = SceneManger::FindPlayer();
+
+		if (pTarget == nullptr ||
+			pTarget->GetState() != GameObject::eState::Active)
+			return false;
+
+		const tObjectInfo& tInfo = SceneManger::FindPlayer()->GetScript<PlayerScript>()->GetObjectInfo();
+
+		if (m_fAccHP > 0.f && tInfo.fHP < tInfo.fMaxHP)
+		{
+			BattleManager::Buff_Stat(SceneManger::FindPlayer(), BattleManager::eUpStatType::AccHP, m_fAccHP);
+			--m_iAccCount;
+		}
+		if (m_fAccMP > 0.f && tInfo.fMP < tInfo.fMaxMP)
+		{
+			BattleManager::Buff_Stat(SceneManger::FindPlayer(), BattleManager::eUpStatType::AccMP, m_fAccMP);
+			--m_iAccCount;
+		}
+
+		if (m_iAccCount < 1)
+		{
+			m_iAccCount = 1;
+			return true;
+		}
+
+		return false;
+	}
+
+	bool ItemUI::active_cash()
+	{
+		if (m_pFunction)
+		{
+			m_pFunction();
+			return true;
+		}
+		return false;
+	}
+
 	void ItemUI::SetItemNumber()
 	{
 		if (m_iItemCount <= 0)
 		{
-			object::Destroy(this);
 			DeleteParent();
+			delete this;
 			return;
 		}
 		MeshRenderer* pMeshRenderer = m_pNumber->GetComponent<MeshRenderer>();

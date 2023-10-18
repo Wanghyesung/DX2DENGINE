@@ -245,9 +245,6 @@
     <ClInclude Include="WSkillLoadUI.h">
       <Filter>Contents\UI\Interface\Extra\Skill\5</Filter>
     </ClInclude>
-    <ClInclude Include="WSkillNumber5.h">
-      <Filter>Contents\UI\Interface\Extra\Skill\5</Filter>
-    </ClInclude>
     <ClInclude Include="WSkillWindUI.h">
       <Filter>Contents\UI\Interface\Extra\Skill\5</Filter>
     </ClInclude>
@@ -779,11 +776,20 @@
     <ClInclude Include="WUltimateShuriken.h">
       <Filter>Contents\Player\PlayerSkill\SkillState\ultimate</Filter>
     </ClInclude>
-    <ClInclude Include="WSkillUltimateUI.h">
-      <Filter>Contents\UI\Interface\Extra\Skill\5</Filter>
-    </ClInclude>
     <ClInclude Include="WUltimateObject.h">
       <Filter>Contents\Player\PlayerSkill\SkillState\ultimate</Filter>
+    </ClInclude>
+    <ClInclude Include="WHairItem.h">
+      <Filter>Contents\UI\cashitem</Filter>
+    </ClInclude>
+    <ClInclude Include="WSKillNumber6.h">
+      <Filter>Contents\UI\Interface\Extra\Skill\1\SkillNumber6</Filter>
+    </ClInclude>
+    <ClInclude Include="WSkillNumber5.h">
+      <Filter>Contents\UI\Interface\Extra\Skill\5</Filter>
+    </ClInclude>
+    <ClInclude Include="WSkillUltimateUI.h">
+      <Filter>Contents\UI\Interface\Extra\Skill\1\SkillNumber6</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1562,11 +1568,17 @@
     <ClCompile Include="WUltimateShuriken.cpp">
       <Filter>Contents\Player\PlayerSkill\SkillState\ultimate</Filter>
     </ClCompile>
-    <ClCompile Include="WSkillUltimateUI.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill\5</Filter>
-    </ClCompile>
     <ClCompile Include="WUltimateObject.cpp">
       <Filter>Contents\Player\PlayerSkill\SkillState\ultimate</Filter>
+    </ClCompile>
+    <ClCompile Include="WHairItem.cpp">
+      <Filter>Contents\UI\cashitem</Filter>
+    </ClCompile>
+    <ClCompile Include="WSKillNumber6.cpp">
+      <Filter>Contents\UI\Interface\Extra\Skill\1\SkillNumber6</Filter>
+    </ClCompile>
+    <ClCompile Include="WSkillUltimateUI.cpp">
+      <Filter>Contents\UI\Interface\Extra\Skill\1\SkillNumber6</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2079,6 +2091,12 @@
     </Filter>
     <Filter Include="Contents\Player\PlayerSkill\SkillState\ultimate">
       <UniqueIdentifier>{6bce2403-cb21-433c-8d66-e1896e616830}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Extra\Skill\1\SkillNumber6">
+      <UniqueIdentifier>{d2ca57b5-7d46-4fc2-a810-735005f09911}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\cashitem">
+      <UniqueIdentifier>{546511eb-c1b6-4b41-8fa6-1da9912618da}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

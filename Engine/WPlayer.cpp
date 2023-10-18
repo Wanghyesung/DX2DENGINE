@@ -249,4 +249,10 @@ namespace W
 		dynamic_cast<PlayerHead*>(m_vecChildObj[1])->SetAnimationIndex();
 		dynamic_cast<PlayerArm*>(m_vecChildObj[2])->SetAnimationIndex();
 	}
+
+	void Player::SetHair(UINT _iHairNum)
+	{
+		dynamic_cast<PlayerHead*>(m_vecChildObj[1])->SetHair(_iHairNum);
+		Reset_Animation();
+	}
 }

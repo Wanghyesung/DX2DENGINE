@@ -65,6 +65,9 @@ namespace W
 		IconUI* pAlxir = ItemManager::GetClone(L"alixir");
 		AddItem(pAlxir, pAlxir->GetName());
 
+		IconUI* phair = ItemManager::GetClone(L"hairitem");
+		AddItem(phair, phair->GetName());
+
 		IconUI* pHorn = ItemManager::GetClone(L"horntailItem");
 		AddItem(pHorn, pHorn->GetName());
 
@@ -160,9 +163,6 @@ namespace W
 			Vector3 vPosisition = pTransform->GetPosition() + vDiff;
 
 			pTransform->SetPosition(vPosisition);
-
-			//m_vUIStartPosition += vDiff;
-			//m_vUIEndPosition += vDiff;
 
 			MoveToParent(vDiff);
 
@@ -340,7 +340,9 @@ namespace W
 
 		IconUI* pFindItem = FindItemOnPosition(iMinX, iMinY, _pItem);
 
-		//여기서 구간 나누기 다른 UI에서 왔는지 내 UI에서만 바꾸는건지
+		//여기서 구간 나누기 
+		
+		//다른 UI에서 왔는지 내 UI에서만 바꾸는건지
 		if (_pItem->GetParentUIType() != eParentUI::Inventory)
 		{
 			//찾은 아이템을 들어온 아이템이 있던 UI로 보내기

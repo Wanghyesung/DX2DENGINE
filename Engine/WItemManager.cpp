@@ -1,6 +1,7 @@
 #include "WItemManager.h"
 #include "WAlixirUI.h"
 #include "WHorntailItem.h"
+#include "WHairItem.h"
 #include "WWeapon_10.h"
 #include "WHat_10.h"
 #include "WTop_10.h"
@@ -16,6 +17,8 @@
 #include "WTop_80.h"
 #include "WBottom_80.h"
 #include "WShoes_80.h"
+#include "WPlayer.h"
+#include "WSceneManger.h"
 namespace W
 {
 #define HashItems std::unordered_map<std::wstring, IconUI*>
@@ -29,6 +32,12 @@ namespace W
 		pAlixir->Initialize();
 		pAlixir->SetName(L"alixir");
 		AddItem(pAlixir);
+
+		HairItem* pHairItem = new HairItem();
+		pHairItem->Initialize();
+		pHairItem->SetFunction(ItemManager::chanage_hair);
+		pHairItem->SetName(L"hairitem");
+		AddItem(pHairItem);
 
 		HorntailItem* pHorntailItem = new HorntailItem();
 		pHorntailItem->SetName(L"horntailItem");
@@ -124,6 +133,15 @@ namespace W
 		
 		return iter->second;
 	}
+	void ItemManager::chanage_hair()
+	{
+		std::random_device rDiv;
+		std::mt19937 en(rDiv());
+		std::uniform_int_distribution<int> disX(0, 1);
+		int iHairNum = disX(en);
+
+		dynamic_cast<Player*>(SceneManger::FindPlayer())->SetHair(iHairNum);
+	}
 	IconUI* ItemManager::GetClone(const std::wstring& _strName)
 	{
 		IconUI* pIcon = find_item(_strName);
@@ -133,4 +151,6 @@ namespace W
 
 		return pIcon->Create_Clone();
 	}
+
+
 }

@@ -69,6 +69,9 @@ namespace W
 		float fMax = 0.f;
 		for (int i = 0; i < vecMonster.size(); ++i)
 		{
+			if (vecMonster[i]->GetState() == GameObject::eState::Paused)
+				continue;
+
 			float fHP = vecMonster[i]->GetScript<MonsterScript>()->GetObjectInfo().fHP;
 			if (fMax < fHP)
 			{
