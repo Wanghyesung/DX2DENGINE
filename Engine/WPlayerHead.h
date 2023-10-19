@@ -30,6 +30,7 @@ namespace W
 		void SetStop(bool _bStop);
 
 		void SetHair(UINT _iHairNum);
+		void SetEye(UINT _iEyeNum);
 	private:
 		Player* m_pPlayer;
 

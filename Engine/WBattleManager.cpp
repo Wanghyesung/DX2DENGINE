@@ -49,7 +49,7 @@ namespace W
 				Resources::Load<Texture>(L"Number_" + strNum, L"..\\Resources\\Texture\\Damage\\" + strNum + L".png");
 		}
 		
-		for (int i = 0; i < 100; ++i)
+		for (int i = 0; i < 300; ++i)
 		{
 			DamageFont* pDamageFont = new DamageFont();
 			m_queueFonts.push(pDamageFont);

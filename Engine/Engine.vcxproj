@@ -230,9 +230,11 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WDemianSpear0.h" />
     <ClInclude Include="WDemianSpear1.h" />
     <ClInclude Include="WDemianVine.h" />
+    <ClInclude Include="WEyeItem.h" />
     <ClInclude Include="WHairItem.h" />
     <ClInclude Include="WHat_40.h" />
     <ClInclude Include="WHat_80.h" />
+    <ClInclude Include="WPlayerDead.h" />
     <ClInclude Include="WShoes_40.h" />
     <ClInclude Include="WShoes_80.h" />
     <ClInclude Include="WSKillNumber6.h" />
@@ -495,9 +497,11 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WDemianSpear0.cpp" />
     <ClCompile Include="WDemianSpear1.cpp" />
     <ClCompile Include="WDemianVine.cpp" />
+    <ClCompile Include="WEyeItem.cpp" />
     <ClCompile Include="WHairItem.cpp" />
     <ClCompile Include="WHat_40.cpp" />
     <ClCompile Include="WHat_80.cpp" />
+    <ClCompile Include="WPlayerDead.cpp" />
     <ClCompile Include="WShoes_40.cpp" />
     <ClCompile Include="WShoes_80.cpp" />
     <ClCompile Include="WSKillNumber6.cpp" />

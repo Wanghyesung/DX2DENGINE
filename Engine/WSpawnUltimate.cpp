@@ -45,6 +45,7 @@ namespace W
 
 		AddComponent<Collider2D>()->SetSize(Vector2(0.f, 0.f));
 		AddComponent<AttackScript>()->SetDeleteTime(1000.f);
+		GetComponent<AttackScript>()->SetDeleteObject(false);
 	}
 	SpawnUltimate::~SpawnUltimate()
 	{
@@ -52,6 +53,8 @@ namespace W
 	}
 	void SpawnUltimate::Initialize()
 	{
+		m_pTarget = nullptr;
+
 		PlayerAttackObject* pAttackObj1 = GetPlayer()->GetScript<PlayerScript>()->GetPlayerSkill(L"ultimate1");
 		PlayerAttackObject* pAttackObj2 = GetPlayer()->GetScript<PlayerScript>()->GetPlayerSkill(L"ultimate2");
 		

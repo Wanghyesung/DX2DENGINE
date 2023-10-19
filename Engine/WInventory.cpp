@@ -68,6 +68,9 @@ namespace W
 		IconUI* phair = ItemManager::GetClone(L"hairitem");
 		AddItem(phair, phair->GetName());
 
+		IconUI* pEye = ItemManager::GetClone(L"eyeitem");
+		AddItem(pEye, pEye->GetName());
+
 		IconUI* pHorn = ItemManager::GetClone(L"horntailItem");
 		AddItem(pHorn, pHorn->GetName());
 

@@ -24,6 +24,7 @@ namespace W
 		void SetStop(bool _bStop) { GetComponent<Animator>()->Stop(_bStop); }
 		void SetAlert(bool _bAlert) { m_bAlert = _bAlert; }
 
+		void SetEye(UINT _iNum);
 		
 	private:
 		PlayerHead* m_pPlayerHead;

@@ -791,6 +791,12 @@
     <ClInclude Include="WSkillUltimateUI.h">
       <Filter>Contents\UI\Interface\Extra\Skill\1\SkillNumber6</Filter>
     </ClInclude>
+    <ClInclude Include="WEyeItem.h">
+      <Filter>Contents\UI\cashitem</Filter>
+    </ClInclude>
+    <ClInclude Include="WPlayerDead.h">
+      <Filter>Contents\Player\PlayerFSM\PlayerDead</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
@@ -1580,6 +1586,12 @@
     <ClCompile Include="WSkillUltimateUI.cpp">
       <Filter>Contents\UI\Interface\Extra\Skill\1\SkillNumber6</Filter>
     </ClCompile>
+    <ClCompile Include="WEyeItem.cpp">
+      <Filter>Contents\UI\cashitem</Filter>
+    </ClCompile>
+    <ClCompile Include="WPlayerDead.cpp">
+      <Filter>Contents\Player\PlayerFSM\PlayerDead</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -2097,6 +2109,9 @@
     </Filter>
     <Filter Include="Contents\UI\cashitem">
       <UniqueIdentifier>{546511eb-c1b6-4b41-8fa6-1da9912618da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Player\PlayerFSM\PlayerDead">
+      <UniqueIdentifier>{cee7a89f-de8c-4d80-9112-8dd1fe3953dc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

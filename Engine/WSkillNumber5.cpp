@@ -69,13 +69,6 @@ namespace W
 		AddChildUI(pSkill3);
 
 
-		SKillBox* pSKillBox4 = new SKillBox();
-		pSKillBox4->SetName(L"SKillBox4");
-		Transform* pBoxTransform4 = pSKillBox4->GetComponent<Transform>();
-		pBoxTransform4->SetPosition(0.85f, -1.3f, -0.01f);
-		pBoxTransform4->SetScale(0.4f * 3.5f, 0.1f * 3.5f, 0.f); //4 : 1
-		AddChildUI(pSKillBox4);
-
 		
 	}
 

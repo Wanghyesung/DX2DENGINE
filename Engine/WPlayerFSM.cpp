@@ -68,6 +68,7 @@ namespace W
 		AddState(new PlayerLadder());
 		AddState(new PlayerAlert());
 		
+		
 	}
 
 	void PlayerFSM::AddState(PlayerState* _pState)

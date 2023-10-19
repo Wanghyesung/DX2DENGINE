@@ -7,7 +7,7 @@ namespace W
 		: Resource(eResourceType::AudioClip)
 		, mSound(nullptr)
 		, mChannel(nullptr)
-		, mMinDistance(1.0f)
+		, mMinDistance(1000.f)
 		, mMaxDistance(1000.0f)
 		, mbLoop(false)
 	{

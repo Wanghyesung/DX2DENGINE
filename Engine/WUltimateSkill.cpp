@@ -62,7 +62,7 @@ namespace W
 		pAttackObj->Initialize();
 
 		Collider2D* pCollider = pAttackObj->AddComponent<Collider2D>();
-		pCollider->SetSize(Vector2(15.f, 15.f));
+		pCollider->SetSize(Vector2(15.5f, 15.5f));
 		pScript->AddPlayerSkill(pAttackObj);
 
 
@@ -121,10 +121,11 @@ namespace W
 		m_bCreate = false;
 
 		Effect* pEffect = BattleManager::GetEffect(L"ultimateEffect0");
+
 		Vector3 vCamPos = renderer::MainCamera->GetOwner()->GetComponent<Transform>()->GetPosition();
 
 		pEffect->GetComponent<Transform>()->SetPosition(Vector3(vCamPos.x, vCamPos.y, -5.f));
-		pEffect->GetComponent<Transform>()->SetScale(Vector3(15.f, 15.f, 0.f));
+		pEffect->GetComponent<Transform>()->SetScale(Vector3(15.5f, 15.5f, 0.f));
 
 		pEffect->StartEffect(1);
 		pEffect->SetActive(true);
@@ -162,7 +163,7 @@ namespace W
 		EventManager::CreateObject(pAttackObj, eLayerType::AttackObject);
 
 		m_bCreate = true;
-
+		
 		create_shuriken();
 	}
 	void SkillUltimate::create_shuriken()

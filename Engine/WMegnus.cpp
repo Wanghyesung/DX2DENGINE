@@ -175,7 +175,6 @@ namespace W
 		check_time();
 		check_HP();
 
-
 		Monster::Update();
 	}
 	void Megnus::LateUpdate()

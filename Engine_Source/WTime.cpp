@@ -30,7 +30,10 @@ namespace W
 
 		double differnceFrequency = m_lCurFrequency.QuadPart - m_lPrevFrequency.QuadPart;
 
+		
 		m_dDeltaTime = differnceFrequency / m_lCpuFrequency.QuadPart;
+		if (m_dDeltaTime >= 0.01f)
+			m_dDeltaTime = 0.01f;
 
 		m_lPrevFrequency.QuadPart = m_lCurFrequency.QuadPart;
 	}

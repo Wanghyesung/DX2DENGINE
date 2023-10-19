@@ -175,5 +175,10 @@ namespace W
 	{
 		m_pPlayerHair->SetHair(_iHairNum);
 	}
+
+	void PlayerHead::SetEye(UINT _iEyeNum)
+	{
+		m_pPlayerEyes->SetEye(_iEyeNum);
+	}
 	
 }

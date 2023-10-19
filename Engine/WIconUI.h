@@ -62,6 +62,9 @@ namespace W
 		void DeleteParent();
 
 	private:
+		void check_doubleclick();
+
+	private:
 		eIconType m_eType;
 
 		bool m_bTargetOn;
@@ -81,6 +84,10 @@ namespace W
 
 		int m_iPrevIndexX;
 		int m_iPrevIndexY;
+
+		int m_iClickCount;
+		float m_fDoubleClickTime;
+		float m_fCurClickTime;
 	};
 }
 

@@ -31,9 +31,10 @@ namespace W
 	}
 	void SpawnMonsterAttack::Update()
 	{
-		int iFrame = GetOwner()->GetComponent<Animator>()->GetActiveAnimation()->GetCurIndex();
-
-		if (m_iEndFrame <= iFrame)
+		Monster* pMon = GetOwner();
+		int iFrame = pMon->GetComponent<Animator>()->GetActiveAnimation()->GetCurIndex();
+		if(pMon->GetState()==GameObject::eState::Paused ||
+			m_iEndFrame <= iFrame)
 			off();
 
 		GameObject::Update();

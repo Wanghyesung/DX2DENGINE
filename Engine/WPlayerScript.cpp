@@ -83,7 +83,7 @@ namespace W
 		m_pFSM = new PlayerFSM();
 		m_pFSM->SetPlayer(m_pPlayer);
 		m_pFSM->Initialize();
-		m_pFSM->SetActiveState(Player::ePlayerState::stand);
+		m_pFSM->SetActiveState(Player::ePlayerState::jump);
 
 		m_pSkill = new PlayerSkill();
 		m_pSkill->SetPlayer(m_pPlayer);
@@ -94,6 +94,14 @@ namespace W
 	void PlayerScript::Update()
 	{
 		check_time();
+
+		Vector3 vPos = m_pPlayer->GetComponent<Transform>()->GetPosition();
+		if (vPos.y <= - 7.3f)
+		{
+			int a = 10;
+		}
+		
+
 		//상태이상
 		if (m_bAbnormal || m_bSuperKnockback)
 			return;

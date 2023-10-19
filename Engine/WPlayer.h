@@ -19,6 +19,7 @@ namespace W
 			swing1,
 			swingOF,
 			walk,
+			dead,
 			end
 		};
 
@@ -101,6 +102,7 @@ namespace W
 		void Reset_Animation();
 
 		void SetHair(UINT _iHairNum);
+		void SetEye(UINT _iEyeNum);
 	private:
 		void child_update();
 		void child_render();

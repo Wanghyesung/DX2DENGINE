@@ -142,7 +142,7 @@ namespace W
 		MeshRenderer* pMeshRender = pBackGround->AddComponent<MeshRenderer>();
 		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		pMeshRender->SetMaterial(Resources::Find<Material>(L"DemianBackMater"));
-		pBackGround->GetComponent<Transform>()->SetPosition(0.f, 0.f, 0.f);
+		pBackGround->GetComponent<Transform>()->SetPosition(0.f, 0.f, 1.f);
 		//2 : 1
 		pBackGround->GetComponent<Transform>()->SetScale(2.2372f * 8.f, 1.f * 8.f, 1.f);
 

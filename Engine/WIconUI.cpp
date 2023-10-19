@@ -8,7 +8,7 @@
 #include "WEquip.h"
 #include "WEquipState.h"
 #include "UIManger.h"
-
+#include "WTime.h"
 namespace W
 {
 	IconUI::IconUI():
@@ -19,6 +19,9 @@ namespace W
 		m_iItemIndexY(-1),
 		m_iPrevIndexX(-1),
 		m_iPrevIndexY(-1),
+		m_iClickCount(0),
+		m_fDoubleClickTime(0.5f),
+		m_fCurClickTime(0.f),
 		m_eType(eIconType::None),
 		m_eParentType(eParentUI::None),
 		m_ePrevParentType(eParentUI::None),
@@ -35,6 +38,9 @@ namespace W
 		m_iItemIndexY(-1),
 		m_iPrevIndexX(-1),
 		m_iPrevIndexY(-1),
+		m_iClickCount(0),
+		m_fDoubleClickTime(0.5f),
+		m_fCurClickTime(0.f),
 		m_eType(_pIcon.m_eType),
 		m_eParentType(eParentUI::None),
 		m_ePrevParentType(eParentUI::None),
@@ -51,6 +57,8 @@ namespace W
 	}
 	void IconUI::Update()
 	{
+		check_doubleclick();
+
 		if (m_eParentType == eParentUI::Inventory)
 		{
 			Inventory* pInven = dynamic_cast<Inventory*>(GetParentUI());
@@ -128,7 +136,7 @@ namespace W
 		m_vStartPos = pTransform->GetPosition();
 
 		Vector3 vPosition = pTransform->GetPosition();
-		vPosition.z = -6.f;
+		vPosition.z = -6.5f;
 		pTransform->SetPosition(vPosition);
 	}
 	void IconUI::MouseLbtnUp()
@@ -144,7 +152,7 @@ namespace W
 	}
 	void IconUI::MouseLbtnClicked()
 	{
-
+		++m_iClickCount;
 	}
 	void IconUI::DeleteParent()
 	{
@@ -187,4 +195,27 @@ namespace W
 			break;
 		}
 	}
+	void IconUI::check_doubleclick()
+	{
+		if (m_iClickCount >= 1)
+		{
+			m_fCurClickTime += Time::DeltaTime();
+			
+			if (m_iClickCount >= 2)
+			{
+				m_fCurClickTime = 0.f;
+				m_iClickCount = 0.f;
+
+				Using();
+			}
+
+			else if (m_fCurClickTime >= m_fDoubleClickTime)
+			{
+				m_fCurClickTime = 0.f;
+				m_iClickCount = 0.f;
+			}
+
+		}
+	}
+
 }

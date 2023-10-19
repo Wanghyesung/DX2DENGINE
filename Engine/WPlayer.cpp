@@ -59,7 +59,7 @@ namespace W
 	{
 		PlayerScript* pPlayerScript = AddComponent<PlayerScript>();
 		Collider2D* pCollider = AddComponent<Collider2D>();
-		AddComponent<Rigidbody>();
+		AddComponent<Rigidbody>()->SetGround(false);
 
 		GetComponent<Transform>()->SetScale(1.5f, 1.5f, 0.f);
 		GetComponent<Transform>()->SetPosition(0.f, -5.f, -2.f);
@@ -253,6 +253,11 @@ namespace W
 	void Player::SetHair(UINT _iHairNum)
 	{
 		dynamic_cast<PlayerHead*>(m_vecChildObj[1])->SetHair(_iHairNum);
+		Reset_Animation();
+	}
+	void Player::SetEye(UINT _iEyeNum)
+	{
+		dynamic_cast<PlayerHead*>(m_vecChildObj[1])->SetEye(_iEyeNum);
 		Reset_Animation();
 	}
 }
