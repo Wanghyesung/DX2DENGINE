@@ -42,6 +42,8 @@ namespace W
 				Vector2(300.f, 300.f), Vector2(0.4f, 0.f), 0.06f);
 		}
 
+		SetSound(Resources::Load<AudioClip>(L"quadsound", L"..\\Resources\\sound\\skill\\qs.mp3"), false);
+
 	}
 	SkillQuad::~SkillQuad()
 	{

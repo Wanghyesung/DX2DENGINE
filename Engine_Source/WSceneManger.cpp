@@ -1,7 +1,7 @@
 #include "WSceneManger.h"
 #include "WCamera.h"
 #include "WRenderer.h"
-
+#include "WRigidbody.h"
 //#include "WPlayScene.h"
 //#include "WLeafreScene.h"
 //#include "WValleyScene.h"
@@ -130,11 +130,13 @@ namespace W
 
 	void SceneManger::SwapPlayer(Scene* _pPrevScene, Scene* _pNextScene)
 	{
-		Vector3 vPos = FindPlayer()->GetComponent<Transform>()->GetPosition();
+		GameObject* pPlayer = FindPlayer();
+		Vector3 vPos = pPlayer->GetComponent<Transform>()->GetPosition();
 		vPos.x = 0.f; vPos.y = 0.f;
-		FindPlayer()->GetComponent<Transform>()->SetPosition(vPos);
+		pPlayer->GetComponent<Transform>()->SetPosition(vPos);
+		pPlayer->GetComponent<Rigidbody>()->SetGround(false);
 
-		SwapObject(_pPrevScene, _pNextScene, FindPlayer());
+		SwapObject(_pPrevScene, _pNextScene, pPlayer);
 	}
 
 	void SceneManger::SwapCamera()

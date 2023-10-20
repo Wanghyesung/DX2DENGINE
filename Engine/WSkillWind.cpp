@@ -38,6 +38,8 @@ namespace W
 
 		std::shared_ptr<Texture> pAtlas
 			= Resources::Load<Texture>(L"windTex", L"..\\Resources\\Texture\\Player\\skill\\shuriken\\windshuriken.png");
+
+
 	}
 	SkillWind::~SkillWind()
 	{

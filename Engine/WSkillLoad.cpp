@@ -34,6 +34,8 @@ namespace W
 		std::shared_ptr<Texture> pAtlas
 			= Resources::Load<Texture>(L"loadTex", L"..\\Resources\\Texture\\Player\\skill\\load\\load.png");
 
+		SetSound(Resources::Load<AudioClip>(L"loadsound", L"..\\Resources\\sound\\skill\\load.mp3"), false);
+
 	}
 
 	SkillLoad::~SkillLoad()

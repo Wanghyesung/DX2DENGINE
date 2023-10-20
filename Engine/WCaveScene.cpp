@@ -89,6 +89,8 @@ namespace W
 	}
 	void CaveScene::OnEnter()
 	{
+		StartSound();
+
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Box, true);
 		CollisionManager::SetLayer(eLayerType::AttackObject, eLayerType::Box, true);
@@ -100,11 +102,15 @@ namespace W
 	}
 	void CaveScene::OnExit()
 	{
+		EndSound();
 		CollisionManager::Clear();
 	}
 	void CaveScene::CreateBackground()
 	{
 		GameObject* pBackGround = new GameObject();
+		AudioSource* pAudio = pBackGround->AddComponent<AudioSource>();
+		pAudio->SetClip(Resources::Load<AudioClip>(L"cavesound", L"..\\Resources\\sound\\HonTale.mp3"));
+
 		AddGameObject(eLayerType::Background, pBackGround);
 		MeshRenderer* pMeshRender = pBackGround->AddComponent<MeshRenderer>();
 		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -113,6 +119,20 @@ namespace W
 		//14::10
 		pBackGround->GetComponent<Transform>()->SetScale(14.f * 1.f, 10.f * 1.f, 1.f);
 		
+	}
+	void CaveScene::StartSound()
+	{
+		const std::vector<GameObject*> m_vecBackGround = GetLayer(eLayerType::Background).GetGameObjects();
+		AudioSource* pAudio = m_vecBackGround[0]->GetComponent<AudioSource>();
+		pAudio->SetLoop(true);
+		pAudio->Play();
+	}
+
+	void CaveScene::EndSound()
+	{
+		const std::vector<GameObject*> m_vecBackGround = GetLayer(eLayerType::Background).GetGameObjects();
+		AudioSource* pAudio = m_vecBackGround[0]->GetComponent<AudioSource>();
+		pAudio->Stop();
 	}
 	void CaveScene::create_object()
 	{

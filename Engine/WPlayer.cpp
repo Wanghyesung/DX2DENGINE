@@ -28,7 +28,7 @@ namespace W
 		m_fChangeTime(0.25f),
 		m_vecChildObj{},
 		m_ePlayerState(ePlayerState::stand),
-		m_strCurStateName(L"_stand")
+		m_strCurStateName(L"_jump")
 	{
 		SetName(L"Player");
 

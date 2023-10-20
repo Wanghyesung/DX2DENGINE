@@ -44,7 +44,7 @@ namespace W
 		m_tMonsterAttack.bSkill = true;
 		m_tMonsterAttack.tAttackInfo.fAttackDamage = 20.f;
 		m_tMonsterAttack.tAttackInfo.fAttUpperRcnt = 0.f;
-		m_tMonsterAttack.tAttackInfo.fAttRcnt = 0.f;
+		m_tMonsterAttack.tAttackInfo.fAttRcnt = 1.f;
 
 		m_tMonsterAttack.vPosition = GetComponent<Transform>()->GetPosition();
 		m_tMonsterAttack.vScale = Vector2(0.7f, 0.5f);

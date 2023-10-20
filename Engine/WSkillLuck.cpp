@@ -41,6 +41,8 @@ namespace W
 		CreateEffet(m_pEffectAtlas, L"luckeffect", Vector2(0.f, 0.f), Vector2(112.f, 52.f), 5, 1,
 			Vector2(110.f, 110.f), Vector2(0.4f, 0.f), 0.1f);
 
+
+		SetSound(Resources::Load<AudioClip>(L"lucksound", L"..\\Resources\\sound\\skill\\luck.mp3"),false);
 	}
 	SkillLuck::~SkillLuck()
 	{
@@ -78,7 +80,6 @@ namespace W
 
 	void SkillLuck::Enter()
 	{
-
 		if (GetPlayer()->GetCurPlayerState() == Player::ePlayerState::ladder)
 		{
 			Exit();

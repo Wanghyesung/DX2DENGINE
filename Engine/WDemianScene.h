@@ -19,6 +19,9 @@ namespace W
 
 		virtual void CreateBackground() override;
 
+		virtual void StartSound()override;
+		virtual void EndSound()override;
+
 	private:
 		void fadein();
 		void phase2();

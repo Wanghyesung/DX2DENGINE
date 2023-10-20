@@ -47,7 +47,7 @@ namespace W
 	{
 		Vector3 vCamPos = renderer::MainCamera->GetOwner()->GetComponent<Transform>()->GetPosition();
 		
-		GetComponent<Transform>()->SetPosition(Vector3(vCamPos.x, vCamPos.y, -4.f));
+		GetComponent<Transform>()->SetPosition(Vector3(vCamPos.x, vCamPos.y, -4.1f));
 
 		GameObject::Update();
 	}

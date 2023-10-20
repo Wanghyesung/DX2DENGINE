@@ -102,7 +102,8 @@ namespace W
 		//사용할 스킬들
 		std::map <std::wstring, std::queue<PlayerAttackObject*>> m_mapAttackObjs;
 
-		friend class CloneScript;
+
+		friend class EventManager;
 		friend class BattleManager;
 	};
 }

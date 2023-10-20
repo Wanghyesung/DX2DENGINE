@@ -93,14 +93,7 @@ namespace W
 	}
 	void PlayerScript::Update()
 	{
-		check_time();
-
-		Vector3 vPos = m_pPlayer->GetComponent<Transform>()->GetPosition();
-		if (vPos.y <= - 7.3f)
-		{
-			int a = 10;
-		}
-		
+		check_time();		
 
 		//상태이상
 		if (m_bAbnormal || m_bSuperKnockback)

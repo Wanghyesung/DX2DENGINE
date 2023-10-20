@@ -3,7 +3,7 @@
 #include "WEntity.h"
 #include "WLayer.h"
 #include "WGraphicDevice_Dx11.h"
-
+#include "WAudioSource.h"
 namespace W
 {
 	class Scene : public Entity
@@ -37,6 +37,9 @@ namespace W
 		virtual void OnExit();
 		
 		virtual void CreateBackground() {};
+
+		virtual void StartSound() {};
+		virtual void EndSound() {};
 
 		void AddGameObject(eLayerType _eType, GameObject* _pGameObj);
 
@@ -76,6 +79,7 @@ namespace W
 
 		void EraseObject(eLayerType _eType, GameObject* _pGameObj){ m_vecLayer[(UINT)_eType].EraseOnVector(_pGameObj); }
 
+		
 	private:
 		std::vector<Layer> m_vecLayer;
 

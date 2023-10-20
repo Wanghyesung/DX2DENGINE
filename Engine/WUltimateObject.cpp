@@ -6,7 +6,7 @@ namespace W
 {
 	UltimateObject::UltimateObject():
 		m_fCurResetTime(0.f),
-		m_fResetTime()
+		m_fResetTime(0.32f)
 	{
 		AddComponent<AttackScript>();
 	}
@@ -17,11 +17,10 @@ namespace W
 	void UltimateObject::Initialize()
 	{
 		//3.5초 동안 총 8번의 공격 공격당 7대
-		m_fResetTime = 0.32f;
 		GetComponent<AttackScript>()->SetStayObject(7, m_fResetTime);
 		GetScript<AttackScript>()->SetDeleteTime(m_fResetTime * 8.f);
 		//최대 15명 공격 가능
-		GetScript<AttackScript>()->SetAbleAttackCount(15);
+		GetScript<AttackScript>()->SetAbleAttackCount(12);
 	}
 	void UltimateObject::Update()
 	{

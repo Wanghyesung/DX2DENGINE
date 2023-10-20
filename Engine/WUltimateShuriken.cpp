@@ -44,12 +44,13 @@ namespace W
 		pScript->SetStayObject(3, 0.3f);
 		pScript->SetDeleteTime(7.f);
 		pScript->SetAbleAttackCount(15);
+		pScript->SetDeleteObject(false);
 	}
 	void UltimateShuriken::Update()
 	{
 		Vector3 vPos = GetComponent<Transform>()->GetPosition();
-		vPos.x += (Time::DeltaTime() * m_vDir.x * 7.f);
-		vPos.y += (Time::DeltaTime() * m_vDir.y * 7.f);
+		vPos.x += (Time::DeltaTime() * m_vDir.x * 9.f);
+		vPos.y += (Time::DeltaTime() * m_vDir.y * 9.f);
 
 		GetComponent<Transform>()->SetPosition(vPos);
 

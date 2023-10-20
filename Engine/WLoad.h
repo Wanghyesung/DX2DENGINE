@@ -21,6 +21,7 @@ namespace W
 		void create_shuriken();
 
 		void init_skill();
+
 	private:
 		float m_fRespawnTime;
 		float m_fCurRespawnTime;
@@ -30,6 +31,7 @@ namespace W
 
 		bool m_bEnd;
 		
+
 	};
 }
 

@@ -12,7 +12,7 @@ namespace W
 
 		std::shared_ptr<Material> pMater = std::make_shared<Material>();
 		pMater->SetRenderinMode(eRenderingMode::Transparent);
-		pMater->SetShader(Resources::Find<Shader>(L"SpriteAnimaionMaterial"));
+		pMater->SetShader(Resources::Find<Shader>(L"SpriteAnimationShader"));
 		Resources::Insert(L"UltiBackMater", pMater);
 
 		//충돌체 없음
@@ -46,7 +46,7 @@ namespace W
 	{
 		Vector3 vCamPos = renderer::MainCamera->GetOwner()->GetComponent<Transform>()->GetPosition();
 		
-		GetComponent<Transform>()->SetPosition(Vector3(vCamPos.x, vCamPos.y, -3.9f));
+		GetComponent<Transform>()->SetPosition(Vector3(vCamPos.x, vCamPos.y, -4.0f));
 
 		GameObject::Update();
 	}
@@ -57,7 +57,7 @@ namespace W
 	void UltimateBackground::Render()
 	{
 		renderer::PlayerCB PlayerCB;
-		PlayerCB.vColor = Vector4(1.f, 1.f, 1.f, 0.45f);
+		PlayerCB.vColor = Vector4(1.f, 1.f, 1.f, 0.5f);
 		PlayerCB.vDir.x = 1;
 		ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Player];
 

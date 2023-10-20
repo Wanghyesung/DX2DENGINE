@@ -26,6 +26,8 @@ namespace W
 
 		Effect* pEffect = CreateEffet(m_pEffectAtlas, L"darkffect", Vector2(0.f, 0.f), Vector2(126.f, 129.f), 8, 1,
 			Vector2(110.f, 110.f), Vector2(-0.15f, 0.1f), tTime.fActiveTime / 8.f);
+
+		SetSound(Resources::Load<AudioClip>(L"darksound", L"..\\Resources\\sound\\skill\\dark.mp3"), false);
 	}
 
 	SkillDark::~SkillDark()

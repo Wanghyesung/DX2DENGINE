@@ -44,6 +44,7 @@ namespace W
 			pEffet3->GetComponent<Transform>()->SetScale(3.5f, 3.5f, 0.f);
 		}
 
+		SetSound(Resources::Load<AudioClip>(L"raidsound", L"..\\Resources\\sound\\skill\\raid.mp3"), false);
 	}
 	SkillRaid::~SkillRaid()
 	{

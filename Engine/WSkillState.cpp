@@ -9,18 +9,19 @@
 #include "WAttackScript.h"
 #include "WBattleManager.h"
 #include "WEventManager.h"
+#include "WResources.h"
 namespace W
 {
 	SkillState::SkillState():
 		m_pOwner(nullptr),
 		m_fAddDamage(10.f)
 	{
-
+	
 	}
 
 	SkillState::~SkillState()
 	{
-	
+		//Fmod::SoundPlay()
 	}
 
 	void SkillState::Enter()
@@ -33,6 +34,9 @@ namespace W
 
 		GetPlayer()->SetCurStateName(GetStateName());
 		m_tSKillTime.fCurActiveTime = 0.f;
+
+		if (m_pSoundClip)
+			StartSound();
 	}
 
 	void SkillState::Exit()
@@ -59,6 +63,22 @@ namespace W
 	Player* SkillState::GetPlayer()
 	{
 		return m_pOwner->GetPlayer();
+	}
+
+	void SkillState::SetSound(std::shared_ptr<AudioClip> clip, bool _bLoop)
+	{
+		m_pSoundClip = clip;
+		m_pSoundClip->SetLoop(_bLoop);
+	}
+
+	void SkillState::StartSound()
+	{
+		m_pSoundClip->Play();
+	}
+
+	void SkillState::EndSound()
+	{
+		m_pSoundClip->Stop();
 	}
 
 	Effect* SkillState::CreateEffet(std::shared_ptr<Texture> _pAtlas, std::wstring _strName, Vector2 _vLeftTop, Vector2 _vSize,

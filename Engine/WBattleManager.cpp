@@ -24,6 +24,7 @@
 #include "WStigma.h"
 #include "WInputBackground.h"
 #include "WDemianEntireAttack.h"
+#include "WStop.h"
 #define DamageMap std::map<std::wstring, BattleManager::tDamageCount>
 #define EffectMap std::map<std::wstring, std::queue<Effect*>> 
 namespace W
@@ -245,10 +246,10 @@ namespace W
 		if (!pPlayer)
 			return;
 
-		//Faint* pFaint = new Faint();
-		//pFaint->SetTarget(pPlayer);
-		//pFaint->SetTime(5.f);
-		//EventManager::CreateObject(pFaint, eLayerType::Object);
+		Stop * pStop = new Stop();
+		pStop->SetTarget(pPlayer);
+		pStop->SetTime(6.f);
+		EventManager::CreateObject(pStop, eLayerType::Object);
 
 		PlayerScript* pScript = pPlayer->GetScript<PlayerScript>();
 		pScript->m_bAbnormal = true;

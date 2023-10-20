@@ -19,6 +19,8 @@ namespace W
 
 		virtual void CreateBackground() override;
 
+		virtual void StartSound()override;
+		virtual void EndSound()override;
 	private:
 		void create_monster();
 	};

@@ -26,6 +26,8 @@
 #include "WPortal.h"
 #include "WPortalScript.h"
 #include "WBossUI.h"
+#include "WAudioClip.h"
+#include "WAudioSource.h"
 namespace W
 {
 	ValleyScene::ValleyScene()
@@ -137,6 +139,8 @@ namespace W
 	}
 	void ValleyScene::OnEnter()
 	{
+		StartSound();
+
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::ItemObject, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::ItemObject, eLayerType::Player, true);
@@ -149,11 +153,16 @@ namespace W
 	}
 	void ValleyScene::OnExit()
 	{
+		EndSound();
+
 		CollisionManager::Clear();
 	}
 	void ValleyScene::CreateBackground()
 	{
 		GameObject* pBackGround = new GameObject();
+		AudioSource* pAudio = pBackGround->AddComponent<AudioSource>();
+		pAudio->SetClip(Resources::Load<AudioClip>(L"valleysound", L"..\\Resources\\sound\\DragonNest.mp3"));
+
 		AddGameObject(eLayerType::Background, pBackGround);
 		MeshRenderer* pMeshRender = pBackGround->AddComponent<MeshRenderer>();
 		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -161,6 +170,20 @@ namespace W
 		pBackGround->GetComponent<Transform>()->SetPosition(0.f, 0.f, 0.2f);
 		//035 : 1
 		pBackGround->GetComponent<Transform>()->SetScale(25 * 0.35f,  25.f * 1.f, 1.f);
+	}
+
+	void ValleyScene::StartSound()
+	{
+		const std::vector<GameObject*> m_vecBackGround = GetLayer(eLayerType::Background).GetGameObjects();
+		AudioSource* pAudio = m_vecBackGround[0]->GetComponent<AudioSource>();
+		pAudio->Play();
+	}
+
+	void ValleyScene::EndSound()
+	{
+		const std::vector<GameObject*> m_vecBackGround = GetLayer(eLayerType::Background).GetGameObjects();
+		AudioSource* pAudio = m_vecBackGround[0]->GetComponent<AudioSource>();
+		pAudio->Stop();
 	}
 
 	void ValleyScene::setobject()

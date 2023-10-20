@@ -2,6 +2,7 @@
 #include "WSceneManger.h"
 #include "WSkillManager.h"
 #include "..\Engine\WPlayerAttackObject.h"
+#include "WPlayerScript.h"
 namespace W
 {
 	std::vector<tEvent> EventManager::m_vecEvent = {};
@@ -192,6 +193,9 @@ namespace W
 		tEvent eve = {};
 		eve.eEventType = EVENT_TYPE::SCENE_CHANGE;
 		m_strNextScene = _strNextScene;
+
+		ChangePlayerFSMState(SceneManger::FindPlayer()->GetScript<PlayerScript>()->m_pFSM,
+			Player::ePlayerState::jump);
 
 		AddEvent(eve);
 	}

@@ -29,6 +29,9 @@ namespace W
 			Vector2(200.f, 200.f), Vector2(-0.4f, 0.2f), 0.1f);
 		pEffect->SetFunction(std::bind(&SkillShadow::create_shadow, this), 4);
 		pEffect->GetComponent<Transform>()->SetScale(2.2f, 2.2f, 0.f);
+
+		SetSound(Resources::Load<AudioClip>(L"shadowsound", L"..\\Resources\\sound\\skill\\shadow.mp3"), false);
+
 	}
 
 	SkillShadow::~SkillShadow()

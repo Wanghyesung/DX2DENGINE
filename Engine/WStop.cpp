@@ -37,7 +37,7 @@ namespace W
 	}
 	void Stop::Render()
 	{
-		Abnormal::Render();
+		//Abnormal::Render();
 	}
 	void Stop::Restore()
 	{

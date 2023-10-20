@@ -121,6 +121,8 @@ namespace W
 	}
 	void DemianScene::OnEnter()
 	{
+		StartSound();
+
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::ItemObject, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::ItemObject, eLayerType::Player, true);
@@ -133,11 +135,16 @@ namespace W
 	}
 	void DemianScene::OnExit()
 	{
+		EndSound();
+
 		CollisionManager::Clear();
 	}
 	void DemianScene::CreateBackground()
 	{
 		GameObject* pBackGround = new GameObject();
+		AudioSource* pAudio = pBackGround->AddComponent<AudioSource>();
+		pAudio->SetClip(Resources::Load<AudioClip>(L"DemianScene0sound", L"..\\Resources\\sound\\Demian.mp3"));
+
 		AddGameObject(eLayerType::Background, pBackGround);
 		MeshRenderer* pMeshRender = pBackGround->AddComponent<MeshRenderer>();
 		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -151,6 +158,21 @@ namespace W
 		AddGameObject(eLayerType::Ground, pGround);
 		pGround->GetComponent<Transform>()->SetPosition(0.f, -2.95f, -0.1f);
 		pGround->GetComponent<Transform>()->SetScale(4.3f * 7.f, 1.f * 0.3f, 0.f);
+	}
+
+	void DemianScene::StartSound()
+	{
+		const std::vector<GameObject*> m_vecBackGround = GetLayer(eLayerType::Background).GetGameObjects();
+		AudioSource* pAudio = m_vecBackGround[0]->GetComponent<AudioSource>();
+		pAudio->SetLoop(true);
+		pAudio->Play();
+	}
+
+	void DemianScene::EndSound()
+	{
+		const std::vector<GameObject*> m_vecBackGround = GetLayer(eLayerType::Background).GetGameObjects();
+		AudioSource* pAudio = m_vecBackGround[0]->GetComponent<AudioSource>();
+		pAudio->Stop();
 	}
 
 	void DemianScene::fadein()

@@ -23,6 +23,8 @@ namespace W
 		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
 		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		pMeshRender->SetMaterial(pSKillMater);
+
+
 	}
 	SkillQSUI::~SkillQSUI()
 	{

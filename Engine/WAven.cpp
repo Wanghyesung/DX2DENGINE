@@ -25,6 +25,7 @@ namespace W
 			= Resources::Load<Texture>(L"avenTex", L"..\\Resources\\Texture\\Player\\skill\\ball.png");
 		pMater->SetTexture(pAtlas);
 		mr->SetMaterial(pMater);
+
 	}
 
 	Aven::~Aven()
