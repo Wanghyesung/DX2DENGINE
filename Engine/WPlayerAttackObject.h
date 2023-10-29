@@ -20,12 +20,21 @@ namespace W
 		void SetPlayer(Player* _pPlayer){ m_pPlayer = _pPlayer;}
 
 		virtual void Off();
-
-	public:
 		void PushObjectPoll();
+
+		void SetSound(std::shared_ptr<AudioClip> clip, bool _bLoop);
+		void StartSound();
+		void EndSound();
+
+		void SetHitSound(std::shared_ptr<AudioClip> clip, bool _bLoop);
+		void HitStartSound();
+		void HitEndSound();
 
 	private:
 		Player* m_pPlayer;
+
+		std::shared_ptr<AudioClip> m_pSoundClip;
+		std::shared_ptr<AudioClip> m_pHitSoundClip;
 	};
 }
 

@@ -8,7 +8,8 @@
 namespace W
 {
 	PlayerAttackObject::PlayerAttackObject():
-		m_pPlayer(nullptr)
+		m_pPlayer(nullptr),
+		m_pSoundClip(nullptr)
 	{
 
 	}
@@ -46,5 +47,31 @@ namespace W
 	void PlayerAttackObject::PushObjectPoll()
 	{
 		EventManager::AddObjectPoll(this);
+	}
+	void PlayerAttackObject::SetSound(std::shared_ptr<AudioClip> clip, bool _bLoop)
+	{
+		m_pSoundClip = clip;
+		m_pSoundClip->SetLoop(_bLoop);
+	}
+	void PlayerAttackObject::StartSound()
+	{
+
+	}
+	void PlayerAttackObject::EndSound()
+	{
+
+	}
+	void PlayerAttackObject::SetHitSound(std::shared_ptr<AudioClip> clip, bool _bLoop)
+	{
+		m_pSoundClip = clip;
+		m_pHitSoundClip->SetLoop(_bLoop);
+	}
+	void PlayerAttackObject::HitStartSound()
+	{
+
+	}
+	void PlayerAttackObject::HitEndSound()
+	{
+
 	}
 }

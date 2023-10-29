@@ -39,6 +39,7 @@ namespace W
 		std::shared_ptr<Texture> pAtlas
 			= Resources::Load<Texture>(L"windTex", L"..\\Resources\\Texture\\Player\\skill\\shuriken\\windshuriken.png");
 
+		SetSound(Resources::Load<AudioClip>(L"windsound", L"..\\Resources\\sound\\skill\\wind.mp3"), false);
 
 	}
 	SkillWind::~SkillWind()

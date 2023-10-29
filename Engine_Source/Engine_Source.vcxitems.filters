@@ -362,6 +362,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WFadeInOut.h">
       <Filter>GameObject\Object</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)temTex.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)WMath.inl">

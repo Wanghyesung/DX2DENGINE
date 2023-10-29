@@ -55,6 +55,7 @@ namespace W
 
 		PlayerSkill* m_pOwner;
 
+		//기본 사운드
 		std::shared_ptr<AudioClip> m_pSoundClip;
 
 		tSkillTime m_tSKillTime;

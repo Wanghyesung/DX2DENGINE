@@ -42,6 +42,7 @@ namespace W
 
 		mr->SetMaterial(pMater);
 
+
 	}
 	Wind::~Wind()
 	{

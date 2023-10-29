@@ -77,6 +77,7 @@ namespace W
 		Microsoft::WRL::ComPtr<ID3D11BlendState> cpBSstate = renderer::m_cpBlendStates[(UINT)m_eBSType];
 
 		GetDevice()->BindRasterizeState(cpRSstate.Get());
+		//깊이 버퍼에 의해서 그림이 지워질 수 있음 기본 - > 반투명 -> 투명순으로 그리게
 		//GetDevice()->BindDepthStencilState(cpDSstate.Get());
 		GetDevice()->BindBlendState(cpBSstate.Get());
 	}

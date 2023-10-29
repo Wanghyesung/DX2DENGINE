@@ -139,6 +139,7 @@ namespace W::graphics
 		bool active;
 	};
 
+	//13
 	struct LightAttribute
 	{
 		math::Vector4 color;
@@ -151,6 +152,7 @@ namespace W::graphics
 		int pad;
 	};
 
+	//14
 	struct Particle
 	{
 		math::Vector4 position;
