@@ -40,6 +40,7 @@ namespace W::graphics
 	{
 		Binds();
 
+		//gpu 스레드 실행
 		GetDevice()->BindComputeShader(m_cpCS.Get());
 		GetDevice()->Dispatch(m_iGroupX, m_iGroupY, m_iGroupZ);
 

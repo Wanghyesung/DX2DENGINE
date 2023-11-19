@@ -4,7 +4,8 @@ namespace W
 {
 	Animator::Animator() :
 		Component(eComponentType::Animator),
-		m_bStop(false)
+		m_bStop(false),
+		m_pActiveAnimation(nullptr)
 	{
 
 	}

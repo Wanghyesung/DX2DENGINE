@@ -24,6 +24,8 @@ namespace W
 
 		pAnim->CompleteEvent(L"right") = std::bind(&PlayerAttackObject::PushObjectPoll, this);
 		pAnim->CompleteEvent(L"left") = std::bind(&PlayerAttackObject::PushObjectPoll, this);
+
+		SetHitSound(Resources::Find<AudioClip>(L"blasthit"), false);
 	}
 	Blast::~Blast()
 	{

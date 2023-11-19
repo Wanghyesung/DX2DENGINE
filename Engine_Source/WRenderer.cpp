@@ -54,6 +54,7 @@ namespace renderer
 		//Iinput layout 정점 구조 정보를 넘겨줘야한다.
 		D3D11_INPUT_ELEMENT_DESC arrLayout[3] = {};
 		
+		//3바이트
 		arrLayout[0].AlignedByteOffset = 0;
 		arrLayout[0].Format = DXGI_FORMAT_R32G32B32_FLOAT;
 		arrLayout[0].InputSlot = 0;
@@ -61,6 +62,7 @@ namespace renderer
 		arrLayout[0].SemanticName = "POSITION";
 		arrLayout[0].SemanticIndex = 0;
 
+		//4바이트
 		arrLayout[1].AlignedByteOffset = 12;
 		arrLayout[1].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
 		arrLayout[1].InputSlot = 0;
@@ -68,6 +70,7 @@ namespace renderer
 		arrLayout[1].SemanticName = "COLOR";
 		arrLayout[1].SemanticIndex = 0;
 
+		//2바이트
 		arrLayout[2].AlignedByteOffset = 28;
 		arrLayout[2].Format = DXGI_FORMAT_R32G32_FLOAT;
 		arrLayout[2].InputSlot = 0;

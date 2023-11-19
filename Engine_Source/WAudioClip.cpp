@@ -7,7 +7,7 @@ namespace W
 		: Resource(eResourceType::AudioClip)
 		, mSound(nullptr)
 		, mChannel(nullptr)
-		, mMinDistance(1000.f)
+		, mMinDistance(1000.0f)
 		, mMaxDistance(1000.0f)
 		, mbLoop(false)
 	{
@@ -42,7 +42,7 @@ namespace W
 	}
 
 	void AudioClip::Stop()
-	{
+	{ 
 		mChannel->stop();
 	}
 

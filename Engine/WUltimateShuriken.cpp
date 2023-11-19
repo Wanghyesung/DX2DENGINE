@@ -27,7 +27,19 @@ namespace W
 		mr->SetMaterial(pMater);
 
 		AddComponent<Collider2D>();
+
+		GetComponent<Transform>()->SetScale(5.f, 5.f, 0.f);
+		Collider2D* pCOll = GetComponent<Collider2D>();
+		pCOll->SetSize(Vector2(0.7f, 0.4f));
+
+		AttackScript* pScript = AddComponent<AttackScript>();
+		//pScript->SetDir(m_iDir);
+		//최대 15명의 적 공격가능
+		pScript->SetDeleteTime(7.f);
+		pScript->SetAbleAttackCount(15);
+		pScript->SetDeleteObject(false);
 	}
+
 	UltimateShuriken::~UltimateShuriken()
 	{
 
@@ -38,13 +50,10 @@ namespace W
 		Collider2D* pCOll = GetComponent<Collider2D>();
 		pCOll->SetSize(Vector2(0.7f, 0.4f));
 
-		AttackScript* pScript = AddComponent<AttackScript>();
+		AttackScript* pScript = GetComponent<AttackScript>();
 		//pScript->SetDir(m_iDir);
 		//최대 15명의 적 공격가능
 		pScript->SetStayObject(3, 0.3f);
-		pScript->SetDeleteTime(7.f);
-		pScript->SetAbleAttackCount(15);
-		pScript->SetDeleteObject(false);
 	}
 	void UltimateShuriken::Update()
 	{
@@ -55,6 +64,11 @@ namespace W
 		GetComponent<Transform>()->SetPosition(vPos);
 
 		float fRadian = atan2f(m_vDir.y, m_vDir.x);
+		if (m_vDir.x > 0.f)
+			fRadian -= XM_2PI;
+		else
+			fRadian += XM_2PI;
+
 		GetComponent<Transform>()->SetRotation(0.f, 0.f, fRadian);
 
 		GameObject::Update();
@@ -79,15 +93,18 @@ namespace W
 	}
 	void UltimateShuriken::SetStartPos(Vector2 _vPos)
 	{
+		Transform* pTransform = GetComponent<Transform>();
+		pTransform->SetPosition(0.f, 0.f, 0.f);
+
 		Vector3 vTemPos = renderer::MainCamera->GetOwner()->GetComponent<Transform>()->GetPosition();
 		Vector2 vCamPos = Vector2(vTemPos.x, vTemPos.y);
 
-		vCamPos += (_vPos * 7.f);
+		vCamPos += (_vPos * 5.f);
 
-		Vector3 vPosition = GetComponent<Transform>()->GetPosition();
-		GetComponent<Transform>()->SetPosition(vCamPos.x, vCamPos.y,vPosition.z);
+		Vector3 vPosition = pTransform->GetPosition();
+		pTransform->SetPosition(vCamPos.x, vCamPos.y,vPosition.z);
 
-		Vector3 vPos = GetComponent<Transform>()->GetPosition();
+		Vector3 vPos = pTransform->GetPosition();
 		vPos.z = 0.f;
 		Vector3 vTargetPos = m_pTarget->GetComponent<Transform>()->GetPosition();
 		vTargetPos.z = 0.f;

@@ -135,9 +135,7 @@ namespace W
 		Transform* pTr = GetComponent<Transform>();
 		Vector3 vPosition;
 		if (m_pOwner)
-		{
 			vPosition = m_pOwner->GetComponent<Transform>()->GetPosition();
-		}
 		else
 			vPosition = pTr->GetPosition();
 

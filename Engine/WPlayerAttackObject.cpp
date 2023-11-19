@@ -9,7 +9,8 @@ namespace W
 {
 	PlayerAttackObject::PlayerAttackObject():
 		m_pPlayer(nullptr),
-		m_pSoundClip(nullptr)
+		m_pSoundClip(nullptr),
+		m_mapSound{}
 	{
 
 	}
@@ -43,35 +44,50 @@ namespace W
 		SceneManger::Erase(this);
 		GetComponent<Collider2D>()->SetActive(false);
 		m_pPlayer->GetScript<PlayerScript>()->AddPlayerSkill(this);
+
+		if(m_pHitSoundClip)
+			m_pHitSoundClip->Stop();
 	}
 	void PlayerAttackObject::PushObjectPoll()
 	{
 		EventManager::AddObjectPoll(this);
 	}
-	void PlayerAttackObject::SetSound(std::shared_ptr<AudioClip> clip, bool _bLoop)
+	void PlayerAttackObject::SetSound(const std::wstring& _strName, std::shared_ptr<AudioClip> clip, bool _bLoop)
 	{
+		std::map < std::wstring, std::shared_ptr<AudioClip>>::iterator iter =
+			m_mapSound.find(_strName);
+		if (iter != m_mapSound.end())
+			return;
+
+		m_mapSound.insert(std::make_pair(_strName, clip));
 		m_pSoundClip = clip;
 		m_pSoundClip->SetLoop(_bLoop);
+		
 	}
-	void PlayerAttackObject::StartSound()
+	void PlayerAttackObject::StartSound(const std::wstring& _strName)
 	{
+		std::map < std::wstring, std::shared_ptr<AudioClip>>::iterator iter =
+			m_mapSound.find(_strName);
+		if (iter == m_mapSound.end())
+			return;
 
-	}
-	void PlayerAttackObject::EndSound()
-	{
+		if (m_pSoundClip)
+		{
+			m_pSoundClip->Stop();
 
+			m_pSoundClip = iter->second;
+
+			m_pSoundClip->Play();
+		}
 	}
 	void PlayerAttackObject::SetHitSound(std::shared_ptr<AudioClip> clip, bool _bLoop)
 	{
-		m_pSoundClip = clip;
+		m_pHitSoundClip = clip;
 		m_pHitSoundClip->SetLoop(_bLoop);
 	}
 	void PlayerAttackObject::HitStartSound()
 	{
-
-	}
-	void PlayerAttackObject::HitEndSound()
-	{
-
+		if (m_pHitSoundClip)
+			m_pHitSoundClip->Play();
 	}
 }

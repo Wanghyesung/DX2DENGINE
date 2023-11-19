@@ -128,6 +128,19 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /R /Y "$(SolutionDir)dll\fmod.dll" "$(SolutionDir)x64\Release"
+
+xcopy /R /Y "$(SolutionDir)dll\fmodL.dll" "$(SolutionDir)x64\Release"
+
+xcopy /R /Y "$(SolutionDir)dll\fmodstudio.dll" "$(SolutionDir)x64\Release"
+
+xcopy /R /Y "$(SolutionDir)dll\fmodstudioL.dll" "$(SolutionDir)x64\Release"
+
+xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapper.dll" "$(SolutionDir)x64\Release"
+
+xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Release"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -174,6 +187,19 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /R /Y "$(SolutionDir)dll\fmod.dll" "$(SolutionDir)x64\Release"
+
+xcopy /R /Y "$(SolutionDir)dll\fmodL.dll" "$(SolutionDir)x64\Release"
+
+xcopy /R /Y "$(SolutionDir)dll\fmodstudio.dll" "$(SolutionDir)x64\Release"
+
+xcopy /R /Y "$(SolutionDir)dll\fmodstudioL.dll" "$(SolutionDir)x64\Release"
+
+xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapper.dll" "$(SolutionDir)x64\Release"
+
+xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Release"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Client.h" />

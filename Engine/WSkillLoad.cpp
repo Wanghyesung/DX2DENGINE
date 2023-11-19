@@ -35,8 +35,9 @@ namespace W
 			= Resources::Load<Texture>(L"loadTex", L"..\\Resources\\Texture\\Player\\skill\\load\\load.png");
 
 		SetSound(Resources::Load<AudioClip>(L"loadsound", L"..\\Resources\\sound\\skill\\load.mp3"), false);
-
-	}
+		Resources::Load<AudioClip>(L"loop", L"..\\Resources\\sound\\skill\\load_loop.mp3");
+		Resources::Load<AudioClip>(L"dead", L"..\\Resources\\sound\\skill\\load_dead.mp3");
+	}							
 
 	SkillLoad::~SkillLoad()
 	{
@@ -61,7 +62,7 @@ namespace W
 			pScript->AddPlayerSkill(pLoad);
 		}
 
-		for (int i = 0; i < 40; ++i)
+		for (int i = 0; i < 50; ++i)
 		{
 			AutoShuriken* pShuriken = new AutoShuriken();
 			pShuriken->SetPlayer(GetPlayer());

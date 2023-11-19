@@ -17,7 +17,8 @@
 #include "WUltimateObject.h"
 namespace W
 {
-	SkillUltimate::SkillUltimate()
+	SkillUltimate::SkillUltimate():
+		m_pUltimateSkill(nullptr)
 	{
 		SetSkillType(Player::ePlayerSkill::ultimate);
 		SetStateName(L"_alert");
@@ -27,17 +28,12 @@ namespace W
 		tTime.fCurTime = 0.f;
 		SetCoolTime(tTime);
 
-		m_pEffectAtlas = Resources::Load<Texture>(L"ultimate0", L"..\\Resources\\Texture\\Player\\skill\\ultimate\\ultimate0.png");
-		Effect* pEffect = CreateEffet(m_pEffectAtlas, L"ultimateEffect0", Vector2(0.f, 0.f),
-			Vector2(1456.f, 860.f), 10, 5, Vector2(1500.f, 1500.f), Vector2(0.0f, 0.f), 0.1f);
-		pEffect->SetFunction(std::bind(&SkillUltimate::activeskill_ultimate, this),24);
-		
+		Resources::Load<Texture>(L"ultimate0", L"..\\Resources\\Texture\\Player\\skill\\ultimate\\ultimate0.png");
 		Resources::Load<Texture>(L"UltiShuriken", L"..\\Resources\\Texture\\Player\\skill\\ultimate\\s1.png");
-
 		m_pHitEffectAtlas = Resources::Load<Texture>(L"ultimate_hit", L"..\\Resources\\Texture\\Player\\skill\\ultimate\\hit.png");
 		for (int i = 0; i < 30; ++i)
 		{
-			pEffect = CreateEffet(m_pHitEffectAtlas, L"ultimate_suriken", Vector2(0.f, 0.f), Vector2(219.f, 209.f), 8, 1,
+			Effect* pEffect = CreateEffet(m_pHitEffectAtlas, L"ultimate_suriken", Vector2(0.f, 0.f), Vector2(219.f, 209.f), 8, 1,
 				Vector2(250.f, 250.f), Vector2(0.f, 0.f), 0.1f);
 			pEffect->GetComponent<Transform>()->SetScale(2.5f, 2.5f, 0.f);
 		}
@@ -48,22 +44,25 @@ namespace W
 	}
 	void SkillUltimate::Update()
 	{
+		int iCurFrame = m_pUltimateSkill->GetCurFrame();
+		if (iCurFrame >= m_pUltimateSkill->GetAttackFrame())
+			m_bCreate = true;
+
 		if (m_bCreate)
+		{
+			create_shuriken();
 			Exit();
+		}
 	}
 	void SkillUltimate::Initialize()
 	{
 		PlayerScript* pScript = GetPlayer()->GetScript<PlayerScript>();
 		//처음 공격
-		UltimateObject* pAttackObj = new UltimateObject();
-
-		pAttackObj->SetName(L"ultimate0");
-		pAttackObj->SetPlayer(GetPlayer());
-		pAttackObj->Initialize();
-
-		Collider2D* pCollider = pAttackObj->AddComponent<Collider2D>();
-		pCollider->SetSize(Vector2(15.5f, 15.5f));
-		pScript->AddPlayerSkill(pAttackObj);
+		m_pUltimateSkill = new UltimateObject();
+		m_pUltimateSkill->SetName(L"ultimate0");
+		m_pUltimateSkill->SetPlayer(GetPlayer());
+		m_pUltimateSkill->AddComponent<Collider2D>();
+		pScript->AddPlayerSkill(m_pUltimateSkill);
 
 
 		//이미지들
@@ -104,7 +103,7 @@ namespace W
 			AttackInfo.fAttUpperRcnt = 0.f;
 
 			//7번 공격
-			AttackInfo.iDamageCount = 15;
+			AttackInfo.iDamageCount = 3;
 
 			pShuriken->GetScript<AttackScript>()->SetAttackInfo(AttackInfo);
 		}
@@ -119,17 +118,8 @@ namespace W
 		SkillState::Enter();
 	
 		m_bCreate = false;
-
-		Effect* pEffect = BattleManager::GetEffect(L"ultimateEffect0");
-
-		Vector3 vCamPos = renderer::MainCamera->GetOwner()->GetComponent<Transform>()->GetPosition();
-
-		pEffect->GetComponent<Transform>()->SetPosition(Vector3(vCamPos.x, vCamPos.y, -5.f));
-		pEffect->GetComponent<Transform>()->SetScale(Vector3(15.5f, 15.5f, 0.f));
-
-		pEffect->StartEffect(1);
-		pEffect->SetActive(true);
-		EventManager::CreateObject(pEffect, eLayerType::Effect);
+		
+		activeskill_ultimate();
 		//StartEffect(pEffect);
 	}
 	void SkillUltimate::Exit()
@@ -139,11 +129,9 @@ namespace W
 	void SkillUltimate::activeskill_ultimate()
 	{
 		PlayerAttackObject* pAttackObj = GetPlayer()->GetScript<PlayerScript>()->GetPlayerSkill(L"ultimate0");
+		pAttackObj->GetComponent<Collider2D>()->SetActive(false);
 		pAttackObj->GetScript<AttackScript>()->SetDeleteObject(false);
-
-		Vector3 vCamPos = renderer::MainCamera->GetOwner()->GetComponent<Transform>()->GetPosition();
-		Transform* pTr = pAttackObj->GetComponent<Transform>();
-		pTr->SetPosition(Vector3(vCamPos.x, vCamPos.y,-4.f));
+		pAttackObj->Initialize();
 
 		const tAttackInfo& Attack = GetPlayer()->GetScript<PlayerScript>()->GetAttackInfo();
 
@@ -155,16 +143,12 @@ namespace W
 		AttackInfo.fAttRcnt = 0.3f;
 		AttackInfo.fAttRigidityTime = 0.3f;
 		AttackInfo.fAttUpperRcnt = 0.f;
-
 		//7번 공격
-		AttackInfo.iDamageCount = 15;
+		AttackInfo.iDamageCount = 7;
 
 		pAttackObj->GetScript<AttackScript>()->SetAttackInfo(AttackInfo);
 		EventManager::CreateObject(pAttackObj, eLayerType::AttackObject);
 
-		m_bCreate = true;
-		
-		create_shuriken();
 	}
 	void SkillUltimate::create_shuriken()
 	{

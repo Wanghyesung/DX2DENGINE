@@ -30,7 +30,6 @@ namespace W
 		//m_pHitEffectAtlas = Resources::Load<Texture>(L"kuckhit", L"..\\Resources\\Texture\\Player\\skill\\hit.png");
 
 		SetSound(Resources::Load<AudioClip>(L"avensound", L"..\\Resources\\sound\\skill\\aven.mp3"), false);
-
 	}
 	SkillAven::~SkillAven()
 	{

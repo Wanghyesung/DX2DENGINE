@@ -38,7 +38,7 @@ namespace W
 		m_vecShurikenDir[1].push_back(Vector2(0.8f, 0.2f));
 
 		m_vecShurikenDir[1].push_back(Vector2(0.5f, 0.5f));
-		m_vecShurikenDir[1].push_back(Vector2(-0.5f, 0.5f));
+		m_vecShurikenDir[1].push_back(Vector2(1.f, 0.f));
 		m_vecShurikenDir[1].push_back(Vector2(0.f, 1.f));
 		m_vecShurikenDir[1].push_back(Vector2(0.6f, -0.4f));
 		m_vecShurikenDir[2].push_back(Vector2(-0.3f, 0.7f));
@@ -136,6 +136,7 @@ namespace W
 				Vector2 vDir = m_vecShurikenDir[m_iCurIndex][i];
 				pShuriken->SetTarget(m_pTarget);
 				pShuriken->SetStartPos(vDir);
+				pShuriken->Initialize();
 				EventManager::CreateObject(pAttackObj, eLayerType::AttackObject);
 			}
 			

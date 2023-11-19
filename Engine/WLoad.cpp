@@ -41,6 +41,9 @@ namespace W
 
 		GetComponent<Transform>()->SetScale(11.f, 11.f, 0.f);
 
+		SetSound(L"loop", Resources::Find<AudioClip>(L"loop"), true);
+		SetSound(L"dead", Resources::Find<AudioClip>(L"dead"), false);
+		SetHitSound(Resources::Load<AudioClip>(L"hit", L"load_hit2"), false);
 	}
 	Load::~Load()
 	{
@@ -103,6 +106,8 @@ namespace W
 	{
 		GetScript<AttackScript>()->SetDeleteObject(false);
 		GetComponent<Animator>()->Play(L"active", true);
+
+		StartSound(L"loop");
 	}
 
 	void Load::end()
@@ -111,6 +116,8 @@ namespace W
 		GetComponent<Animator>()->Play(L"end", true);
 
 		GetComponent<Collider2D>()->SetActive(true);
+
+		StartSound(L"dead");
 	}
 
 	void Load::create_shuriken()

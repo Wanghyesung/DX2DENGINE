@@ -81,7 +81,7 @@ namespace W
 		{
 			//타겟을 잡지 못하면 바로 오브젝트 풀
 			if (!set_target())
-				GetScript<AttackScript>()->SetDeleteTime(0.f);
+				GetScript<AttackScript>()->SetDelete();
 		}
 		
 		else

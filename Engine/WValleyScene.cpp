@@ -161,7 +161,9 @@ namespace W
 	{
 		GameObject* pBackGround = new GameObject();
 		AudioSource* pAudio = pBackGround->AddComponent<AudioSource>();
-		pAudio->SetClip(Resources::Load<AudioClip>(L"valleysound", L"..\\Resources\\sound\\DragonNest.mp3"));
+		std::shared_ptr<AudioClip> pAudioClip = Resources::Load<AudioClip>(L"valleysound", L"..\\Resources\\sound\\DragonNest.mp3");
+		pAudioClip->SetLoop(true);
+		pAudio->SetClip(pAudioClip);
 
 		AddGameObject(eLayerType::Background, pBackGround);
 		MeshRenderer* pMeshRender = pBackGround->AddComponent<MeshRenderer>();

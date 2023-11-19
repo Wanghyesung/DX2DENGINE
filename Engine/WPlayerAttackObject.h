@@ -1,6 +1,6 @@
 #pragma once
 #include "WGameObject.h"
-
+#include "WAudioClip.h"
 namespace W
 {
 	class Player;
@@ -22,19 +22,19 @@ namespace W
 		virtual void Off();
 		void PushObjectPoll();
 
-		void SetSound(std::shared_ptr<AudioClip> clip, bool _bLoop);
-		void StartSound();
-		void EndSound();
+		void SetSound(const std::wstring& _strName, std::shared_ptr<AudioClip> clip, bool _bLoop);
+		void StartSound(const std::wstring& _strName);
 
 		void SetHitSound(std::shared_ptr<AudioClip> clip, bool _bLoop);
 		void HitStartSound();
-		void HitEndSound();
-
+		
 	private:
 		Player* m_pPlayer;
 
 		std::shared_ptr<AudioClip> m_pSoundClip;
 		std::shared_ptr<AudioClip> m_pHitSoundClip;
+
+		std::map <std::wstring, std::shared_ptr<AudioClip>> m_mapSound;
 	};
 }
 

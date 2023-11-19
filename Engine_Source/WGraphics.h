@@ -163,7 +163,7 @@ namespace W::graphics
 		float speed;
 		UINT active;
 	};
-
+	//15
 	struct ParticleShared
 	{
 		UINT sharedActiveCount;

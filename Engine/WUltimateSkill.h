@@ -2,6 +2,8 @@
 #include "WSkillState.h"
 namespace W
 {
+	class UltimateObject;
+
 	class SkillUltimate : public SkillState
 	{
 	public:
@@ -20,8 +22,7 @@ namespace W
 
 	private:
 		bool m_bCreate;
-
-
+		UltimateObject* m_pUltimateSkill;
 
 	};
 

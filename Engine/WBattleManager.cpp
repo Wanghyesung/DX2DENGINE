@@ -225,6 +225,9 @@ namespace W
 		}
 		else
 		{
+			if (iter->second.iCurCount > _iDamageCount)
+				iter->second.iCurCount = 0;
+
 			++iter->second.iCurCount;
 			return iter->second;
 		}

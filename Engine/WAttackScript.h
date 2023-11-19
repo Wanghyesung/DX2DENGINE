@@ -36,6 +36,7 @@ namespace W
 		void SetAttackInfo(const tAttackInfo& _tAttackInfo) { m_tAttackInfo = _tAttackInfo; }
 
 		void SetDeleteTime(float _fDeleteTime) { m_fCurDeleteTime = 0.f;  m_fDeleteTime = _fDeleteTime; }
+		void SetDelete() { m_fCurDeleteTime = 0.f; }
 
 		void SetDeleteObject(bool _bDelete) { m_bDelete = _bDelete; }
 		void SetStayObject(UINT _iAttackCount, float _fAttackTime);

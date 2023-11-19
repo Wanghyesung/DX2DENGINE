@@ -41,6 +41,7 @@ namespace W
 			= Resources::Load<Texture>(L"blastTex", L"..\\Resources\\Texture\\Player\\skill\\blast\\effect_2.png");
 
 		SetSound(Resources::Load<AudioClip>(L"blastsound", L"..\\Resources\\sound\\skill\\blast.mp3"), false);
+		Resources::Load<AudioClip>(L"blasthit", L"..\\Resources\\sound\\skill\\blast1.mp3");
 
 	}
 	SkillBlast::~SkillBlast()
