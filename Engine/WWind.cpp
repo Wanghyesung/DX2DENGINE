@@ -45,7 +45,7 @@ namespace W
 		SetSound(L"move", Resources::Find<AudioClip>(L"wind_move"),true);
 		SetSound(L"finish", Resources::Find<AudioClip>(L"wind_finish"), false);
 		//SetSound(L"stop", Resources::Find<AudioClip>(L"wind_stop"), true);
-		SetHitSound(Resources::Load<AudioClip>(L"hit",L"wind_hit"), false);
+		SetHitSound(Resources::Find<AudioClip>(L"wind_hit"), false);
 	}
 	Wind::~Wind()
 	{

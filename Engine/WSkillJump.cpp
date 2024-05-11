@@ -15,7 +15,7 @@ namespace W
 		SetStateName(L"_jump");
 
 		tSkillTime tTime = {};
-		tTime.fCoolTime = 0.f;
+		tTime.fCoolTime = 7.f;
 		tTime.fCurTime = 0.f;
 		SetCoolTime(tTime);
 

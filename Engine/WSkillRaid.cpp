@@ -45,6 +45,7 @@ namespace W
 		}
 
 		SetSound(Resources::Load<AudioClip>(L"raidsound", L"..\\Resources\\sound\\skill\\raid.mp3"), false);
+		Resources::Load<AudioClip>(L"raid_hit", L"..\\Resources\\sound\\skill\\raid_hit.mp3");
 	}
 	SkillRaid::~SkillRaid()
 	{
@@ -103,6 +104,8 @@ namespace W
 
 		pAttackObj->AddComponent<AttackScript>()->SetStayObject(7, 0.8f);
 		pAttackObj->GetComponent<AttackScript>()->SetDeleteTime(1.f);
+
+		pAttackObj->SetHitSound(Resources::Find<AudioClip>(L"raid_hit"),false);
 	}
 
 	void SkillRaid::activeskill_raid()

@@ -186,6 +186,12 @@ namespace W
 		//구
 		Resources::Load<Texture>(L"DemianCircle", L"..\\Resources\\Texture\\Monster\\demian\\circle.png");
 
+		pAttack20->BindShaderResource(eShaderStage::PS, 12);
+		pAttack21->BindShaderResource(eShaderStage::PS, 12);
+		pAttack22->BindShaderResource(eShaderStage::PS, 12);
+		pAttack23->BindShaderResource(eShaderStage::PS, 12);
+		pAttack24->BindShaderResource(eShaderStage::PS, 12);
+		pAttack25->BindShaderResource(eShaderStage::PS, 12);
 
 		//데미안 창 공격
 		set_effect();

@@ -37,6 +37,11 @@ namespace W
 				Vector2(250.f, 250.f), Vector2(0.f, 0.f), 0.1f);
 			pEffect->GetComponent<Transform>()->SetScale(2.5f, 2.5f, 0.f);
 		}
+
+		SetSound(Resources::Load<AudioClip>(L"ultisound", L"..\\Resources\\sound\\skill\\UltiUse.mp3"), false);
+		Resources::Load<AudioClip>(L"UltiHit", L"..\\Resources\\sound\\skill\\UltiHit.mp3");
+		Resources::Load<AudioClip>(L"UltiShurikenHit", L"..\\Resources\\sound\\skill\\UltiShurikenHit.mp3");
+
 	}
 	SkillUltimate::~SkillUltimate()
 	{

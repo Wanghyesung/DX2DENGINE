@@ -38,6 +38,9 @@ namespace W
 		pScript->SetDeleteTime(7.f);
 		pScript->SetAbleAttackCount(15);
 		pScript->SetDeleteObject(false);
+
+		SetHitSound(Resources::Find<AudioClip>(L"UltiShurikenHit"), false);
+
 	}
 
 	UltimateShuriken::~UltimateShuriken()

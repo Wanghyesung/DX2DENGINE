@@ -76,9 +76,11 @@ namespace W
 	}
 	void UI::MouseLbtnDown()
 	{
+
 	}
 	void UI::MouseLbtnUp()
 	{
+
 	}
 	void UI::MouseLbtnClicked()
 	{

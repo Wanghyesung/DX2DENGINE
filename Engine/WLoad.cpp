@@ -39,11 +39,14 @@ namespace W
 
 		pAnim->CompleteEvent(L"end") = std::bind(&PlayerAttackObject::PushObjectPoll, this);
 
+		//test
+		pAtlas->BindShaderResource(graphics::eShaderStage::PS, 12);
+
 		GetComponent<Transform>()->SetScale(11.f, 11.f, 0.f);
 
-		SetSound(L"loop", Resources::Find<AudioClip>(L"loop"), true);
-		SetSound(L"dead", Resources::Find<AudioClip>(L"dead"), false);
-		SetHitSound(Resources::Load<AudioClip>(L"hit", L"load_hit2"), false);
+		SetSound(L"loop", Resources::Find<AudioClip>(L"load_loop"), true);
+		SetSound(L"dead", Resources::Find<AudioClip>(L"load_dead"), false);
+		SetHitSound(Resources::Find<AudioClip>(L"load_hit"), false);
 	}
 	Load::~Load()
 	{
@@ -147,6 +150,7 @@ namespace W
 	}
 	void Load::init_skill()
 	{
+		//GetComponent<Animator>()->Binds();
 		Collider2D* pCollider = AddComponent<Collider2D>();
 		//pCollider->SetSize(Vector2(6.f, 6.f));
 		pCollider->SetActive(false);

@@ -35,8 +35,9 @@ namespace W
 			= Resources::Load<Texture>(L"loadTex", L"..\\Resources\\Texture\\Player\\skill\\load\\load.png");
 
 		SetSound(Resources::Load<AudioClip>(L"loadsound", L"..\\Resources\\sound\\skill\\load.mp3"), false);
-		Resources::Load<AudioClip>(L"loop", L"..\\Resources\\sound\\skill\\load_loop.mp3");
-		Resources::Load<AudioClip>(L"dead", L"..\\Resources\\sound\\skill\\load_dead.mp3");
+		Resources::Load<AudioClip>(L"load_loop", L"..\\Resources\\sound\\skill\\load_loop.mp3");
+		Resources::Load<AudioClip>(L"load_dead", L"..\\Resources\\sound\\skill\\load_dead.mp3");
+		Resources::Load<AudioClip>(L"load_hit", L"..\\Resources\\sound\\skill\\load_hit2.mp3");
 	}							
 
 	SkillLoad::~SkillLoad()

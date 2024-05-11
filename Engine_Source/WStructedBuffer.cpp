@@ -113,6 +113,7 @@ namespace W::graphics
 	void StructedBuffer::SetData(void* data, UINT bufferCount)
 	{
 		//쓰고 복사
+		//writebuffer -> minabuffer 
 		if (m_iStride < bufferCount)
 			Create(m_iSize, bufferCount, m_eType, data);
 		else

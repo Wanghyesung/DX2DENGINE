@@ -41,6 +41,7 @@ namespace W
 		//최대 15명 공격 가능
 		GetScript<AttackScript>()->SetAbleAttackCount(15);
 
+		SetHitSound(Resources::Find<AudioClip>(L"UltiHit"), false);
 	}
 	UltimateObject::~UltimateObject()
 	{

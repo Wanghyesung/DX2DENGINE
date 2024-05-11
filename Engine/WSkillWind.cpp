@@ -42,7 +42,7 @@ namespace W
 		SetSound(Resources::Load<AudioClip>(L"windsound", L"..\\Resources\\sound\\skill\\wind.mp3"), false);
 		Resources::Load<AudioClip>(L"wind_move", L"..\\Resources\\sound\\skill\\wind_loop.mp3");
 		Resources::Load<AudioClip>(L"wind_finish", L"..\\Resources\\sound\\skill\\wind_dead.mp3");
-		Resources::Load<AudioClip>(L"wind_stop", L"..\\Resources\\sound\\skill\\wind_hit.mp3");
+		Resources::Load<AudioClip>(L"wind_hit", L"..\\Resources\\sound\\skill\\wind_hit.mp3");
 
 	}
 	SkillWind::~SkillWind()
