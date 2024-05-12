@@ -529,7 +529,7 @@ namespace W
 		vStartPos.y -= 0.35f;
 
 		srand(time(NULL));
-		for (int i = -4; i < 4; ++i)
+		for (int i = -4; i < 4; i+=2)
 		{
 			int iIndx = (rand() % 4);
 

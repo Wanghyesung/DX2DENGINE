@@ -57,7 +57,7 @@ namespace W
 		pAttack1->BindShaderResource(eShaderStage::PS, 12);
 		pAttack2->BindShaderResource(eShaderStage::PS, 12);
 		pAttack3->BindShaderResource(eShaderStage::PS, 12);
-
+		pDead->BindShaderResource(eShaderStage::PS, 12);
 
 		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"Demian1_stand_left", pNormal, Vector2(0.f, 0.f), Vector2(2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);

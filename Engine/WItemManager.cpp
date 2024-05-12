@@ -147,7 +147,8 @@ namespace W
 		std::mt19937 en(rDiv());
 		std::uniform_int_distribution<int> disX(0, 1);
 		int iHairNum = disX(en);
-
+		//임시
+		iHairNum = 1;
 		dynamic_cast<Player*>(SceneManger::FindPlayer())->SetHair(iHairNum);
 	}
 	void ItemManager::chanage_eye()
@@ -157,6 +158,8 @@ namespace W
 		std::uniform_int_distribution<int> disX(0, 2);
 		int iEyeNum = disX(en);
 
+		//임시
+		iEyeNum = 1;
 		dynamic_cast<Player*>(SceneManger::FindPlayer())->SetEye(iEyeNum);
 	}
 	IconUI* ItemManager::GetClone(const std::wstring& _strName)
