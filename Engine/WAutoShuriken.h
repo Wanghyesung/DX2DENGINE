@@ -25,7 +25,7 @@ namespace W
 		
 		void move();
 		void rotate();
-		const Vector3& get_dir();
+		const Vector2& get_dir();
 		
 
 	private:
@@ -35,9 +35,7 @@ namespace W
 
 		float m_fDeleteTime;
 		float m_fCurTime;
-
-		float m_fStartTime;
-		float m_fCurStartTime;
+		const float m_fContFoce;
 
 		Vector2 m_vForce;
 		Vector2 m_vVelocity;

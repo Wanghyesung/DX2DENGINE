@@ -78,8 +78,6 @@ namespace W
 
 	void SkillWindUI::Using()
 	{
-		
-		//SkillManager::SetActiveSkill(GetPlayerSkill());
 		EventManager::ChangePlayerSkillState(Player::ePlayerSkill::wind);
 	}
 }

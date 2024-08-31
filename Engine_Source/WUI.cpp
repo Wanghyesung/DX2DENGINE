@@ -212,7 +212,6 @@ namespace W
 		{
 			UI* pUI = queue.front();
 
-			//내 UI는 움직이지 않게 하기
 			if (pUI != this)
 			{
 				Transform* pChildTr = pUI->GetComponent<Transform>();
@@ -226,19 +225,6 @@ namespace W
 				queue.push(ChildUI);
 		}
 
-
-		
-		//for (UI* pUI : vecChidUI)
-		//{
-		//	//자식 UI가 없을떄까지
-		//	const std::vector<UI*> vecUI = pUI->GetChildUI();
-		//	
-		//	for (UI* UI : vecUI)
-		//	{
-		//		Transform* pChildTr = UI->GetComponent<Transform>();
-		//		pChildTr->SetPosition(pChildTr->GetPosition() + _vDiff);
-		//	}
-		//}
 	}
 	
 }

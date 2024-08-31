@@ -35,7 +35,7 @@ namespace W
 
 			if (fLen > 0.f)
 			{
-				pRigidbody->SetPhysics(true);
+				pRigidbody->SetAccumulation(true);
 				pRigidbody->SetVelocity(Vector2(iDir * 10.f, vVel.y));
 			}
 		}
@@ -46,7 +46,7 @@ namespace W
 
 		if (m_fCurTime >= m_fDeleteTime)
 		{
-			m_pTarget->GetComponent<Rigidbody>()->SetPhysics(false);
+			m_pTarget->GetComponent<Rigidbody>()->SetAccumulation(false);
 			object::Destroy(this);
 			return;
 		}

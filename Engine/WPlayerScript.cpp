@@ -318,7 +318,7 @@ namespace W
 			if (m_fknockbackTime <= 0.f)
 			{
 				m_bSuperKnockback = false;
-				m_pPlayer->GetComponent<Rigidbody>()->SetPhysics(false);
+				m_pPlayer->GetComponent<Rigidbody>()->SetAccumulation(false);
 				m_fknockbackTime = 0.f;
 			}
 		}
@@ -326,7 +326,7 @@ namespace W
 
 	void PlayerScript::super_knockback(float _fTime)
 	{
-		m_pPlayer->GetComponent<Rigidbody>()->SetPhysics(true);
+		m_pPlayer->GetComponent<Rigidbody>()->SetAccumulation(true);
 		m_bSuperKnockback = true;
 		m_fknockbackTime = _fTime;
 	}
@@ -343,7 +343,7 @@ namespace W
 		}
 		else
 		{
-			m_pPlayer->GetComponent<Rigidbody>()->SetPhysics(false);
+			m_pPlayer->GetComponent<Rigidbody>()->SetAccumulation(false);
 			if(m_tHitInfo.fHitUpperRcnt > 0.f)
 				pRigidbody->SetGround(false);
 

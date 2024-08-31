@@ -259,7 +259,8 @@ namespace W
 			if (dynamic_cast<PinkBean*>(pMon))
 				continue;
 
-			if(pMon->GetState() == GameObject::eState::Active)
+			MonsterScript* pMonster = pMon->GetScript<MonsterScript>();
+			if(pMon->GetState() == GameObject::eState::Active && pMonster->GetObjectInfo().fHP>0)
 				BattleManager::Buff_Stat(pMon, BattleManager::eUpStatType::Heal, fAccValue);
 		}
 			

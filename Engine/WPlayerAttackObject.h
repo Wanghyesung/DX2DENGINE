@@ -20,7 +20,7 @@ namespace W
 		void SetPlayer(Player* _pPlayer){ m_pPlayer = _pPlayer;}
 
 		virtual void Off();
-		void PushObjectPoll();
+		void PushObjectPool();
 
 		void SetSound(const std::wstring& _strName, std::shared_ptr<AudioClip> clip, bool _bLoop);
 		void StartSound(const std::wstring& _strName);

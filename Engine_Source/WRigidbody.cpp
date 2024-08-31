@@ -16,12 +16,12 @@ namespace W
 		m_vLimitedVelocity(Vector2::Zero),
 		m_fMass(1.f),
 		m_bGround(true),
-		m_bPhysics(false)
+		m_bAccumulation(false)
 	{
 		m_vLimitedVelocity.x = 10.0f;
 		m_vLimitedVelocity.y = 10.0f;
 		m_vGravity = Vector2(0.0f, -9.0f);
-		m_fFriction = 100.0f;
+		m_vFriction = Vector2::Zero; //사용하지 않음
 	}
 	Rigidbody::~Rigidbody()
 	{
@@ -43,30 +43,27 @@ namespace W
 
 		if (fLen != 0.f)
 		{
-			fForce.Normalize();//방향
-			float fAccel = fLen / m_fMass; //가속도
+			fForce.Normalize();
+			float fAccel = fLen / m_fMass;
 
-			m_vAccelation = fForce * fAccel; //내 속도는 내 힘의 방향 * 내 가속도
+			m_vAccelation = fForce * fAccel;
 		}
 
-
-		if(!m_bGround || m_bPhysics)
+		if (m_bAccumulation)
 		{
-			if (m_bGround)
-			{
-				m_vVelocity += m_vAccelation * Time::DeltaTime();
-				m_vVelocity.y = 0.f;
-			}
-				
-			else
-			{
-				m_vVelocity += m_vAccelation * Time::DeltaTime();
-				m_vVelocity.y += m_vGravity.y * Time::DeltaTime();
-			}
+			m_vVelocity += m_vAccelation * Time::DeltaTime();
+			m_vVelocity.y = 0.f;
+
 			vTemPosition = vTemPosition + m_vVelocity * Time::DeltaTime();
 		}
+		
+		else if (!m_bGround)
+		{
+			m_vVelocity += m_vAccelation * Time::DeltaTime();
+			m_vVelocity.y += m_vGravity.y * Time::DeltaTime();
 
-		//땅
+			vTemPosition = vTemPosition + m_vVelocity * Time::DeltaTime();
+		}
 		else
 		{
 			m_vVelocity = m_vAccelation * Time::DeltaTime();
@@ -77,9 +74,13 @@ namespace W
 			float dot = m_vVelocity.Dot(vGravity);
 			m_vVelocity += vGravity * dot;
 
+			if ((m_vVelocity + m_vFriction).Length() <= m_vFriction.Length())
+				m_vVelocity = Vector2::Zero;
+			else
+				m_vVelocity.x += m_vFriction.x;
+
 			vTemPosition = vTemPosition + m_vVelocity;
 		}
-
 		pTransform->SetPosition(vTemPosition.x, vTemPosition.y, vPosition.z);
 		
 		check_map();

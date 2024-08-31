@@ -52,7 +52,9 @@ namespace W
 
 	private:
 		UINT m_iItemCount;
+		
 		class Number* m_pNumber;
+		Vector2 m_vNumberOffset;
 
 		//눌렀을 때 사용되는 템 ex : 헤어
 		std::function<void()> m_pFunction;

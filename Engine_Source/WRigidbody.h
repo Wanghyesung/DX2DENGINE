@@ -18,7 +18,7 @@ namespace W
 		void SetMass(float _fMass) { m_fMass = _fMass; }
 		void AddForce(Vector2 _vForce);
 		void SetGround(bool _bGround) { m_bGround = _bGround; }
-		void SetPhysics(bool _bPhysics) { m_bPhysics = _bPhysics; }
+		void SetAccumulation(bool _bAcc) { m_bAccumulation = _bAcc; }
 		bool IsGround() { return m_bGround; }
 		void SetVelocity(Vector2 _vVelocity) { m_vVelocity = _vVelocity; }
 		void AddVelocity(Vector2 _vVelocity) { m_vVelocity += _vVelocity; }
@@ -35,9 +35,10 @@ namespace W
 		Vector2 m_vLimitedVelocity;
 
 		Vector2 m_vGravity;
-		float m_fFriction;
+		Vector2 m_vFriction;
+
 		bool m_bGround;
-		bool m_bPhysics;
+		bool m_bAccumulation;
 
 		float m_fGravityAccel;
 

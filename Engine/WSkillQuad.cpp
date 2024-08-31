@@ -101,9 +101,10 @@ namespace W
 	{
 		Player* pPlayer = GetPlayer();
 		m_iMaxCnt = 4;
+
 		if (pPlayer->IsShadow())
 		{
-			m_iMaxCnt = 8;
+			m_iMaxCnt *= 2;
 			pPlayer->GetShadow()->Set_Attack(std::bind(&SkillQuad::create_quad, this), 0.07f);
 		}
 		create_quad();

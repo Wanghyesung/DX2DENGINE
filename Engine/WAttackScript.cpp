@@ -45,7 +45,7 @@ namespace W
 		if (m_fCurDeleteTime >= m_fDeleteTime && !m_bdead)
 		{
 			m_bdead = true;
-			EventManager::AddObjectPoll(GetOwner());
+			EventManager::AddObjectPool(GetOwner());
 			return;
 		}
 	}
@@ -81,7 +81,7 @@ namespace W
 				if (m_bDelete)
 				{
 					m_bdead = true;
-					EventManager::AddObjectPoll(GetOwner());
+					EventManager::AddObjectPool(GetOwner());
 				}
 			}
 		}

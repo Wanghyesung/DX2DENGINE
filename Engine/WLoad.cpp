@@ -37,7 +37,7 @@ namespace W
 		pAnim->FindAnimation(L"end")->Create(L"end", pAtlas, Vector2(0.0f, 4800.0f), Vector2(1700.0f, 1200.0f), 6, Vector2(1700.f, 1700.f), Vector2::Zero, 0.1f);
 		pAnim->FindAnimation(L"end")->Create(L"end", pAtlas, Vector2(0.0f, 6000.0f), Vector2(1700.0f, 1200.0f), 6, Vector2(1700.f, 1700.f), Vector2::Zero, 0.1f);
 
-		pAnim->CompleteEvent(L"end") = std::bind(&PlayerAttackObject::PushObjectPoll, this);
+		pAnim->CompleteEvent(L"end") = std::bind(&PlayerAttackObject::PushObjectPool, this);
 
 		//test
 		pAtlas->BindShaderResource(graphics::eShaderStage::PS, 12);

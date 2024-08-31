@@ -56,9 +56,7 @@ namespace W
 		m_vUIStartPosition = Vector2(-0.68f, 1.2f);
 		m_vUIEndPosition = Vector2(0.58f, -0.9f);
 		m_vUIDiffPosition = Vector2(0.42f, -0.42f);
-		//-0.68 1.2      -0.26 0.77 차이
-		// 0.42 0.42 
-		//0.58 -0.90
+		
 
 #pragma region Items
 		//받을 떄 itemui까지만 복사생성자를 만들어서 상속이 itemui까지만 감
@@ -194,19 +192,19 @@ namespace W
 
 	IconUI* Inventory::FindItem(std::wstring _strName)
 	{
-		std::map<std::wstring, IconUI*>::iterator iter =
-			m_mapItems.find(_strName);
+		std::map<std::wstring, IconUI*>::iterator iter = m_mapItems.find(_strName);
 
 		if (iter == m_mapItems.end())
 			return nullptr;
 
 		return iter->second;
 	}
-
 	void Inventory::InsertItem(IconUI* _pItem, std::wstring _strName)
 	{
 		AddChildUI(_pItem, false);
+
 		m_mapItems.insert(make_pair(_strName, _pItem));
+
 		_pItem->SetParentUIType(eParentUI::Inventory);
 	}
 
@@ -296,38 +294,28 @@ namespace W
 
 	bool Inventory::ChangeItemPosition(IconUI* _pItem, Vector2 _vSetPosition)
 	{	
-		//if ((UINT)_pItem->GetIconType() != (UINT)m_eActivePage)
-		//	return;
+		Vector3 vPosition = GetComponent<Transform>()->GetPosition();
 
-		//인벤토리 위치
-		Transform* pTransform = GetComponent<Transform>();
-		Vector3 vPosition = pTransform->GetPosition();
-
-		//들어올 아이템 트렌스폼
 		Transform* pItemTransform = _pItem->GetComponent<Transform>();
-		Vector3 vItemPosition = pItemTransform->GetPosition();
 
 		Vector2 vStartPosition = Vector2(m_vUIStartPosition.x + vPosition.x, m_vUIStartPosition.y + vPosition.y);
 		Vector2 vComaprePos = {};
 
-		//마우스 둔 우치에서 가장 가까운곳 찾기
-		Vector2 vMinValue = Vector2(2000.f, 2000.f);
+		Vector2 vMinValue = Vector2(2000.f, 2000.f); 
 		float fMinLen = 2000.f;
-		UINT iMinX = 0;
-		UINT iMinY = 0;
+		UINT iMinX = 0; 
+        UINT iMinY = 0;
 
 		for (UINT y = 0; y < 6; ++y)
 		{
 			vComaprePos.y = vStartPosition.y + y * m_vUIDiffPosition.y;
 			for (UINT x = 0; x < 4; ++x)
 			{
-
 				vComaprePos.x = vStartPosition.x + x * m_vUIDiffPosition.x;
 
 				Vector2 vDiff = _vSetPosition - vComaprePos;
 				float fLen = abs(vDiff.Length());
 
-				//아이템 둔곳에서 가장 가까운곳
 				if (fLen <= fMinLen)
 				{
 					fMinLen = fLen;
@@ -338,21 +326,16 @@ namespace W
 			}
 		}
 
-		//현재 스크롤 위치
+		
 		iMinY += m_iScrollCurY;
-
 		IconUI* pFindItem = FindItemOnPosition(iMinX, iMinY, _pItem);
 
-		//여기서 구간 나누기 
+		Vector3 vItemPosition = pItemTransform->GetPosition();
 		
-		//다른 UI에서 왔는지 내 UI에서만 바꾸는건지
 		if (_pItem->GetParentUIType() != eParentUI::Inventory)
 		{
-			//찾은 아이템을 들어온 아이템이 있던 UI로 보내기
 			if (pFindItem != nullptr)
 			{
-				Transform* pFindTr = pFindItem->GetComponent<Transform>();
-				
 				eParentUI eParentType = _pItem->GetParentUIType();
 				switch (eParentType)
 				{
@@ -360,7 +343,7 @@ namespace W
 				{
 					if (pFindItem->GetIconType() == IconUI::eIconType::Equip)
 						return false;
-					pFindTr->SetPosition(_pItem->GetStartPosition());
+					pFindItem->GetComponent<Transform>()->SetPosition(_pItem->GetStartPosition());
 					pFindItem->SetItemIndex(_pItem->GetItemindexX(), _pItem->GetItemIndexY());
 					pFindItem->DeleteParent();
 					SceneManger::GetUI<InterfaceUI>()->InsertItem(pFindItem, pFindItem->GetName());
@@ -377,7 +360,6 @@ namespace W
 			InsertItem(_pItem, _pItem->GetName());
 		}
 
-		//내 UI에서 왔다면
 		else
 		{
 			if (pFindItem != nullptr)

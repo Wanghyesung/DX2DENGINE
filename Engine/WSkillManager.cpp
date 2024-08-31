@@ -60,7 +60,6 @@ namespace W
 	{
 		PlayerScript* pScript = m_pPlayerSkill->m_pPlayer->GetScript<PlayerScript>();
 	
-		//animaiton 끝날때
 		if (_eSkill == Player::ePlayerSkill::end)
 		{
 			m_pPlayerSkill->m_pActiveSkill = nullptr;
@@ -68,11 +67,9 @@ namespace W
 			return;
 		}
 
-		//이미 스킬이 실행중이면
 		if (m_pPlayerSkill->m_pActiveSkill != nullptr)
 			return;
 
-		//쿨타임
 		if (!check_cooltime(_eSkill))
 			return;
 
@@ -100,22 +97,12 @@ namespace W
 	{
 		PlayerScript* pScript = m_pPlayerSkill->m_pPlayer->GetScript<PlayerScript>();
 		
-		//srand(time(NULL));
-		//int iCnt = (rand() % 2) + 1;
-		//pScript->MinusAttackCnt(iCnt);
-
-		//for (int i = 0; i < iCnt; ++i)
-		//{
 		SkillState* pState = FindSkillState(Player::ePlayerSkill::blast);
 		SkillBlast* pBlast = dynamic_cast<SkillBlast*>(pState);
 		_vPosition.z -= 1.f;
 		pBlast->create_blast(_vPosition);
 		pScript->MinusAttackCnt();
-		//}
-
-		//bool IsAccAttack = pScript->IsAccAttack();
-		//if (!IsAccAttack)
-		//	return;
+	
 	}
 	void SkillManager::Release()
 	{

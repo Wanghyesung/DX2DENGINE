@@ -87,7 +87,8 @@ namespace W
 		m_fCurTime += Time::DeltaTime();
 
 		PlayerScript* pScript = m_pOwner->GetComponent<PlayerScript>();
-		if (/*pScript->GetObjectInfo().fHP <= 0.f ||*/m_fCurTime >= m_fActiveTime)
+		/*pScript->GetObjectInfo().fHP <= 0.f ||*/
+		if (m_fCurTime >= m_fActiveTime)
 		{
 			m_bOff = true;
 			m_pOwner->SetShadow(false);

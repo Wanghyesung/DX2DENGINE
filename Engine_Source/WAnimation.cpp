@@ -29,9 +29,6 @@ namespace W
 		if (m_bComplete)
 			return;
 
-		/*if (m_pAnimator->IsStop())
-			return;*/
-
 		m_fTime += Time::DeltaTime();
 
 		if (m_vecSprites[m_iIndex].fDuration <= m_fTime)
@@ -50,7 +47,8 @@ namespace W
 	{
 
 	}
-	void Animation::Create(std::wstring _strName, std::shared_ptr<graphics::Texture> _pAtlas, Vector2 _vLeftTop, Vector2 _vSize, UINT _iColumnLength, Vector2 _vDivisionSize, Vector2 _vOffset, float _fDuration)
+	void Animation::Create(std::wstring _strName, std::shared_ptr<graphics::Texture> _pAtlas, Vector2 _vLeftTop, 
+		Vector2 _vSize, UINT _iColumnLength, Vector2 _vDivisionSize, Vector2 _vOffset, float _fDuration)
 	{
 		SetKey(_strName);
 		m_spAtlas = _pAtlas;

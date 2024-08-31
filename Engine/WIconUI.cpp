@@ -139,6 +139,7 @@ namespace W
 		vPosition.z = -6.5f;
 		pTransform->SetPosition(vPosition);
 	}
+
 	void IconUI::MouseLbtnUp()
 	{
 		m_bTargetOn = false;

@@ -48,9 +48,9 @@ namespace W
 		if(m_pHitSoundClip)
 			m_pHitSoundClip->Stop();
 	}
-	void PlayerAttackObject::PushObjectPoll()
+	void PlayerAttackObject::PushObjectPool()
 	{
-		EventManager::AddObjectPoll(this);
+		EventManager::AddObjectPool(this);
 	}
 	void PlayerAttackObject::SetSound(const std::wstring& _strName, std::shared_ptr<AudioClip> clip, bool _bLoop)
 	{

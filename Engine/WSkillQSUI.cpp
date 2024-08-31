@@ -80,7 +80,6 @@ namespace W
 
 	void SkillQSUI::Using()
 	{
-		//SkillManager::SetActiveSkill(GetPlayerSkill());
 		EventManager::ChangePlayerSkillState(Player::ePlayerSkill::quad);
 	}
 }

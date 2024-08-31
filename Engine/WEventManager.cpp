@@ -9,7 +9,7 @@ namespace W
 	std::vector<GameObject*> EventManager::m_vecObjectPool = {};
 
 	std::wstring EventManager::m_strNextScene = {};
-#define ObjectPollPosition 2000.f
+#define ObjectPoolPosition 2000.f
 	void EventManager::Update()
 	{
 		for (int i = 0; i < m_vecObjectPool.size(); ++i)
@@ -71,7 +71,7 @@ namespace W
 			pFSM->ChangeState(eState);
 		}
 		break;
-		case EVENT_TYPE::ADD_OBJECTPOLL:
+		case EVENT_TYPE::ADD_OBJECTPOOL:
 		{
 			GameObject* pObj = (GameObject*)_tEve.lParm;
 			m_vecObjectPool.push_back(pObj);
@@ -173,16 +173,15 @@ namespace W
 		}
 	}
 
-	void EventManager::AddObjectPoll(GameObject* pObj)
+	void EventManager::AddObjectPool(GameObject* pObj)
 	{
 		tEvent eve = {};
-		eve.eEventType = EVENT_TYPE::ADD_OBJECTPOLL;
+		eve.eEventType = EVENT_TYPE::ADD_OBJECTPOOL;
 		eve.lParm = (DWORD_PTR)pObj;
 
-		//오브젝트 풀에 넘기기
 		Vector3 vPosition = pObj->GetComponent<Transform>()->GetPosition();
-		vPosition.x += ObjectPollPosition;
-		vPosition.y += ObjectPollPosition;
+		vPosition.x += ObjectPoolPosition;
+		vPosition.y += ObjectPoolPosition;
 		pObj->GetComponent<Transform>()->SetPosition(vPosition);
 
 		AddEvent(eve);

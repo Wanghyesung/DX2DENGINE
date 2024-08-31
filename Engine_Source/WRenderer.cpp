@@ -644,7 +644,6 @@ namespace renderer
 			vecLightsAttributes.push_back(attribute);
 		}
 
-		//배열로 데이터를 넘길 수 있음
 		if (vecLightsAttributes.size() == 0)
 			return;
 

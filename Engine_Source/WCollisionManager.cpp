@@ -196,27 +196,26 @@ namespace W
 		Vector3 vLeftScale = Vector3(_pLeft->GetSize().x, _pLeft->GetSize().y, 1.f);
 		Vector3 vRightScale = Vector3(_pRight->GetSize().x, _pRight->GetSize().y, 1.f);
 
-		Matrix mFinalLeft = Matrix::CreateScale(vLeftScale);
+		Matrix mFinalLeft = Matrix::CreateScale(vLeftScale);//XMMatrixScaling
 		mFinalLeft *= mLeftMatrix;
 
 		Matrix mFinalRight = Matrix::CreateScale(vRightScale);
 		mFinalRight *= mRightMatrix;
 
 		//x, y축 기준축 벡터
-		vAxis[0] = Vector3::Transform(arrLocalPos[1], mFinalLeft);
+		vAxis[0] = Vector3::Transform(arrLocalPos[1], mFinalLeft); //XMVector3TransformCoord(arrLocalPos[1], mFinalLeft);
 		vAxis[1] = Vector3::Transform(arrLocalPos[3], mFinalLeft);
 		vAxis[2] = Vector3::Transform(arrLocalPos[1], mFinalRight);
 		vAxis[3] = Vector3::Transform(arrLocalPos[3], mFinalRight);
 		
-		vAxis[0] -= Vector3::Transform(arrLocalPos[0], mFinalLeft);
-		vAxis[1] -= Vector3::Transform(arrLocalPos[0], mFinalLeft);
-		vAxis[2] -= Vector3::Transform(arrLocalPos[0], mFinalRight);
-		vAxis[3] -= Vector3::Transform(arrLocalPos[0], mFinalRight);
+		vAxis[0] = vAxis[0] - Vector3::Transform(arrLocalPos[0], mFinalLeft);
+		vAxis[1] = vAxis[1] - Vector3::Transform(arrLocalPos[0], mFinalLeft);
+		vAxis[2] = vAxis[2] - Vector3::Transform(arrLocalPos[0], mFinalRight);
+		vAxis[3] = vAxis[3] - Vector3::Transform(arrLocalPos[0], mFinalRight);
 
 		for (UINT i = 0; i < 4; ++i)
 			vAxis[i].z = 0.f;
 
-		//두물체 위치 차이값
 		Vector3 vDiff;
 		if(_pLeft->GetCenter() == Vector2::Zero && _pRight->GetCenter() == Vector2::Zero)
 			vDiff = pLeftTr->GetPosition() - pRightTr->GetPosition();
@@ -224,10 +223,8 @@ namespace W
 			vDiff = _pLeft->GetPosition() - _pRight->GetPosition();
 		vDiff.z = 0.f;
 
-		//축을 기준으로 내적하여 길이를 구하여 분리축이 존재시 false
 		Vector3 vCenter = vDiff;
 
-		//두물체 위치에 기준축으로 내적하여 받을 길이
 		for (UINT i = 0; i < 4; ++i)
 		{
 			Vector3 Axis = vAxis[i];
@@ -235,7 +232,6 @@ namespace W
 
 			for (UINT j = 0; j < 4; ++j)
 			{
-				//x, y 정점과 기준축 내적하여 길이 구하기
 				fProjDistance += fabsf(vAxis[j].Dot(Axis) / 2.f);
 			}
 

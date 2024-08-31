@@ -16,7 +16,8 @@ namespace W
 		m_iItemCount(0),
 		m_fAccHP(0),
 		m_fAccMP(0),
-		m_iAccCount(1)
+		m_iAccCount(1),
+		m_vNumberOffset(0.08f,0.07f)
 	{
 		SetIconType(eIconType::Item);
 	}
@@ -93,8 +94,6 @@ namespace W
 		MoveToParent(Vector2(vDiff.x - 0.08f,vDiff.y - 0.07f));
 
 		IconUI::MouseLbtnUp();
-
-		//IconUI::ResetTarget();
 	}
 	void ItemUI::MouseLbtnClicked()
 	{

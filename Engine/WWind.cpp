@@ -37,8 +37,8 @@ namespace W
 		pAnim->Create(L"stop_right", pAtlas, Vector2(10556.f, 316.0f), Vector2(-460.0f, 460.0f), 6, Vector2(600.f, 600.f), Vector2::Zero, 0.06f);
 		pAnim->Create(L"finish_right", pAtlas, Vector2(10404.f, 776.0f), Vector2(-612.0f, 580.0f), 18, Vector2(600.f, 600.f), Vector2::Zero, 0.06f);
 
-		pAnim->CompleteEvent(L"finish_left") = std::bind(&PlayerAttackObject::PushObjectPoll, this);
-		pAnim->CompleteEvent(L"finish_right") = std::bind(&PlayerAttackObject::PushObjectPoll, this);
+		pAnim->CompleteEvent(L"finish_left") = std::bind(&PlayerAttackObject::PushObjectPool, this);
+		pAnim->CompleteEvent(L"finish_right") = std::bind(&PlayerAttackObject::PushObjectPool, this);
 
 		mr->SetMaterial(pMater);
 

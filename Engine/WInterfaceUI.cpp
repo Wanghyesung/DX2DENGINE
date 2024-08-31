@@ -270,6 +270,8 @@ namespace W
 		m_mapItems.insert(std::make_pair(_pItem->GetName(), _pItem));
 		AddChildUI(_pItem,false);
 		_pItem->SetParentUIType(eParentUI::Interface);
+
+		SetItemKeyCode(_pItem, _pItem->GetItemindexX(), _pItem->GetItemIndexY());
 	}
 
 	IconUI* InterfaceUI::FindItem(std::wstring _strName)

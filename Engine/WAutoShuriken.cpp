@@ -13,10 +13,11 @@ namespace W
 {
 	AutoShuriken::AutoShuriken():
 		m_pTarget(nullptr),
-		m_fStartTime(0.3f),
-		m_fCurStartTime(0.f),
 		m_vVelocity(Vector2::Zero),
-		m_vMaxVelocity(Vector2(3.f, 3.f))
+		m_vMaxVelocity(Vector2(3.f, 3.f)),
+		m_fCurTime(0.f),
+		m_fDeleteTime(7.f),
+		m_fContFoce(4.f)
 	{
 		//if(_vDir.x > 0.f)
 		//	m_iDir = 1;
@@ -58,7 +59,7 @@ namespace W
 		AttackInfo.iDamageCount = 1;
 
 		AttackScript* pScript = AddComponent<AttackScript>();
-		pScript->SetDeleteTime(100000.f);
+		pScript->SetDeleteTime(m_fDeleteTime);
 		pScript->SetDir(1);
 		pScript->SetAttackInfo(AttackInfo);
 
@@ -135,7 +136,6 @@ namespace W
 	{
 		m_vVelocity = Vector2::Zero;
 		m_pTarget = nullptr;
-		m_fCurStartTime = 0.3f;
 
 		PlayerAttackObject::Off();
 	}
@@ -189,22 +189,20 @@ namespace W
 
 	void AutoShuriken::move()
 	{
-		Vector3 vPosition = GetComponent<Collider2D>()->GetPosition();
-
-		Vector3 vTemDiff = get_dir();
-		Vector2 vDiff = Vector2(vTemDiff.x, vTemDiff.y);
-		float fLen = vDiff.Length();
+		Vector2 vDiff = get_dir();
 		
-		m_vForce = (vDiff * 6.f) / fLen;
+		float fCurDeleteTime = GetScript<AttackScript>()->GetCurDeleteTime();
+		m_vForce = (vDiff * m_fContFoce * fCurDeleteTime);
 
 		float fDot = m_vVelocity.Dot(vDiff);
 		if (fDot < 0)
-		{
-			m_vForce *= 8.f;
-		}
-		m_vVelocity += Time::DeltaTime() * m_vForce;
-		//m_vVelocity += Time::DeltaTime() * m_vForce;
+			m_vForce *= (m_fContFoce * 2.f);
+		
+		m_vVelocity += Time::DeltaTime() * m_vForce; 
+
+		Vector3 vPosition = GetComponent<Collider2D>()->GetPosition();
 		vPosition = vPosition + m_vVelocity * Time::DeltaTime();
+
 		GetComponent<Transform>()->SetPosition(vPosition);
 	}
 
@@ -214,7 +212,7 @@ namespace W
 		GetComponent<Transform>()->SetRotation(0.f, 0.f, fRadian);
 	}
 
-	const Vector3& AutoShuriken::get_dir()
+	const Vector2& AutoShuriken::get_dir()
 	{
 		Collider2D* pTargetColl = m_pTarget->GetComponent<Collider2D>();
 		Transform* pTr = m_pTarget->GetComponent<Transform>();
@@ -233,7 +231,8 @@ namespace W
 		vPosition.z = 0.f;
 
 		Vector3 vTemDiff = vTargetPos - vPosition;
-		return vTemDiff;
+
+		return Vector2(vTemDiff.x, vTemDiff.y);
 	}
 
 	
