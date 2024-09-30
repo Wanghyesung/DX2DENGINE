@@ -69,6 +69,7 @@ namespace W
 				BattleManager::HitchAbnormal(m_eAbnorType, m_fAccValue);
 				m_iAbnormalStack = 0;
 			}
+
 			Effect* pEffect = BattleManager::GetEffect(pMonsterAttack->GetName());
 			if (pEffect)
 			{

@@ -91,7 +91,7 @@ namespace W
 		if (m_fCurActiveTime >= m_fActiveTime)
 		{
 			m_fCurActiveTime = 0.f;
-			off();
+			EventManager::AddPlayerPool(this);
 		}
 
 		if (m_fCurCreateTime >= m_fCreateTime)
@@ -117,7 +117,6 @@ namespace W
 		m_fCurCreateTime = 0.f;
 		m_pTarget = nullptr;
 
-		//GetScript<MonsterScript>()->
 
 		PlayerAttackObject::Off();
 	}

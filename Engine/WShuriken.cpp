@@ -5,6 +5,7 @@
 #include "WRenderer.h"
 #include "WSceneManger.h"
 #include "WTime.h"
+#include "WEventManager.h"
 namespace W
 {
 	UINT Shuriken::COUNT = 0;

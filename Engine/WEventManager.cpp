@@ -1,22 +1,37 @@
 #include "WEventManager.h"
 #include "WSceneManger.h"
 #include "WSkillManager.h"
+#include "WObjectPoolManager.h"
 #include "..\Engine\WPlayerAttackObject.h"
+#include "..\Engine\WMonsterAttackObject.h"
 #include "WPlayerScript.h"
 namespace W
 {
 	std::vector<tEvent> EventManager::m_vecEvent = {};
-	std::vector<GameObject*> EventManager::m_vecObjectPool = {};
+	std::vector<GameObject*> EventManager::m_vecPlayer_Pool = {};
+	std::vector<GameObject*> EventManager::m_vecMonster_Pool = {};
+
 
 	std::wstring EventManager::m_strNextScene = {};
 #define ObjectPoolPosition 2000.f
 	void EventManager::Update()
 	{
-		for (int i = 0; i < m_vecObjectPool.size(); ++i)
+		for (int i = 0; i < m_vecPlayer_Pool.size(); ++i)
 		{
-			dynamic_cast<PlayerAttackObject*>(m_vecObjectPool[i])->Off();
+			ObjectPoolManager::AddObjectPool(m_vecPlayer_Pool[i]->GetName(), m_vecPlayer_Pool[i]);
+			SceneManger::Erase(m_vecPlayer_Pool[i]);
+
+			dynamic_cast<PlayerAttackObject*>(m_vecPlayer_Pool[i])->Off();
 		}
-		m_vecObjectPool.clear();
+		m_vecPlayer_Pool.clear();
+
+		for (int i = 0; i < m_vecMonster_Pool.size(); ++i)
+		{
+			ObjectPoolManager::AddObjectPool(m_vecMonster_Pool[i]->GetName(), m_vecMonster_Pool[i]);
+			//erase를 여기서 시키기
+			SceneManger::Erase(m_vecMonster_Pool[i]);
+		}
+		m_vecMonster_Pool.clear();
 
 		for (int i = 0; i < m_vecEvent.size(); ++i)
 		{
@@ -71,12 +86,23 @@ namespace W
 			pFSM->ChangeState(eState);
 		}
 		break;
-		case EVENT_TYPE::ADD_OBJECTPOOL:
+		
+		case EVENT_TYPE::ADD_PLAYER_POOL:
 		{
 			GameObject* pObj = (GameObject*)_tEve.lParm;
-			m_vecObjectPool.push_back(pObj);
+			
+			m_vecPlayer_Pool.push_back(pObj);
 		}
 		break;
+
+		case EVENT_TYPE::ADD_MONSTER_POOL:
+		{
+			GameObject* pObj = (GameObject*)_tEve.lParm;
+
+			m_vecMonster_Pool.push_back(pObj);
+		}
+		break;
+
 		case EVENT_TYPE::HITCH_ABNORMAL:
 		{
 			GameObject* pObj = (GameObject*)_tEve.lParm;
@@ -173,16 +199,32 @@ namespace W
 		}
 	}
 
-	void EventManager::AddObjectPool(GameObject* pObj)
+	void EventManager::AddPlayerPool(GameObject* _pObj)
 	{
 		tEvent eve = {};
-		eve.eEventType = EVENT_TYPE::ADD_OBJECTPOOL;
-		eve.lParm = (DWORD_PTR)pObj;
+		eve.lParm = (DWORD_PTR)_pObj;
+	
+		eve.eEventType = EVENT_TYPE::ADD_PLAYER_POOL;
 
-		Vector3 vPosition = pObj->GetComponent<Transform>()->GetPosition();
+		Vector3 vPosition = _pObj->GetComponent<Transform>()->GetPosition();
 		vPosition.x += ObjectPoolPosition;
 		vPosition.y += ObjectPoolPosition;
-		pObj->GetComponent<Transform>()->SetPosition(vPosition);
+		_pObj->GetComponent<Transform>()->SetPosition(vPosition);
+
+		AddEvent(eve);
+	}
+
+	void EventManager::AddMonsterPool(GameObject* _pObj)
+	{
+		tEvent eve = {};
+		eve.lParm = (DWORD_PTR)_pObj;
+		eve.eEventType = EVENT_TYPE::ADD_MONSTER_POOL;
+
+
+		Vector3 vPosition = _pObj->GetComponent<Transform>()->GetPosition();
+		vPosition.x += ObjectPoolPosition;
+		vPosition.y += ObjectPoolPosition;
+		_pObj->GetComponent<Transform>()->SetPosition(vPosition);
 
 		AddEvent(eve);
 	}

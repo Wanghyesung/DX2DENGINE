@@ -125,10 +125,9 @@ namespace W
 
 			PlayerAttackObject* pAttackObj = GetPlayer()->GetScript<PlayerScript>()->GetPlayerSkill(L"luck");
 			Shuriken* pShuriken = dynamic_cast<Shuriken*>(pAttackObj);
-			//pShuriken->GetComponent<Collider2D>()->SetActive(true);
+			
 			pShuriken->SetDir(GetPlayer()->GetDir());
-			//Shuriken* pShuriken = GetPlayer()->GetScript<PlayerScript>()->CreateShuriken();
-			//pShuriken->SetName(L"luck");
+		
 			//추가 데미지
 			AddDamage(pShuriken);
 

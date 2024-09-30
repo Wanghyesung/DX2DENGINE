@@ -93,7 +93,6 @@ namespace W
 	{
 		//몬스터 오브젝트 풀에 넣기
 		m_iCallCount = 0;
-		SceneManger::Erase(this);
-		GetOwner()->AddMonsterSkill(this);
+		EventManager::AddMonsterPool(this);
 	}
 }

@@ -15,6 +15,7 @@
 #include "..\Engine\WBattleManager.h"
 #include "..\Engine\WItemManager.h"
 #include "..\Engine\WPlayerAttackObject.h"
+#include "..\Engine\WObjectPoolManager.h"
 namespace W
 {
 	Scene* SceneManger::m_pActiveScene = nullptr;
@@ -73,6 +74,8 @@ namespace W
 			iter.second = nullptr;
 		}
 
+
+		ObjectPoolManager::Release();
 		BattleManager::Release();
 		ItemManager::Release();
 	}

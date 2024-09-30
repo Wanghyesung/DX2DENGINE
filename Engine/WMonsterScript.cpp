@@ -142,9 +142,12 @@ namespace W
 		tMonsterAttack& tAttack = m_vecAttacks[m_iCurAttackCount];
 		if (!tAttack.bSkill)
 		{
-			m_pMonster->AddMonsterSkill(m_pAttackObject);
+			//m_pMonster->AddMonsterSkill(m_pAttackObject);
+			//SceneManger::Erase(m_pAttackObject);
+
 			m_pAttackObject->GetScript<MonsterAttackScript>()->InitStack();
-			SceneManger::Erase(m_pAttackObject);
+			EventManager::AddMonsterPool(m_pAttackObject);
+
 			m_pAttackObject = nullptr;
 		}
 	}

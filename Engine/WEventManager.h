@@ -13,7 +13,8 @@ namespace W
 		CHANGE_PLAYER_STATE,
 		CHANGE_PLAYER_SKILL,
 		CHANGE_MONSTER_STATE,
-		ADD_OBJECTPOOL,
+		ADD_PLAYER_POOL,
+		ADD_MONSTER_POOL,
 		HITCH_ABNORMAL,
 		UP_STAT,
 		RESTORE,
@@ -33,7 +34,8 @@ namespace W
 		static void Update();
 		static void AddEvent(const tEvent& _tEve) { m_vecEvent.push_back(_tEve); }
 		
-		static void AddObjectPool(GameObject* pObj);
+		static void AddPlayerPool (GameObject* _pObj);
+		static void AddMonsterPool(GameObject* _pObj);
 		static void ChangeScene(const std::wstring& _strNextScene);
 		static void ChangePlayerFSMState(PlayerFSM* _pFSM, Player::ePlayerState _ePlayerState);
 		static void ChangePlayerSkillState(Player::ePlayerSkill _ePlayerSkill);
@@ -47,7 +49,8 @@ namespace W
 
 	private:
 		static std::vector<tEvent> m_vecEvent;
-		static std::vector<GameObject*> m_vecObjectPool;
+		static std::vector<GameObject*> m_vecPlayer_Pool;
+		static std::vector<GameObject*> m_vecMonster_Pool;
 		static std::wstring m_strNextScene;
 	};
 }

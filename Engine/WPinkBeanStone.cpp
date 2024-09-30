@@ -90,7 +90,6 @@ namespace W
 	void PinkBeanStone::off()
 	{
 		m_iCallCount = 0;
-		SceneManger::Erase(this);
-		GetOwner()->AddMonsterSkill(this);
+		EventManager::AddMonsterPool(this);
 	}
 }

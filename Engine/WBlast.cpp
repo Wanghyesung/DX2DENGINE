@@ -3,6 +3,7 @@
 #include "WObject.h"
 #include "WRenderer.h"
 #include "WAnimator.h"
+#include "WEventManager.h"
 namespace W
 {
 	Blast::Blast()
@@ -22,8 +23,8 @@ namespace W
 		pAnim->Create(L"left", pAtlas, Vector2(0.0f, 0.0f), Vector2(695.0f, 506.0f), 23, Vector2(700.f, 700.f), Vector2::Zero, 0.06f);
 		pAnim->Create(L"right", pAtlas, Vector2(15290.0f, 0.0f), Vector2(-695.0f, 506.0f), 23, Vector2(700.f, 700.f), Vector2::Zero, 0.06f);
 
-		pAnim->CompleteEvent(L"right") = std::bind(&PlayerAttackObject::PushObjectPool, this);
-		pAnim->CompleteEvent(L"left") = std::bind(&PlayerAttackObject::PushObjectPool, this);
+		pAnim->CompleteEvent(L"right") = std::bind(&EventManager::AddPlayerPool, this);
+		pAnim->CompleteEvent(L"left") = std::bind(&EventManager::AddPlayerPool, this);
 
 		SetHitSound(Resources::Find<AudioClip>(L"blasthit"), false);
 	}

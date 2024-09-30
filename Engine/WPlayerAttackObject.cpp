@@ -41,16 +41,15 @@ namespace W
 	{
 		GetScript<AttackScript>()->off();
 
-		SceneManger::Erase(this);
 		GetComponent<Collider2D>()->SetActive(false);
-		m_pPlayer->GetScript<PlayerScript>()->AddPlayerSkill(this);
+
 
 		if(m_pHitSoundClip)
 			m_pHitSoundClip->Stop();
 	}
 	void PlayerAttackObject::PushObjectPool()
 	{
-		EventManager::AddObjectPool(this);
+		EventManager::AddPlayerPool(this);
 	}
 	void PlayerAttackObject::SetSound(const std::wstring& _strName, std::shared_ptr<AudioClip> clip, bool _bLoop)
 	{

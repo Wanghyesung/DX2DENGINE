@@ -101,8 +101,7 @@ namespace W
 	{
 		m_iExplodeCount = 3;
 		m_iCallCount = 0;
-		SceneManger::Erase(this);
-		GetOwner()->AddMonsterSkill(this);
+		EventManager::AddMonsterPool(this);
 		GetScript<MonsterAttackScript>()->InitStack();
 	}
 	void SwordExplode::start()

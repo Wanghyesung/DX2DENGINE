@@ -94,7 +94,6 @@ namespace W
 	void Thunder::off()
 	{
 		m_iCallCount = 0;
-		SceneManger::Erase(this);
-		GetOwner()->AddMonsterSkill(this);
+		EventManager::AddMonsterPool(this);
 	}
 }

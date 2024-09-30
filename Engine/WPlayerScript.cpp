@@ -17,6 +17,7 @@
 #include "WSkillState.h"
 #include "WBattleManager.h"
 #include "WEventManager.h"
+#include "WObjectPoolManager.h"
 
 namespace W
 {
@@ -35,8 +36,8 @@ namespace W
 		m_fHitTime(2.f),
 		m_fknockbackTime(0.f),
 		m_tHitInfo{},
-		m_tObjectInfo{},
-		m_mapAttackObjs{}
+		m_tObjectInfo{}
+		//m_mapAttackObjs{}
 	{
 		m_tObjectInfo.fHP = 100.f;
 		m_tObjectInfo.fMP = 100.f;
@@ -56,21 +57,21 @@ namespace W
 			m_pSkill = nullptr;
 		}
 
-		std::map < std::wstring, std::queue<PlayerAttackObject*>>::iterator iter =
-			m_mapAttackObjs.begin();
-
-		for (iter; iter != m_mapAttackObjs.end(); ++iter)
-		{
-			std::queue< PlayerAttackObject*> queue = iter->second;
-			while (!queue.empty())
-			{
-				PlayerAttackObject* pObj = queue.front();
-				delete pObj;
-				pObj = nullptr;
-				queue.pop();
-			}
-
-		}
+		//std::map < std::wstring, std::queue<PlayerAttackObject*>>::iterator iter =
+		//	m_mapAttackObjs.begin();
+		//
+		//for (iter; iter != m_mapAttackObjs.end(); ++iter)
+		//{
+		//	std::queue< PlayerAttackObject*> queue = iter->second;
+		//	while (!queue.empty())
+		//	{
+		//		PlayerAttackObject* pObj = queue.front();
+		//		delete pObj;
+		//		pObj = nullptr;
+		//		queue.pop();
+		//	}
+		//
+		//}
 	}
 
 	void PlayerScript::Initialize()
@@ -265,31 +266,36 @@ namespace W
 
 	void PlayerScript::AddPlayerSkill(PlayerAttackObject* _pObj)
 	{
-		std::map<std::wstring, std::queue<PlayerAttackObject*>>::iterator iter =
-			m_mapAttackObjs.find(_pObj->GetName());
-
-		if (iter == m_mapAttackObjs.end())
-		{
-			std::queue<PlayerAttackObject*> queue = {};
-			queue.push(_pObj);
-			m_mapAttackObjs.insert(std::make_pair(_pObj->GetName(), queue));
-		}
-		else
-			iter->second.push(_pObj);
+		ObjectPoolManager::AddObjectPool(_pObj->GetName(), _pObj);
+		//std::map<std::wstring, std::queue<PlayerAttackObject*>>::iterator iter =
+		//	m_mapAttackObjs.find(_pObj->GetName());
+		//
+		//if (iter == m_mapAttackObjs.end())
+		//{
+		//	std::queue<PlayerAttackObject*> queue = {};
+		//	queue.push(_pObj);
+		//	m_mapAttackObjs.insert(std::make_pair(_pObj->GetName(), queue));
+		//}
+		//else
+		//	iter->second.push(_pObj);
 	}
 
 	PlayerAttackObject* PlayerScript::GetPlayerSkill(const std::wstring& _strName)
 	{
-		std::map<std::wstring, std::queue<PlayerAttackObject*>>::iterator iter =
-			m_mapAttackObjs.find(_strName);
 
-		if (iter == m_mapAttackObjs.end())
-			assert(nullptr);
+		//std::map<std::wstring, std::queue<PlayerAttackObject*>>::iterator iter =
+		//	m_mapAttackObjs.find(_strName);
+		//
+		//if (iter == m_mapAttackObjs.end())
+		//	assert(nullptr);
+		//
+		//PlayerAttackObject* pObj = iter->second.front();
+		//iter->second.pop();
+		//pObj->GetComponent<Collider2D>()->SetActive(true);
+		GameObject* pGameObj = ObjectPoolManager::FrontObject(_strName);
+		pGameObj->GetComponent<Collider2D>()->SetActive(true);
 
-		PlayerAttackObject* pObj = iter->second.front();
-		iter->second.pop();
-		pObj->GetComponent<Collider2D>()->SetActive(true);
-		return pObj;
+		return dynamic_cast<PlayerAttackObject*>(pGameObj);
 	}
 
 	void PlayerScript::add_skill()

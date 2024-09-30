@@ -68,7 +68,7 @@ namespace W
 		std::vector<std::wstring> m_vecItemNames;
 
 		//사용할 스킬들
-		std::map < std::wstring, std::queue<MonsterAttackObject*>> m_mapAttackObjs;
+		//std::map < std::wstring, std::queue<MonsterAttackObject*>> m_mapAttackObjs;
 
 		friend class MonsterManager;
 	};

@@ -2,7 +2,7 @@
 #include "WRenderer.h"
 #include "WSceneManger.h"
 #include "WCollisionManager.h"
-
+#include "WObjectPoolManager.h"
 namespace W
 {
 	Monster::Monster():
@@ -10,28 +10,28 @@ namespace W
 		m_eMonsterState(eMonsterState::stand),
 		m_strCurStateName(L"_stand"),
 		m_vecItemNames{},
-		m_iCreateCount(1),
-		m_mapAttackObjs{}
+		m_iCreateCount(1)
+		//m_mapAttackObjs{}
 	{
 
 	}
 	Monster::~Monster()
 	{
-		std::map < std::wstring, std::queue<MonsterAttackObject*>>::iterator iter =
-			m_mapAttackObjs.begin();
-
-		for (iter; iter != m_mapAttackObjs.end(); ++iter)
-		{
-			std::queue< MonsterAttackObject*> queue = iter->second;
-			while (!queue.empty())
-			{
-				MonsterAttackObject* pObj =  queue.front();
-				delete pObj;
-				pObj = nullptr;
-				queue.pop();
-			}
-
-		}
+		//std::map < std::wstring, std::queue<MonsterAttackObject*>>::iterator iter =
+		//	m_mapAttackObjs.begin();
+		//
+		//for (iter; iter != m_mapAttackObjs.end(); ++iter)
+		//{
+		//	std::queue< MonsterAttackObject*> queue = iter->second;
+		//	while (!queue.empty())
+		//	{
+		//		MonsterAttackObject* pObj =  queue.front();
+		//		delete pObj;
+		//		pObj = nullptr;
+		//		queue.pop();
+		//	}
+		//
+		//}
 	}
 	void Monster::Initialize()
 	{
@@ -75,33 +75,13 @@ namespace W
 
 	void Monster::AddMonsterSkill(MonsterAttackObject* _pObj)
 	{
-		std::map<std::wstring, std::queue<MonsterAttackObject*>>::iterator iter =
-			m_mapAttackObjs.find(_pObj->GetName());
-
-		if (iter == m_mapAttackObjs.end())
-		{
-			std::queue<MonsterAttackObject*> queue = {};
-			queue.push(_pObj);
-			m_mapAttackObjs.insert(std::make_pair(_pObj->GetName(), queue));
-		}
-		else
-			iter->second.push(_pObj);
-
-		
+		ObjectPoolManager::AddObjectPool(_pObj->GetName(), _pObj);
 	}
 
 	MonsterAttackObject* Monster::GetMonsterSkill(const std::wstring& _strName)
 	{
-		std::map<std::wstring, std::queue<MonsterAttackObject*>>::iterator iter =
-			m_mapAttackObjs.find(_strName);
-
-		if(iter == m_mapAttackObjs.end())
-			assert(nullptr);
-
-		MonsterAttackObject* pObj = iter->second.front();
-		iter->second.pop();
-
-		return pObj;
+		GameObject* pGameObj = ObjectPoolManager::FrontObject(_strName);
+		return dynamic_cast<MonsterAttackObject*>(pGameObj);
 	}
 
 	

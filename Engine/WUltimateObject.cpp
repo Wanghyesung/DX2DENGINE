@@ -4,6 +4,7 @@
 #include "WTime.h"
 #include "WAnimator.h"
 #include "WRenderer.h"
+#include "WEventManager.h"
 namespace W
 {
 	UltimateObject::UltimateObject():
@@ -91,6 +92,7 @@ namespace W
 		m_iCreateCount = 0;
 		m_iCurFrame = 0;
 		m_fCurResetTime = 0.f;
+	
 		PlayerAttackObject::Off();
 	}
 

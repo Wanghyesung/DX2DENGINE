@@ -94,7 +94,7 @@ namespace W
 	void Fire::off()
 	{
 		m_iCallCount = 0;
-		SceneManger::Erase(this);
-		GetOwner()->AddMonsterSkill(this);
+		
+		EventManager::AddMonsterPool(this);
 	}
 }

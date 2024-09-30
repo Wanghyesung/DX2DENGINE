@@ -12,7 +12,8 @@ namespace W
 		m_fCurCreateTime(0.f),
 		m_iCurIndex(0),
 		m_iEndFrame(0),
-		m_vecOffset{}
+		m_vecOffset{},
+		m_bEndEvent(false)
 	{
 
 	}
@@ -22,6 +23,7 @@ namespace W
 	}
 	void SpawnMonsterAttack::Initialize()
 	{
+		m_bEndEvent = false;
 		m_iCurIndex = 0;
 		m_iEndFrame = 0;
 		m_fCurCreateTime = 0.f;
@@ -33,9 +35,13 @@ namespace W
 	{
 		Monster* pMon = GetOwner();
 		int iFrame = pMon->GetComponent<Animator>()->GetActiveAnimation()->GetCurIndex();
-		if(pMon->GetState()==GameObject::eState::Paused ||
-			m_iEndFrame <= iFrame)
+
+
+		if (m_iEndFrame <= iFrame ||
+			pMon->GetState() == GameObject::eState::Paused)
+		{
 			off();
+		}
 
 		GameObject::Update();
 	}
@@ -85,7 +91,10 @@ namespace W
 	}
 	void SpawnMonsterAttack::off()
 	{
-		SceneManger::Erase(this);
-		GetOwner()->AddMonsterSkill(this);
+		if (!m_bEndEvent)
+		{
+			EventManager::AddMonsterPool(this);
+			m_bEndEvent = true;
+		}
 	}
 }

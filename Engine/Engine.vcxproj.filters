@@ -797,6 +797,9 @@
     <ClInclude Include="WPlayerDead.h">
       <Filter>Contents\Player\PlayerFSM\PlayerDead</Filter>
     </ClInclude>
+    <ClInclude Include="WObjectPoolManager.h">
+      <Filter>Contents\Manager\ObjectPoolManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
@@ -1592,6 +1595,9 @@
     <ClCompile Include="WPlayerDead.cpp">
       <Filter>Contents\Player\PlayerFSM\PlayerDead</Filter>
     </ClCompile>
+    <ClCompile Include="WObjectPoolManager.cpp">
+      <Filter>Contents\Manager\ObjectPoolManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -2112,6 +2118,9 @@
     </Filter>
     <Filter Include="Contents\Player\PlayerFSM\PlayerDead">
       <UniqueIdentifier>{cee7a89f-de8c-4d80-9112-8dd1fe3953dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Manager\ObjectPoolManager">
+      <UniqueIdentifier>{841e6804-6e66-4f01-a41d-731cf8ac634f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

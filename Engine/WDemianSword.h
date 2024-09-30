@@ -15,6 +15,7 @@ namespace W
 
 	private:
 		void off();
+
 		void start();
 		void restart();
 

@@ -104,6 +104,7 @@ namespace W
 		m_pWind = dynamic_cast<Wind*>(pAttackObj);
 		m_pWind->GetScript<AttackScript>()->SetDeleteObject(false);
 		m_pWind->SetDir(iDir);
+		
 		//추가 데미지
 		//AddDamage(m_bWind);
 

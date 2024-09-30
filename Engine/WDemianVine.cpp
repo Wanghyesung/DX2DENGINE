@@ -144,8 +144,7 @@ namespace W
 
 		GetComponent<Animator>()->Stop(false);
 		GetComponent<Animator>()->FindAnimation(L"vine")->SetIndex(0);
-		SceneManger::Erase(this);
-		GetOwner()->AddMonsterSkill(this);
+		EventManager::AddMonsterPool(this);
 	}
 
 	void DemianVine::check_hp()

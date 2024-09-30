@@ -95,7 +95,6 @@ namespace W
 	{
 		m_fCurTime = 0.f;
 		GetScript<MonsterAttackScript>()->SetEnter(false);
-		SceneManger::Erase(this);
-		GetOwner()->AddMonsterSkill(this);
+		EventManager::AddMonsterPool(this);
 	}
 }

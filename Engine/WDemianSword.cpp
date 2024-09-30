@@ -189,8 +189,7 @@ namespace W
 		m_fCurChangeTime = 0.f;
 		m_fCurWaitTime = 0.f;
 
-		SceneManger::Erase(this);
-		GetOwner()->AddMonsterSkill(this);
+		EventManager::AddMonsterPool(this);
 	}
 
 	void DemianSword::move()

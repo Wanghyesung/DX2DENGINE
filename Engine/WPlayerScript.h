@@ -100,7 +100,7 @@ namespace W
 		PlayerSkill* m_pSkill;
 
 		
-		std::map <std::wstring, std::queue<PlayerAttackObject*>> m_mapAttackObjs;
+		//std::map <std::wstring, std::queue<PlayerAttackObject*>> m_mapAttackObjs;
 
 
 		friend class EventManager;

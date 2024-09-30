@@ -22,8 +22,9 @@ namespace W
 		void SetCreateCount(int _iCount) { m_iCreateCount = _iCount; }
 		void SetEndFrame(int _iFrame) { m_iEndFrame = _iFrame; }
 
+
 	private:
-		void off();
+		 void off();
 
 	private:
 		std::vector<Vector2> m_vecVelocity;
@@ -34,10 +35,14 @@ namespace W
 		//생성 주기
 		float m_fCreateTime;
 		float m_fCurCreateTime;
+
 		//내 방향 인덴스 가져오기 용
 		int m_iCurIndex;
 		int m_iCreateCount;
 		int m_iEndFrame;
+
+		//
+		bool m_bEndEvent;
 	};
 }
 

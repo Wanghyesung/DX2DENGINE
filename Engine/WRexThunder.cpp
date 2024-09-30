@@ -102,7 +102,6 @@ namespace W
 	void RexThunder::off()
 	{
 		m_iCallCount = 0;
-		SceneManger::Erase(this);
-		GetOwner()->AddMonsterSkill(this);
+		EventManager::AddMonsterPool(this);
 	}
 }

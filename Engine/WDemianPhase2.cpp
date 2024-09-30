@@ -461,6 +461,9 @@ namespace W
 		if (attack1 == nullptr)
 			return;
 		SpawnMonsterAttack* pSpawn = dynamic_cast<SpawnMonsterAttack*>(attack1);
+
+		pSpawn->SetOnwer(this);
+
 		//위치 초기화
 		Vector3 vPosition = GetComponent<Transform>()->GetPosition();
 		pSpawn->GetComponent<Transform>()->SetPosition(vPosition);
@@ -513,7 +516,9 @@ namespace W
 		if (attack2 == nullptr)
 			return;
 		SpawnMonsterAttack* pSpawn = dynamic_cast<SpawnMonsterAttack*>(attack2);
-		//위치 초기화
+
+		pSpawn->SetOnwer(this);
+
 		Vector3 vPosition = GetComponent<Transform>()->GetPosition();
 		vPosition.y += 3.4;
 		pSpawn->GetComponent<Transform>()->SetPosition(vPosition);

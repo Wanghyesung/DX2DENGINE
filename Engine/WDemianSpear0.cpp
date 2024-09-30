@@ -100,7 +100,6 @@ namespace W
 	{
 		m_iCallCount = 0;
 		GetScript<MonsterAttackScript>()->InitStack();
-		SceneManger::Erase(this);
-		GetOwner()->AddMonsterSkill(this);
+		EventManager::AddMonsterPool(this);
 	}
 }

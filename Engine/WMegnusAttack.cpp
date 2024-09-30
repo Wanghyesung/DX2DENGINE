@@ -24,6 +24,8 @@ namespace W
 
 		m_tMonsterAttack.iStartFrame = 27;
 		m_tMonsterAttack.iEndFrame = 37;
+
+		m_iCallCount = 0;
 	}
 	void MegnusAttack::Update()
 	{
@@ -41,10 +43,9 @@ namespace W
 			SetMonsterAttack(m_tMonsterAttack);
 		}
 
-		if (m_iCallCount == 1 && iIndex >= m_tMonsterAttack.iEndFrame)
+		else if (m_iCallCount == 1 && iIndex >= m_tMonsterAttack.iEndFrame)
 		{
 			m_iCallCount = 2;
-			GetComponent<Collider2D>()->SetActive(false);
 			off();
 			return;
 		}
@@ -61,8 +62,8 @@ namespace W
 	}
 	void MegnusAttack::off()
 	{
-		m_iCallCount = 0;
-		SceneManger::Erase(this);
-		GetOwner()->AddMonsterSkill(this);
+		GetComponent<Collider2D>()->SetActive(false);
+
+		EventManager::AddMonsterPool(this);
 	}
 }

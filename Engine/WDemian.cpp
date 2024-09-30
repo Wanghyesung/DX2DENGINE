@@ -168,6 +168,7 @@ namespace W
 	{
 		
 	}
+
 	void Demian::Initialize()
 	{
 		//위치 내리기
@@ -415,6 +416,9 @@ namespace W
 		if (attack2 == nullptr)
 			return;
 		SpawnMonsterAttack* pSpawn = dynamic_cast<SpawnMonsterAttack*>(attack2);
+	
+		pSpawn->SetOnwer(this);
+
 		//위치 초기화
 		Vector3 vPosition =GetComponent<Transform>()->GetPosition();
 		vPosition.y += 3.4;

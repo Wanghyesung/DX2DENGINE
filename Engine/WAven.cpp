@@ -4,6 +4,7 @@
 #include "WAttackScript.h"
 #include "WRenderer.h"
 #include "WTime.h"
+#include "WEventManager.h"
 namespace W
 {
 	Aven::Aven() :
@@ -77,5 +78,6 @@ namespace W
 	void Aven::Off()
 	{
 		PlayerAttackObject::Off();
+		//EventManager::AddPlayerPool(this);
 	}
 }

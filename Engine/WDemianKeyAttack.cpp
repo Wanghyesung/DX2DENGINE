@@ -130,7 +130,6 @@ namespace W
 		m_fCurTime = 0.f;
 
 		GetScript<MonsterAttackScript>()->InitStack();
-		SceneManger::Erase(this);
-		GetOwner()->AddMonsterSkill(this);
+		EventManager::AddMonsterPool(this);
 	}
 }

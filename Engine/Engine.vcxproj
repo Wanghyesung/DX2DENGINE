@@ -234,6 +234,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WHairItem.h" />
     <ClInclude Include="WHat_40.h" />
     <ClInclude Include="WHat_80.h" />
+    <ClInclude Include="WObjectPoolManager.h" />
     <ClInclude Include="WPlayerDead.h" />
     <ClInclude Include="WShoes_40.h" />
     <ClInclude Include="WShoes_80.h" />
@@ -501,6 +502,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WHairItem.cpp" />
     <ClCompile Include="WHat_40.cpp" />
     <ClCompile Include="WHat_80.cpp" />
+    <ClCompile Include="WObjectPoolManager.cpp" />
     <ClCompile Include="WPlayerDead.cpp" />
     <ClCompile Include="WShoes_40.cpp" />
     <ClCompile Include="WShoes_80.cpp" />

@@ -92,7 +92,6 @@ namespace W
 	void ArielLaser::off()
 	{
 		m_iCallCount = 0;
-		SceneManger::Erase(this);
-		GetOwner()->AddMonsterSkill(this);
+		EventManager::AddMonsterPool(this);
 	}
 }

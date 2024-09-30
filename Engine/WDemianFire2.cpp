@@ -118,8 +118,8 @@ namespace W
 		m_bEnd = false;
 		GetScript<MonsterAttackScript>()->SetEnter(false);
 		GetScript<MonsterAttackScript>()->InitStack();
-		SceneManger::Erase(this);
-		GetOwner()->AddMonsterSkill(this);
+
+		EventManager::AddMonsterPool(this);
 	}
 	void DemianFire2::start()
 	{

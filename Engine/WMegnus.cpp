@@ -156,6 +156,7 @@ namespace W
 		setattack();
 		add_skill();
 
+
 		MonsterFSM* pFSM = new MonsterFSM();
 		pFSM->SetMonster(this);
 		Pscript->SetFSM(pFSM);

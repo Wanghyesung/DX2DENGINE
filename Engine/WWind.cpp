@@ -5,6 +5,7 @@
 #include "WTime.h"
 #include "WAnimator.h"
 #include "WObject.h"
+#include "WEventManager.h"
 namespace W
 {
 	Wind::Wind():
@@ -90,6 +91,7 @@ namespace W
 
 		GameObject::Update();
 	}
+
 	void Wind::LateUpdate()
 	{
 		Animator* pAnimator = GetComponent<Animator>();
