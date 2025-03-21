@@ -100,6 +100,9 @@
     <Filter Include="Font">
       <UniqueIdentifier>{99006f79-f95e-4194-bd26-cf2fbb212c27}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ThreadPool">
+      <UniqueIdentifier>{24ad2f3e-a5b0-4806-ab27-1d84500e448a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)WEntity.cpp">
@@ -221,6 +224,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WFadeInOut.cpp">
       <Filter>GameObject\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WThreadPool.cpp">
+      <Filter>ThreadPool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -364,6 +370,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)temTex.h">
       <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WThreadPool.h">
+      <Filter>ThreadPool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

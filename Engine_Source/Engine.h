@@ -11,6 +11,9 @@
 #include <bitset> // 비트 배열 편하게 사용해주는 라이브러리
 #include <set> // 해시 테이블
 #include <functional> // 함수 포인터
+#include <mutex>
+#include <condition_variable>
+#include <atomic>
 
 #include <cmath> //수학
 #include <algorithm> //정렬 알고리즘

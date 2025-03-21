@@ -52,6 +52,7 @@ namespace W
 			Resources::Load<Texture>(L"Demian_attack2", L"..\\Resources\\Texture\\Monster\\demian\\attack2.png");
 		std::shared_ptr<Texture> pAttack3 =
 			Resources::Load<Texture>(L"Demian_attack3", L"..\\Resources\\Texture\\Monster\\demian\\attack3.png");
+
 		
 		pAttack0->BindShaderResource(eShaderStage::PS, 12);
 		pAttack1->BindShaderResource(eShaderStage::PS, 12);

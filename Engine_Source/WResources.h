@@ -12,8 +12,12 @@ namespace W
 		{
 			//리소스맵에서 데이터를 탐색한다 데이터가 있다면 해당데이터를 반환하고
 			//데이터가 없다면 end를 반환해준다.
-			std::map<std::wstring, std::shared_ptr<Resource>>::iterator iter = m_mapResources.find(_strKey);
+			std::map<std::wstring, std::shared_ptr<Resource>>::iterator iter = m_mapResources.begin();
 
+			{
+				std::lock_guard<std::mutex> lock(m_mutex);
+				iter = m_mapResources.find(_strKey);
+			}
 			//찾고자 하는 데이터가 존재한다면
 			//해당타입으로 형변환하여 반환
 			if (iter != m_mapResources.end())
@@ -31,9 +35,7 @@ namespace W
 			// 키값으로 탐색
 			std::shared_ptr<T> resource = Resources::Find<T>(_strKey);
 			if (resource != nullptr)
-			{
 				return resource;
-			}
 
 			// 해당 리소스가 없다면
 			resource = std::make_shared<T>();
@@ -45,7 +47,11 @@ namespace W
 
 			resource->SetKey(_strKey);
 			resource->SetPath(_strPath);
-			m_mapResources.insert(std::make_pair(_strKey, resource));
+
+			{
+				std::lock_guard<std::mutex> lock(m_mutex);
+				m_mapResources.insert(std::make_pair(_strKey, resource));
+			}
 
 			return std::dynamic_pointer_cast<T>(resource);
 		}
@@ -53,6 +59,7 @@ namespace W
 		template <typename T>
 		static void Insert(const std::wstring& _strKey, std::shared_ptr<T> _pResource)
 		{
+			std::lock_guard<std::mutex> lock(m_mutex);
 			m_mapResources.insert(std::make_pair(_strKey, _pResource));
 		}
 
@@ -66,6 +73,8 @@ namespace W
 		//}
 
 	private:
+		static std::mutex m_mutex;
+
 		static std::map<std::wstring, std::shared_ptr<Resource>> m_mapResources;
 		//리소스같은 경우엔 로드된 리소스하나를 모두가 쓰기 때문에 sharedptr이 적합 쓰고 있는
 		//리소스가 전부 해제되야 그떄 해제됨

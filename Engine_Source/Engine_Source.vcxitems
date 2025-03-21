@@ -15,6 +15,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)temTex.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WThreadPool.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WFadeInOut.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WInfo.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)UIManger.h" />
@@ -65,6 +66,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WFontWrapper.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WThreadPool.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)UIManger.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WAnimation.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WAnimator.cpp" />

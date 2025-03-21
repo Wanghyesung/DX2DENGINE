@@ -11,6 +11,7 @@
 #include "..\Engine\WEventManager.h"
 #include "..\Engine\WMonsterManager.h"
 #include "..\Engine\WItemManager.h"
+#include "..\Engine_Source\WThreadPool.h"
 #include "WFmod.h"
 #include "WFontWrapper.h"
 namespace W
@@ -42,6 +43,7 @@ namespace W
 
 	void Application::Initialize()
 	{
+		ThreadPool::Initiailize(4);
 		Time::Initiailize();
 		Input::Initialize();
 		Fmod::Initialize();

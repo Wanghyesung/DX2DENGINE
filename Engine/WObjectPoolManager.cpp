@@ -4,7 +4,6 @@
 
 namespace W
 {
-	//몬스터나 플레이어 map 삭제해야함
 	std::unordered_map<std::wstring, std::queue<GameObject*>> ObjectPoolManager::m_hashObjectPool = {};
 
 	void ObjectPoolManager::AddObjectPool(const std::wstring& _strName, GameObject* _pGameObj)

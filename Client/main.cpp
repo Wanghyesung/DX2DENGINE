@@ -19,6 +19,8 @@
 #include "..\Engine_Source/WFmod.h"
 #include "..\Engine_Source\WFontWrapper.h"
 #include "..\Engine\LoadScene.h"
+#include "..\Engine_Source\WThreadPool.h"
+
 #include "guiEditor.h"
 
 //키 이동, shader 색, 랜덤한게 생성, 먹으면 크기 늘어나게 (분열은 선택)
@@ -166,6 +168,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     renderer::Release();
     //W::Resources::Release();//전부 shadered_ptr로 바꿈 알아서 해제
+
+    W::ThreadPool::Shutdown();
     W::SceneManger::Release();
     //W::BattleManager::Release();
     W::Fmod::Release();
