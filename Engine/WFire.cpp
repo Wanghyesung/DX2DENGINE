@@ -25,8 +25,7 @@ namespace W
 
 		GetComponent<Transform>()->SetScale(1.1f, 1.1f, 0.f);
 
-		std::shared_ptr<Texture> pAtlas =
-			Resources::Load<Texture>(L"FireTex", L"..\\Resources\\Texture\\Monster\\Horntail\\headB\\attack1_effect.png");
+		std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"FireTex");
 		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"Fire_left", pAtlas, Vector2(0.0f, 0.0f), Vector2(111.f, 110.0f), 30, Vector2(110.f, 110.f), Vector2::Zero, 0.15f);
 

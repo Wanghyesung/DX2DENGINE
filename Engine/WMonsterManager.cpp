@@ -6,11 +6,13 @@
 #include "WMonsterHP.h"
 #include "WItemObject.h"
 #include "WIconUI.h"
+#include "WSceneManger.h"
 
 namespace W
 {
 	std::vector<Monster*> MonsterManager::m_vecDeadObjs = {};
 	std::vector<float> MonsterManager::m_vecReSpwanTime = {};
+	std::vector<GameObject*> MonsterManager::m_vecExpectedDeleteObjs = {};
 
 	void MonsterManager::Update()
 	{
@@ -40,6 +42,23 @@ namespace W
 		m_vecReSpwanTime.push_back(7.f);
 
 		create_item(_pGameObj);
+	}
+
+	void MonsterManager::AddDeleteObject(GameObject* _pGameObj)
+	{
+		_pGameObj->SetState(GameObject::eState::Paused);
+		SceneManger::Erase(_pGameObj);
+		m_vecExpectedDeleteObjs.push_back(_pGameObj);
+	}
+
+	void MonsterManager::DeleteMonster()
+	{
+		for (int i = 0; i < m_vecExpectedDeleteObjs.size(); ++i)
+		{
+			delete m_vecExpectedDeleteObjs[i];
+			m_vecExpectedDeleteObjs[i] = nullptr;
+		}
+		m_vecExpectedDeleteObjs.clear();
 	}
 
 	void MonsterManager::respawn(Monster* _pGameObj)

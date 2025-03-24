@@ -26,8 +26,7 @@ namespace W
 
 		GetComponent<Transform>()->SetScale(2.1f, 2.1f, 0.f);
 
-		std::shared_ptr<Texture> pAtlas =
-			Resources::Load<Texture>(L"IceTex", L"..\\Resources\\Texture\\Monster\\Horntail\\headA\\attack1_effect.png");
+		std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"IceTex");
 		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"Ice_left", pAtlas, Vector2(0.0f, 0.0f), Vector2(216.f, 242.0f), 30, Vector2(220.f, 220.f), Vector2::Zero, 0.15f);
 

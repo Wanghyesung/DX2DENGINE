@@ -18,7 +18,6 @@ namespace W
 		}
 
 		m_hashObjectPool[_strName].push(_pGameObj);
-
 	}
 	GameObject* ObjectPoolManager::FrontObject(const std::wstring& _strName)
 	{
@@ -37,8 +36,6 @@ namespace W
 				return pGameObj;
 			}
 		}
-
-
 		return nullptr;
 	}
 
@@ -59,6 +56,27 @@ namespace W
 				pGameObj = nullptr;
 			}
 		}
+	}
+
+	void ObjectPoolManager::ReleaseObject(const std::wstring& _strName)
+	{
+		std::unordered_map<std::wstring, std::queue<GameObject*>>::iterator iter =
+			m_hashObjectPool.find(_strName);
+
+		if (iter == m_hashObjectPool.end())
+			return;
+
+		std::queue<GameObject*>& queue = iter->second;
+		while (!queue.empty())
+		{
+			GameObject* pGameObj = queue.front();
+			queue.pop();
+
+			delete pGameObj;
+			pGameObj = nullptr;
+		}
+
+		m_hashObjectPool.erase(_strName);
 	}
 
 }

@@ -29,28 +29,20 @@ namespace W
 		pRenderer->SetMaterial(pMater);
 
 		std::shared_ptr<Texture> pAtlas =
-			Resources::Load<Texture>(L"LegTex", L"..\\Resources\\Texture\\Monster\\Horntail\\Leg\\Leg.png");
+			Resources::Find<Texture>(L"LegTex");
+		pAtlas->BindShaderResource(eShaderStage::PS, 12);
+
 		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"Leg_stand", pAtlas, Vector2(0.f, 0.f), Vector2(600.f, 300.f), 1, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"Leg_attack0", pAtlas, Vector2(0.f, 300.f), Vector2(600.f, 300.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"Leg_attack1", pAtlas, Vector2(0.f, 600.f), Vector2(600.f, 300.f), 18, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"Leg_dead", pAtlas, Vector2(0.f, 900.f), Vector2(600.f, 300.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 
-		m_spAttackEffect1 =
-			Resources::Load<Texture>(L"legattack1Hit", L"..\\Resources\\Texture\\Monster\\Horntail\\Leg\\attack1_hit.png");
-		Effect* pEffect = new Effect();
-		pEffect->SetName(L"legattack1");
-		pEffect->CreateAnimation(m_spAttackEffect1, Vector2(0.f, 0.f), Vector2(126.f, 107.f), 5, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
-
-		m_spAttackEffect2 =
-			Resources::Load<Texture>(L"legattack2Hit", L"..\\Resources\\Texture\\Monster\\Horntail\\Leg\\attack2_hit.png");
-		pEffect = new Effect();
-		pEffect->SetName(L"legattack2");
-		pEffect->CreateAnimation(m_spAttackEffect2, Vector2(0.f, 0.f), Vector2(197, 119.f), 6, 1, Vector2(100.f, 100.f), Vector2(0.f, 0.3f), 0.1f);
-
 	}
 	HorntailLeg::~HorntailLeg()
 	{
+		ObjectPoolManager::ReleaseObject(L"legattack1");
+		ObjectPoolManager::ReleaseObject(L"legattack2");
 
 	}
 

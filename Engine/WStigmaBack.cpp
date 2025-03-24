@@ -23,8 +23,7 @@ namespace W
 		Resources::Insert(L"StigamBackMater", pMater);
 		mr->SetMaterial(pMater);
 		Animator* pAnim = AddComponent<Animator>();
-		std::shared_ptr<Texture> pAtlas
-			= Resources::Load<Texture>(L"StigmaBack", L"..\\Resources\\Texture\\Monster\\demian\\stigmaback.png");
+		std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"StigmaBack");
 		pAnim->Create(L"loop", pAtlas, Vector2(0.0f, 0.0f), Vector2(80.0f, 43.0f), 11, Vector2(80.f, 80.f), Vector2::Zero, 0.13f);
 
 		pAnim->Play(L"loop", true);

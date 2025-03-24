@@ -16,6 +16,7 @@
 #include "..\Engine\WItemManager.h"
 #include "..\Engine\WPlayerAttackObject.h"
 #include "..\Engine\WObjectPoolManager.h"
+#include "..\Engine\WMonsterManager.h"
 namespace W
 {
 	Scene* SceneManger::m_pActiveScene = nullptr;
@@ -74,7 +75,7 @@ namespace W
 			iter.second = nullptr;
 		}
 
-
+		MonsterManager::DeleteMonster();
 		ObjectPoolManager::Release();
 		BattleManager::Release();
 		ItemManager::Release();
@@ -93,7 +94,7 @@ namespace W
 			return nullptr;
 
 
-		PushObjectPool(m_pActiveScene);
+		PushObjectPool(m_pActiveScene);//현재 씬 공격 오브젝트 회수
 		SwapUI(m_pActiveScene, iter->second);
 		SwapPlayer(m_pActiveScene, iter->second);
 

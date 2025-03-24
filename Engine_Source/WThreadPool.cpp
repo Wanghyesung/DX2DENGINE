@@ -9,6 +9,10 @@ namespace W
 	std::condition_variable ThreadPool::m_CV = {};
 	std::atomic<bool> ThreadPool::m_bRunnig = true;
 
+	std::mutex ThreadPool::m_completeMutex = {};
+	std::condition_variable ThreadPool::m_completeCV = {};
+	std::atomic<int> ThreadPool::m_iWorkCount = 0;
+
 	void ThreadPool::Initiailize(int _iThreadCount)
 	{
 		for (int i = 0; i < _iThreadCount; ++i)
@@ -29,6 +33,11 @@ namespace W
 						m_queueTasks.pop();
 					}
 					funcTask();
+
+					m_iWorkCount.fetch_sub(1);
+
+					if (m_iWorkCount.load() == 0)
+						m_completeCV.notify_one();
 				}
 			});
 		}
@@ -50,9 +59,20 @@ namespace W
 
 	void ThreadPool::Enqueu(std::function<void()> _func)
 	{
-		std::lock_guard<std::mutex> lock(m_mutex);
-		m_queueTasks.push(_func);
+		{
+			std::lock_guard<std::mutex> lock(m_mutex);
+			m_queueTasks.push(_func);
+		}
+
+		m_iWorkCount.fetch_add(1);
 		m_CV.notify_one();
+	}
+
+	void ThreadPool::Joinable()
+	{
+		std::unique_lock<std::mutex> lock(m_completeMutex);
+		m_completeCV.wait(lock, []() {return m_iWorkCount.load() == 0; });
+
 	}
 	
 }

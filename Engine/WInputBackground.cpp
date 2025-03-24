@@ -24,8 +24,7 @@ namespace W
 		pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		pRenderer->SetMaterial(pMater);
 
-		std::shared_ptr<Texture> pAtlas =
-			Resources::Find<Texture>(L"demainInputBack");
+		std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"demainInputBack");
 		pMater->SetTexture(pAtlas);
 
 		GetComponent<Transform>()->SetScale(2.5f * 1.8f, 2.5f * 0.5f, 0.f);

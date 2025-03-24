@@ -21,6 +21,8 @@ namespace W
 		virtual void OnCollisionStay(Collider2D* other)override;
 		virtual void OnCollisionExit(Collider2D* other)override;
 
+		MonsterHP* GetMonsterHP() { return m_pHP; }
+
 		void SetHitInfo(const tHitInfo& _tHitInfo) { m_tHitInfo = _tHitInfo; }
 		const tHitInfo& GetHitInfo() { return m_tHitInfo; }
 

@@ -20,7 +20,6 @@ namespace W
 		void SetHPValue(float _fValue) { m_fHP = _fValue; }
 	private:
 		float m_fHP;
-		MonsterBackHP* m_pHPBack;
 		friend class MonsterManager;
 	};
 

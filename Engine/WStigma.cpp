@@ -18,8 +18,7 @@ namespace W
 		Resources::Insert(L"StigamMater", pMater);
 
 		Animator* pAnim = AddComponent<Animator>();
-		std::shared_ptr<Texture> pAtlas
-			= Resources::Load<Texture>(L"Stigma", L"..\\Resources\\Texture\\Monster\\demian\\stigma.png");
+		std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"Stigma");
 		pAnim->Create(L"start", pAtlas, Vector2(0.0f, 0.0f), Vector2(189.0f, 187.0f), 7, Vector2(200.f, 200.f), Vector2::Zero, 0.12f);
 		
 		pAnim->CompleteEvent(L"start") = std::bind(&Stigma::Restore, this);

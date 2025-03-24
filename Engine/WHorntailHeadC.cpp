@@ -31,32 +31,22 @@ namespace W
 		pRenderer->SetMaterial(pMater);
 
 		std::shared_ptr<Texture> pAtlas =
-			Resources::Load<Texture>(L"HeadCTex", L"..\\Resources\\Texture\\Monster\\Horntail\\headC\\headC.png");
+			Resources::Find<Texture>(L"HeadCTex");
+		pAtlas->BindShaderResource(eShaderStage::PS, 12);
+
 		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"HeadC_stand", pAtlas, Vector2(0.f, 0.f), Vector2(600.f, 700.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"HeadC_attack0", pAtlas, Vector2(0.f, 700.f), Vector2(600.f, 700.f), 23, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"HeadC_attack1", pAtlas, Vector2(0.f, 1400.f), Vector2(600.f, 700.f), 18, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"HeadC_attack2", pAtlas, Vector2(0.f, 2100.f), Vector2(600.f, 700.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"HeadC_dead", pAtlas, Vector2(0.f, 2800.f), Vector2(600.f, 700.f), 13, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-
-
-		m_spAttackEffect1 =
-			Resources::Load<Texture>(L"thunderbreathHit", L"..\\Resources\\Texture\\Monster\\Horntail\\headC\\attack1_hit.png");
-		Effect* pEffect = new Effect();
-		pEffect->SetName(L"thunderbreath");
-		pEffect->CreateAnimation(m_spAttackEffect1, Vector2(0.f, 0.f), Vector2(72.f, 82.f), 4, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
-
-		m_spAttackEffect2 =
-			Resources::Load<Texture>(L"thunderHit", L"..\\Resources\\Texture\\Monster\\Horntail\\headC\\attack2_hit.png");
-		pEffect = new Effect();
-		pEffect->SetName(L"thunder");
-		pEffect->CreateAnimation(m_spAttackEffect2, Vector2(0.f, 0.f), Vector2(78.f, 75.f), 5, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
 		
 	}
 
 	HorntailHeadC::~HorntailHeadC()
 	{
-
+		ObjectPoolManager::ReleaseObject(L"thunderbreath");
+		ObjectPoolManager::ReleaseObject(L"thunder");
 	}
 
 	void HorntailHeadC::add_skill()

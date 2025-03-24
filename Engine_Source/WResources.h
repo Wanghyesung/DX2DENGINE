@@ -63,14 +63,13 @@ namespace W
 			m_mapResources.insert(std::make_pair(_strKey, _pResource));
 		}
 
-		//static void Release()
-		//{
-		//	for (auto pair : m_mapResources)
-		//	{
-		//		delete pair.second;
-		//		pair.second = nullptr;
-		//	}
-		//}
+		template <typename T>
+		static void Release(const std::wstring& _strKey)
+		{
+			std::lock_guard<std::mutex> lock(m_mutex);
+			m_mapResources.erase(_strKey);
+		}
+		
 
 	private:
 		static std::mutex m_mutex;

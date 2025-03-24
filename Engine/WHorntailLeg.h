@@ -25,8 +25,6 @@ namespace W
 	private:
 		Horntail* m_pOwner;
 
-		std::shared_ptr<Texture> m_spAttackEffect1;
-		std::shared_ptr<Texture> m_spAttackEffect2;
 	};
 }
 

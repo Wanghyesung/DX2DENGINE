@@ -23,7 +23,7 @@ namespace W
 
 	private:
 		void create_monster();
-
+		void create_effect();
 	};
 }
 

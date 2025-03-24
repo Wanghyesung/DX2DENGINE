@@ -43,22 +43,14 @@ namespace W
 		pRenderer->SetMaterial(pMater);
 		AddComponent<Rigidbody>();
 
-		std::shared_ptr<Texture> pNormal2 =
-			Resources::Load<Texture>(L"Demian2Normal", L"..\\Resources\\Texture\\Monster\\demian\\stand1.png");
-		std::shared_ptr<Texture> pDead2 =
-			Resources::Load<Texture>(L"Demian2Dead", L"..\\Resources\\Texture\\Monster\\demian\\dead1.png");
-		std::shared_ptr<Texture> pAttack20 =
-			Resources::Load<Texture>(L"Demian2_attack0", L"..\\Resources\\Texture\\Monster\\demian\\attack10.png");
-		std::shared_ptr<Texture> pAttack21 =
-			Resources::Load<Texture>(L"Demian2_attack1", L"..\\Resources\\Texture\\Monster\\demian\\attack11.png");
-		std::shared_ptr<Texture> pAttack22 =
-			Resources::Load<Texture>(L"Demian2_attack2", L"..\\Resources\\Texture\\Monster\\demian\\attack12.png");
-		std::shared_ptr<Texture> pAttack23 =
-			Resources::Load<Texture>(L"Demian2_attack3", L"..\\Resources\\Texture\\Monster\\demian\\attack13.png");
-		std::shared_ptr<Texture> pAttack24 =
-			Resources::Load<Texture>(L"Demian2_attack4", L"..\\Resources\\Texture\\Monster\\demian\\attack14.png");
-		std::shared_ptr<Texture> pAttack25 =
-			Resources::Load<Texture>(L"Demian2_attack5", L"..\\Resources\\Texture\\Monster\\demian\\attack15.png");
+		std::shared_ptr<Texture> pNormal2 = Resources::Find<Texture>(L"Demian2Normal");
+		std::shared_ptr<Texture> pDead2 = Resources::Find<Texture>(L"Demian2Dead");
+		std::shared_ptr<Texture> pAttack20 = Resources::Find<Texture>(L"Demian2_attack0");
+		std::shared_ptr<Texture> pAttack21 = Resources::Find<Texture>(L"Demian2_attack1");
+		std::shared_ptr<Texture> pAttack22 = Resources::Find<Texture>(L"Demian2_attack2");
+		std::shared_ptr<Texture> pAttack23 = Resources::Find<Texture>(L"Demian2_attack3");
+		std::shared_ptr<Texture> pAttack24 = Resources::Find<Texture>(L"Demian2_attack4");
+		std::shared_ptr<Texture> pAttack25 = Resources::Find<Texture>(L"Demian2_attack5");
 
 		Animator* pAnim = AddComponent<Animator>();
 		//////////////////페이즈 2///////////////////////
@@ -163,35 +155,13 @@ namespace W
 		pAnim->FindAnimation(L"Demian2_attack5_right")->Create(L"Demian2_attack5_right", pAttack25, Vector2(12000.f, 6500.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Demian2_attack5_right")->Create(L"Demian2_attack5_right", pAttack25, Vector2(12000.f, 7800.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
 
-	
-		Resources::Load<Texture>(L"demainfire1", L"..\\Resources\\Texture\\Monster\\demian\\demianfire1.png");
-		Resources::Load<Texture>(L"demainfire2", L"..\\Resources\\Texture\\Monster\\demian\\demainfire2.png");
-		Resources::Load<Texture>(L"demianClone0", L"..\\Resources\\Texture\\Monster\\demian\\demianclone0.png");
-		Resources::Load<Texture>(L"demianClone1", L"..\\Resources\\Texture\\Monster\\demian\\demianclone1.png");
-		Resources::Load<Texture>(L"demianspear0", L"..\\Resources\\Texture\\Monster\\demian\\demianspear0.png");
-		Resources::Load<Texture>(L"demianspear1", L"..\\Resources\\Texture\\Monster\\demian\\demianspear1.png");
-
-		Resources::Load<Texture>(L"demianfire1hit", L"..\\Resources\\Texture\\Monster\\demian\\demianfire1hit.png");
-		Effect* pAttack_hit1 = new Effect();
-		pAttack_hit1->SetName(L"Demian2_attack1");
-		pAttack_hit1->CreateAnimation(Resources::Find<Texture>(L"demianfire1hit"), Vector2(0.f, 0.f), Vector2(227.f, 228.f), 5, 1, Vector2(250.f, 250.f), Vector2(0.f, 0.f), 0.2f);
-
-
-		Resources::Load<Texture>(L"DemianAttack0Effect", L"..\\Resources\\Texture\\Monster\\demian\\demianEffect.png");
-		Effect* pEffect = new Effect();
-		pEffect->GetComponent<Transform>()->SetScale(Vector3(18.f, 18.f, 0.f));
-		pEffect->SetName(L"DemianAttack0Effect");
-		pEffect->CreateAnimation(Resources::Find<Texture>(L"DemianAttack0Effect"), Vector2(0.f, 0.f), Vector2(1122.f, 382.f), 9, 1, Vector2(2000.f, 2000.f), Vector2(0.f, 0.f), 0.1f);
-
-		//구
-		Resources::Load<Texture>(L"DemianCircle", L"..\\Resources\\Texture\\Monster\\demian\\circle.png");
-
 		pAttack20->BindShaderResource(eShaderStage::PS, 12);
 		pAttack21->BindShaderResource(eShaderStage::PS, 12);
 		pAttack22->BindShaderResource(eShaderStage::PS, 12);
 		pAttack23->BindShaderResource(eShaderStage::PS, 12);
 		pAttack24->BindShaderResource(eShaderStage::PS, 12);
 		pAttack25->BindShaderResource(eShaderStage::PS, 12);
+		pDead2->BindShaderResource(eShaderStage::PS, 12);
 
 		//데미안 창 공격
 		set_effect();
@@ -213,6 +183,13 @@ namespace W
 			m_vecCircle[i] = nullptr;
 		}
 
+		ObjectPoolManager::ReleaseObject(L"SpawnObj");
+		ObjectPoolManager::ReleaseObject(L"Demian2_attack0");
+		ObjectPoolManager::ReleaseObject(L"Demian2_attack1");
+		ObjectPoolManager::ReleaseObject(L"Demian2_attack2");
+		ObjectPoolManager::ReleaseObject(L"Demian2_attack3");
+		ObjectPoolManager::ReleaseObject(L"Demian2_attack4");
+		ObjectPoolManager::ReleaseObject(L"Demian2_attack5");
 	}
 	void DemianPhase2::Initialize()
 	{
@@ -673,23 +650,16 @@ namespace W
 	}
 	void DemianPhase2::set_effect()
 	{
-		Effect* pClone1 = new Effect();
-		pClone1->GetComponent<Transform>()->SetScale(Vector3(18.f, 18.f, 0.f));
-		pClone1->SetName(L"DemianClone0");
-		pClone1->CreateAnimation(Resources::Find<Texture>(L"demianClone0"), Vector2(0.f, 0.f), Vector2(515.f, 318.f), 8, 1, Vector2(2000.f, 2000.f), Vector2(0.f, 0.f), 0.1f);
-		pClone1->SetFunction(std::bind(&DemianPhase2::create_spear0, this), 1);
-
-		Effect* pClone2 = new Effect();
-		pClone2->GetComponent<Transform>()->SetScale(Vector3(18.f, 18.f, 0.f));
-		pClone2->SetName(L"DemianClone1");
-		pClone2->CreateAnimation(Resources::Find<Texture>(L"demianClone1"), Vector2(0.f, 0.f), Vector2(679.f, 542.f), 8, 1, Vector2(1800.f, 1800.f), Vector2(0.f, 0.f), 0.1f);
+		for (int i = 0; i < 2; ++i)
+		{
+			Effect* pClone1 = BattleManager::GetEffect(L"DemianClone0");
+			pClone1->SetFunction(std::bind(&DemianPhase2::create_spear0, this), 1);
+			BattleManager::PushEffect(pClone1);
+		}
+		
+		Effect* pClone2 = BattleManager::GetEffect(L"DemianClone1");
 		pClone2->SetFunction(std::bind(&DemianPhase2::create_spear1, this), 1);
-
-		pClone1 = new Effect();
-		pClone1->GetComponent<Transform>()->SetScale(Vector3(18.f, 18.f, 0.f));
-		pClone1->SetName(L"DemianClone0");
-		pClone1->CreateAnimation(Resources::Find<Texture>(L"demianClone0"), Vector2(0.f, 0.f), Vector2(515.f, 318.f), 8, 1, Vector2(2000.f, 2000.f), Vector2(0.f, 0.f), 0.1f);
-		pClone1->SetFunction(std::bind(&DemianPhase2::create_spear0, this), 1);
+		BattleManager::PushEffect(pClone2);
 	}
 
 	void DemianPhase2::move()

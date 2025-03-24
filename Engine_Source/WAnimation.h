@@ -60,7 +60,7 @@ namespace W
 
 		void SetAnimator(Animator* _pAnim) { m_pAnimator = _pAnim; }
 	private:
-		std::shared_ptr<graphics::Texture> m_spAtlas;
+		std::weak_ptr<graphics::Texture> m_wpAtlas;
 		Animator* m_pAnimator;
 		std::vector<Sprite> m_vecSprites;
 		int m_iIndex;

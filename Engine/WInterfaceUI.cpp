@@ -378,6 +378,8 @@ namespace W
 						//찾은 아이템 다시 스킬창으로 위치 설정
 						SKill* pSKill = dynamic_cast<SKill*>(pFindItem);
 						SKill* pSKillClone = pSKill->GetSkillClone();
+						if (!pSKillClone)
+							return false;
 						Vector3 vClonePosition = pSKillClone->GetComponent<Transform>()->GetPosition();
 						pFindItem->GetComponent<Transform>()->SetPosition(vClonePosition);
 

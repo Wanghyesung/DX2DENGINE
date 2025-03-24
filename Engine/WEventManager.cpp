@@ -55,7 +55,11 @@ namespace W
 
 		case EVENT_TYPE::DELET_OBJECT:
 		{
-			
+			GameObject* pObj = (GameObject*)_tEve.lParm;
+			Scene* pScene = (Scene*)_tEve.wParm;
+		
+			pScene->EraseObject(pObj->GetLayerType(),pObj);
+			delete pObj;
 		}
 		break;
 
@@ -199,13 +203,23 @@ namespace W
 		}
 	}
 
+	void EventManager::DeleteObject(GameObject* _pObj, Scene* _pScene)
+	{
+		tEvent eve = {};
+		eve.lParm = (DWORD_PTR)_pObj;
+		eve.wParm = (DWORD_PTR)_pScene;
+
+		eve.eEventType = EVENT_TYPE::DELET_OBJECT;
+		AddEvent(eve);
+	}
+
 	void EventManager::AddPlayerPool(GameObject* _pObj)
 	{
 		tEvent eve = {};
 		eve.lParm = (DWORD_PTR)_pObj;
 	
 		eve.eEventType = EVENT_TYPE::ADD_PLAYER_POOL;
-
+	
 		Vector3 vPosition = _pObj->GetComponent<Transform>()->GetPosition();
 		vPosition.x += ObjectPoolPosition;
 		vPosition.y += ObjectPoolPosition;
@@ -218,6 +232,7 @@ namespace W
 	{
 		tEvent eve = {};
 		eve.lParm = (DWORD_PTR)_pObj;
+		
 		eve.eEventType = EVENT_TYPE::ADD_MONSTER_POOL;
 
 

@@ -29,8 +29,7 @@ namespace W
 
 		pRenderer->SetMaterial(pMater);
 
-		std::shared_ptr<Texture> pAtlas =
-			Resources::Load<Texture>(L"RexTex", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Rex\\Rex.png");
+		std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"RexTex");
 		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"Rex_stand", pAtlas, Vector2(0.f, 0.f), Vector2(500.f, 1000.f), 1, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"Rex_start", pAtlas, Vector2(0.f, 1000.f), Vector2(500.f, 1000.f), 11, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
@@ -39,24 +38,12 @@ namespace W
 		pAnim->Create(L"Rex_attack2", pAtlas, Vector2(0.f, 4000.f), Vector2(500.f, 1000.f), 20, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"Rex_dead", pAtlas, Vector2(0.f, 5000.f), Vector2(500.f, 1000.f), 15, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 
-		m_spAttackEffect1 =
-			Resources::Load<Texture>(L"Rex_attack0", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Rex\\attack0_hit.png");
-		Effect* pEffect = new Effect();
-		pEffect->SetName(L"Rex_attack0");
-		pEffect->CreateAnimation(m_spAttackEffect1, Vector2(0.f, 0.f), Vector2(129.f, 128.f), 7, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
-
-		m_spAttackEffect2 =
-			Resources::Load<Texture>(L"Rex_attack2", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Rex\\attack2_hit.png");
-		pEffect = new Effect();
-		pEffect->SetName(L"Rex_attack2");
-		pEffect->CreateAnimation(m_spAttackEffect2, Vector2(0.f, 0.f), Vector2(219.f, 163.f), 8, 1, Vector2(200.f, 200.f), Vector2::Zero, 0.1f);
-
-
-		Resources::Load<Texture>(L"Rex_attack1", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Rex\\attack1_hit.png");
 	}
 	Rex::~Rex()
 	{
-
+		ObjectPoolManager::ReleaseObject(L"Rex_attack0");
+		ObjectPoolManager::ReleaseObject(L"Rex_attack1");
+		ObjectPoolManager::ReleaseObject(L"Rex_attack2");
 	}
 
 	void Rex::add_skill()

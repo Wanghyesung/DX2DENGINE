@@ -4,7 +4,7 @@
 #include "WMonsterScript.h"
 #include "WRenderer.h"
 #include "WMonsterBackHP.h"
-
+#include "WMonsterManager.h"
 namespace W
 {
 	UINT MonsterHP::HP_COUNT = 0;
@@ -105,5 +105,11 @@ namespace W
 		pConstBuffer->Bind(eShaderStage::PS);
 
 		GameObject::Render();
+	}
+	void MonsterHP::DeleteHP()
+	{
+		MonsterManager::AddDeleteObject(m_pHPBack);
+		MonsterManager::AddDeleteObject(this);
+		
 	}
 }

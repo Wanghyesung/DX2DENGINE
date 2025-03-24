@@ -22,7 +22,7 @@ namespace W
 		m_pWhite(nullptr),
 		m_bActive(false)
 	{
-		Resources::Load<Texture>(L"vine", L"..\\Resources\\Texture\\Monster\\demian\\vine.png");
+		Resources::Find<Texture>(L"vine");
 
 		std::shared_ptr<Material> pMater = std::make_shared<Material>();
 		pMater->SetRenderinMode(eRenderingMode::Transparent);

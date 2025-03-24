@@ -25,10 +25,14 @@ namespace W
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetRenderinMode(eRenderingMode::Transparent);
-		pMater->SetShader(Resources::Find<Shader>(L"ObjectAnimShader"));
-		Resources::Insert(L"MagnusStoneMater", pMater);
+		std::shared_ptr<Material> pMater = Resources::Find<Material>(L"MagnusStoneMater");
+		if (pMater == nullptr)
+		{
+			pMater = std::make_shared<Material>();
+			pMater->SetRenderinMode(eRenderingMode::Transparent);
+			pMater->SetShader(Resources::Find<Shader>(L"ObjectAnimShader"));
+			Resources::Insert(L"MagnusStoneMater", pMater);
+		}
 
 		Animator* pAnim = AddComponent<Animator>();
 		std::shared_ptr<Texture> pAtlas

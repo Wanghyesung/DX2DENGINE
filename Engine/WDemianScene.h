@@ -28,6 +28,10 @@ namespace W
 		void check_stigma();
 	private:
 		void create_monster();
+		void create_effect();
+		void create_event();
+
+	private:
 		class SharHP* m_pSharHP;
 
 		class White* m_pWhite;

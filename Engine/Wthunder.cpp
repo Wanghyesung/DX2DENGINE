@@ -26,8 +26,7 @@ namespace W
 
 		GetComponent<Transform>()->SetScale(6.f, 6.f, 0.f);
 
-		std::shared_ptr<Texture> pAtlas =
-			Resources::Load<Texture>(L"ThunderTex", L"..\\Resources\\Texture\\Monster\\Horntail\\headC\\attack2_effect.png");
+		std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"ThunderTex");
 		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"Thunder_left", pAtlas, Vector2(0.0f, 0.0f), Vector2(180.f, 845.0f), 30, Vector2(800.f, 800.f), Vector2::Zero, 0.15f);
 

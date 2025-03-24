@@ -44,7 +44,7 @@ namespace W
 		mr->SetMaterial(pMater);
 
 		Animator* pAnim = AddComponent<Animator>();
-		std::shared_ptr<Texture> pAtlas = Resources::Load<Texture>(L"DemianSword", L"..\\Resources\\Texture\\Monster\\demian\\sword.png");
+		std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"DemianSword");
 		pAnim->Create(L"sword_start", pAtlas, Vector2(0.0f, 0.0f), Vector2(419.0f, 342.0f), 13, Vector2(2000.f, 2000.f), Vector2::Zero, 0.12f);
 		pAnim->Create(L"sword_move", pAtlas, Vector2(0.0f, 342.0f), Vector2(419.0f, 342.0f), 8, Vector2(2000.f, 2000.f), Vector2::Zero, 0.12f);
 		pAnim->Create(L"sword_end", pAtlas, Vector2(0.0f, 684.f), Vector2(419.0f, 342.0f), 11, Vector2(2000.f, 2000.f), Vector2::Zero, 0.12f);
@@ -53,15 +53,6 @@ namespace W
 		pAnim->CompleteEvent(L"sword_end") = std::bind(&DemianSword::off, this);
 
 		pAnim->Play(L"sword_start", true);
-
-		for (int i = 0; i < 3; ++i)
-		{
-			pAtlas = Resources::Load<Texture>(L"DemianTarget", L"..\\Resources\\Texture\\Monster\\demian\\target.png");
-			Effect* pEffect = new Effect();
-			pEffect->GetComponent<Transform>()->SetScale(3.5f, 3.5f, 0.f);
-			pEffect->SetName(L"DemianTarget");
-			pEffect->CreateAnimation(pAtlas, Vector2(0.f, 0.f), Vector2(286.f, 288.f), 14, 1, Vector2(300.f, 300.f), Vector2::Zero, 0.1f);
-		}
 
 		m_vecDir.push_back(Vector2(0.8f, 0.2f));
 		m_vecDir.push_back(Vector2(0.8f, -0.2f));

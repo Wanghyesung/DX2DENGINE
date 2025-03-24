@@ -30,12 +30,11 @@ namespace W
 
 		GetComponent<Transform>()->SetScale(10.f, 10.f, 0.f);
 
-		Resources::Load<Texture>(L"Megnus_Zone0", L"..\\Resources\\Texture\\Monster\\megnus\\mobzon1.png");
-		Resources::Load<Texture>(L"Megnus_Zone1", L"..\\Resources\\Texture\\Monster\\megnus\\mobzon2.png");
-		Resources::Load<Texture>(L"Megnus_Zone2", L"..\\Resources\\Texture\\Monster\\megnus\\mobzon3.png");
-		Resources::Load<Texture>(L"Megnus_Zone3", L"..\\Resources\\Texture\\Monster\\megnus\\mobzon4.png");
-
 		std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"Megnus_Zone0");
+		Resources::Find<Texture>(L"Megnus_Zone1");
+		Resources::Find<Texture>(L"Megnus_Zone2");
+		Resources::Find<Texture>(L"Megnus_Zone3");
+
 		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"Megnus_Zone0", pAtlas, Vector2(0.0f, 0.0f), Vector2(796.f, 852.0f), 8, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 		

@@ -41,10 +41,8 @@ namespace W
 
 		pRenderer->SetMaterial(pMater);
 
-		std::shared_ptr<Texture> pAtlas1 =
-			Resources::Load<Texture>(L"Megnus1", L"..\\Resources\\Texture\\Monster\\megnus\\megnus0.png");
-		std::shared_ptr<Texture> pAtlas2 =
-			Resources::Load<Texture>(L"Megnus2", L"..\\Resources\\Texture\\Monster\\megnus\\megnus1.png");
+		std::shared_ptr<Texture> pAtlas1 = Resources::Find<Texture>(L"Megnus1");
+		std::shared_ptr<Texture> pAtlas2 = Resources::Find<Texture>(L"Megnus2");
 
 		AddComponent<Rigidbody>();
 
@@ -106,39 +104,15 @@ namespace W
 		pAnim->FindAnimation(L"Megnus_dead_right")->Create(L"Megnus_dead_right", pAtlas2, Vector2(8800.f, 4950.f), Vector2(1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Megnus_dead_right")->Create(L"Megnus_dead_right", pAtlas2, Vector2(8800.f, 5500.f), Vector2(1100.f, 550.f), 8, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
 
-		Resources::Load<Texture>(L"Megnus_attack0_hit", L"..\\Resources\\Texture\\Monster\\megnus\\attack0_hit.png");
-		Effect* pEffect = new Effect();
-		pEffect->SetName(L"Megnus_attack0");
-		pEffect->CreateAnimation(Resources::Find<Texture>(L"Megnus_attack0_hit"), Vector2(0.f, 0.f), Vector2(320.f, 244.f), 5, 1, Vector2(320.f, 320.f), Vector2(0.f, 0.f), 0.2f);
-
-		Resources::Load<Texture>(L"Megnus_attack1_effect", L"..\\Resources\\Texture\\Monster\\megnus\\attack1_effect.png");
-		Resources::Load<Texture>(L"Megnus_attack1_hit", L"..\\Resources\\Texture\\Monster\\megnus\\attack1_hit.png");
-		pEffect = new Effect();
-		pEffect->SetName(L"Megnus_attack1");
-		pEffect->CreateAnimation(Resources::Find<Texture>(L"Megnus_attack1_hit"), Vector2(0.f, 0.f), Vector2(256.f, 196.f), 5, 1, Vector2(250.f, 250.f), Vector2(0.f, 0.f), 0.2f);
-
-		Resources::Load<Texture>(L"Megnus_attack2_hit", L"..\\Resources\\Texture\\Monster\\megnus\\attack2_hit.png");
-		pEffect = new Effect();
-		pEffect->SetName(L"Megnus_attack2");
-		pEffect->CreateAnimation(Resources::Find<Texture>(L"Megnus_attack2_hit"), Vector2(0.f, 0.f), Vector2(236.f, 229.f), 7, 1, Vector2(240.f, 240.f), Vector2(0.f, 0.f), 0.2f);
-
-		Resources::Load<Texture>(L"Megnus_attack3_hit", L"..\\Resources\\Texture\\Monster\\megnus\\attack3_hit.png");
-		pEffect = new Effect();
-		pEffect->SetName(L"Megnus_attack3");
-		pEffect->CreateAnimation(Resources::Find<Texture>(L"Megnus_attack3_hit"), Vector2(0.f, 0.f), Vector2(228.f, 231.f), 7, 1, Vector2(230.f, 230.f), Vector2(0.f, 0.f), 0.2f);
-
-		Resources::Load<Texture>(L"Megnus_attack4_hit", L"..\\Resources\\Texture\\Monster\\megnus\\attack4_hit.png");
-		pEffect = new Effect();
-		pEffect->SetName(L"Megnus_attack4");
-		pEffect->CreateAnimation(Resources::Find<Texture>(L"Megnus_attack4_hit"), Vector2(0.f, 0.f), Vector2(165.f, 168.f), 7, 1, Vector2(170.f, 170.f), Vector2(0.f, 0.f), 0.2f);
-
-		//stone
-		Resources::Load<Texture>(L"magnus_stone", L"..\\Resources\\Texture\\Monster\\megnus\\magnusstone.png");
-
 	}
 	Megnus::~Megnus()
 	{
-		
+		ObjectPoolManager::ReleaseObject(L"Megnus_Stone");
+		ObjectPoolManager::ReleaseObject(L"Megnus_attack0");
+		ObjectPoolManager::ReleaseObject(L"Megnus_attack1");
+		ObjectPoolManager::ReleaseObject(L"Megnus_attack2");
+		ObjectPoolManager::ReleaseObject(L"Megnus_attack3");
+		ObjectPoolManager::ReleaseObject(L"Megnus_attack4");
 	}
 	void Megnus::Initialize()
 	{

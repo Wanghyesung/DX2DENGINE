@@ -28,8 +28,7 @@ namespace W
 
 		GetComponent<Transform>()->SetScale(18.f, 18.f, 0.f);
 
-		std::shared_ptr<Texture> pAtlas =
-			Resources::Load<Texture>(L"swordExplodeTex", L"..\\Resources\\Texture\\Monster\\demian\\swordexplode.png");
+		std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"swordExplodeTex");
 		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"start", pAtlas, Vector2(0.0f, 0.0f), Vector2(614.f, 557.0f), 3, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"explode", pAtlas, Vector2(0.0f, 557.0f), Vector2(614.f, 557.0f), 23, Vector2(2000.f, 2000.f), Vector2::Zero, 0.1f);

@@ -35,13 +35,14 @@ namespace W
 
 		virtual void OnEnter();
 		virtual void OnExit();
-		
+
 		virtual void CreateBackground() {};
 
 		virtual void StartSound() {};
 		virtual void EndSound() {};
 
 		void AddGameObject(eLayerType _eType, GameObject* _pGameObj);
+		void DeleteMonsterObject();
 
 		template <typename T>
 		std::vector<T*> FindObjectsOfType()
@@ -80,13 +81,16 @@ namespace W
 		void EraseObject(eLayerType _eType, GameObject* _pGameObj){ m_vecLayer[(UINT)_eType].EraseOnVector(_pGameObj); }
 
 		
+	protected:
+		//맵 나갈 때, 맵 들어올 때 리소스 삭제, 할당
+		std::vector<std::pair<std::wstring, std::wstring>> m_vecResource;
+
 	private:
 		std::vector<Layer> m_vecLayer;
 
 		tMapSize m_tMapSize;
 		tMapPossibleSize m_tPossibleSize;
 
-		//tem
 		class InterfaceUI* m_pInterface;
 		class Inventory* m_pInventory;
 		class SKillStorage* m_pSKillStorage;

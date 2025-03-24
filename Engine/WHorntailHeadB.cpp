@@ -32,7 +32,7 @@ namespace W
 		pRenderer->SetMaterial(pMater);
 
 		std::shared_ptr<Texture> pAtlas =
-			Resources::Load<Texture>(L"HeadBTex", L"..\\Resources\\Texture\\Monster\\Horntail\\headB\\headB.png");
+			Resources::Find<Texture>(L"HeadBTex");
 		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"HeadB_stand", pAtlas, Vector2(0.f, 0.f), Vector2(500.f, 800.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"HeadB_attack0", pAtlas, Vector2(0.f, 800.f), Vector2(500.f, 800.f), 26, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
@@ -41,25 +41,12 @@ namespace W
 		pAnim->Create(L"HeadB_dead", pAtlas, Vector2(0.f, 3200.f), Vector2(500.f, 800.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 
 		//pAnim->Play(L"HeadA_stand", true);
-
-		m_spAttackEffect1 =
-			Resources::Load<Texture>(L"firebreathHit", L"..\\Resources\\Texture\\Monster\\Horntail\\headB\\attack1_hit.png");
-		Effect* pEffect = new Effect();
-		pEffect->SetName(L"firebreath");
-		pEffect->CreateAnimation(m_spAttackEffect1, Vector2(0.f, 0.f), Vector2(99.f, 107.f), 2, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
-
-
-		m_spAttackEffect2 =
-			Resources::Load<Texture>(L"fireHit", L"..\\Resources\\Texture\\Monster\\Horntail\\headB\\attack2_hit.png");
-		pEffect = new Effect();
-		pEffect->SetName(L"fire");
-		pEffect->CreateAnimation(m_spAttackEffect2, Vector2(0.f, 0.f), Vector2(92.f, 91.f), 4, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
-
 	}
 
 	HorntailHeadB::~HorntailHeadB()
 	{
-
+		ObjectPoolManager::ReleaseObject(L"firebreath");
+		ObjectPoolManager::ReleaseObject(L"fire");
 	}
 
 	void HorntailHeadB::add_skill()

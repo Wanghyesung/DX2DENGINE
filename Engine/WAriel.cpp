@@ -42,19 +42,12 @@ namespace W
 		pAnim->Create(L"Ariel_attack2", pAtlas, Vector2(0.f, 1600.f), Vector2(400.f, 400.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"Ariel_attack3", pAtlas, Vector2(0.f, 2000.f), Vector2(400.f, 400.f), 17, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"Ariel_dead", pAtlas, Vector2(0.f, 2400.f), Vector2(400.f, 400.f), 17, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-
-		m_spAttackEffect1 =
-			Resources::Load<Texture>(L"Ariel_attack0", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Ariel\\attack0_effect.png");
-	
-
-		m_spAttackEffect2 =
-			Resources::Load<Texture>(L"Ariel_attack1", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Ariel\\attack1_effect.png");
-
 	}
 
 	Ariel::~Ariel()
 	{
-
+		ObjectPoolManager::ReleaseObject(L"Ariel_attack0");
+		ObjectPoolManager::ReleaseObject(L"Ariel_attack1");
 	}
 	void Ariel::add_skill()
 	{

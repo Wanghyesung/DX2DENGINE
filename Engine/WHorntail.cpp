@@ -15,6 +15,7 @@
 #include "WBattleManager.h"
 #include "WObject.h"
 #include "WCameraScript.h"
+#include "WMonsterManager.h"
 
 //수동으로 exe파일에 넣어주기
 //속성 -> 빌드이벤트 -> 복사해서 넘기기
@@ -42,8 +43,9 @@ namespace W
 
 		pRenderer->SetMaterial(pMater);
 
-		std::shared_ptr<Texture> pAtlas =
-			Resources::Load<Texture>(L"HorntailStartTex", L"..\\Resources\\Texture\\Monster\\Horntail\\start.png");
+		std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"HorntailStartTex");
+		pAtlas->BindShaderResource(eShaderStage::PS, 12);
+
 		Animator* pAnim = AddComponent<Animator>();
 		//pAnim->Create(L"HorntailStart", pAtlas, Vector2(5316.f, 2673.f), Vector2(886.f, 891.f), 1, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"HorntailStart", pAtlas, Vector2(0.0f, 0.f), Vector2(886.f, 891.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
@@ -52,7 +54,7 @@ namespace W
 		pAnim->FindAnimation(L"HorntailStart")->Create(L"HorntailStart", pAtlas, Vector2(0.0f, 2673.f), Vector2(886.f, 891.f), 7, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->CompleteEvent(L"HorntailStart") = std::bind(&Horntail::create_child, this);
 
-		pAtlas = Resources::Load<Texture>(L"HorntailDead", L"..\\Resources\\Texture\\Monster\\Horntail\\dead.png");
+		pAtlas = Resources::Find<Texture>(L"HorntailDead");
 		pAnim->Create(L"HorntailDead", pAtlas, Vector2(0.0f, 0.f), Vector2(731.f, 643.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"HorntailDead")->Create(L"HorntailDead", pAtlas, Vector2(0.0f, 643.0f), Vector2(731.f, 643.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"HorntailDead")->Create(L"HorntailDead", pAtlas, Vector2(0.0f, 1286.f), Vector2(731.f, 643.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
@@ -216,9 +218,9 @@ namespace W
 	}
 	void Horntail::delete_child()
 	{
-		object::Destroy(this);
+		MonsterManager::AddDeleteObject(this);
 		for (int i = 0; i < 8; ++i)
-			object::Destroy(m_vecMonster[i]);
+			MonsterManager::AddDeleteObject(m_vecMonster[i]);
 	}
 	void Horntail::up_attack()
 	{

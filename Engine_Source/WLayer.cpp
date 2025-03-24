@@ -1,5 +1,6 @@
 #include "WLayer.h"
-
+#include "..\Engine\WEventManager.h"
+#include "WScene.h"
 namespace W
 {
 	Layer::Layer()
@@ -83,6 +84,14 @@ namespace W
 			pObj = nullptr;
 		}
 
+	}
+
+	void Layer::DestroyAll(Scene* _pScene)
+	{
+		for (int i = 0; i < m_vecGameObject.size(); ++i)
+		{
+			EventManager::DeleteObject(m_vecGameObject[i], _pScene);
+		}
 	}
 
 	void Layer::AddGameObject(GameObject* _pGameObj)

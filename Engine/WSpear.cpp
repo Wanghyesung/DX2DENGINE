@@ -25,8 +25,7 @@ namespace W
 
 		GetComponent<Transform>()->SetScale(2.1f, 2.1f, 0.f);
 
-		std::shared_ptr<Texture> pAtlas =
-			Resources::Load<Texture>(L"SpearTex", L"..\\Resources\\Texture\\Monster\\Horntail\\LeftHand\\attack0.png");
+		std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"SpearTex");
 		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"Spear_left", pAtlas, Vector2(0.0f, 0.0f), Vector2(185.f, 160.0f), 17, Vector2(220.f, 220.f), Vector2::Zero, 0.15f);
 

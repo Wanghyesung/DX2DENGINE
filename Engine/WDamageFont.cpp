@@ -17,13 +17,7 @@ namespace W
 		m_iCount(FontCount++),
 		m_vColor(Vector4(1.f,1.f,1.f,0.2f))
 	{
-		std::wstring strNum = std::to_wstring(m_iCount);
-
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetShader(Resources::Find<Shader>(L"ObjectShader"));
-		pMater->SetRenderinMode(eRenderingMode::Transparent);
-
-		Resources::Insert(L"DamageMater" + strNum, pMater);
+		std::shared_ptr<Material> pMater = Resources::Find<Material>(L"DamageMater");
 
 		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
 		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));

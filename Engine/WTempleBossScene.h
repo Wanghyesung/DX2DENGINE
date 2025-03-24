@@ -21,8 +21,10 @@ namespace W
 
 		virtual void StartSound()override;
 		virtual void EndSound()override;
+
 	private:
 		void create_monster();
+		void create_effect();
 	};
 
 }

@@ -3,6 +3,7 @@
 #include "WGameObject.h"
 #include "WInfo.h"
 #include "WMonsterAttackObject.h"
+#include "WObjectPoolManager.h"
 
 namespace W
 {

@@ -42,6 +42,11 @@ namespace W
 
 	void BattleManager::Initialize()
 	{
+		std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		pMater->SetShader(Resources::Find<Shader>(L"ObjectShader"));
+		pMater->SetRenderinMode(eRenderingMode::Transparent);
+		Resources::Insert(L"DamageMater", pMater);
+
 		for (int i = 0; i < 10; ++i)
 		{
 			std::wstring strNum = std::to_wstring(i);

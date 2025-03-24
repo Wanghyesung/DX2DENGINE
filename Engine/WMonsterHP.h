@@ -23,12 +23,17 @@ namespace W
 
 		void SetOwner(Monster* _pMonster) { m_pOwner = _pMonster; }
 		bool IsBoss() { return m_bBoss; }
+
+		void DeleteHP();
+
+	protected:
+		MonsterBackHP* m_pHPBack;
+
 	private:
 		UINT m_iHPCount;
 		static UINT HP_COUNT;
 
 		Monster* m_pOwner;
-		MonsterBackHP* m_pHPBack;
 		float m_fHP;
 		bool m_bActive;
 		bool m_bBoss;

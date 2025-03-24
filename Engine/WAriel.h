@@ -25,10 +25,6 @@ namespace W
 		void heal();
 		void pull();
 
-	private:
-		std::shared_ptr<Texture> m_spAttackEffect1;
-		std::shared_ptr<Texture> m_spAttackEffect2;
-
 
 	};
 }

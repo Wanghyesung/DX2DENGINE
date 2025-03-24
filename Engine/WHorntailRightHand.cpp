@@ -29,7 +29,9 @@ namespace W
 		pRenderer->SetMaterial(pMater);
 
 		std::shared_ptr<Texture> pAtlas =
-			Resources::Load<Texture>(L"RightHandTex", L"..\\Resources\\Texture\\Monster\\Horntail\\RightHand\\RightHand.png");
+			Resources::Find<Texture>(L"RightHandTex");
+		pAtlas->BindShaderResource(eShaderStage::PS, 12);
+
 		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"RightHand_stand", pAtlas, Vector2(0.f, 0.f), Vector2(500.f, 300.f), 5, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"RightHand_attack0", pAtlas, Vector2(0.f, 300.f), Vector2(500.f, 300.f), 18, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
@@ -41,6 +43,7 @@ namespace W
 	HorntailRightHand::~HorntailRightHand()
 	{
 
+		ObjectPoolManager::ReleaseObject(L"spear");
 	}
 
 	void HorntailRightHand::add_skill()

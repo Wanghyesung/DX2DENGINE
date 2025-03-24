@@ -23,12 +23,6 @@ namespace W
 
 		void dark();
 		void attack_reflect();
-
-	private:
-		std::shared_ptr<Texture> m_spAttackEffect1;
-		std::shared_ptr<Texture> m_spAttackEffect2;
-
-
 	};
 }
 

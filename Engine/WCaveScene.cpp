@@ -17,6 +17,8 @@
 #include "WHorntail.h"
 #include "WStoneScript.h"
 #include "WLadder.h"
+#include "WThreadPool.h"
+#include "WMonsterManager.h"
 
 namespace W
 {
@@ -25,33 +27,36 @@ namespace W
 		SetMapSize(0.f, 1.f, 0.f, -1.f);
 		SetMapPossibleSize(-7.f, 7.f);
 
-		std::shared_ptr<Texture> pLadder9 =
-			Resources::Load<Texture>(L"Ladder9BaseTex", L"..\\Resources\\Texture\\Object\\ladder\\9_base.png");
-
-		std::shared_ptr<Material> pLadderMater9 = std::make_shared<Material>();
-		pLadderMater9->SetShader(Resources::Find<Shader>(L"ObjectShader"));
-		pLadderMater9->SetTexture(pLadder9);
-		Resources::Insert(L"LadderBaseMater9", pLadderMater9);
-
-
-		std::shared_ptr<Texture> pLadder9_ =
-			Resources::Load<Texture>(L"Ladder9Base_Tex", L"..\\Resources\\Texture\\Object\\ladder\\9base.png");
-
-		std::shared_ptr<Material> pLadderMater9_ = std::make_shared<Material>();
-		pLadderMater9_->SetShader(Resources::Find<Shader>(L"ObjectShader"));
-		pLadderMater9_->SetTexture(pLadder9_);
-		Resources::Insert(L"LadderBaseMater9_", pLadderMater9_);
+	
+		//내가 할당할 리소스들
+		m_vecResource.push_back(std::make_pair(L"StoneTex", L"..\\Resources\\Texture\\Monster\\Horntail\\stone.png"));
+		m_vecResource.push_back(std::make_pair(L"HorntailStartTex", L"..\\Resources\\Texture\\Monster\\Horntail\\start.png"));
+		m_vecResource.push_back(std::make_pair(L"HeadATex", L"..\\Resources\\Texture\\Monster\\Horntail\\headA\\headA.png"));
+		m_vecResource.push_back(std::make_pair(L"HeadBTex", L"..\\Resources\\Texture\\Monster\\Horntail\\headB\\headB.png"));
+		m_vecResource.push_back(std::make_pair(L"HeadCTex", L"..\\Resources\\Texture\\Monster\\Horntail\\headC\\headC.png"));
+		m_vecResource.push_back(std::make_pair(L"LeftHandTex", L"..\\Resources\\Texture\\Monster\\Horntail\\LeftHand\\lefthand.png"));
+		m_vecResource.push_back(std::make_pair(L"RightHandTex", L"..\\Resources\\Texture\\Monster\\Horntail\\RightHand\\RightHand.png"));
+		m_vecResource.push_back(std::make_pair(L"LegTex", L"..\\Resources\\Texture\\Monster\\Horntail\\Leg\\Leg.png"));
+		m_vecResource.push_back(std::make_pair(L"WingTex", L"..\\Resources\\Texture\\Monster\\Horntail\\wing\\wing.png"));
+		m_vecResource.push_back(std::make_pair(L"TailTex", L"..\\Resources\\Texture\\Monster\\Horntail\\tail\\tail.png"));
+		
+		m_vecResource.push_back(std::make_pair(L"SpearTex", L"..\\Resources\\Texture\\Monster\\Horntail\\LeftHand\\attack0.png"));
+		m_vecResource.push_back(std::make_pair(L"IceTex", L"..\\Resources\\Texture\\Monster\\Horntail\\headA\\attack1_effect.png"));
+		m_vecResource.push_back(std::make_pair(L"FireTex", L"..\\Resources\\Texture\\Monster\\Horntail\\headB\\attack1_effect.png"));
+		m_vecResource.push_back(std::make_pair(L"ThunderTex", L"..\\Resources\\Texture\\Monster\\Horntail\\headC\\attack2_effect.png"));
+		m_vecResource.push_back(std::make_pair(L"HorntailStartTex", L"..\\Resources\\Texture\\Monster\\Horntail\\start.png"));
+		m_vecResource.push_back(std::make_pair(L"HorntailDead", L"..\\Resources\\Texture\\Monster\\Horntail\\dead.png"));
 	}
 	CaveScene::~CaveScene()
 	{
-
+		
 	}
 	void CaveScene::Initialize()
 	{
-		CreateBackground();
 		create_object();
-		create_monster();
+		create_effect();
 
+		CreateBackground();
 		{
 			GameObject* pCamera = new GameObject();
 			pCamera->SetName(L"ObjCam");
@@ -89,6 +94,12 @@ namespace W
 	}
 	void CaveScene::OnEnter()
 	{
+		Scene::OnEnter();
+		
+		ThreadPool::Joinable();
+
+		create_monster();
+
 		StartSound();
 
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
@@ -102,6 +113,14 @@ namespace W
 	}
 	void CaveScene::OnExit()
 	{
+		Scene::OnExit();//리소스 해제
+
+		//몬스터 해제
+		DeleteMonsterObject();
+		MonsterManager::DeleteMonster();
+
+		ThreadPool::Joinable();
+
 		EndSound();
 		CollisionManager::Clear();
 	}
@@ -135,7 +154,20 @@ namespace W
 		pAudio->Stop();
 	}
 	void CaveScene::create_object()
-	{
+	{	
+		std::shared_ptr<Texture> pLadder9 = Resources::Load<Texture>(L"Ladder9BaseTex", L"..\\Resources\\Texture\\Object\\ladder\\9_base.png");
+		std::shared_ptr<Texture> pLadder9_ = Resources::Load<Texture>(L"Ladder9Base_Tex", L"..\\Resources\\Texture\\Object\\ladder\\9base.png");
+
+		std::shared_ptr<Material> pLadderMater9 = std::make_shared<Material>();
+		pLadderMater9->SetShader(Resources::Find<Shader>(L"ObjectShader"));
+		pLadderMater9->SetTexture(pLadder9);
+		Resources::Insert(L"LadderBaseMater9", pLadderMater9);
+
+		std::shared_ptr<Material> pLadderMater9_ = std::make_shared<Material>();
+		pLadderMater9_->SetShader(Resources::Find<Shader>(L"ObjectShader"));
+		pLadderMater9_->SetTexture(pLadder9_);
+		Resources::Insert(L"LadderBaseMater9_", pLadderMater9_);
+
 		Ground* pGround = new Ground(true);
 		AddGameObject(eLayerType::Ground, pGround);
 		pGround->GetComponent<Transform>()->SetPosition(0.f, -3.8f, -0.1f);
@@ -174,6 +206,55 @@ namespace W
 
 
 	}
+	void CaveScene::create_effect()
+	{	
+		std::shared_ptr<Texture> pTex = 
+			Resources::Load<Texture>(L"icebreathHit", L"..\\Resources\\Texture\\Monster\\Horntail\\headA\\attack0_hit.png");
+		Effect* pEffect = new Effect();
+		pEffect->SetName(L"icebreath");
+		pEffect->CreateAnimation(pTex, Vector2(0.f, 0.f), Vector2(110.f, 113.f), 2, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
+
+		pTex = Resources::Load<Texture>(L"iceHit", L"..\\Resources\\Texture\\Monster\\Horntail\\headA\\attack1_hit.png");
+		pEffect = new Effect();
+		pEffect->SetName(L"ice");
+		pEffect->CreateAnimation(pTex, Vector2(0.f, 0.f), Vector2(118.f, 87.f), 2, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
+
+		pTex = Resources::Load<Texture>(L"firebreathHit", L"..\\Resources\\Texture\\Monster\\Horntail\\headB\\attack1_hit.png");
+		pEffect = new Effect();
+		pEffect->SetName(L"firebreath");
+		pEffect->CreateAnimation(pTex, Vector2(0.f, 0.f), Vector2(99.f, 107.f), 2, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
+
+		pTex = Resources::Load<Texture>(L"fireHit", L"..\\Resources\\Texture\\Monster\\Horntail\\headB\\attack2_hit.png");
+		pEffect = new Effect();
+		pEffect->SetName(L"fire");
+		pEffect->CreateAnimation(pTex, Vector2(0.f, 0.f), Vector2(92.f, 91.f), 4, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
+
+		pTex = Resources::Load<Texture>(L"thunderbreathHit", L"..\\Resources\\Texture\\Monster\\Horntail\\headC\\attack1_hit.png");
+		pEffect = new Effect();
+		pEffect->SetName(L"thunderbreath");
+		pEffect->CreateAnimation(pTex, Vector2(0.f, 0.f), Vector2(72.f, 82.f), 4, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
+
+		pTex = Resources::Load<Texture>(L"thunderHit", L"..\\Resources\\Texture\\Monster\\Horntail\\headC\\attack2_hit.png");
+		pEffect = new Effect();
+		pEffect->SetName(L"thunder");
+		pEffect->CreateAnimation(pTex, Vector2(0.f, 0.f), Vector2(78.f, 75.f), 5, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
+
+		pTex = Resources::Load<Texture>(L"legattack1Hit", L"..\\Resources\\Texture\\Monster\\Horntail\\Leg\\attack1_hit.png");
+		pEffect = new Effect();
+		pEffect->SetName(L"legattack1");
+		pEffect->CreateAnimation(pTex, Vector2(0.f, 0.f), Vector2(126.f, 107.f), 5, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
+
+		pTex = Resources::Load<Texture>(L"legattack2Hit", L"..\\Resources\\Texture\\Monster\\Horntail\\Leg\\attack2_hit.png");
+		pEffect = new Effect();
+		pEffect->SetName(L"legattack2");
+		pEffect->CreateAnimation(pTex, Vector2(0.f, 0.f), Vector2(197, 119.f), 6, 1, Vector2(100.f, 100.f), Vector2(0.f, 0.3f), 0.1f);
+		
+		pTex = Resources::Load<Texture>(L"tailHit", L"..\\Resources\\Texture\\Monster\\Horntail\\tail\\attack0_hit.png");
+		pEffect = new Effect();
+		pEffect->SetName(L"tailattack");
+		pEffect->CreateAnimation(pTex, Vector2(0.f, 0.f), Vector2(132.f, 120.f), 5, 1, Vector2(100.f, 100.f), Vector2(0.f, 0.3f), 0.2f);
+	}
+
 	void CaveScene::create_monster()
 	{
 		Stone* pStone = new Stone();
@@ -188,4 +269,5 @@ namespace W
 		std::function<void()> start = std::bind(&Horntail::Start, pHorntail);
 		pStone->GetScript<StoneScript>()->SetFunction(start);
 	}
+
 }

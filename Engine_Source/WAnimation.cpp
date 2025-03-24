@@ -7,7 +7,6 @@ namespace W
 {
 	Animation::Animation():
 		Resource(enums::eResourceType::Animation),
-		m_spAtlas(nullptr),
 		m_pAnimator(nullptr),
 		m_vecSprites{},
 		m_iIndex(-1),
@@ -51,7 +50,7 @@ namespace W
 		Vector2 _vSize, UINT _iColumnLength, Vector2 _vDivisionSize, Vector2 _vOffset, float _fDuration)
 	{
 		SetKey(_strName);
-		m_spAtlas = _pAtlas;
+		m_wpAtlas = _pAtlas;
 
 		float fWidth = (float)_pAtlas->GetWidth();
 		float fHeight = (float)_pAtlas->GetHeight();
@@ -75,7 +74,10 @@ namespace W
 	}
 	void Animation::Binds()
 	{
-		m_spAtlas->BindShaderResource(graphics::eShaderStage::PS, 12);
+		std::shared_ptr<Texture> spAtlas = m_wpAtlas.lock();
+		if (!spAtlas)
+			assert(nullptr);
+		spAtlas->BindShaderResource(graphics::eShaderStage::PS, 12);
 
 		renderer::AnimatorCB data = {};
 		data.vSpriteLeftTop = m_vecSprites[m_iIndex].vLeftTop;

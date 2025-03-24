@@ -44,10 +44,8 @@ namespace W
 
 		pRenderer->SetMaterial(pMater);
 
-		std::shared_ptr<Texture> pAtlas1 =
-			Resources::Load<Texture>(L"PinkBean1", L"..\\Resources\\Texture\\Monster\\Pinkbean\\PinkBean\\Pinkbean1.png");
-		std::shared_ptr<Texture> pAtlas2 =
-			Resources::Load<Texture>(L"PinkBean2", L"..\\Resources\\Texture\\Monster\\Pinkbean\\PinkBean\\Pinkbean2.png");
+		std::shared_ptr<Texture> pAtlas1 = Resources::Find<Texture>(L"PinkBean1");
+		std::shared_ptr<Texture> pAtlas2 = Resources::Find<Texture>(L"PinkBean2");
 
 		AddComponent<Rigidbody>();
 
@@ -113,32 +111,6 @@ namespace W
 		pAnim->FindAnimation(L"PinkBean_attack9_right")->Create(L"PinkBean_attack9_right", pAtlas2, Vector2(9750.f, 6600.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"PinkBean_attack10_right", pAtlas2, Vector2(9750.f, 7200.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 
-		Resources::Load<Texture>(L"PinkBean_attack0", L"..\\Resources\\Texture\\Monster\\PinkBean\\PinkBean\\attack0_effect.png");
-		Resources::Load<Texture>(L"PinkBean_attack0_hit", L"..\\Resources\\Texture\\Monster\\PinkBean\\PinkBean\\attack0_hit.png");
-		Effect* pEffect = new Effect();
-		pEffect->SetName(L"PinkBean_attack0");
-		pEffect->CreateAnimation(Resources::Find<Texture>(L"PinkBean_attack0_hit"), Vector2(0.f, 0.f), Vector2(97.f, 107.f), 7, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
-
-		Resources::Load<Texture>(L"PinkBean_attack1_hit", L"..\\Resources\\Texture\\Monster\\PinkBean\\PinkBean\\attack1_hit.png");
-		pEffect = new Effect();
-		pEffect->SetName(L"PinkBean_attack1");
-		pEffect->CreateAnimation(Resources::Find<Texture>(L"PinkBean_attack1_hit"), Vector2(0.f, 0.f), Vector2(124.f, 112.f), 5, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
-
-		Resources::Load<Texture>(L"PinkBean_attack2", L"..\\Resources\\Texture\\Monster\\Pinkbean\\PinkBean\\attack2_effect.png");
-		Resources::Load<Texture>(L"PinkBean_attack2_hit", L"..\\Resources\\Texture\\Monster\\Pinkbean\\PinkBean\\attack2_hit.png");
-		pEffect = new Effect();
-		pEffect->SetName(L"PinkBean_attack2");
-		pEffect->CreateAnimation(Resources::Find<Texture>(L"PinkBean_attack2_hit"), Vector2(0.f, 0.f), Vector2(112.f, 110.f), 6, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
-
-		Resources::Load<Texture>(L"PinkBean_attack3", L"..\\Resources\\Texture\\Monster\\Pinkbean\\PinkBean\\attack3_effect.png");
-		Resources::Load<Texture>(L"PinkBean_attack3_hit", L"..\\Resources\\Texture\\Monster\\Pinkbean\\PinkBean\\attack3_hit.png");
-		pEffect = new Effect();
-		pEffect->SetName(L"PinkBean_attack3");
-		pEffect->CreateAnimation(Resources::Find<Texture>(L"PinkBean_attack3_hit"), Vector2(0.f, 0.f), Vector2(88.f, 87.f), 4, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
-
-		set_minibean();
-		create_child();
-
 	}
 	PinkBean::~PinkBean()
 	{
@@ -150,6 +122,11 @@ namespace W
 			delete pMiniBean;
 			pMiniBean = nullptr;
 		}
+
+		ObjectPoolManager::ReleaseObject(L"PinkBean_attack0");
+		ObjectPoolManager::ReleaseObject(L"PinkBean_attack1");
+		ObjectPoolManager::ReleaseObject(L"PinkBean_attack2");
+		ObjectPoolManager::ReleaseObject(L"PinkBean_attack3");
 	}
 	void PinkBean::Initialize()
 	{
@@ -189,7 +166,8 @@ namespace W
 		pFSM->SetActiveState(Monster::eMonsterState::wait);
 		pFSM->Initialize();
 
-		
+		set_minibean();
+		create_child();
 	}
 	void PinkBean::Update()
 	{

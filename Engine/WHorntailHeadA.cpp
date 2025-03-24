@@ -31,8 +31,7 @@ namespace W
 
 		pRenderer->SetMaterial(pMater);
 
-		std::shared_ptr<Texture> pAtlas =
-			Resources::Load<Texture>(L"HeadATex", L"..\\Resources\\Texture\\Monster\\Horntail\\headA\\headA.png");
+		std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"HeadATex");
 		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"HeadA_stand", pAtlas, Vector2(0.f, 0.f), Vector2(550.f, 650.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"HeadA_attack0", pAtlas, Vector2(0.f, 650.f), Vector2(550.f, 650.f), 21, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
@@ -41,27 +40,12 @@ namespace W
 		pAnim->Create(L"HeadA_dead", pAtlas, Vector2(0.f, 2600.f), Vector2(550.f, 650.f), 15, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 
 		pAnim->Play(L"HeadA_stand", true);
-
-		m_spAttackEffect1 =
-			Resources::Load<Texture>(L"icebreathHit", L"..\\Resources\\Texture\\Monster\\Horntail\\headA\\attack0_hit.png");
-		Effect* pEffect = new Effect();
-		pEffect->SetName(L"icebreath");
-
-		pEffect->CreateAnimation(m_spAttackEffect1, Vector2(0.f, 0.f), Vector2(110.f, 113.f), 2, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
-
-
-		m_spAttackEffect2 =
-			Resources::Load<Texture>(L"iceHit", L"..\\Resources\\Texture\\Monster\\Horntail\\headA\\attack1_hit.png");
-		pEffect = new Effect();
-		pEffect->SetName(L"ice");
-		pEffect->CreateAnimation(m_spAttackEffect2, Vector2(0.f, 0.f), Vector2(118.f, 87.f), 2, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
-
-
 	}
 
 	HorntailHeadA::~HorntailHeadA()
 	{
-
+		ObjectPoolManager::ReleaseObject(L"icebreath");
+		ObjectPoolManager::ReleaseObject(L"ice");
 	}
 
 	void HorntailHeadA::add_skill()
@@ -115,6 +99,7 @@ namespace W
 	void HorntailHeadA::Update()
 	{
 		Monster::Update();
+		
 	}
 
 	void HorntailHeadA::LateUpdate()

@@ -40,20 +40,13 @@ namespace W
 		pRenderer->SetMaterial(pMater);
 		AddComponent<Rigidbody>();
 
-		std::shared_ptr<Texture> pNormal =
-			Resources::Load<Texture>(L"DemianNormal", L"..\\Resources\\Texture\\Monster\\demian\\stand.png");
-		std::shared_ptr<Texture> pDead =
-			Resources::Load<Texture>(L"DemianDead", L"..\\Resources\\Texture\\Monster\\demian\\dead0.png");
-		std::shared_ptr<Texture> pAttack0 =
-			Resources::Load<Texture>(L"Demian_attack0", L"..\\Resources\\Texture\\Monster\\demian\\attack0.png");
-		std::shared_ptr<Texture> pAttack1 =
-			Resources::Load<Texture>(L"Demian_attack1", L"..\\Resources\\Texture\\Monster\\demian\\attack1.png");
-		std::shared_ptr<Texture> pAttack2 =
-			Resources::Load<Texture>(L"Demian_attack2", L"..\\Resources\\Texture\\Monster\\demian\\attack2.png");
-		std::shared_ptr<Texture> pAttack3 =
-			Resources::Load<Texture>(L"Demian_attack3", L"..\\Resources\\Texture\\Monster\\demian\\attack3.png");
+		std::shared_ptr<Texture> pNormal = Resources::Find<Texture>(L"DemianNormal");
+		std::shared_ptr<Texture> pDead = Resources::Find<Texture>(L"DemianDead");
+		std::shared_ptr<Texture> pAttack0 = Resources::Find<Texture>(L"Demian_attack0");
+		std::shared_ptr<Texture> pAttack1 = Resources::Find<Texture>(L"Demian_attack1");
+		std::shared_ptr<Texture> pAttack2 = Resources::Find<Texture>(L"Demian_attack2");
+		std::shared_ptr<Texture> pAttack3 = Resources::Find<Texture>(L"Demian_attack3");
 
-		
 		pAttack0->BindShaderResource(eShaderStage::PS, 12);
 		pAttack1->BindShaderResource(eShaderStage::PS, 12);
 		pAttack2->BindShaderResource(eShaderStage::PS, 12);
@@ -147,27 +140,21 @@ namespace W
 		pAnim->FindAnimation(L"Demian1_attack3_right")->Create(L"Demian1_attack3_right", pAttack3, Vector2(12000.f, 3900.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
 		pAnim->FindAnimation(L"Demian1_attack3_right")->Create(L"Demian1_attack3_right", pAttack3, Vector2(12000.f, 5200.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
 
-		//pAnim->Play(L"Demian1_stand_right", true);
-		//pAnim->EndEvent(L"Demian1_dead_left") = std::bind(&Demian::phase2, this);
-		//pAnim->EndEvent(L"Demian1_dead_right") = std::bind(&Demian::phase2, this);
-
 		pAnim->EndEvent(L"Demian1_attack2_left") = std::bind(&Demian::move, this);
 		pAnim->EndEvent(L"Demian1_attack2_right") = std::bind(&Demian::move, this);
 
-		//attack skill
-		Resources::Load<Texture>(L"demainfire0", L"..\\Resources\\Texture\\Monster\\demian\\demainfire0.png");
-		Resources::Load<Texture>(L"demianExplode", L"..\\Resources\\Texture\\Monster\\demian\\demain_explode.png");
-		Resources::Load<Texture>(L"demainkeyAttack", L"..\\Resources\\Texture\\Monster\\demian\\keyAttack.png");
-		Resources::Load<Texture>(L"demainInputBack", L"..\\Resources\\Texture\\Monster\\demian\\inputbackground.png");
-		Resources::Load<Texture>(L"Inputright", L"..\\Resources\\Texture\\Monster\\demian\\right.png");
-		Resources::Load<Texture>(L"Inputleft", L"..\\Resources\\Texture\\Monster\\demian\\left.png");
-		Resources::Load<Texture>(L"Inputup", L"..\\Resources\\Texture\\Monster\\demian\\up.png");
-		Resources::Load<Texture>(L"Inputdown", L"..\\Resources\\Texture\\Monster\\demian\\down.png");
 
 	}
 	Demian::~Demian()
 	{
-		
+		ObjectPoolManager::ReleaseObject(L"demianSword");
+		ObjectPoolManager::ReleaseObject(L"SwordExplode");
+		ObjectPoolManager::ReleaseObject(L"KeyAttackObj");
+		ObjectPoolManager::ReleaseObject(L"SpawnObj");
+		ObjectPoolManager::ReleaseObject(L"Demian_attack0");
+		ObjectPoolManager::ReleaseObject(L"Demian_attack1");
+		ObjectPoolManager::ReleaseObject(L"Demian_attack2");
+		ObjectPoolManager::ReleaseObject(L"Demian_attack3");
 	}
 
 	void Demian::Initialize()
@@ -182,7 +169,7 @@ namespace W
 		MonsterScript* Pscript = AddComponent<MonsterScript>();
 		Pscript->SetBoss();
 		Pscript->Initialize();
-		Pscript->SetHP(700.f);
+		Pscript->SetHP(300.f);
 		//Pscript->CreateHP();
 
 		setattack();

@@ -28,8 +28,7 @@ namespace W
 
 		pRenderer->SetMaterial(pMater);
 
-		std::shared_ptr<Texture> pAtlas =
-			Resources::Load<Texture>(L"WhigginTex", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Whiggin\\Whiggin.png");
+		std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"WhigginTex");
 		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"Whiggin_stand", pAtlas, Vector2(0.f, 0.f), Vector2(350.f, 500.f), 1, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"Whiggin_start", pAtlas, Vector2(0.f, 500.f), Vector2(350.f, 500.f), 11, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
@@ -39,19 +38,6 @@ namespace W
 		pAnim->Create(L"Whiggin_attack3", pAtlas, Vector2(0.f, 2500.f), Vector2(350.f, 500.f), 18, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"Whiggin_dead", pAtlas, Vector2(0.f, 3000.f), Vector2(350.f, 500.f), 16, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 
-		m_spAttackEffect1 =
-			Resources::Load<Texture>(L"Whiggin_attack0", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Whiggin\\attack0_hit.png");
-		Effect* pEffect = new Effect();
-		pEffect->SetName(L"Whiggin_attack0");
-		pEffect->CreateAnimation(m_spAttackEffect1, Vector2(0.f, 0.f), Vector2(117.f, 156.f), 5, 1, Vector2(150.f, 150.f), Vector2(0.f, 0.2f), 0.2f);
-
-		m_spAttackEffect2 =
-			Resources::Load<Texture>(L"Munin_attack1", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Munin\\attack1_hit.png");
-		pEffect = new Effect();
-		pEffect->SetName(L"Whiggin_attack1");
-		pEffect->CreateAnimation(m_spAttackEffect2, Vector2(0.f, 0.f), Vector2(109.f, 104.f), 8, 1, Vector2(200.f, 200.f), Vector2::Zero, 0.1f);
-
-		Resources::Load<Texture>(L"MuninStoneTex", L"..\\Resources\\Texture\\Monster\\PinkBean\\Munin\\attack1_effect.png");
 	}
 
 	void Whiggin::add_skill()
@@ -69,6 +55,8 @@ namespace W
 
 	Whiggin::~Whiggin()
 	{
+		ObjectPoolManager::ReleaseObject(L"Whiggin_attack0");
+		ObjectPoolManager::ReleaseObject(L"Whiggin_attack1");
 
 	}
 	void Whiggin::Initialize()

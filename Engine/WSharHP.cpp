@@ -9,8 +9,7 @@ namespace W
 	
 	SharHP::SharHP():
 		MonsterHP(true),
-		m_fHP(100.f),
-		m_pHPBack(nullptr)
+		m_fHP(100.f)
 	{
 	
 	}

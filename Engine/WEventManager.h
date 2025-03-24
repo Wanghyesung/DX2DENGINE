@@ -34,6 +34,7 @@ namespace W
 		static void Update();
 		static void AddEvent(const tEvent& _tEve) { m_vecEvent.push_back(_tEve); }
 		
+		static void DeleteObject(GameObject* _pObj, class Scene* _pScene);
 		static void AddPlayerPool (GameObject* _pObj);
 		static void AddMonsterPool(GameObject* _pObj);
 		static void ChangeScene(const std::wstring& _strNextScene);

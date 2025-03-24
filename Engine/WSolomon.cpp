@@ -28,8 +28,7 @@ namespace W
 
 		pRenderer->SetMaterial(pMater);
 
-		std::shared_ptr<Texture> pAtlas =
-			Resources::Load<Texture>(L"SolomonTex", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Solomon\\Solomon.png");
+		std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"SolomonTex");
 		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"Solomon_stand", pAtlas, Vector2(0.f, 0.f), Vector2(500.f, 1000.f), 1, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"Solomon_start", pAtlas, Vector2(0.f, 1000.f), Vector2(500.f, 1000.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
@@ -37,27 +36,12 @@ namespace W
 		pAnim->Create(L"Solomon_attack1", pAtlas, Vector2(0.f, 3000.f), Vector2(500.f, 1000.f), 20, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"Solomon_attack2", pAtlas, Vector2(0.f, 4000.f), Vector2(500.f, 1000.f), 19, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"Solomon_dead", pAtlas, Vector2(0.f, 5000.f), Vector2(500.f, 1000.f), 16, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-
-		m_spAttackEffect1 =
-			Resources::Load<Texture>(L"Solomon_attack0", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Solomon\\attack0_hit.png");
-		Effect* pEffect = new Effect();
-		pEffect->SetName(L"Solomon_attack0");
-		pEffect->CreateAnimation(m_spAttackEffect1, Vector2(0.f, 0.f), Vector2(131.f, 128.f), 7, 1, Vector2(120.f, 120.f), Vector2(0.f,0.2f), 0.2f);
-
-		m_spAttackEffect2 =
-			Resources::Load<Texture>(L"Solomon_attack2", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Solomon\\attack2_hit.png");
-		pEffect = new Effect();
-		pEffect->SetName(L"Solomon_attack2");
-		pEffect->CreateAnimation(m_spAttackEffect2, Vector2(0.f, 0.f), Vector2(217.f, 163.f), 8, 1, Vector2(200.f, 200.f), Vector2::Zero, 0.1f);
-		
-		//skill
-		Resources::Load<Texture>(L"Solomon_attack1", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Solomon\\attack1_hit.png");
-
-
 	}
 	Solomon::~Solomon()
 	{
-
+		ObjectPoolManager::ReleaseObject(L"Solomon_attack0");
+		ObjectPoolManager::ReleaseObject(L"Solomon_attack1");
+		ObjectPoolManager::ReleaseObject(L"Solomon_attack2");
 	}
 
 	void Solomon::add_skill()

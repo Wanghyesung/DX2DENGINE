@@ -29,8 +29,9 @@ namespace W
 
 		pRenderer->SetMaterial(pMater);
 
-		std::shared_ptr<Texture> pAtlas =
-			Resources::Load<Texture>(L"LeftHandTex", L"..\\Resources\\Texture\\Monster\\Horntail\\LeftHand\\lefthand.png");
+		std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"LeftHandTex");
+		pAtlas->BindShaderResource(eShaderStage::PS, 12);
+
 		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"LeftHand_stand", pAtlas, Vector2(0.f, 0.f), Vector2(500.f, 300.f), 5, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"LeftHand_attack0", pAtlas, Vector2(0.f, 300.f), Vector2(500.f, 300.f), 18, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
@@ -41,7 +42,7 @@ namespace W
 	}
 	HorntailLeftHand::~HorntailLeftHand()
 	{
-
+		ObjectPoolManager::ReleaseObject(L"spear");
 	}
 
 	void HorntailLeftHand::add_skill()

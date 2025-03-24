@@ -191,7 +191,7 @@ namespace W
 	void ValleyScene::setobject()
 	{
 		Cage* pCage = new Cage();
-		AddGameObject(eLayerType::Object, pCage);
+		AddGameObject(eLayerType::Box, pCage);
 		
 		pCage->GetComponent<Transform>()->SetPosition(2.5f, 7.57f, -0.3f);
 		pCage->GetComponent<Transform>()->SetScale(0.641f * 2.2f, 1.f * 2.2f, 0.f);
