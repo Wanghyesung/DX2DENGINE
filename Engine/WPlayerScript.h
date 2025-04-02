@@ -99,10 +99,6 @@ namespace W
 		PlayerFSM* m_pFSM;
 		PlayerSkill* m_pSkill;
 
-		
-		//std::map <std::wstring, std::queue<PlayerAttackObject*>> m_mapAttackObjs;
-
-
 		friend class EventManager;
 		friend class BattleManager;
 	};

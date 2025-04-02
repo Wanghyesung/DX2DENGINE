@@ -12,6 +12,7 @@ namespace W
 		SCENE_CHANGE,
 		CHANGE_PLAYER_STATE,
 		CHANGE_PLAYER_SKILL,
+		ADD_PLAYER_SKILL,
 		CHANGE_MONSTER_STATE,
 		ADD_PLAYER_POOL,
 		ADD_MONSTER_POOL,
@@ -33,15 +34,16 @@ namespace W
 	public:
 		static void Update();
 		static void AddEvent(const tEvent& _tEve) { m_vecEvent.push_back(_tEve); }
-		
+		static void CreateObject(GameObject* _pObj, eLayerType _eLayer);
 		static void DeleteObject(GameObject* _pObj, class Scene* _pScene);
 		static void AddPlayerPool (GameObject* _pObj);
 		static void AddMonsterPool(GameObject* _pObj);
 		static void ChangeScene(const std::wstring& _strNextScene);
 		static void ChangePlayerFSMState(PlayerFSM* _pFSM, Player::ePlayerState _ePlayerState);
 		static void ChangePlayerSkillState(Player::ePlayerSkill _ePlayerSkill);
+		static void AddPlayerSkillState(class SkillState* _pSkillState);
 		static void ChangeMonsterFSMState(MonsterFSM* _pFSM, Monster::eMonsterState _eMonsterState);
-		static void CreateObject(GameObject* _pObj, eLayerType _eLayer);
+		
 		static void HitchAbnormal(GameObject* _pObj, BattleManager::eAbnormalType _eType, float _fAccStat = 0.f);
 		static void Restore(GameObject* _pObj, BattleManager::eAbnormalType _eType, float _fAccStat = 0.f);
 		static void UpStat(GameObject* _pObj, BattleManager::eUpStatType _eType, float _fAccStat);

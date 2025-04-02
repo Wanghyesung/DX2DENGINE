@@ -82,6 +82,12 @@ namespace W
 			SkillManager::SetActiveSkill(_ePlayerSkill);
 		}
 		break;
+		case EVENT_TYPE::ADD_PLAYER_SKILL:
+		{
+			SkillState* pSkillState = (SkillState*)_tEve.lParm;
+			SkillManager::AddSkill(pSkillState);
+		}
+		break;
 
 		case EVENT_TYPE::CHANGE_MONSTER_STATE:
 		{
@@ -269,6 +275,13 @@ namespace W
 		tEvent eve = {};
 		eve.lParm = (DWORD_PTR)_ePlayerSkill;
 		eve.eEventType = EVENT_TYPE::CHANGE_PLAYER_SKILL;
+		AddEvent(eve);
+	}
+	void EventManager::AddPlayerSkillState(SkillState* _pSkillState)
+	{
+		tEvent eve = {};
+		eve.lParm = (DWORD_PTR)_pSkillState;
+		eve.eEventType = EVENT_TYPE::ADD_PLAYER_SKILL;
 		AddEvent(eve);
 	}
 	void EventManager::ChangeMonsterFSMState(MonsterFSM* _pFSM, Monster::eMonsterState _eMonsterState)

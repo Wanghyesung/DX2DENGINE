@@ -20,7 +20,7 @@ namespace W
 		std::shared_ptr<Material> pMater = std::make_shared<Material>();
 		pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
 		pMater->SetTexture(pTex);
-		Resources::Insert(L"chMater" + strNum, pMater);
+		Resources::Insert(L"chMater", pMater);
 
 		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
 		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));

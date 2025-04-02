@@ -298,6 +298,7 @@ namespace W
 		return dynamic_cast<PlayerAttackObject*>(pGameObj);
 	}
 
+
 	void PlayerScript::add_skill()
 	{
 		for (int i = 0; i < 5; ++i)

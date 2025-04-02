@@ -16,7 +16,7 @@ namespace W
 		m_iCount = COUNT;
 		++COUNT;
 
-		std::wstring strNum = std::to_wstring(m_iCount);
+		//std::wstring strNum = std::to_wstring(m_iCount);
 
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -25,7 +25,7 @@ namespace W
 		std::shared_ptr<Material> pMater = std::make_shared<Material>();
 		pMater->SetRenderinMode(eRenderingMode::Transparent);
 		pMater->SetShader(Resources::Find<Shader>(L"SpriteAnimationShader"));
-		Resources::Insert(strNum + L"shurikenMater", pMater);
+		Resources::Insert(L"shurikenMater", pMater);
 
 		mr->SetMaterial(pMater);
 

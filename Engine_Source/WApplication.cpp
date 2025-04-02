@@ -36,6 +36,7 @@ namespace W
 		Update();
 		LateUpdate();
 		Render();
+		EventManager::Update();
 		Destroy();
 		UIManger::ReleaseChildUI();
 	}
@@ -64,7 +65,6 @@ namespace W
 		BattleManager::Update();
 		UIManger::Update();
 		MonsterManager::Update();
-		EventManager::Update();
 	}
 
 	void Application::LateUpdate()

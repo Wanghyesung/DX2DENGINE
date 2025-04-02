@@ -23,6 +23,7 @@ namespace W
 		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		pMeshRender->SetMaterial(pMater);
 	}
+
 	DamageFont::~DamageFont()
 	{
 
