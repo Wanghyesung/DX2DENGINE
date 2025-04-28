@@ -27,14 +27,14 @@ namespace W
 	{
 		if (m_bComplete)
 			return;
-
+		
 		m_fTime += Time::DeltaTime();
-
+		
 		if (m_vecSprites[m_iIndex].fDuration <= m_fTime)
 		{
 			++m_iIndex;
 			m_fTime = 0.f;
-
+		
 			if (m_vecSprites.size() <= m_iIndex)
 			{
 				m_iIndex = m_vecSprites.size() - 1;

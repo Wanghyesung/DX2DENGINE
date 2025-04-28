@@ -41,6 +41,7 @@ namespace W
 		Resources::Insert(L"Player", pMater);
 		mr->SetMaterial(pMater);
 	}
+
 	Player::~Player()
 	{
 		for (GameObject* pChildObj : m_vecChildObj)

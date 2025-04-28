@@ -30,9 +30,9 @@ namespace W
 		pEffect->GetComponent<Transform>()->SetScale(5.f, 5.f, 0.f);
 		pEffect->SetFunction(std::bind(&SkillBlast::exit, this), 8);
 
+		m_pHitEffectAtlas = Resources::Load<Texture>(L"blast", L"..\\Resources\\Texture\\Player\\skill\\blast\\hit.png");
 		for (int i = 0; i < 25; ++i)
 		{
-			m_pHitEffectAtlas = Resources::Load<Texture>(L"blast", L"..\\Resources\\Texture\\Player\\skill\\blast\\hit.png");
 			pEffect = CreateEffet(m_pHitEffectAtlas, L"blast", Vector2(0.f, 0.f),
 				Vector2(285.f, 284.f), 8, 1, Vector2(300.f, 300.f), Vector2(0.f, 0.f), 0.1f);
 		}

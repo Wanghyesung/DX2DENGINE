@@ -32,6 +32,7 @@ namespace W
 		static std::condition_variable m_completeCV;
 		static std::atomic<int> m_iWorkCount;
 	};
+
 	template<typename T>
 	inline void ThreadPool::LoadingResource(const std::wstring& _strResourceName, const std::wstring& _strPath)
 	{
@@ -39,13 +40,13 @@ namespace W
 			std::lock_guard<std::mutex> lock(m_mutex);
 			m_queueTasks.push([=]()
 				{
-					//template에서 template함수 호출시 template 명시
 					Resources::template Load<T>(_strResourceName, _strPath);
 				});
 		}
 		m_iWorkCount.fetch_add(1);
 		m_CV.notify_all();	
 	}
+
 	template<typename T>
 	inline void ThreadPool::DeleteResource(const std::wstring& _strResourceName)
 	{
@@ -53,7 +54,6 @@ namespace W
 			std::lock_guard<std::mutex> lock(m_mutex);
 			m_queueTasks.push([=]()
 				{
-					//template에서 template함수 호출시 template 명시
 					Resources::template Release<T>(_strResourceName);
 				});
 		}
